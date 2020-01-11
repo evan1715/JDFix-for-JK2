@@ -1,0 +1,106 @@
+//JediDogFix version history.
+
+
+*~~~~~=~~~~~*
+v4.7 Version Info:
+-Fix thedestroyer fix. Not being able to swing or change weapon instead of getting stuck.
+-Fix bot issues with fakeplayers
+-Health choice at beginning of duel
+--ent->client->ps.stats[STAT_HEALTH] = ent->health = ent->client->ps.stats[STAT_MAX_HEALTH];
+-Command for turning off/on vote kick
+-Command for duel limit
+--http://jedidog.freeforums.org/jk2-duel-limit-remover-t191.html
+-Ability to push and pull objects (health, etc)
+
+
+*~~~~~=~~~~~*
+v4.6 Version Info:
+-Fixed team follow bug
+-Got rid of sleep command
+
+
+*~~~~~=~~~~~*
+v4.5 Version Info:
+-Fixed callvote bug
+-Fixed turret/sentry bug (ouned's fix)
+
+
+*~~~~~=~~~~~*
+v4.4 Version Info:
+-Fixed map change with bots bug. It gave an error and denied bots access to the server from the fake players detection.
+
+
+*~~~~~=~~~~~*
+v4.3 (AKA: v4c) Version Info:
+-Changed the version to v4.3 in the /help because I forgot to change it to 4b, haha.
+-Versions will now be by v#.# instead of v#-letter. It's just easier for me.
+
+
+*~~~~~=~~~~~*
+v4b Version Info:
+-Added fix for when you get stuck while using the cheat, "thedestroyer" sometimes. Now you wont ever get stuck! :D
+-Improved Anti Fake Players
+
+
+*~~~~~=~~~~~*
+v4a Version Info:
+-Added rcon command, jd_Messages, which enables or disables the messages like when the client enters the game and it says "JediDog's Fix v4. Type /help for more information." Some others it disables like when the server is closed the msg will not appear. When a client is slapped that message will not appear. When a client is put to sleep it wont show that message either. It'll still show if it's on, if it's off these messages are disabled.
+
+
+*~~~~~=~~~~~*
+v4 Version Info:
+-Fixed Anti Flood
+-Fixed Anti Force Crash
+-Added a New Enhanced version of Anti Name Crash
+-Added a MSG for when client enters game, saying "JediDog's Fix v4. Type /help for more information."
+-Enhanced Anti Fake Players
+-Removed old Anti Name Crash
+-Removed Anti Name Crash, Anti Force Crash, and Anti MSGBoom Messages & Logs
+
+
+*~~~~~=~~~~~*
+Stealth Version Info:
+In the 'Stealthed' version of the JediDog Fix, it would be as if you were playing on a regular server, while being secure. No messages will be shown, for example, when you flood get the "Don't Flood..." msg, that will no longer be there. This version stays anonymous, sort of.
+~Changes made in Stealth:
+-Disabled jd_antiFlood, jd_antiNameCrash, jd_antiForceCrash, jd_FakePlayerDetection, jd_SitEmote to make the Anti's hard coded as part as being "stealth"
+-Disabled credit given to me when client entered game.
+-Disabled logs for Anti Force Crash, Anti Name Crash, Anti Fake Players and Anti MSGBoom.
+-Enhanced anti flood to work nearly perfectly. :)
+-Made it so clients cannot sit in any gametype but FFA & TFFA.
+
+
+*~~~~~=~~~~~*
+Version 3 Info:
+-Reinforced protection against MSGBoom by adding 3 extra solutions. Now there is four Anti MSGBoom. Haha.
+-Improved Anti Fake Players.
+-Fixed Duel Challenge Get-Up Quick Bug. (Scroll down to get more info)
+-Gave more credit to myself by sending msgs to client when entering the game in-console. So that they know what it is since I left "Game Version: basejk" alone instead of putting like "JediDog Fix."
+-Added a close server option from Gamall mod because it's a really cool option to use instead of pinging the server or passwording it if you wanted to close it.
+-Added | and  to the anti name crash acceptable letters list. Apparently it thought that | and  were illegal characters. Now you may connect with those. (Note: if I ever forget a letter/character/symbol that doesn’t do the bug, TELL me at my forum and I WILL add it)
+-Added RCon Commands CSay, Slap, and Sleep.
+-Fixed /rcon <msg> & /rcon say <msg> next line bug. Also made it with a few colors.
+-Added /sit emote.
+--Added command to turn off/on the sit command.
+-Bug Fixes that I seem to have created by accident:
+--Fixed push & pull bug.
+--Fixed bug that rarely let clients with illegal characters in their name to join the server.
+--Fixed invulnerability shield/bubble not to appear after respawning.
+--Fixed bug not allowing some clients to be knocked down.
+-Added more logs.
+-Updated ReadeMe.
+-Fixed some more typos in the ReadMe ^_^
+
+
+*~~~~~=~~~~~*
+Version 2 Info:
+-Added the 3 commands just incase there was some bug that would appear some how. But that's very unlikely as you can read below "none after months of beta testing." But I added it you know just incase you guys wanted it off/on cmds.
+-Also added log improvements by showing IP & info when a client connects, showing IP when there is a fake player, and showing IP when there is a name with illegal characters.
+-Rewrote the information about name crash in ReadMe.
+-Added more notes and comments in ReadMe.
+-Fixed some typos in the ReadMe. Heh.
+
+
+*~~~~~=~~~~~*
+Version 1 Info::
+Basic Protection against Flood, Force Crash, MSGBoom, Name Crash & Fake Players.
+

@@ -1,0 +1,36071 @@
+data
+export speedLoopSound
+align 4
+LABELV speedLoopSound
+byte 4 0
+export rageLoopSound
+align 4
+LABELV rageLoopSound
+byte 4 0
+export protectLoopSound
+align 4
+LABELV protectLoopSound
+byte 4 0
+export absorbLoopSound
+align 4
+LABELV absorbLoopSound
+byte 4 0
+export seeLoopSound
+align 4
+LABELV seeLoopSound
+byte 4 0
+export ysalamiriLoopSound
+align 4
+LABELV ysalamiriLoopSound
+byte 4 0
+export G_PreDefSound
+code
+proc G_PreDefSound 8 8
+file "../w_force.c"
+line 27
+;1:#include "g_local.h"
+;2:#include "w_saber.h"
+;3:#include "ai_main.h"
+;4:#include "..\ghoul2\g2.h"
+;5:
+;6:#define METROID_JUMP 1
+;7:
+;8:extern bot_state_t *botstates[MAX_CLIENTS];
+;9:
+;10:int speedLoopSound = 0;
+;11: 
+;12:int rageLoopSound = 0;
+;13:
+;14:int protectLoopSound = 0;
+;15:
+;16:int absorbLoopSound = 0;
+;17:
+;18:int seeLoopSound = 0;
+;19:
+;20:int	ysalamiriLoopSound = 0;
+;21:
+;22:#define FORCE_VELOCITY_DAMAGE 0
+;23:
+;24:int ForceShootDrain( gentity_t *self );
+;25:
+;26:gentity_t *G_PreDefSound(vec3_t org, int pdSound)
+;27:{
+line 30
+;28:	gentity_t	*te;
+;29:
+;30:	te = G_TempEntity( org, EV_PREDEFSOUND );
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 36
+ARGI4
+ADDRLP4 4
+ADDRGP4 G_TempEntity
+CALLP4
+ASGNP4
+ADDRLP4 0
+ADDRLP4 4
+INDIRP4
+ASGNP4
+line 31
+;31:	te->s.eventParm = pdSound;
+ADDRLP4 0
+INDIRP4
+CNSTI4 256
+ADDP4
+ADDRFP4 4
+INDIRI4
+ASGNI4
+line 32
+;32:	VectorCopy(org, te->s.origin);
+ADDRLP4 0
+INDIRP4
+CNSTI4 92
+ADDP4
+ADDRFP4 0
+INDIRP4
+INDIRB
+ASGNB 12
+line 34
+;33:
+;34:	return te;
+ADDRLP4 0
+INDIRP4
+RETP4
+LABELV $82
+endproc G_PreDefSound 8 8
+export InFront
+proc InFront 64 16
+line 38
+;35:}
+;36:
+;37:qboolean InFront( vec3_t spot, vec3_t from, vec3_t fromAngles, float threshHold )
+;38:{
+line 42
+;39:	vec3_t	dir, forward, angles;
+;40:	float	dot;
+;41:
+;42:	VectorSubtract( spot, from, dir );
+ADDRLP4 40
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 44
+ADDRFP4 4
+INDIRP4
+ASGNP4
+ADDRLP4 0
+ADDRLP4 40
+INDIRP4
+INDIRF4
+ADDRLP4 44
+INDIRP4
+INDIRF4
+SUBF4
+ASGNF4
+ADDRLP4 48
+CNSTI4 4
+ASGNI4
+ADDRLP4 0+4
+ADDRLP4 40
+INDIRP4
+ADDRLP4 48
+INDIRI4
+ADDP4
+INDIRF4
+ADDRLP4 44
+INDIRP4
+ADDRLP4 48
+INDIRI4
+ADDP4
+INDIRF4
+SUBF4
+ASGNF4
+ADDRLP4 52
+CNSTI4 8
+ASGNI4
+ADDRLP4 0+8
+ADDRFP4 0
+INDIRP4
+ADDRLP4 52
+INDIRI4
+ADDP4
+INDIRF4
+ADDRFP4 4
+INDIRP4
+ADDRLP4 52
+INDIRI4
+ADDP4
+INDIRF4
+SUBF4
+ASGNF4
+line 43
+;43:	dir[2] = 0;
+ADDRLP4 0+8
+CNSTF4 0
+ASGNF4
+line 44
+;44:	VectorNormalize( dir );
+ADDRLP4 0
+ARGP4
+ADDRGP4 VectorNormalize
+CALLF4
+pop
+line 46
+;45:
+;46:	VectorCopy( fromAngles, angles );
+ADDRLP4 24
+ADDRFP4 8
+INDIRP4
+INDIRB
+ASGNB 12
+line 47
+;47:	angles[0] = 0;
+ADDRLP4 24
+CNSTF4 0
+ASGNF4
+line 48
+;48:	AngleVectors( angles, forward, NULL, NULL );
+ADDRLP4 24
+ARGP4
+ADDRLP4 12
+ARGP4
+ADDRLP4 56
+CNSTP4 0
+ASGNP4
+ADDRLP4 56
+INDIRP4
+ARGP4
+ADDRLP4 56
+INDIRP4
+ARGP4
+ADDRGP4 AngleVectors
+CALLV
+pop
+line 50
+;49:
+;50:	dot = DotProduct( dir, forward );
+ADDRLP4 36
+ADDRLP4 0
+INDIRF4
+ADDRLP4 12
+INDIRF4
+MULF4
+ADDRLP4 0+4
+INDIRF4
+ADDRLP4 12+4
+INDIRF4
+MULF4
+ADDF4
+ADDRLP4 0+8
+INDIRF4
+ADDRLP4 12+8
+INDIRF4
+MULF4
+ADDF4
+ASGNF4
+line 52
+;51:
+;52:	return (dot > threshHold);
+ADDRLP4 36
+INDIRF4
+ADDRFP4 12
+INDIRF4
+LEF4 $92
+ADDRLP4 60
+CNSTI4 1
+ASGNI4
+ADDRGP4 $93
+JUMPV
+LABELV $92
+ADDRLP4 60
+CNSTI4 0
+ASGNI4
+LABELV $93
+ADDRLP4 60
+INDIRI4
+RETI4
+LABELV $83
+endproc InFront 64 16
+data
+export forcePowerMinRank
+align 4
+LABELV forcePowerMinRank
+byte 4 999
+byte 4 999
+byte 4 999
+byte 4 999
+byte 4 999
+byte 4 999
+byte 4 999
+byte 4 999
+byte 4 999
+byte 4 999
+byte 4 999
+byte 4 999
+byte 4 999
+byte 4 999
+byte 4 999
+byte 4 999
+byte 4 999
+byte 4 999
+byte 4 10
+byte 4 0
+byte 4 0
+byte 4 0
+byte 4 0
+byte 4 10
+byte 4 15
+byte 4 10
+byte 4 15
+byte 4 15
+byte 4 15
+byte 4 10
+byte 4 10
+byte 4 10
+byte 4 5
+byte 4 0
+byte 4 0
+byte 4 0
+byte 4 10
+byte 4 0
+byte 4 0
+byte 4 0
+byte 4 0
+byte 4 10
+byte 4 15
+byte 4 10
+byte 4 15
+byte 4 15
+byte 4 15
+byte 4 10
+byte 4 10
+byte 4 10
+byte 4 5
+byte 4 5
+byte 4 5
+byte 4 5
+byte 4 10
+byte 4 0
+byte 4 0
+byte 4 0
+byte 4 0
+byte 4 10
+byte 4 15
+byte 4 10
+byte 4 15
+byte 4 15
+byte 4 15
+byte 4 10
+byte 4 10
+byte 4 10
+byte 4 5
+byte 4 10
+byte 4 10
+byte 4 10
+export GENERIC_FORCE
+align 4
+LABELV GENERIC_FORCE
+address $94
+export FORCE_LOWER
+align 4
+LABELV FORCE_LOWER
+address $95
+export FORCE_UPPER
+align 4
+LABELV FORCE_UPPER
+address $96
+export CheckForceStringTail
+code
+proc CheckForceStringTail 36 4
+line 147
+;53:}
+;54:
+;55:int forcePowerMinRank[NUM_FORCE_POWER_LEVELS][NUM_FORCE_POWERS] = //0 == neutral
+;56:{
+;57:	{
+;58:		999,//FP_HEAL,//instant
+;59:		999,//FP_LEVITATION,//hold/duration
+;60:		999,//FP_SPEED,//duration
+;61:		999,//FP_PUSH,//hold/duration
+;62:		999,//FP_PULL,//hold/duration
+;63:		999,//FP_TELEPATHY,//instant
+;64:		999,//FP_GRIP,//hold/duration
+;65:		999,//FP_LIGHTNING,//hold/duration
+;66:		999,//FP_RAGE,//duration
+;67:		999,//FP_PROTECT,//duration
+;68:		999,//FP_ABSORB,//duration
+;69:		999,//FP_TEAM_HEAL,//instant
+;70:		999,//FP_TEAM_FORCE,//instant
+;71:		999,//FP_DRAIN,//hold/duration
+;72:		999,//FP_SEE,//duration
+;73:		999,//FP_SABERATTACK,
+;74:		999,//FP_SABERDEFEND,
+;75:		999//FP_SABERTHROW,
+;76:		//NUM_FORCE_POWERS
+;77:	},
+;78:	{
+;79:		10,//FP_HEAL,//instant
+;80:		0,//FP_LEVITATION,//hold/duration
+;81:		0,//FP_SPEED,//duration
+;82:		0,//FP_PUSH,//hold/duration
+;83:		0,//FP_PULL,//hold/duration
+;84:		10,//FP_TELEPATHY,//instant
+;85:		15,//FP_GRIP,//hold/duration
+;86:		10,//FP_LIGHTNING,//hold/duration
+;87:		15,//FP_RAGE,//duration
+;88:		15,//FP_PROTECT,//duration
+;89:		15,//FP_ABSORB,//duration
+;90:		10,//FP_TEAM_HEAL,//instant
+;91:		10,//FP_TEAM_FORCE,//instant
+;92:		10,//FP_DRAIN,//hold/duration
+;93:		5,//FP_SEE,//duration
+;94:		0,//FP_SABERATTACK,
+;95:		0,//FP_SABERDEFEND,
+;96:		0//FP_SABERTHROW,
+;97:		//NUM_FORCE_POWERS
+;98:	},
+;99:	{
+;100:		10,//FP_HEAL,//instant
+;101:		0,//FP_LEVITATION,//hold/duration
+;102:		0,//FP_SPEED,//duration
+;103:		0,//FP_PUSH,//hold/duration
+;104:		0,//FP_PULL,//hold/duration
+;105:		10,//FP_TELEPATHY,//instant
+;106:		15,//FP_GRIP,//hold/duration
+;107:		10,//FP_LIGHTNING,//hold/duration
+;108:		15,//FP_RAGE,//duration
+;109:		15,//FP_PROTECT,//duration
+;110:		15,//FP_ABSORB,//duration
+;111:		10,//FP_TEAM_HEAL,//instant
+;112:		10,//FP_TEAM_FORCE,//instant
+;113:		10,//FP_DRAIN,//hold/duration
+;114:		5,//FP_SEE,//duration
+;115:		5,//FP_SABERATTACK,
+;116:		5,//FP_SABERDEFEND,
+;117:		5//FP_SABERTHROW,
+;118:		//NUM_FORCE_POWERS
+;119:	},
+;120:	{
+;121:		10,//FP_HEAL,//instant
+;122:		0,//FP_LEVITATION,//hold/duration
+;123:		0,//FP_SPEED,//duration
+;124:		0,//FP_PUSH,//hold/duration
+;125:		0,//FP_PULL,//hold/duration
+;126:		10,//FP_TELEPATHY,//instant
+;127:		15,//FP_GRIP,//hold/duration
+;128:		10,//FP_LIGHTNING,//hold/duration
+;129:		15,//FP_RAGE,//duration
+;130:		15,//FP_PROTECT,//duration
+;131:		15,//FP_ABSORB,//duration
+;132:		10,//FP_TEAM_HEAL,//instant
+;133:		10,//FP_TEAM_FORCE,//instant
+;134:		10,//FP_DRAIN,//hold/duration
+;135:		5,//FP_SEE,//duration
+;136:		10,//FP_SABERATTACK,
+;137:		10,//FP_SABERDEFEND,
+;138:		10//FP_SABERTHROW,
+;139:		//NUM_FORCE_POWERS
+;140:	}
+;141:};
+;142://Version modified to allow special settings like "g_maxforcerank 200".
+;143://JediDog: Anti Force Crash
+;144:char  *GENERIC_FORCE    = "7-1-033330000000000333";
+;145:char  *FORCE_LOWER     = "-1-000000000000000000";
+;146:char  *FORCE_UPPER     = "-2-333333333333333333";
+;147:char* CheckForceStringTail(char* s, char* S) {
+line 148
+;148:	char *p = s, *pu = FORCE_UPPER, *pl = FORCE_LOWER;
+ADDRLP4 0
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 4
+ADDRGP4 FORCE_UPPER
+INDIRP4
+ASGNP4
+ADDRLP4 8
+ADDRGP4 FORCE_LOWER
+INDIRP4
+ASGNP4
+line 149
+;149:	if (!s || strlen(s) != 21) return GENERIC_FORCE;
+ADDRLP4 12
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 12
+INDIRP4
+CVPU4 4
+CNSTU4 0
+EQU4 $100
+ADDRLP4 12
+INDIRP4
+ARGP4
+ADDRLP4 16
+ADDRGP4 strlen
+CALLI4
+ASGNI4
+ADDRLP4 16
+INDIRI4
+CNSTI4 21
+EQI4 $102
+LABELV $100
+ADDRGP4 GENERIC_FORCE
+INDIRP4
+RETP4
+ADDRGP4 $97
+JUMPV
+LABELV $101
+line 150
+;150:	while(*p) {if (*p > *pu++ || *p++ < *pl++) {return GENERIC_FORCE;}}
+ADDRLP4 20
+ADDRLP4 4
+INDIRP4
+ASGNP4
+ADDRLP4 32
+CNSTI4 1
+ASGNI4
+ADDRLP4 4
+ADDRLP4 20
+INDIRP4
+ADDRLP4 32
+INDIRI4
+ADDP4
+ASGNP4
+ADDRLP4 24
+ADDRLP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 24
+INDIRP4
+INDIRI1
+CVII4 1
+ADDRLP4 20
+INDIRP4
+INDIRI1
+CVII4 1
+GTI4 $106
+ADDRLP4 0
+ADDRLP4 24
+INDIRP4
+ADDRLP4 32
+INDIRI4
+ADDP4
+ASGNP4
+ADDRLP4 28
+ADDRLP4 8
+INDIRP4
+ASGNP4
+ADDRLP4 8
+ADDRLP4 28
+INDIRP4
+ADDRLP4 32
+INDIRI4
+ADDP4
+ASGNP4
+ADDRLP4 24
+INDIRP4
+INDIRI1
+CVII4 1
+ADDRLP4 28
+INDIRP4
+INDIRI1
+CVII4 1
+GEI4 $104
+LABELV $106
+ADDRGP4 GENERIC_FORCE
+INDIRP4
+RETP4
+ADDRGP4 $97
+JUMPV
+LABELV $104
+LABELV $102
+ADDRLP4 0
+INDIRP4
+INDIRI1
+CVII4 1
+CNSTI4 0
+NEI4 $101
+line 151
+;151:	return S;    
+ADDRFP4 4
+INDIRP4
+RETP4
+LABELV $97
+endproc CheckForceStringTail 36 4
+export CheckForceString
+proc CheckForceString 36 8
+line 153
+;152:}
+;153:char* CheckForceString(char* S) {
+line 154
+;154:	int i, l; char *p = S;
+ADDRLP4 8
+ADDRFP4 0
+INDIRP4
+ASGNP4
+line 155
+;155:	if (!S || (l = strlen(S)) > 24 || l < 22  || *S < '0' || *S > '9') return GENERIC_FORCE;
+ADDRLP4 12
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 12
+INDIRP4
+CVPU4 4
+CNSTU4 0
+EQU4 $113
+ADDRLP4 12
+INDIRP4
+ARGP4
+ADDRLP4 16
+ADDRGP4 strlen
+CALLI4
+ASGNI4
+ADDRLP4 4
+ADDRLP4 16
+INDIRI4
+ASGNI4
+ADDRLP4 16
+INDIRI4
+CNSTI4 24
+GTI4 $113
+ADDRLP4 4
+INDIRI4
+CNSTI4 22
+LTI4 $113
+ADDRLP4 20
+ADDRFP4 0
+INDIRP4
+INDIRI1
+CVII4 1
+ASGNI4
+ADDRLP4 20
+INDIRI4
+CNSTI4 48
+LTI4 $113
+ADDRLP4 20
+INDIRI4
+CNSTI4 57
+LEI4 $108
+LABELV $113
+ADDRGP4 GENERIC_FORCE
+INDIRP4
+RETP4
+ADDRGP4 $107
+JUMPV
+LABELV $108
+line 156
+;156:	for(i = 1 ; i <= 3 ; i++) {
+ADDRLP4 0
+CNSTI4 1
+ASGNI4
+LABELV $114
+line 157
+;157:		if (S[i] == '-') return CheckForceStringTail(S+i, S);
+ADDRLP4 0
+INDIRI4
+ADDRFP4 0
+INDIRP4
+ADDP4
+INDIRI1
+CVII4 1
+CNSTI4 45
+NEI4 $118
+ADDRLP4 24
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 0
+INDIRI4
+ADDRLP4 24
+INDIRP4
+ADDP4
+ARGP4
+ADDRLP4 24
+INDIRP4
+ARGP4
+ADDRLP4 28
+ADDRGP4 CheckForceStringTail
+CALLP4
+ASGNP4
+ADDRLP4 28
+INDIRP4
+RETP4
+ADDRGP4 $107
+JUMPV
+LABELV $118
+line 158
+;158:		if (S[i] < '0' || S[i] > '9') break;
+ADDRLP4 32
+ADDRLP4 0
+INDIRI4
+ADDRFP4 0
+INDIRP4
+ADDP4
+INDIRI1
+CVII4 1
+ASGNI4
+ADDRLP4 32
+INDIRI4
+CNSTI4 48
+LTI4 $122
+ADDRLP4 32
+INDIRI4
+CNSTI4 57
+LEI4 $120
+LABELV $122
+ADDRGP4 $116
+JUMPV
+LABELV $120
+line 159
+;159:	} return GENERIC_FORCE;
+LABELV $115
+line 156
+ADDRLP4 0
+ADDRLP4 0
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+ADDRLP4 0
+INDIRI4
+CNSTI4 3
+LEI4 $114
+LABELV $116
+line 159
+ADDRGP4 GENERIC_FORCE
+INDIRP4
+RETP4
+LABELV $107
+endproc CheckForceString 36 8
+export WP_InitForcePowers
+proc WP_InitForcePowers 1636 24
+line 163
+;160:}//end of anti force crash
+;161:
+;162:void WP_InitForcePowers( gentity_t *ent )
+;163:{
+line 166
+;164:	int i;
+;165:	int i_r;
+;166:	int maxRank = g_maxForceRank.integer;
+ADDRLP4 520
+ADDRGP4 g_maxForceRank+12
+INDIRI4
+ASGNI4
+line 167
+;167:	qboolean warnClient = qfalse;
+ADDRLP4 528
+CNSTI4 0
+ASGNI4
+line 168
+;168:	qboolean warnClientLimit = qfalse;
+ADDRLP4 1560
+CNSTI4 0
+ASGNI4
+line 172
+;169:	char userinfo[MAX_INFO_STRING];
+;170:	char forcePowers[256];
+;171:	char readBuf[256];
+;172:	int lastFPKnown = -1;
+ADDRLP4 524
+CNSTI4 -1
+ASGNI4
+line 173
+;173:	qboolean didEvent = qfalse;
+ADDRLP4 1556
+CNSTI4 0
+ASGNI4
+line 176
+;174:    char* temp; //cm anti force crash
+;175:
+;176:	if (!maxRank)
+ADDRLP4 520
+INDIRI4
+CNSTI4 0
+NEI4 $125
+line 177
+;177:	{ //if server has no max rank, default to max (50)
+line 178
+;178:		maxRank = FORCE_MASTERY_JEDI_MASTER;
+ADDRLP4 520
+CNSTI4 7
+ASGNI4
+line 179
+;179:	}
+LABELV $125
+line 189
+;180:
+;181:	/*
+;182:	if (g_forcePowerDisable.integer)
+;183:	{
+;184:		maxRank = FORCE_MASTERY_UNINITIATED;
+;185:	}
+;186:	*/
+;187:	//rww - don't do this
+;188:
+;189:	if ( !ent || !ent->client )
+ADDRLP4 1568
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 1572
+CNSTU4 0
+ASGNU4
+ADDRLP4 1568
+INDIRP4
+CVPU4 4
+ADDRLP4 1572
+INDIRU4
+EQU4 $129
+ADDRLP4 1568
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CVPU4 4
+ADDRLP4 1572
+INDIRU4
+NEU4 $127
+LABELV $129
+line 190
+;190:	{
+line 191
+;191:		return;
+ADDRGP4 $123
+JUMPV
+LABELV $127
+line 194
+;192:	}
+;193:
+;194:	ent->client->ps.fd.saberAnimLevel = ent->client->sess.saberLevel;
+ADDRLP4 1576
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 1576
+INDIRP4
+CNSTI4 1228
+ADDP4
+ADDRLP4 1576
+INDIRP4
+CNSTI4 1660
+ADDP4
+INDIRI4
+ASGNI4
+line 196
+;195:
+;196:	if (ent->client->ps.fd.saberAnimLevel < FORCE_LEVEL_1 ||
+ADDRLP4 1580
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1228
+ADDP4
+INDIRI4
+ASGNI4
+ADDRLP4 1580
+INDIRI4
+CNSTI4 1
+LTI4 $132
+ADDRLP4 1580
+INDIRI4
+CNSTI4 3
+LEI4 $130
+LABELV $132
+line 198
+;197:		ent->client->ps.fd.saberAnimLevel > FORCE_LEVEL_3)
+;198:	{
+line 199
+;199:		ent->client->ps.fd.saberAnimLevel = FORCE_LEVEL_1;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1228
+ADDP4
+CNSTI4 1
+ASGNI4
+line 200
+;200:	}
+LABELV $130
+line 202
+;201:
+;202:	if (!speedLoopSound)
+ADDRGP4 speedLoopSound
+INDIRI4
+CNSTI4 0
+NEI4 $133
+line 203
+;203:	{ //so that the client configstring is already modified with this when we need it
+line 204
+;204:		speedLoopSound = G_SoundIndex("sound/weapons/force/speedloop.wav");
+ADDRGP4 $135
+ARGP4
+ADDRLP4 1584
+ADDRGP4 G_SoundIndex
+CALLI4
+ASGNI4
+ADDRGP4 speedLoopSound
+ADDRLP4 1584
+INDIRI4
+ASGNI4
+line 205
+;205:	}
+LABELV $133
+line 207
+;206:
+;207:	if (!rageLoopSound)
+ADDRGP4 rageLoopSound
+INDIRI4
+CNSTI4 0
+NEI4 $136
+line 208
+;208:	{
+line 209
+;209:		rageLoopSound = G_SoundIndex("sound/weapons/force/rageloop.wav");
+ADDRGP4 $138
+ARGP4
+ADDRLP4 1584
+ADDRGP4 G_SoundIndex
+CALLI4
+ASGNI4
+ADDRGP4 rageLoopSound
+ADDRLP4 1584
+INDIRI4
+ASGNI4
+line 210
+;210:	}
+LABELV $136
+line 212
+;211:
+;212:	if (!absorbLoopSound)
+ADDRGP4 absorbLoopSound
+INDIRI4
+CNSTI4 0
+NEI4 $139
+line 213
+;213:	{
+line 214
+;214:		absorbLoopSound = G_SoundIndex("sound/weapons/force/absorbloop.wav");
+ADDRGP4 $141
+ARGP4
+ADDRLP4 1584
+ADDRGP4 G_SoundIndex
+CALLI4
+ASGNI4
+ADDRGP4 absorbLoopSound
+ADDRLP4 1584
+INDIRI4
+ASGNI4
+line 215
+;215:	}
+LABELV $139
+line 217
+;216:
+;217:	if (!protectLoopSound)
+ADDRGP4 protectLoopSound
+INDIRI4
+CNSTI4 0
+NEI4 $142
+line 218
+;218:	{
+line 219
+;219:		protectLoopSound = G_SoundIndex("sound/weapons/force/protectloop.wav");
+ADDRGP4 $144
+ARGP4
+ADDRLP4 1584
+ADDRGP4 G_SoundIndex
+CALLI4
+ASGNI4
+ADDRGP4 protectLoopSound
+ADDRLP4 1584
+INDIRI4
+ASGNI4
+line 220
+;220:	}
+LABELV $142
+line 222
+;221:
+;222:	if (!seeLoopSound)
+ADDRGP4 seeLoopSound
+INDIRI4
+CNSTI4 0
+NEI4 $145
+line 223
+;223:	{
+line 224
+;224:		seeLoopSound = G_SoundIndex("sound/weapons/force/seeloop.wav");
+ADDRGP4 $147
+ARGP4
+ADDRLP4 1584
+ADDRGP4 G_SoundIndex
+CALLI4
+ASGNI4
+ADDRGP4 seeLoopSound
+ADDRLP4 1584
+INDIRI4
+ASGNI4
+line 225
+;225:	}
+LABELV $145
+line 227
+;226:
+;227:	if (!ysalamiriLoopSound)
+ADDRGP4 ysalamiriLoopSound
+INDIRI4
+CNSTI4 0
+NEI4 $148
+line 228
+;228:	{
+line 229
+;229:		ysalamiriLoopSound = G_SoundIndex("sound/player/nullifyloop.wav");
+ADDRGP4 $150
+ARGP4
+ADDRLP4 1584
+ADDRGP4 G_SoundIndex
+CALLI4
+ASGNI4
+ADDRGP4 ysalamiriLoopSound
+ADDRLP4 1584
+INDIRI4
+ASGNI4
+line 230
+;230:	}
+LABELV $148
+line 232
+;231:
+;232:	i = 0;
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+ADDRGP4 $152
+JUMPV
+LABELV $151
+line 234
+;233:	while (i < NUM_FORCE_POWERS)
+;234:	{
+line 235
+;235:		ent->client->ps.fd.forcePowerLevel[i] = 0;
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 944
+ADDP4
+ADDP4
+CNSTI4 0
+ASGNI4
+line 236
+;236:		ent->client->ps.fd.forcePowersKnown &= ~(1 << i);
+ADDRLP4 1584
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 844
+ADDP4
+ASGNP4
+ADDRLP4 1584
+INDIRP4
+ADDRLP4 1584
+INDIRP4
+INDIRI4
+CNSTI4 1
+ADDRLP4 0
+INDIRI4
+LSHI4
+BCOMI4
+BANDI4
+ASGNI4
+line 237
+;237:		i++;
+ADDRLP4 0
+ADDRLP4 0
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 238
+;238:	}
+LABELV $152
+line 233
+ADDRLP4 0
+INDIRI4
+CNSTI4 18
+LTI4 $151
+line 240
+;239:
+;240:	ent->client->ps.fd.forcePowerSelected = -1;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 852
+ADDP4
+CNSTI4 -1
+ASGNI4
+line 242
+;241:
+;242:	ent->client->ps.fd.forceSide = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1188
+ADDP4
+CNSTI4 0
+ASGNI4
+line 244
+;243:
+;244:	trap_GetUserinfo( ent->s.number, userinfo, sizeof( userinfo ) );
+ADDRFP4 0
+INDIRP4
+INDIRI4
+ARGI4
+ADDRLP4 532
+ARGP4
+CNSTI4 1024
+ARGI4
+ADDRGP4 trap_GetUserinfo
+CALLV
+pop
+line 246
+;245:
+;246:	Q_strncpyz( forcePowers, Info_ValueForKey (userinfo, "forcepowers"), sizeof( forcePowers ) );
+ADDRLP4 532
+ARGP4
+ADDRGP4 $154
+ARGP4
+ADDRLP4 1584
+ADDRGP4 Info_ValueForKey
+CALLP4
+ASGNP4
+ADDRLP4 4
+ARGP4
+ADDRLP4 1584
+INDIRP4
+ARGP4
+CNSTI4 256
+ARGI4
+ADDRGP4 Q_strncpyz
+CALLV
+pop
+line 248
+;247:	//JediDog: anti force crash
+;248:	if (jd_antiForceCrash.integer != 0) {
+ADDRGP4 jd_antiForceCrash+12
+INDIRI4
+CNSTI4 0
+EQI4 $155
+line 249
+;249:		temp = CheckForceString(forcePowers);
+ADDRLP4 4
+ARGP4
+ADDRLP4 1588
+ADDRGP4 CheckForceString
+CALLP4
+ASGNP4
+ADDRLP4 1564
+ADDRLP4 1588
+INDIRP4
+ASGNP4
+line 250
+;250:		if (temp != forcePowers) {
+ADDRLP4 1564
+INDIRP4
+CVPU4 4
+ADDRLP4 4
+CVPU4 4
+EQU4 $158
+line 251
+;251:			 Q_strncpyz( forcePowers, temp, sizeof( forcePowers ) );
+ADDRLP4 4
+ARGP4
+ADDRLP4 1564
+INDIRP4
+ARGP4
+CNSTI4 256
+ARGI4
+ADDRGP4 Q_strncpyz
+CALLV
+pop
+line 252
+;252:		}
+LABELV $158
+line 253
+;253:	}//end of anti force crash
+LABELV $155
+line 255
+;254:
+;255:	if ( ent->r.svFlags & SVF_BOT && botstates[ent->s.number] )
+ADDRLP4 1588
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 1588
+INDIRP4
+CNSTI4 304
+ADDP4
+INDIRI4
+CNSTI4 8
+BANDI4
+CNSTI4 0
+EQI4 $160
+ADDRLP4 1588
+INDIRP4
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRGP4 botstates
+ADDP4
+INDIRP4
+CVPU4 4
+CNSTU4 0
+EQU4 $160
+line 256
+;256:	{ //if it's a bot just copy the info directly from its personality
+line 257
+;257:		Com_sprintf(forcePowers, sizeof(forcePowers), "%s\0", botstates[ent->s.number]->forceinfo);
+ADDRLP4 4
+ARGP4
+CNSTI4 256
+ARGI4
+ADDRGP4 $162
+ARGP4
+ADDRFP4 0
+INDIRP4
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRGP4 botstates
+ADDP4
+INDIRP4
+CNSTI4 2744
+ADDP4
+ARGP4
+ADDRGP4 Com_sprintf
+CALLV
+pop
+line 258
+;258:	}
+LABELV $160
+line 261
+;259:
+;260:	//rww - parse through the string manually and eat out all the appropriate data
+;261:	i = 0;
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+line 263
+;262:
+;263:	if (g_forceBasedTeams.integer)
+ADDRGP4 g_forceBasedTeams+12
+INDIRI4
+CNSTI4 0
+EQI4 $163
+line 264
+;264:	{
+line 265
+;265:		if (ent->client->sess.sessionTeam == TEAM_RED)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1632
+ADDP4
+INDIRI4
+CNSTI4 1
+NEI4 $166
+line 266
+;266:		{
+line 267
+;267:			warnClient = !(BG_LegalizedForcePowers(forcePowers, maxRank, HasSetSaberOnly(), FORCE_DARKSIDE, g_gametype.integer, g_forcePowerDisable.integer));
+ADDRLP4 1596
+ADDRGP4 HasSetSaberOnly
+CALLI4
+ASGNI4
+ADDRLP4 4
+ARGP4
+ADDRLP4 520
+INDIRI4
+ARGI4
+ADDRLP4 1596
+INDIRI4
+ARGI4
+CNSTI4 2
+ARGI4
+ADDRGP4 g_gametype+12
+INDIRI4
+ARGI4
+ADDRGP4 g_forcePowerDisable+12
+INDIRI4
+ARGI4
+ADDRLP4 1600
+ADDRGP4 BG_LegalizedForcePowers
+CALLI4
+ASGNI4
+ADDRLP4 1600
+INDIRI4
+CNSTI4 0
+NEI4 $171
+ADDRLP4 1592
+CNSTI4 1
+ASGNI4
+ADDRGP4 $172
+JUMPV
+LABELV $171
+ADDRLP4 1592
+CNSTI4 0
+ASGNI4
+LABELV $172
+ADDRLP4 528
+ADDRLP4 1592
+INDIRI4
+ASGNI4
+line 268
+;268:		}
+ADDRGP4 $164
+JUMPV
+LABELV $166
+line 269
+;269:		else if (ent->client->sess.sessionTeam == TEAM_BLUE)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1632
+ADDP4
+INDIRI4
+CNSTI4 2
+NEI4 $173
+line 270
+;270:		{
+line 271
+;271:			warnClient = !(BG_LegalizedForcePowers(forcePowers, maxRank, HasSetSaberOnly(), FORCE_LIGHTSIDE, g_gametype.integer, g_forcePowerDisable.integer));
+ADDRLP4 1596
+ADDRGP4 HasSetSaberOnly
+CALLI4
+ASGNI4
+ADDRLP4 4
+ARGP4
+ADDRLP4 520
+INDIRI4
+ARGI4
+ADDRLP4 1596
+INDIRI4
+ARGI4
+CNSTI4 1
+ARGI4
+ADDRGP4 g_gametype+12
+INDIRI4
+ARGI4
+ADDRGP4 g_forcePowerDisable+12
+INDIRI4
+ARGI4
+ADDRLP4 1600
+ADDRGP4 BG_LegalizedForcePowers
+CALLI4
+ASGNI4
+ADDRLP4 1600
+INDIRI4
+CNSTI4 0
+NEI4 $178
+ADDRLP4 1592
+CNSTI4 1
+ASGNI4
+ADDRGP4 $179
+JUMPV
+LABELV $178
+ADDRLP4 1592
+CNSTI4 0
+ASGNI4
+LABELV $179
+ADDRLP4 528
+ADDRLP4 1592
+INDIRI4
+ASGNI4
+line 272
+;272:		}
+ADDRGP4 $164
+JUMPV
+LABELV $173
+line 274
+;273:		else
+;274:		{
+line 275
+;275:			warnClient = !(BG_LegalizedForcePowers(forcePowers, maxRank, HasSetSaberOnly(), 0, g_gametype.integer, g_forcePowerDisable.integer));
+ADDRLP4 1596
+ADDRGP4 HasSetSaberOnly
+CALLI4
+ASGNI4
+ADDRLP4 4
+ARGP4
+ADDRLP4 520
+INDIRI4
+ARGI4
+ADDRLP4 1596
+INDIRI4
+ARGI4
+CNSTI4 0
+ARGI4
+ADDRGP4 g_gametype+12
+INDIRI4
+ARGI4
+ADDRGP4 g_forcePowerDisable+12
+INDIRI4
+ARGI4
+ADDRLP4 1600
+ADDRGP4 BG_LegalizedForcePowers
+CALLI4
+ASGNI4
+ADDRLP4 1600
+INDIRI4
+CNSTI4 0
+NEI4 $183
+ADDRLP4 1592
+CNSTI4 1
+ASGNI4
+ADDRGP4 $184
+JUMPV
+LABELV $183
+ADDRLP4 1592
+CNSTI4 0
+ASGNI4
+LABELV $184
+ADDRLP4 528
+ADDRLP4 1592
+INDIRI4
+ASGNI4
+line 276
+;276:		}
+line 277
+;277:	}
+ADDRGP4 $164
+JUMPV
+LABELV $163
+line 279
+;278:	else
+;279:	{
+line 280
+;280:		warnClient = !(BG_LegalizedForcePowers(forcePowers, maxRank, HasSetSaberOnly(), 0, g_gametype.integer, g_forcePowerDisable.integer));
+ADDRLP4 1596
+ADDRGP4 HasSetSaberOnly
+CALLI4
+ASGNI4
+ADDRLP4 4
+ARGP4
+ADDRLP4 520
+INDIRI4
+ARGI4
+ADDRLP4 1596
+INDIRI4
+ARGI4
+CNSTI4 0
+ARGI4
+ADDRGP4 g_gametype+12
+INDIRI4
+ARGI4
+ADDRGP4 g_forcePowerDisable+12
+INDIRI4
+ARGI4
+ADDRLP4 1600
+ADDRGP4 BG_LegalizedForcePowers
+CALLI4
+ASGNI4
+ADDRLP4 1600
+INDIRI4
+CNSTI4 0
+NEI4 $188
+ADDRLP4 1592
+CNSTI4 1
+ASGNI4
+ADDRGP4 $189
+JUMPV
+LABELV $188
+ADDRLP4 1592
+CNSTI4 0
+ASGNI4
+LABELV $189
+ADDRLP4 528
+ADDRLP4 1592
+INDIRI4
+ASGNI4
+line 281
+;281:	}
+LABELV $164
+line 283
+;282:
+;283:	i_r = 0;
+ADDRLP4 260
+CNSTI4 0
+ASGNI4
+ADDRGP4 $191
+JUMPV
+LABELV $190
+line 285
+;284:	while (forcePowers[i] && forcePowers[i] != '-')
+;285:	{
+line 286
+;286:		readBuf[i_r] = forcePowers[i];
+ADDRLP4 260
+INDIRI4
+ADDRLP4 264
+ADDP4
+ADDRLP4 0
+INDIRI4
+ADDRLP4 4
+ADDP4
+INDIRI1
+ASGNI1
+line 287
+;287:		i_r++;
+ADDRLP4 260
+ADDRLP4 260
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 288
+;288:		i++;
+ADDRLP4 0
+ADDRLP4 0
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 289
+;289:	}
+LABELV $191
+line 284
+ADDRLP4 1592
+ADDRLP4 0
+INDIRI4
+ADDRLP4 4
+ADDP4
+INDIRI1
+CVII4 1
+ASGNI4
+ADDRLP4 1592
+INDIRI4
+CNSTI4 0
+EQI4 $193
+ADDRLP4 1592
+INDIRI4
+CNSTI4 45
+NEI4 $190
+LABELV $193
+line 290
+;290:	readBuf[i_r] = 0;
+ADDRLP4 260
+INDIRI4
+ADDRLP4 264
+ADDP4
+CNSTI1 0
+ASGNI1
+line 292
+;291:	//THE RANK
+;292:	ent->client->ps.fd.forceRank = atoi(readBuf);
+ADDRLP4 264
+ARGP4
+ADDRLP4 1596
+ADDRGP4 atoi
+CALLI4
+ASGNI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1192
+ADDP4
+ADDRLP4 1596
+INDIRI4
+ASGNI4
+line 293
+;293:	i++;
+ADDRLP4 0
+ADDRLP4 0
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 295
+;294:
+;295:	i_r = 0;
+ADDRLP4 260
+CNSTI4 0
+ASGNI4
+ADDRGP4 $195
+JUMPV
+LABELV $194
+line 297
+;296:	while (forcePowers[i] && forcePowers[i] != '-')
+;297:	{
+line 298
+;298:		readBuf[i_r] = forcePowers[i];
+ADDRLP4 260
+INDIRI4
+ADDRLP4 264
+ADDP4
+ADDRLP4 0
+INDIRI4
+ADDRLP4 4
+ADDP4
+INDIRI1
+ASGNI1
+line 299
+;299:		i_r++;
+ADDRLP4 260
+ADDRLP4 260
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 300
+;300:		i++;
+ADDRLP4 0
+ADDRLP4 0
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 301
+;301:	}
+LABELV $195
+line 296
+ADDRLP4 1600
+ADDRLP4 0
+INDIRI4
+ADDRLP4 4
+ADDP4
+INDIRI1
+CVII4 1
+ASGNI4
+ADDRLP4 1600
+INDIRI4
+CNSTI4 0
+EQI4 $197
+ADDRLP4 1600
+INDIRI4
+CNSTI4 45
+NEI4 $194
+LABELV $197
+line 302
+;302:	readBuf[i_r] = 0;
+ADDRLP4 260
+INDIRI4
+ADDRLP4 264
+ADDP4
+CNSTI1 0
+ASGNI1
+line 304
+;303:	//THE SIDE
+;304:	ent->client->ps.fd.forceSide = atoi(readBuf);
+ADDRLP4 264
+ARGP4
+ADDRLP4 1604
+ADDRGP4 atoi
+CALLI4
+ASGNI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1188
+ADDP4
+ADDRLP4 1604
+INDIRI4
+ASGNI4
+line 305
+;305:	i++;
+ADDRLP4 0
+ADDRLP4 0
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 307
+;306:
+;307:	i_r = 0;
+ADDRLP4 260
+CNSTI4 0
+ASGNI4
+ADDRGP4 $199
+JUMPV
+LABELV $198
+line 310
+;308:	while (forcePowers[i] && forcePowers[i] != '\n' &&
+;309:		i_r < NUM_FORCE_POWERS)
+;310:	{
+line 311
+;311:		readBuf[0] = forcePowers[i];
+ADDRLP4 264
+ADDRLP4 0
+INDIRI4
+ADDRLP4 4
+ADDP4
+INDIRI1
+ASGNI1
+line 312
+;312:		readBuf[1] = 0;
+ADDRLP4 264+1
+CNSTI1 0
+ASGNI1
+line 314
+;313:
+;314:		ent->client->ps.fd.forcePowerLevel[i_r] = atoi(readBuf);
+ADDRLP4 264
+ARGP4
+ADDRLP4 1608
+ADDRGP4 atoi
+CALLI4
+ASGNI4
+ADDRLP4 260
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 944
+ADDP4
+ADDP4
+ADDRLP4 1608
+INDIRI4
+ASGNI4
+line 315
+;315:		if (ent->client->ps.fd.forcePowerLevel[i_r])
+ADDRLP4 260
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 944
+ADDP4
+ADDP4
+INDIRI4
+CNSTI4 0
+EQI4 $202
+line 316
+;316:		{
+line 317
+;317:			ent->client->ps.fd.forcePowersKnown |= (1 << i_r);
+ADDRLP4 1612
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 844
+ADDP4
+ASGNP4
+ADDRLP4 1612
+INDIRP4
+ADDRLP4 1612
+INDIRP4
+INDIRI4
+CNSTI4 1
+ADDRLP4 260
+INDIRI4
+LSHI4
+BORI4
+ASGNI4
+line 318
+;318:		}
+ADDRGP4 $203
+JUMPV
+LABELV $202
+line 320
+;319:		else
+;320:		{
+line 321
+;321:			ent->client->ps.fd.forcePowersKnown &= ~(1 << i_r);
+ADDRLP4 1612
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 844
+ADDP4
+ASGNP4
+ADDRLP4 1612
+INDIRP4
+ADDRLP4 1612
+INDIRP4
+INDIRI4
+CNSTI4 1
+ADDRLP4 260
+INDIRI4
+LSHI4
+BCOMI4
+BANDI4
+ASGNI4
+line 322
+;322:		}
+LABELV $203
+line 323
+;323:		i++;
+ADDRLP4 0
+ADDRLP4 0
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 324
+;324:		i_r++;
+ADDRLP4 260
+ADDRLP4 260
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 325
+;325:	}
+LABELV $199
+line 308
+ADDRLP4 1608
+ADDRLP4 0
+INDIRI4
+ADDRLP4 4
+ADDP4
+INDIRI1
+CVII4 1
+ASGNI4
+ADDRLP4 1608
+INDIRI4
+CNSTI4 0
+EQI4 $205
+ADDRLP4 1608
+INDIRI4
+CNSTI4 10
+EQI4 $205
+ADDRLP4 260
+INDIRI4
+CNSTI4 18
+LTI4 $198
+LABELV $205
+line 328
+;326:	//THE POWERS
+;327:
+;328:	if (HasSetSaberOnly())
+ADDRLP4 1612
+ADDRGP4 HasSetSaberOnly
+CALLI4
+ASGNI4
+ADDRLP4 1612
+INDIRI4
+CNSTI4 0
+EQI4 $206
+line 329
+;329:	{
+line 330
+;330:		gentity_t *te = G_TempEntity( vec3_origin, EV_SET_FREE_SABER );
+ADDRGP4 vec3_origin
+ARGP4
+CNSTI4 93
+ARGI4
+ADDRLP4 1620
+ADDRGP4 G_TempEntity
+CALLP4
+ASGNP4
+ADDRLP4 1616
+ADDRLP4 1620
+INDIRP4
+ASGNP4
+line 331
+;331:		te->r.svFlags |= SVF_BROADCAST;
+ADDRLP4 1624
+ADDRLP4 1616
+INDIRP4
+CNSTI4 304
+ADDP4
+ASGNP4
+ADDRLP4 1624
+INDIRP4
+ADDRLP4 1624
+INDIRP4
+INDIRI4
+CNSTI4 32
+BORI4
+ASGNI4
+line 332
+;332:		te->s.eventParm = 1;
+ADDRLP4 1616
+INDIRP4
+CNSTI4 256
+ADDP4
+CNSTI4 1
+ASGNI4
+line 333
+;333:	}
+ADDRGP4 $207
+JUMPV
+LABELV $206
+line 335
+;334:	else
+;335:	{
+line 336
+;336:		gentity_t *te = G_TempEntity( vec3_origin, EV_SET_FREE_SABER );
+ADDRGP4 vec3_origin
+ARGP4
+CNSTI4 93
+ARGI4
+ADDRLP4 1620
+ADDRGP4 G_TempEntity
+CALLP4
+ASGNP4
+ADDRLP4 1616
+ADDRLP4 1620
+INDIRP4
+ASGNP4
+line 337
+;337:		te->r.svFlags |= SVF_BROADCAST;
+ADDRLP4 1624
+ADDRLP4 1616
+INDIRP4
+CNSTI4 304
+ADDP4
+ASGNP4
+ADDRLP4 1624
+INDIRP4
+ADDRLP4 1624
+INDIRP4
+INDIRI4
+CNSTI4 32
+BORI4
+ASGNI4
+line 338
+;338:		te->s.eventParm = 0;
+ADDRLP4 1616
+INDIRP4
+CNSTI4 256
+ADDP4
+CNSTI4 0
+ASGNI4
+line 339
+;339:	}
+LABELV $207
+line 341
+;340:
+;341:	if (g_forcePowerDisable.integer)
+ADDRGP4 g_forcePowerDisable+12
+INDIRI4
+CNSTI4 0
+EQI4 $208
+line 342
+;342:	{
+line 343
+;343:		gentity_t *te = G_TempEntity( vec3_origin, EV_SET_FORCE_DISABLE );
+ADDRGP4 vec3_origin
+ARGP4
+CNSTI4 94
+ARGI4
+ADDRLP4 1620
+ADDRGP4 G_TempEntity
+CALLP4
+ASGNP4
+ADDRLP4 1616
+ADDRLP4 1620
+INDIRP4
+ASGNP4
+line 344
+;344:		te->r.svFlags |= SVF_BROADCAST;
+ADDRLP4 1624
+ADDRLP4 1616
+INDIRP4
+CNSTI4 304
+ADDP4
+ASGNP4
+ADDRLP4 1624
+INDIRP4
+ADDRLP4 1624
+INDIRP4
+INDIRI4
+CNSTI4 32
+BORI4
+ASGNI4
+line 345
+;345:		te->s.eventParm = 1;
+ADDRLP4 1616
+INDIRP4
+CNSTI4 256
+ADDP4
+CNSTI4 1
+ASGNI4
+line 346
+;346:	}
+ADDRGP4 $209
+JUMPV
+LABELV $208
+line 348
+;347:	else
+;348:	{
+line 349
+;349:		gentity_t *te = G_TempEntity( vec3_origin, EV_SET_FORCE_DISABLE );
+ADDRGP4 vec3_origin
+ARGP4
+CNSTI4 94
+ARGI4
+ADDRLP4 1620
+ADDRGP4 G_TempEntity
+CALLP4
+ASGNP4
+ADDRLP4 1616
+ADDRLP4 1620
+INDIRP4
+ASGNP4
+line 350
+;350:		te->r.svFlags |= SVF_BROADCAST;
+ADDRLP4 1624
+ADDRLP4 1616
+INDIRP4
+CNSTI4 304
+ADDP4
+ASGNP4
+ADDRLP4 1624
+INDIRP4
+ADDRLP4 1624
+INDIRP4
+INDIRI4
+CNSTI4 32
+BORI4
+ASGNI4
+line 351
+;351:		te->s.eventParm = 0;
+ADDRLP4 1616
+INDIRP4
+CNSTI4 256
+ADDP4
+CNSTI4 0
+ASGNI4
+line 352
+;352:	}
+LABELV $209
+line 356
+;353:
+;354:	//rww - It seems we currently want to always do this, even if the player isn't exceeding the max
+;355:	//rank, so..
+;356:	if (g_gametype.integer == GT_TOURNAMENT)
+ADDRGP4 g_gametype+12
+INDIRI4
+CNSTI4 3
+NEI4 $211
+line 357
+;357:	{ //totally messes duel up to force someone into spec mode, and besides, each "round" is
+line 359
+;358:	  //counted as a full restart
+;359:		ent->client->sess.setForce = qtrue;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1664
+ADDP4
+CNSTI4 1
+ASGNI4
+line 360
+;360:	}
+LABELV $211
+line 362
+;361:
+;362:	if (warnClient || !ent->client->sess.setForce)
+ADDRLP4 1616
+CNSTI4 0
+ASGNI4
+ADDRLP4 528
+INDIRI4
+ADDRLP4 1616
+INDIRI4
+NEI4 $216
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1664
+ADDP4
+INDIRI4
+ADDRLP4 1616
+INDIRI4
+NEI4 $214
+LABELV $216
+line 363
+;363:	{ //the client's rank is too high for the server and has been autocapped, so tell them
+line 364
+;364:		if (g_gametype.integer != GT_HOLOCRON && g_gametype.integer != GT_JEDIMASTER)
+ADDRGP4 g_gametype+12
+INDIRI4
+CNSTI4 1
+EQI4 $217
+ADDRGP4 g_gametype+12
+INDIRI4
+CNSTI4 2
+EQI4 $217
+line 365
+;365:		{
+line 374
+;366:#ifdef EVENT_FORCE_RANK
+;367:			gentity_t *te = G_TempEntity( vec3_origin, EV_GIVE_NEW_RANK );
+;368:
+;369:			te->r.svFlags |= SVF_BROADCAST;
+;370:			te->s.trickedentindex = ent->s.number;
+;371:			te->s.eventParm = maxRank;
+;372:			te->s.bolt1 = 0;
+;373:#endif
+;374:			didEvent = qtrue;
+ADDRLP4 1556
+CNSTI4 1
+ASGNI4
+line 376
+;375:
+;376:			if (!(ent->r.svFlags & SVF_BOT) && g_gametype.integer != GT_TOURNAMENT)
+ADDRFP4 0
+INDIRP4
+CNSTI4 304
+ADDP4
+INDIRI4
+CNSTI4 8
+BANDI4
+CNSTI4 0
+NEI4 $221
+ADDRGP4 g_gametype+12
+INDIRI4
+CNSTI4 3
+EQI4 $221
+line 377
+;377:			{
+line 378
+;378:				if (g_gametype.integer < GT_TEAM || !g_teamAutoJoin.integer)
+ADDRGP4 g_gametype+12
+INDIRI4
+CNSTI4 5
+LTI4 $228
+ADDRGP4 g_teamAutoJoin+12
+INDIRI4
+CNSTI4 0
+NEI4 $224
+LABELV $228
+line 379
+;379:				{
+line 381
+;380:					//Make them a spectator so they can set their powerups up without being bothered.
+;381:					ent->client->sess.sessionTeam = TEAM_SPECTATOR;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1632
+ADDP4
+CNSTI4 3
+ASGNI4
+line 382
+;382:					ent->client->sess.spectatorState = SPECTATOR_FREE;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1640
+ADDP4
+CNSTI4 1
+ASGNI4
+line 383
+;383:					ent->client->sess.spectatorClient = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1644
+ADDP4
+CNSTI4 0
+ASGNI4
+line 385
+;384:
+;385:					ent->client->pers.teamState.state = TEAM_BEGIN;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1472
+ADDP4
+CNSTI4 0
+ASGNI4
+line 386
+;386:				}
+LABELV $224
+line 387
+;387:			}
+LABELV $221
+line 394
+;388:
+;389:#ifdef EVENT_FORCE_RANK
+;390:			te->s.bolt2 = ent->client->sess.sessionTeam;
+;391:#else
+;392:			//Event isn't very reliable, I made it a string. This way I can send it to just one
+;393:			//client also, as opposed to making a broadcast event.
+;394:			trap_SendServerCommand(ent->s.number, va("nfr %i %i %i", maxRank, 1, ent->client->sess.sessionTeam));
+ADDRGP4 $229
+ARGP4
+ADDRLP4 520
+INDIRI4
+ARGI4
+CNSTI4 1
+ARGI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1632
+ADDP4
+INDIRI4
+ARGI4
+ADDRLP4 1620
+ADDRGP4 va
+CALLP4
+ASGNP4
+ADDRFP4 0
+INDIRP4
+INDIRI4
+ARGI4
+ADDRLP4 1620
+INDIRP4
+ARGP4
+ADDRGP4 trap_SendServerCommand
+CALLV
+pop
+line 397
+;395:			//Arg1 is new max rank, arg2 is non-0 if force menu should be shown, arg3 is the current team
+;396:#endif
+;397:		}
+LABELV $217
+line 398
+;398:		ent->client->sess.setForce = qtrue;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1664
+ADDP4
+CNSTI4 1
+ASGNI4
+line 399
+;399:	}
+LABELV $214
+line 401
+;400:
+;401:	if (!didEvent)
+ADDRLP4 1556
+INDIRI4
+CNSTI4 0
+NEI4 $230
+line 402
+;402:	{
+line 412
+;403:#ifdef EVENT_FORCE_RANK
+;404:		gentity_t *te = G_TempEntity( vec3_origin, EV_GIVE_NEW_RANK );
+;405:
+;406:		te->r.svFlags |= SVF_BROADCAST;
+;407:		te->s.trickedentindex = ent->s.number;
+;408:		te->s.eventParm = maxRank;
+;409:		te->s.bolt1 = 1;
+;410:		te->s.bolt2 = ent->client->sess.sessionTeam;
+;411:#else
+;412:		trap_SendServerCommand(ent->s.number, va("nfr %i %i %i", maxRank, 0, ent->client->sess.sessionTeam));
+ADDRGP4 $229
+ARGP4
+ADDRLP4 520
+INDIRI4
+ARGI4
+CNSTI4 0
+ARGI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1632
+ADDP4
+INDIRI4
+ARGI4
+ADDRLP4 1620
+ADDRGP4 va
+CALLP4
+ASGNP4
+ADDRFP4 0
+INDIRP4
+INDIRI4
+ARGI4
+ADDRLP4 1620
+INDIRP4
+ARGP4
+ADDRGP4 trap_SendServerCommand
+CALLV
+pop
+line 414
+;413:#endif
+;414:	}
+LABELV $230
+line 416
+;415:
+;416:	if (warnClientLimit)
+ADDRLP4 1560
+INDIRI4
+CNSTI4 0
+EQI4 $232
+line 417
+;417:	{ //the server has one or more force powers disabled and the client is using them in his config
+line 419
+;418:		//trap_SendServerCommand(ent-g_entities, va("print \"The server has one or more force powers that you have chosen disabled.\nYou will not be able to use the disable force power(s) while playing on this server.\n\""));
+;419:	}
+LABELV $232
+line 421
+;420:
+;421:	i = 0;
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+ADDRGP4 $235
+JUMPV
+LABELV $234
+line 423
+;422:	while (i < NUM_FORCE_POWERS)
+;423:	{
+line 424
+;424:		if ((ent->client->ps.fd.forcePowersKnown & (1 << i)) &&
+ADDRLP4 1620
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 1628
+CNSTI4 0
+ASGNI4
+ADDRLP4 1620
+INDIRP4
+CNSTI4 844
+ADDP4
+INDIRI4
+CNSTI4 1
+ADDRLP4 0
+INDIRI4
+LSHI4
+BANDI4
+ADDRLP4 1628
+INDIRI4
+EQI4 $237
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 1620
+INDIRP4
+CNSTI4 944
+ADDP4
+ADDP4
+INDIRI4
+ADDRLP4 1628
+INDIRI4
+NEI4 $237
+line 426
+;425:			!ent->client->ps.fd.forcePowerLevel[i])
+;426:		{ //err..
+line 427
+;427:			ent->client->ps.fd.forcePowersKnown &= ~(1 << i);
+ADDRLP4 1632
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 844
+ADDP4
+ASGNP4
+ADDRLP4 1632
+INDIRP4
+ADDRLP4 1632
+INDIRP4
+INDIRI4
+CNSTI4 1
+ADDRLP4 0
+INDIRI4
+LSHI4
+BCOMI4
+BANDI4
+ASGNI4
+line 428
+;428:		}
+ADDRGP4 $238
+JUMPV
+LABELV $237
+line 430
+;429:		else
+;430:		{
+line 431
+;431:			if (i != FP_LEVITATION && i != FP_SABERATTACK && i != FP_SABERDEFEND && i != FP_SABERTHROW)
+ADDRLP4 0
+INDIRI4
+CNSTI4 1
+EQI4 $239
+ADDRLP4 0
+INDIRI4
+CNSTI4 15
+EQI4 $239
+ADDRLP4 0
+INDIRI4
+CNSTI4 16
+EQI4 $239
+ADDRLP4 0
+INDIRI4
+CNSTI4 17
+EQI4 $239
+line 432
+;432:			{
+line 433
+;433:				lastFPKnown = i;
+ADDRLP4 524
+ADDRLP4 0
+INDIRI4
+ASGNI4
+line 434
+;434:			}
+LABELV $239
+line 435
+;435:		}
+LABELV $238
+line 437
+;436:
+;437:		i++;
+ADDRLP4 0
+ADDRLP4 0
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 438
+;438:	}
+LABELV $235
+line 422
+ADDRLP4 0
+INDIRI4
+CNSTI4 18
+LTI4 $234
+line 440
+;439:
+;440:	if (ent->client->ps.fd.forcePowersKnown & ent->client->sess.selectedFP)
+ADDRLP4 1620
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 1620
+INDIRP4
+CNSTI4 844
+ADDP4
+INDIRI4
+ADDRLP4 1620
+INDIRP4
+CNSTI4 1656
+ADDP4
+INDIRI4
+BANDI4
+CNSTI4 0
+EQI4 $241
+line 441
+;441:	{
+line 442
+;442:		ent->client->ps.fd.forcePowerSelected = ent->client->sess.selectedFP;
+ADDRLP4 1624
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 1624
+INDIRP4
+CNSTI4 852
+ADDP4
+ADDRLP4 1624
+INDIRP4
+CNSTI4 1656
+ADDP4
+INDIRI4
+ASGNI4
+line 443
+;443:	}
+LABELV $241
+line 445
+;444:
+;445:	if (!(ent->client->ps.fd.forcePowersKnown & (1 << ent->client->ps.fd.forcePowerSelected)))
+ADDRLP4 1624
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 1624
+INDIRP4
+CNSTI4 844
+ADDP4
+INDIRI4
+CNSTI4 1
+ADDRLP4 1624
+INDIRP4
+CNSTI4 852
+ADDP4
+INDIRI4
+LSHI4
+BANDI4
+CNSTI4 0
+NEI4 $248
+line 446
+;446:	{
+line 447
+;447:		if (lastFPKnown != -1)
+ADDRLP4 524
+INDIRI4
+CNSTI4 -1
+EQI4 $245
+line 448
+;448:		{
+line 449
+;449:			ent->client->ps.fd.forcePowerSelected = lastFPKnown;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 852
+ADDP4
+ADDRLP4 524
+INDIRI4
+ASGNI4
+line 450
+;450:		}
+ADDRGP4 $248
+JUMPV
+LABELV $245
+line 452
+;451:		else
+;452:		{
+line 453
+;453:			ent->client->ps.fd.forcePowerSelected = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 852
+ADDP4
+CNSTI4 0
+ASGNI4
+line 454
+;454:		}
+line 455
+;455:	}
+ADDRGP4 $248
+JUMPV
+LABELV $247
+line 458
+;456:
+;457:	while (i < NUM_FORCE_POWERS)
+;458:	{
+line 459
+;459:		ent->client->ps.fd.forcePowerBaseLevel[i] = ent->client->ps.fd.forcePowerLevel[i];
+ADDRLP4 1628
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+ASGNI4
+ADDRLP4 1632
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 1628
+INDIRI4
+ADDRLP4 1632
+INDIRP4
+CNSTI4 1016
+ADDP4
+ADDP4
+ADDRLP4 1628
+INDIRI4
+ADDRLP4 1632
+INDIRP4
+CNSTI4 944
+ADDP4
+ADDP4
+INDIRI4
+ASGNI4
+line 460
+;460:		i++;
+ADDRLP4 0
+ADDRLP4 0
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 461
+;461:	}
+LABELV $248
+line 457
+ADDRLP4 0
+INDIRI4
+CNSTI4 18
+LTI4 $247
+line 462
+;462:	ent->client->ps.fd.forceUsingAdded = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1088
+ADDP4
+CNSTI4 0
+ASGNI4
+line 463
+;463:}
+LABELV $123
+endproc WP_InitForcePowers 1636 24
+export WP_SpawnInitForcePowers
+proc WP_SpawnInitForcePowers 28 8
+line 466
+;464:
+;465:void WP_SpawnInitForcePowers( gentity_t *ent )
+;466:{
+line 467
+;467:	int i = 0;
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+line 469
+;468:
+;469:	ent->client->ps.saberAttackChainCount = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1308
+ADDP4
+CNSTI4 0
+ASGNI4
+line 471
+;470:
+;471:	i = 0;
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+ADDRGP4 $252
+JUMPV
+LABELV $251
+line 474
+;472:
+;473:	while (i < NUM_FORCE_POWERS)
+;474:	{
+line 475
+;475:		if (ent->client->ps.fd.forcePowersActive & (1 << i))
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 848
+ADDP4
+INDIRI4
+CNSTI4 1
+ADDRLP4 0
+INDIRI4
+LSHI4
+BANDI4
+CNSTI4 0
+EQI4 $254
+line 476
+;476:		{
+line 477
+;477:			WP_ForcePowerStop(ent, i);
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRLP4 0
+INDIRI4
+ARGI4
+ADDRGP4 WP_ForcePowerStop
+CALLV
+pop
+line 478
+;478:		}
+LABELV $254
+line 480
+;479:
+;480:		i++;
+ADDRLP4 0
+ADDRLP4 0
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 481
+;481:	}
+LABELV $252
+line 473
+ADDRLP4 0
+INDIRI4
+CNSTI4 18
+LTI4 $251
+line 483
+;482:
+;483:	ent->client->ps.fd.forceDeactivateAll = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1196
+ADDP4
+CNSTI4 0
+ASGNI4
+line 485
+;484:
+;485:	ent->client->ps.fd.forcePower = ent->client->ps.fd.forcePowerMax = FORCE_POWER_MAX;
+ADDRLP4 4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 8
+CNSTI4 100
+ASGNI4
+ADDRLP4 4
+INDIRP4
+CNSTI4 936
+ADDP4
+ADDRLP4 8
+INDIRI4
+ASGNI4
+ADDRLP4 4
+INDIRP4
+CNSTI4 932
+ADDP4
+ADDRLP4 8
+INDIRI4
+ASGNI4
+line 486
+;486:	ent->client->ps.fd.forcePowerRegenDebounceTime = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 940
+ADDP4
+CNSTI4 0
+ASGNI4
+line 487
+;487:	ent->client->ps.fd.forceGripEntityNum = ENTITYNUM_NONE;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1108
+ADDP4
+CNSTI4 1023
+ASGNI4
+line 488
+;488:	ent->client->ps.fd.forceMindtrickTargetIndex = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1156
+ADDP4
+CNSTI4 0
+ASGNI4
+line 489
+;489:	ent->client->ps.fd.forceMindtrickTargetIndex2 = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1160
+ADDP4
+CNSTI4 0
+ASGNI4
+line 490
+;490:	ent->client->ps.fd.forceMindtrickTargetIndex3 = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1164
+ADDP4
+CNSTI4 0
+ASGNI4
+line 491
+;491:	ent->client->ps.fd.forceMindtrickTargetIndex4 = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1168
+ADDP4
+CNSTI4 0
+ASGNI4
+line 493
+;492:
+;493:	ent->client->ps.holocronBits = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 724
+ADDP4
+CNSTI4 0
+ASGNI4
+line 495
+;494:
+;495:	i = 0;
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+ADDRGP4 $257
+JUMPV
+LABELV $256
+line 497
+;496:	while (i < NUM_FORCE_POWERS)
+;497:	{
+line 498
+;498:		ent->client->ps.holocronsCarried[i] = 0;
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 644
+ADDP4
+ADDP4
+CNSTF4 0
+ASGNF4
+line 499
+;499:		i++;
+ADDRLP4 0
+ADDRLP4 0
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 500
+;500:	}
+LABELV $257
+line 496
+ADDRLP4 0
+INDIRI4
+CNSTI4 18
+LTI4 $256
+line 502
+;501:
+;502:	if (g_gametype.integer == GT_HOLOCRON)
+ADDRGP4 g_gametype+12
+INDIRI4
+CNSTI4 1
+NEI4 $259
+line 503
+;503:	{
+line 504
+;504:		i = 0;
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+ADDRGP4 $263
+JUMPV
+LABELV $262
+line 506
+;505:		while (i < NUM_FORCE_POWERS)
+;506:		{
+line 507
+;507:			ent->client->ps.fd.forcePowerLevel[i] = FORCE_LEVEL_0;
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 944
+ADDP4
+ADDP4
+CNSTI4 0
+ASGNI4
+line 508
+;508:			i++;
+ADDRLP4 0
+ADDRLP4 0
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 509
+;509:		}
+LABELV $263
+line 505
+ADDRLP4 0
+INDIRI4
+CNSTI4 18
+LTI4 $262
+line 511
+;510:
+;511:		if (HasSetSaberOnly())
+ADDRLP4 12
+ADDRGP4 HasSetSaberOnly
+CALLI4
+ASGNI4
+ADDRLP4 12
+INDIRI4
+CNSTI4 0
+EQI4 $265
+line 512
+;512:		{
+line 513
+;513:			if (ent->client->ps.fd.forcePowerLevel[FP_SABERATTACK] < FORCE_LEVEL_1)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1004
+ADDP4
+INDIRI4
+CNSTI4 1
+GEI4 $267
+line 514
+;514:			{
+line 515
+;515:				ent->client->ps.fd.forcePowerLevel[FP_SABERATTACK] = FORCE_LEVEL_1;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1004
+ADDP4
+CNSTI4 1
+ASGNI4
+line 516
+;516:			}
+LABELV $267
+line 517
+;517:			if (ent->client->ps.fd.forcePowerLevel[FP_SABERDEFEND] < FORCE_LEVEL_1)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1008
+ADDP4
+INDIRI4
+CNSTI4 1
+GEI4 $269
+line 518
+;518:			{
+line 519
+;519:				ent->client->ps.fd.forcePowerLevel[FP_SABERDEFEND] = FORCE_LEVEL_1;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1008
+ADDP4
+CNSTI4 1
+ASGNI4
+line 520
+;520:			}
+LABELV $269
+line 521
+;521:		}
+LABELV $265
+line 522
+;522:	}
+LABELV $259
+line 524
+;523:
+;524:	i = 0;
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+ADDRGP4 $272
+JUMPV
+LABELV $271
+line 527
+;525:
+;526:	while (i < NUM_FORCE_POWERS)
+;527:	{
+line 528
+;528:		ent->client->ps.fd.forcePowerDebounce[i] = 0;
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 772
+ADDP4
+ADDP4
+CNSTI4 0
+ASGNI4
+line 529
+;529:		ent->client->ps.fd.forcePowerDuration[i] = 0;
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 860
+ADDP4
+ADDP4
+CNSTI4 0
+ASGNI4
+line 531
+;530:
+;531:		i++;
+ADDRLP4 0
+ADDRLP4 0
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 532
+;532:	}
+LABELV $272
+line 526
+ADDRLP4 0
+INDIRI4
+CNSTI4 18
+LTI4 $271
+line 534
+;533:
+;534:	ent->client->ps.fd.forcePowerRegenDebounceTime = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 940
+ADDP4
+CNSTI4 0
+ASGNI4
+line 535
+;535:	ent->client->ps.fd.forceJumpZStart = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1092
+ADDP4
+CNSTF4 0
+ASGNF4
+line 536
+;536:	ent->client->ps.fd.forceJumpCharge = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1096
+ADDP4
+CNSTF4 0
+ASGNF4
+line 537
+;537:	ent->client->ps.fd.forceJumpSound = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1100
+ADDP4
+CNSTI4 0
+ASGNI4
+line 538
+;538:	ent->client->ps.fd.forceGripDamageDebounceTime = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1112
+ADDP4
+CNSTI4 0
+ASGNI4
+line 539
+;539:	ent->client->ps.fd.forceGripBeingGripped = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1116
+ADDP4
+CNSTF4 0
+ASGNF4
+line 540
+;540:	ent->client->ps.fd.forceGripCripple = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1120
+ADDP4
+CNSTI4 0
+ASGNI4
+line 541
+;541:	ent->client->ps.fd.forceGripUseTime = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1124
+ADDP4
+CNSTI4 0
+ASGNI4
+line 542
+;542:	ent->client->ps.fd.forceGripSoundTime = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1128
+ADDP4
+CNSTF4 0
+ASGNF4
+line 543
+;543:	ent->client->ps.fd.forceGripStarted = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1132
+ADDP4
+CNSTF4 0
+ASGNF4
+line 544
+;544:	ent->client->ps.fd.forceSpeedSmash = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1136
+ADDP4
+CNSTF4 0
+ASGNF4
+line 545
+;545:	ent->client->ps.fd.forceSpeedDoDamage = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1140
+ADDP4
+CNSTF4 0
+ASGNF4
+line 546
+;546:	ent->client->ps.fd.forceSpeedHitIndex = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1144
+ADDP4
+CNSTI4 0
+ASGNI4
+line 547
+;547:	ent->client->ps.fd.forceHealTime = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1148
+ADDP4
+CNSTI4 0
+ASGNI4
+line 548
+;548:	ent->client->ps.fd.forceHealAmount = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1152
+ADDP4
+CNSTI4 0
+ASGNI4
+line 549
+;549:	ent->client->ps.fd.forceRageRecoveryTime = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1172
+ADDP4
+CNSTI4 0
+ASGNI4
+line 550
+;550:	ent->client->ps.fd.forceDrainEntNum = ENTITYNUM_NONE;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1176
+ADDP4
+CNSTI4 1023
+ASGNI4
+line 551
+;551:	ent->client->ps.fd.forceDrainTime = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1180
+ADDP4
+CNSTF4 0
+ASGNF4
+line 553
+;552:
+;553:	i = 0;
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+ADDRGP4 $275
+JUMPV
+LABELV $274
+line 555
+;554:	while (i < NUM_FORCE_POWERS)
+;555:	{
+line 556
+;556:		if ((ent->client->ps.fd.forcePowersKnown & (1 << i)) &&
+ADDRLP4 12
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 20
+CNSTI4 0
+ASGNI4
+ADDRLP4 12
+INDIRP4
+CNSTI4 844
+ADDP4
+INDIRI4
+CNSTI4 1
+ADDRLP4 0
+INDIRI4
+LSHI4
+BANDI4
+ADDRLP4 20
+INDIRI4
+EQI4 $277
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 12
+INDIRP4
+CNSTI4 944
+ADDP4
+ADDP4
+INDIRI4
+ADDRLP4 20
+INDIRI4
+NEI4 $277
+line 558
+;557:			!ent->client->ps.fd.forcePowerLevel[i])
+;558:		{ //err..
+line 559
+;559:			ent->client->ps.fd.forcePowersKnown &= ~(1 << i);
+ADDRLP4 24
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 844
+ADDP4
+ASGNP4
+ADDRLP4 24
+INDIRP4
+ADDRLP4 24
+INDIRP4
+INDIRI4
+CNSTI4 1
+ADDRLP4 0
+INDIRI4
+LSHI4
+BCOMI4
+BANDI4
+ASGNI4
+line 560
+;560:		}
+LABELV $277
+line 562
+;561:
+;562:		i++;
+ADDRLP4 0
+ADDRLP4 0
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 563
+;563:	}
+LABELV $275
+line 554
+ADDRLP4 0
+INDIRI4
+CNSTI4 18
+LTI4 $274
+line 564
+;564:}
+LABELV $250
+endproc WP_SpawnInitForcePowers 28 8
+export ForcePowerUsableOn
+proc ForcePowerUsableOn 68 16
+line 567
+;565:
+;566:int ForcePowerUsableOn(gentity_t *attacker, gentity_t *other, forcePowers_t forcePower)
+;567:{
+line 568
+;568:	if (other && other->client && other->client->ps.usingATST)
+ADDRLP4 0
+ADDRFP4 4
+INDIRP4
+ASGNP4
+ADDRLP4 4
+CNSTU4 0
+ASGNU4
+ADDRLP4 0
+INDIRP4
+CVPU4 4
+ADDRLP4 4
+INDIRU4
+EQU4 $280
+ADDRLP4 8
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 8
+INDIRP4
+CVPU4 4
+ADDRLP4 4
+INDIRU4
+EQU4 $280
+ADDRLP4 8
+INDIRP4
+CNSTI4 1316
+ADDP4
+INDIRI4
+CNSTI4 0
+EQI4 $280
+line 569
+;569:	{
+line 570
+;570:		return 0;
+CNSTI4 0
+RETI4
+ADDRGP4 $279
+JUMPV
+LABELV $280
+line 573
+;571:	}
+;572:
+;573:	if (other && other->client && BG_HasYsalamiri(g_gametype.integer, &other->client->ps))
+ADDRLP4 12
+ADDRFP4 4
+INDIRP4
+ASGNP4
+ADDRLP4 16
+CNSTU4 0
+ASGNU4
+ADDRLP4 12
+INDIRP4
+CVPU4 4
+ADDRLP4 16
+INDIRU4
+EQU4 $282
+ADDRLP4 20
+ADDRLP4 12
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 20
+INDIRP4
+CVPU4 4
+ADDRLP4 16
+INDIRU4
+EQU4 $282
+ADDRGP4 g_gametype+12
+INDIRI4
+ARGI4
+ADDRLP4 20
+INDIRP4
+ARGP4
+ADDRLP4 24
+ADDRGP4 BG_HasYsalamiri
+CALLI4
+ASGNI4
+ADDRLP4 24
+INDIRI4
+CNSTI4 0
+EQI4 $282
+line 574
+;574:	{
+line 575
+;575:		return 0;
+CNSTI4 0
+RETI4
+ADDRGP4 $279
+JUMPV
+LABELV $282
+line 578
+;576:	}
+;577:
+;578:	if (attacker && attacker->client && !BG_CanUseFPNow(g_gametype.integer, &attacker->client->ps, level.time, forcePower))
+ADDRLP4 28
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 32
+CNSTU4 0
+ASGNU4
+ADDRLP4 28
+INDIRP4
+CVPU4 4
+ADDRLP4 32
+INDIRU4
+EQU4 $285
+ADDRLP4 36
+ADDRLP4 28
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 36
+INDIRP4
+CVPU4 4
+ADDRLP4 32
+INDIRU4
+EQU4 $285
+ADDRGP4 g_gametype+12
+INDIRI4
+ARGI4
+ADDRLP4 36
+INDIRP4
+ARGP4
+ADDRGP4 level+32
+INDIRI4
+ARGI4
+ADDRFP4 8
+INDIRI4
+ARGI4
+ADDRLP4 40
+ADDRGP4 BG_CanUseFPNow
+CALLI4
+ASGNI4
+ADDRLP4 40
+INDIRI4
+CNSTI4 0
+NEI4 $285
+line 579
+;579:	{
+line 580
+;580:		return 0;
+CNSTI4 0
+RETI4
+ADDRGP4 $279
+JUMPV
+LABELV $285
+line 584
+;581:	}
+;582:
+;583:	//Dueling fighters cannot use force powers on others, with the exception of force push when locked with each other
+;584:	if (attacker && attacker->client && attacker->client->ps.duelInProgress)
+ADDRLP4 44
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 48
+CNSTU4 0
+ASGNU4
+ADDRLP4 44
+INDIRP4
+CVPU4 4
+ADDRLP4 48
+INDIRU4
+EQU4 $289
+ADDRLP4 52
+ADDRLP4 44
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 52
+INDIRP4
+CVPU4 4
+ADDRLP4 48
+INDIRU4
+EQU4 $289
+ADDRLP4 52
+INDIRP4
+CNSTI4 1304
+ADDP4
+INDIRI4
+CNSTI4 0
+EQI4 $289
+line 585
+;585:	{
+line 586
+;586:		return 0;
+CNSTI4 0
+RETI4
+ADDRGP4 $279
+JUMPV
+LABELV $289
+line 589
+;587:	}
+;588:
+;589:	if (other && other->client && other->client->ps.duelInProgress)
+ADDRLP4 56
+ADDRFP4 4
+INDIRP4
+ASGNP4
+ADDRLP4 60
+CNSTU4 0
+ASGNU4
+ADDRLP4 56
+INDIRP4
+CVPU4 4
+ADDRLP4 60
+INDIRU4
+EQU4 $291
+ADDRLP4 64
+ADDRLP4 56
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 64
+INDIRP4
+CVPU4 4
+ADDRLP4 60
+INDIRU4
+EQU4 $291
+ADDRLP4 64
+INDIRP4
+CNSTI4 1304
+ADDP4
+INDIRI4
+CNSTI4 0
+EQI4 $291
+line 590
+;590:	{
+line 591
+;591:		return 0;
+CNSTI4 0
+RETI4
+ADDRGP4 $279
+JUMPV
+LABELV $291
+line 594
+;592:	}
+;593:
+;594:	return 1;
+CNSTI4 1
+RETI4
+LABELV $279
+endproc ForcePowerUsableOn 68 16
+export WP_ForcePowerAvailable
+proc WP_ForcePowerAvailable 8 0
+line 598
+;595:}
+;596:
+;597:qboolean WP_ForcePowerAvailable( gentity_t *self, forcePowers_t forcePower )
+;598:{
+line 599
+;599:	int	drain = forcePowerNeeded[self->client->ps.fd.forcePowerLevel[forcePower]][forcePower];
+ADDRLP4 4
+ADDRFP4 4
+INDIRI4
+CNSTI4 2
+LSHI4
+ASGNI4
+ADDRLP4 0
+ADDRLP4 4
+INDIRI4
+CNSTI4 72
+ADDRLP4 4
+INDIRI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 944
+ADDP4
+ADDP4
+INDIRI4
+MULI4
+ADDRGP4 forcePowerNeeded
+ADDP4
+ADDP4
+INDIRI4
+ASGNI4
+line 601
+;600:
+;601:	if (self->client->ps.fd.forcePowersActive & (1 << forcePower))
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 848
+ADDP4
+INDIRI4
+CNSTI4 1
+ADDRFP4 4
+INDIRI4
+LSHI4
+BANDI4
+CNSTI4 0
+EQI4 $294
+line 602
+;602:	{ //we're probably going to deactivate it..
+line 603
+;603:		return qtrue;
+CNSTI4 1
+RETI4
+ADDRGP4 $293
+JUMPV
+LABELV $294
+line 606
+;604:	}
+;605:
+;606:	if ( forcePower == FP_LEVITATION )
+ADDRFP4 4
+INDIRI4
+CNSTI4 1
+NEI4 $296
+line 607
+;607:	{
+line 608
+;608:		return qtrue;
+CNSTI4 1
+RETI4
+ADDRGP4 $293
+JUMPV
+LABELV $296
+line 610
+;609:	}
+;610:	if ( !drain )
+ADDRLP4 0
+INDIRI4
+CNSTI4 0
+NEI4 $298
+line 611
+;611:	{
+line 612
+;612:		return qtrue;
+CNSTI4 1
+RETI4
+ADDRGP4 $293
+JUMPV
+LABELV $298
+line 614
+;613:	}
+;614:	if ( self->client->ps.fd.forcePower < drain )
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 932
+ADDP4
+INDIRI4
+ADDRLP4 0
+INDIRI4
+GEI4 $300
+line 615
+;615:	{
+line 616
+;616:		return qfalse;
+CNSTI4 0
+RETI4
+ADDRGP4 $293
+JUMPV
+LABELV $300
+line 618
+;617:	}
+;618:	return qtrue;
+CNSTI4 1
+RETI4
+LABELV $293
+endproc WP_ForcePowerAvailable 8 0
+export WP_ForcePowerInUse
+proc WP_ForcePowerInUse 0 0
+line 622
+;619:}
+;620:
+;621:qboolean WP_ForcePowerInUse( gentity_t *self, forcePowers_t forcePower )
+;622:{
+line 623
+;623:	if ( (self->client->ps.fd.forcePowersActive & ( 1 << forcePower )) )
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 848
+ADDP4
+INDIRI4
+CNSTI4 1
+ADDRFP4 4
+INDIRI4
+LSHI4
+BANDI4
+CNSTI4 0
+EQI4 $303
+line 624
+;624:	{//already using this power
+line 625
+;625:		return qtrue;
+CNSTI4 1
+RETI4
+ADDRGP4 $302
+JUMPV
+LABELV $303
+line 628
+;626:	}
+;627:
+;628:	return qfalse;
+CNSTI4 0
+RETI4
+LABELV $302
+endproc WP_ForcePowerInUse 0 0
+export WP_ForcePowerUsable
+proc WP_ForcePowerUsable 24 16
+line 632
+;629:}
+;630:
+;631:qboolean WP_ForcePowerUsable( gentity_t *self, forcePowers_t forcePower )
+;632:{
+line 633
+;633:	if (BG_HasYsalamiri(g_gametype.integer, &self->client->ps))
+ADDRGP4 g_gametype+12
+INDIRI4
+ARGI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ARGP4
+ADDRLP4 0
+ADDRGP4 BG_HasYsalamiri
+CALLI4
+ASGNI4
+ADDRLP4 0
+INDIRI4
+CNSTI4 0
+EQI4 $306
+line 634
+;634:	{
+line 635
+;635:		return qfalse;
+CNSTI4 0
+RETI4
+ADDRGP4 $305
+JUMPV
+LABELV $306
+line 638
+;636:	}
+;637:
+;638:	if (self->health <= 0 || self->client->ps.stats[STAT_HEALTH] <= 0 ||
+ADDRLP4 4
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 8
+CNSTI4 0
+ASGNI4
+ADDRLP4 4
+INDIRP4
+CNSTI4 676
+ADDP4
+INDIRI4
+ADDRLP4 8
+INDIRI4
+LEI4 $312
+ADDRLP4 12
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 12
+INDIRP4
+CNSTI4 216
+ADDP4
+INDIRI4
+ADDRLP4 8
+INDIRI4
+LEI4 $312
+ADDRLP4 12
+INDIRP4
+CNSTI4 108
+ADDP4
+INDIRI4
+CNSTI4 1
+BANDI4
+ADDRLP4 8
+INDIRI4
+EQI4 $309
+LABELV $312
+line 640
+;639:		(self->client->ps.eFlags & EF_DEAD))
+;640:	{
+line 641
+;641:		return qfalse;
+CNSTI4 0
+RETI4
+ADDRGP4 $305
+JUMPV
+LABELV $309
+line 644
+;642:	}
+;643:
+;644:	if (self->client->ps.pm_flags & PMF_FOLLOW)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 12
+ADDP4
+INDIRI4
+CNSTI4 4096
+BANDI4
+CNSTI4 0
+EQI4 $313
+line 645
+;645:	{ //specs can't use powers through people
+line 646
+;646:		return qfalse;
+CNSTI4 0
+RETI4
+ADDRGP4 $305
+JUMPV
+LABELV $313
+line 648
+;647:	}
+;648:	if (self->client->sess.sessionTeam == TEAM_SPECTATOR)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1632
+ADDP4
+INDIRI4
+CNSTI4 3
+NEI4 $315
+line 649
+;649:	{
+line 650
+;650:		return qfalse;
+CNSTI4 0
+RETI4
+ADDRGP4 $305
+JUMPV
+LABELV $315
+line 653
+;651:	}
+;652:
+;653:	if (!BG_CanUseFPNow(g_gametype.integer, &self->client->ps, level.time, forcePower))
+ADDRGP4 g_gametype+12
+INDIRI4
+ARGI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ARGP4
+ADDRGP4 level+32
+INDIRI4
+ARGI4
+ADDRFP4 4
+INDIRI4
+ARGI4
+ADDRLP4 16
+ADDRGP4 BG_CanUseFPNow
+CALLI4
+ASGNI4
+ADDRLP4 16
+INDIRI4
+CNSTI4 0
+NEI4 $317
+line 654
+;654:	{
+line 655
+;655:		return qfalse;
+CNSTI4 0
+RETI4
+ADDRGP4 $305
+JUMPV
+LABELV $317
+line 658
+;656:	}
+;657:
+;658:	if ( !(self->client->ps.fd.forcePowersKnown & ( 1 << forcePower )) )
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 844
+ADDP4
+INDIRI4
+CNSTI4 1
+ADDRFP4 4
+INDIRI4
+LSHI4
+BANDI4
+CNSTI4 0
+NEI4 $321
+line 659
+;659:	{//don't know this power
+line 660
+;660:		return qfalse;
+CNSTI4 0
+RETI4
+ADDRGP4 $305
+JUMPV
+LABELV $321
+line 663
+;661:	}
+;662:	
+;663:	if ( (self->client->ps.fd.forcePowersActive & ( 1 << forcePower )) )
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 848
+ADDP4
+INDIRI4
+CNSTI4 1
+ADDRFP4 4
+INDIRI4
+LSHI4
+BANDI4
+CNSTI4 0
+EQI4 $323
+line 664
+;664:	{//already using this power
+line 665
+;665:		if (forcePower != FP_LEVITATION)
+ADDRFP4 4
+INDIRI4
+CNSTI4 1
+EQI4 $325
+line 666
+;666:		{
+line 667
+;667:			return qfalse;
+CNSTI4 0
+RETI4
+ADDRGP4 $305
+JUMPV
+LABELV $325
+line 669
+;668:		}
+;669:	}
+LABELV $323
+line 671
+;670:
+;671:	if (forcePower == FP_LEVITATION && self->client->fjDidJump)
+ADDRFP4 4
+INDIRI4
+CNSTI4 1
+NEI4 $327
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 2956
+ADDP4
+INDIRI4
+CNSTI4 0
+EQI4 $327
+line 672
+;672:	{
+line 673
+;673:		return qfalse;
+CNSTI4 0
+RETI4
+ADDRGP4 $305
+JUMPV
+LABELV $327
+line 676
+;674:	}
+;675:
+;676:	if (!self->client->ps.fd.forcePowerLevel[forcePower])
+ADDRFP4 4
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 944
+ADDP4
+ADDP4
+INDIRI4
+CNSTI4 0
+NEI4 $329
+line 677
+;677:	{
+line 678
+;678:		return qfalse;
+CNSTI4 0
+RETI4
+ADDRGP4 $305
+JUMPV
+LABELV $329
+line 681
+;679:	}
+;680:
+;681:	return WP_ForcePowerAvailable( self, forcePower );
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRFP4 4
+INDIRI4
+ARGI4
+ADDRLP4 20
+ADDRGP4 WP_ForcePowerAvailable
+CALLI4
+ASGNI4
+ADDRLP4 20
+INDIRI4
+RETI4
+LABELV $305
+endproc WP_ForcePowerUsable 24 16
+export WP_AbsorbConversion
+proc WP_AbsorbConversion 28 8
+line 685
+;682:}
+;683:
+;684:int WP_AbsorbConversion(gentity_t *attacked, int atdAbsLevel, gentity_t *attacker, int atPower, int atPowerLevel, int atForceSpent)
+;685:{
+line 686
+;686:	int getLevel = 0;
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+line 687
+;687:	int addTot = 0;
+ADDRLP4 4
+CNSTI4 0
+ASGNI4
+line 690
+;688:	gentity_t *abSound;
+;689:
+;690:	if (atPower != FP_LIGHTNING &&
+ADDRLP4 12
+ADDRFP4 12
+INDIRI4
+ASGNI4
+ADDRLP4 12
+INDIRI4
+CNSTI4 7
+EQI4 $332
+ADDRLP4 12
+INDIRI4
+CNSTI4 13
+EQI4 $332
+ADDRLP4 12
+INDIRI4
+CNSTI4 6
+EQI4 $332
+ADDRLP4 12
+INDIRI4
+CNSTI4 3
+EQI4 $332
+ADDRLP4 12
+INDIRI4
+CNSTI4 4
+EQI4 $332
+line 695
+;691:		atPower != FP_DRAIN &&
+;692:		atPower != FP_GRIP &&
+;693:		atPower != FP_PUSH &&
+;694:		atPower != FP_PULL)
+;695:	{ //Only these powers can be absorbed
+line 696
+;696:		return -1;
+CNSTI4 -1
+RETI4
+ADDRGP4 $331
+JUMPV
+LABELV $332
+line 699
+;697:	}
+;698:
+;699:	if (!atdAbsLevel)
+ADDRFP4 4
+INDIRI4
+CNSTI4 0
+NEI4 $334
+line 700
+;700:	{ //looks like attacker doesn't have any absorb power
+line 701
+;701:		return -1;
+CNSTI4 -1
+RETI4
+ADDRGP4 $331
+JUMPV
+LABELV $334
+line 704
+;702:	}
+;703:
+;704:	if (!(attacked->client->ps.fd.forcePowersActive & (1 << FP_ABSORB)))
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 848
+ADDP4
+INDIRI4
+CNSTI4 1024
+BANDI4
+CNSTI4 0
+NEI4 $336
+line 705
+;705:	{ //absorb is not active
+line 706
+;706:		return -1;
+CNSTI4 -1
+RETI4
+ADDRGP4 $331
+JUMPV
+LABELV $336
+line 710
+;707:	}
+;708:
+;709:	//Subtract absorb power level from the offensive force power
+;710:	getLevel = atPowerLevel;
+ADDRLP4 0
+ADDRFP4 16
+INDIRI4
+ASGNI4
+line 711
+;711:	getLevel -= atdAbsLevel;
+ADDRLP4 0
+ADDRLP4 0
+INDIRI4
+ADDRFP4 4
+INDIRI4
+SUBI4
+ASGNI4
+line 713
+;712:
+;713:	if (getLevel < 0)
+ADDRLP4 0
+INDIRI4
+CNSTI4 0
+GEI4 $338
+line 714
+;714:	{
+line 715
+;715:		getLevel = 0;
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+line 716
+;716:	}
+LABELV $338
+line 719
+;717:
+;718:	//let the attacker absorb an amount of force used in this attack based on his level of absorb
+;719:	addTot = (atForceSpent/3)*attacked->client->ps.fd.forcePowerLevel[FP_ABSORB];
+ADDRLP4 4
+ADDRFP4 20
+INDIRI4
+CNSTI4 3
+DIVI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 984
+ADDP4
+INDIRI4
+MULI4
+ASGNI4
+line 721
+;720:
+;721:	if (addTot < 1 && atForceSpent >= 1)
+ADDRLP4 16
+CNSTI4 1
+ASGNI4
+ADDRLP4 4
+INDIRI4
+ADDRLP4 16
+INDIRI4
+GEI4 $340
+ADDRFP4 20
+INDIRI4
+ADDRLP4 16
+INDIRI4
+LTI4 $340
+line 722
+;722:	{
+line 723
+;723:		addTot = 1;
+ADDRLP4 4
+CNSTI4 1
+ASGNI4
+line 724
+;724:	}
+LABELV $340
+line 725
+;725:	attacked->client->ps.fd.forcePower += addTot;
+ADDRLP4 20
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 932
+ADDP4
+ASGNP4
+ADDRLP4 20
+INDIRP4
+ADDRLP4 20
+INDIRP4
+INDIRI4
+ADDRLP4 4
+INDIRI4
+ADDI4
+ASGNI4
+line 726
+;726:	if (attacked->client->ps.fd.forcePower > 100)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 932
+ADDP4
+INDIRI4
+CNSTI4 100
+LEI4 $342
+line 727
+;727:	{
+line 728
+;728:		attacked->client->ps.fd.forcePower = 100;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 932
+ADDP4
+CNSTI4 100
+ASGNI4
+line 729
+;729:	}
+LABELV $342
+line 732
+;730:
+;731:	//play sound indicating that attack was absorbed
+;732:	if (attacked->client->forcePowerSoundDebounce < level.time)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 2952
+ADDP4
+INDIRI4
+ADDRGP4 level+32
+INDIRI4
+GEI4 $344
+line 733
+;733:	{
+line 734
+;734:		abSound = G_PreDefSound(attacked->client->ps.origin, PDSOUND_ABSORBHIT);
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 20
+ADDP4
+ARGP4
+CNSTI4 3
+ARGI4
+ADDRLP4 24
+ADDRGP4 G_PreDefSound
+CALLP4
+ASGNP4
+ADDRLP4 8
+ADDRLP4 24
+INDIRP4
+ASGNP4
+line 735
+;735:		abSound->s.trickedentindex = attacked->s.number;
+ADDRLP4 8
+INDIRP4
+CNSTI4 148
+ADDP4
+ADDRFP4 0
+INDIRP4
+INDIRI4
+ASGNI4
+line 737
+;736:
+;737:		attacked->client->forcePowerSoundDebounce = level.time + 400;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 2952
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 400
+ADDI4
+ASGNI4
+line 738
+;738:	}
+LABELV $344
+line 740
+;739:
+;740:	return getLevel;
+ADDRLP4 0
+INDIRI4
+RETI4
+LABELV $331
+endproc WP_AbsorbConversion 28 8
+export WP_ForcePowerRegenerate
+proc WP_ForcePowerRegenerate 8 0
+line 744
+;741:}
+;742:
+;743:void WP_ForcePowerRegenerate( gentity_t *self, int overrideAmt )
+;744:{ //called on a regular interval to regenerate force power.
+line 745
+;745:	if ( !self->client )
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CVPU4 4
+CNSTU4 0
+NEU4 $349
+line 746
+;746:	{
+line 747
+;747:		return;
+ADDRGP4 $348
+JUMPV
+LABELV $349
+line 750
+;748:	}
+;749:
+;750:	if ( overrideAmt )
+ADDRFP4 4
+INDIRI4
+CNSTI4 0
+EQI4 $351
+line 751
+;751:	{ //custom regen amount
+line 752
+;752:		self->client->ps.fd.forcePower += overrideAmt;
+ADDRLP4 0
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 932
+ADDP4
+ASGNP4
+ADDRLP4 0
+INDIRP4
+ADDRLP4 0
+INDIRP4
+INDIRI4
+ADDRFP4 4
+INDIRI4
+ADDI4
+ASGNI4
+line 753
+;753:	}
+ADDRGP4 $352
+JUMPV
+LABELV $351
+line 755
+;754:	else
+;755:	{ //otherwise, just 1
+line 756
+;756:		self->client->ps.fd.forcePower++;
+ADDRLP4 0
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 932
+ADDP4
+ASGNP4
+ADDRLP4 0
+INDIRP4
+ADDRLP4 0
+INDIRP4
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 757
+;757:	}
+LABELV $352
+line 759
+;758:
+;759:	if ( self->client->ps.fd.forcePower > self->client->ps.fd.forcePowerMax )
+ADDRLP4 0
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 0
+INDIRP4
+CNSTI4 932
+ADDP4
+INDIRI4
+ADDRLP4 0
+INDIRP4
+CNSTI4 936
+ADDP4
+INDIRI4
+LEI4 $353
+line 760
+;760:	{ //cap it off at the max (default 100)
+line 761
+;761:		self->client->ps.fd.forcePower = self->client->ps.fd.forcePowerMax;
+ADDRLP4 4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 4
+INDIRP4
+CNSTI4 932
+ADDP4
+ADDRLP4 4
+INDIRP4
+CNSTI4 936
+ADDP4
+INDIRI4
+ASGNI4
+line 762
+;762:	}
+LABELV $353
+line 763
+;763:}
+LABELV $348
+endproc WP_ForcePowerRegenerate 8 0
+export WP_ForcePowerStart
+proc WP_ForcePowerStart 80 12
+line 766
+;764:
+;765:void WP_ForcePowerStart( gentity_t *self, forcePowers_t forcePower, int overrideAmt )
+;766:{ //activate the given force power
+line 767
+;767:	int	duration = 0;
+ADDRLP4 4
+CNSTI4 0
+ASGNI4
+line 768
+;768:	qboolean hearable = qfalse;
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+line 769
+;769:	float hearDist = 0;
+ADDRLP4 8
+CNSTF4 0
+ASGNF4
+line 771
+;770:
+;771:	if (!WP_ForcePowerAvailable( self, forcePower ))
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRFP4 4
+INDIRI4
+ARGI4
+ADDRLP4 12
+ADDRGP4 WP_ForcePowerAvailable
+CALLI4
+ASGNI4
+ADDRLP4 12
+INDIRI4
+CNSTI4 0
+NEI4 $356
+line 772
+;772:	{
+line 773
+;773:		return;
+ADDRGP4 $355
+JUMPV
+LABELV $356
+line 778
+;774:	}
+;775:
+;776:	//hearable and hearDist are merely for the benefit of bots, and not related to if a sound is actually played.
+;777:	//If duration is set, the force power will assume to be timer-based.
+;778:	switch( (int)forcePower )
+ADDRLP4 16
+ADDRFP4 4
+INDIRI4
+ASGNI4
+ADDRLP4 16
+INDIRI4
+CNSTI4 0
+LTI4 $359
+ADDRLP4 16
+INDIRI4
+CNSTI4 17
+GTI4 $359
+ADDRLP4 16
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRGP4 $406
+ADDP4
+INDIRP4
+JUMPV
+lit
+align 4
+LABELV $406
+address $361
+address $362
+address $363
+address $372
+address $373
+address $374
+address $381
+address $383
+address $384
+address $391
+address $392
+address $393
+address $394
+address $395
+address $396
+address $359
+address $359
+address $359
+code
+line 779
+;779:	{
+LABELV $361
+line 781
+;780:	case FP_HEAL:
+;781:		hearable = qtrue;
+ADDRLP4 0
+CNSTI4 1
+ASGNI4
+line 782
+;782:		hearDist = 256;
+ADDRLP4 8
+CNSTF4 1132462080
+ASGNF4
+line 783
+;783:		self->client->ps.fd.forcePowersActive |= ( 1 << forcePower );
+ADDRLP4 24
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 848
+ADDP4
+ASGNP4
+ADDRLP4 24
+INDIRP4
+ADDRLP4 24
+INDIRP4
+INDIRI4
+CNSTI4 1
+ADDRFP4 4
+INDIRI4
+LSHI4
+BORI4
+ASGNI4
+line 784
+;784:		break;
+ADDRGP4 $359
+JUMPV
+LABELV $362
+line 786
+;785:	case FP_LEVITATION:
+;786:		hearable = qtrue;
+ADDRLP4 0
+CNSTI4 1
+ASGNI4
+line 787
+;787:		hearDist = 256;
+ADDRLP4 8
+CNSTF4 1132462080
+ASGNF4
+line 788
+;788:		self->client->ps.fd.forcePowersActive |= ( 1 << forcePower );
+ADDRLP4 28
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 848
+ADDP4
+ASGNP4
+ADDRLP4 28
+INDIRP4
+ADDRLP4 28
+INDIRP4
+INDIRI4
+CNSTI4 1
+ADDRFP4 4
+INDIRI4
+LSHI4
+BORI4
+ASGNI4
+line 789
+;789:		break;
+ADDRGP4 $359
+JUMPV
+LABELV $363
+line 791
+;790:	case FP_SPEED:
+;791:		hearable = qtrue;
+ADDRLP4 0
+CNSTI4 1
+ASGNI4
+line 792
+;792:		hearDist = 256;
+ADDRLP4 8
+CNSTF4 1132462080
+ASGNF4
+line 793
+;793:		if (self->client->ps.fd.forcePowerLevel[FP_SPEED] == FORCE_LEVEL_1)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 952
+ADDP4
+INDIRI4
+CNSTI4 1
+NEI4 $364
+line 794
+;794:		{
+line 795
+;795:			duration = 10000;
+ADDRLP4 4
+CNSTI4 10000
+ASGNI4
+line 796
+;796:		}
+ADDRGP4 $365
+JUMPV
+LABELV $364
+line 797
+;797:		else if (self->client->ps.fd.forcePowerLevel[FP_SPEED] == FORCE_LEVEL_2)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 952
+ADDP4
+INDIRI4
+CNSTI4 2
+NEI4 $366
+line 798
+;798:		{
+line 799
+;799:			duration = 15000;
+ADDRLP4 4
+CNSTI4 15000
+ASGNI4
+line 800
+;800:		}
+ADDRGP4 $367
+JUMPV
+LABELV $366
+line 801
+;801:		else if (self->client->ps.fd.forcePowerLevel[FP_SPEED] == FORCE_LEVEL_3)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 952
+ADDP4
+INDIRI4
+CNSTI4 3
+NEI4 $359
+line 802
+;802:		{
+line 803
+;803:			duration = 20000;
+ADDRLP4 4
+CNSTI4 20000
+ASGNI4
+line 804
+;804:		}
+line 806
+;805:		else //shouldn't get here
+;806:		{
+line 807
+;807:			break;
+LABELV $369
+LABELV $367
+LABELV $365
+line 810
+;808:		}
+;809:
+;810:		if (overrideAmt)
+ADDRFP4 8
+INDIRI4
+CNSTI4 0
+EQI4 $370
+line 811
+;811:		{
+line 812
+;812:			duration = overrideAmt;
+ADDRLP4 4
+ADDRFP4 8
+INDIRI4
+ASGNI4
+line 813
+;813:		}
+LABELV $370
+line 815
+;814:
+;815:		self->client->ps.fd.forcePowersActive |= ( 1 << forcePower );
+ADDRLP4 32
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 848
+ADDP4
+ASGNP4
+ADDRLP4 32
+INDIRP4
+ADDRLP4 32
+INDIRP4
+INDIRI4
+CNSTI4 1
+ADDRFP4 4
+INDIRI4
+LSHI4
+BORI4
+ASGNI4
+line 816
+;816:		break;
+ADDRGP4 $359
+JUMPV
+LABELV $372
+line 818
+;817:	case FP_PUSH:
+;818:		hearable = qtrue;
+ADDRLP4 0
+CNSTI4 1
+ASGNI4
+line 819
+;819:		hearDist = 256;
+ADDRLP4 8
+CNSTF4 1132462080
+ASGNF4
+line 820
+;820:		break;
+ADDRGP4 $359
+JUMPV
+LABELV $373
+line 822
+;821:	case FP_PULL:
+;822:		hearable = qtrue;
+ADDRLP4 0
+CNSTI4 1
+ASGNI4
+line 823
+;823:		hearDist = 256;
+ADDRLP4 8
+CNSTF4 1132462080
+ASGNF4
+line 824
+;824:		break;
+ADDRGP4 $359
+JUMPV
+LABELV $374
+line 826
+;825:	case FP_TELEPATHY:
+;826:		hearable = qtrue;
+ADDRLP4 0
+CNSTI4 1
+ASGNI4
+line 827
+;827:		hearDist = 256;
+ADDRLP4 8
+CNSTF4 1132462080
+ASGNF4
+line 828
+;828:		if (self->client->ps.fd.forcePowerLevel[FP_TELEPATHY] == FORCE_LEVEL_1)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 964
+ADDP4
+INDIRI4
+CNSTI4 1
+NEI4 $375
+line 829
+;829:		{
+line 830
+;830:			duration = 20000;
+ADDRLP4 4
+CNSTI4 20000
+ASGNI4
+line 831
+;831:		}
+ADDRGP4 $376
+JUMPV
+LABELV $375
+line 832
+;832:		else if (self->client->ps.fd.forcePowerLevel[FP_TELEPATHY] == FORCE_LEVEL_2)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 964
+ADDP4
+INDIRI4
+CNSTI4 2
+NEI4 $377
+line 833
+;833:		{
+line 834
+;834:			duration = 25000;
+ADDRLP4 4
+CNSTI4 25000
+ASGNI4
+line 835
+;835:		}
+ADDRGP4 $378
+JUMPV
+LABELV $377
+line 836
+;836:		else if (self->client->ps.fd.forcePowerLevel[FP_TELEPATHY] == FORCE_LEVEL_3)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 964
+ADDP4
+INDIRI4
+CNSTI4 3
+NEI4 $359
+line 837
+;837:		{
+line 838
+;838:			duration = 30000;
+ADDRLP4 4
+CNSTI4 30000
+ASGNI4
+line 839
+;839:		}
+line 841
+;840:		else //shouldn't get here
+;841:		{
+line 842
+;842:			break;
+LABELV $380
+LABELV $378
+LABELV $376
+line 845
+;843:		}
+;844:
+;845:		self->client->ps.fd.forcePowersActive |= ( 1 << forcePower );
+ADDRLP4 36
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 848
+ADDP4
+ASGNP4
+ADDRLP4 36
+INDIRP4
+ADDRLP4 36
+INDIRP4
+INDIRI4
+CNSTI4 1
+ADDRFP4 4
+INDIRI4
+LSHI4
+BORI4
+ASGNI4
+line 846
+;846:		break;
+ADDRGP4 $359
+JUMPV
+LABELV $381
+line 848
+;847:	case FP_GRIP:
+;848:		hearable = qtrue;
+ADDRLP4 0
+CNSTI4 1
+ASGNI4
+line 849
+;849:		hearDist = 256;
+ADDRLP4 8
+CNSTF4 1132462080
+ASGNF4
+line 850
+;850:		self->client->ps.fd.forcePowersActive |= ( 1 << forcePower );
+ADDRLP4 40
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 848
+ADDP4
+ASGNP4
+ADDRLP4 40
+INDIRP4
+ADDRLP4 40
+INDIRP4
+INDIRI4
+CNSTI4 1
+ADDRFP4 4
+INDIRI4
+LSHI4
+BORI4
+ASGNI4
+line 851
+;851:		self->client->ps.powerups[PW_DISINT_4] = level.time + 60000;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 380
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 60000
+ADDI4
+ASGNI4
+line 852
+;852:		break;
+ADDRGP4 $359
+JUMPV
+LABELV $383
+line 854
+;853:	case FP_LIGHTNING:
+;854:		hearable = qtrue;
+ADDRLP4 0
+CNSTI4 1
+ASGNI4
+line 855
+;855:		hearDist = 512;
+ADDRLP4 8
+CNSTF4 1140850688
+ASGNF4
+line 856
+;856:		duration = overrideAmt;
+ADDRLP4 4
+ADDRFP4 8
+INDIRI4
+ASGNI4
+line 857
+;857:		overrideAmt = 0;
+ADDRFP4 8
+CNSTI4 0
+ASGNI4
+line 858
+;858:		self->client->ps.fd.forcePowersActive |= ( 1 << forcePower );
+ADDRLP4 44
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 848
+ADDP4
+ASGNP4
+ADDRLP4 44
+INDIRP4
+ADDRLP4 44
+INDIRP4
+INDIRI4
+CNSTI4 1
+ADDRFP4 4
+INDIRI4
+LSHI4
+BORI4
+ASGNI4
+line 859
+;859:		self->client->ps.activeForcePass = self->client->ps.fd.forcePowerLevel[FP_LIGHTNING];
+ADDRLP4 48
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 48
+INDIRP4
+CNSTI4 636
+ADDP4
+ADDRLP4 48
+INDIRP4
+CNSTI4 972
+ADDP4
+INDIRI4
+ASGNI4
+line 860
+;860:		break;
+ADDRGP4 $359
+JUMPV
+LABELV $384
+line 862
+;861:	case FP_RAGE:
+;862:		hearable = qtrue;
+ADDRLP4 0
+CNSTI4 1
+ASGNI4
+line 863
+;863:		hearDist = 256;
+ADDRLP4 8
+CNSTF4 1132462080
+ASGNF4
+line 864
+;864:		if (self->client->ps.fd.forcePowerLevel[FP_RAGE] == FORCE_LEVEL_1)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 976
+ADDP4
+INDIRI4
+CNSTI4 1
+NEI4 $385
+line 865
+;865:		{
+line 866
+;866:			duration = 8000;
+ADDRLP4 4
+CNSTI4 8000
+ASGNI4
+line 867
+;867:		}
+ADDRGP4 $386
+JUMPV
+LABELV $385
+line 868
+;868:		else if (self->client->ps.fd.forcePowerLevel[FP_RAGE] == FORCE_LEVEL_2)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 976
+ADDP4
+INDIRI4
+CNSTI4 2
+NEI4 $387
+line 869
+;869:		{
+line 870
+;870:			duration = 14000;
+ADDRLP4 4
+CNSTI4 14000
+ASGNI4
+line 871
+;871:		}
+ADDRGP4 $388
+JUMPV
+LABELV $387
+line 872
+;872:		else if (self->client->ps.fd.forcePowerLevel[FP_RAGE] == FORCE_LEVEL_3)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 976
+ADDP4
+INDIRI4
+CNSTI4 3
+NEI4 $359
+line 873
+;873:		{
+line 874
+;874:			duration = 20000;
+ADDRLP4 4
+CNSTI4 20000
+ASGNI4
+line 875
+;875:		}
+line 877
+;876:		else //shouldn't get here
+;877:		{
+line 878
+;878:			break;
+LABELV $390
+LABELV $388
+LABELV $386
+line 881
+;879:		}
+;880:
+;881:		self->client->ps.fd.forcePowersActive |= ( 1 << forcePower );
+ADDRLP4 52
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 848
+ADDP4
+ASGNP4
+ADDRLP4 52
+INDIRP4
+ADDRLP4 52
+INDIRP4
+INDIRI4
+CNSTI4 1
+ADDRFP4 4
+INDIRI4
+LSHI4
+BORI4
+ASGNI4
+line 882
+;882:		break;
+ADDRGP4 $359
+JUMPV
+LABELV $391
+line 884
+;883:	case FP_PROTECT:
+;884:		hearable = qtrue;
+ADDRLP4 0
+CNSTI4 1
+ASGNI4
+line 885
+;885:		hearDist = 256;
+ADDRLP4 8
+CNSTF4 1132462080
+ASGNF4
+line 886
+;886:		duration = 20000;
+ADDRLP4 4
+CNSTI4 20000
+ASGNI4
+line 887
+;887:		self->client->ps.fd.forcePowersActive |= ( 1 << forcePower );
+ADDRLP4 56
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 848
+ADDP4
+ASGNP4
+ADDRLP4 56
+INDIRP4
+ADDRLP4 56
+INDIRP4
+INDIRI4
+CNSTI4 1
+ADDRFP4 4
+INDIRI4
+LSHI4
+BORI4
+ASGNI4
+line 888
+;888:		break;
+ADDRGP4 $359
+JUMPV
+LABELV $392
+line 890
+;889:	case FP_ABSORB:
+;890:		hearable = qtrue;
+ADDRLP4 0
+CNSTI4 1
+ASGNI4
+line 891
+;891:		hearDist = 256;
+ADDRLP4 8
+CNSTF4 1132462080
+ASGNF4
+line 892
+;892:		duration = 20000;
+ADDRLP4 4
+CNSTI4 20000
+ASGNI4
+line 893
+;893:		self->client->ps.fd.forcePowersActive |= ( 1 << forcePower );
+ADDRLP4 60
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 848
+ADDP4
+ASGNP4
+ADDRLP4 60
+INDIRP4
+ADDRLP4 60
+INDIRP4
+INDIRI4
+CNSTI4 1
+ADDRFP4 4
+INDIRI4
+LSHI4
+BORI4
+ASGNI4
+line 894
+;894:		break;
+ADDRGP4 $359
+JUMPV
+LABELV $393
+line 896
+;895:	case FP_TEAM_HEAL:
+;896:		hearable = qtrue;
+ADDRLP4 0
+CNSTI4 1
+ASGNI4
+line 897
+;897:		hearDist = 256;
+ADDRLP4 8
+CNSTF4 1132462080
+ASGNF4
+line 898
+;898:		self->client->ps.fd.forcePowersActive |= ( 1 << forcePower );
+ADDRLP4 64
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 848
+ADDP4
+ASGNP4
+ADDRLP4 64
+INDIRP4
+ADDRLP4 64
+INDIRP4
+INDIRI4
+CNSTI4 1
+ADDRFP4 4
+INDIRI4
+LSHI4
+BORI4
+ASGNI4
+line 899
+;899:		break;
+ADDRGP4 $359
+JUMPV
+LABELV $394
+line 901
+;900:	case FP_TEAM_FORCE:
+;901:		hearable = qtrue;
+ADDRLP4 0
+CNSTI4 1
+ASGNI4
+line 902
+;902:		hearDist = 256;
+ADDRLP4 8
+CNSTF4 1132462080
+ASGNF4
+line 903
+;903:		self->client->ps.fd.forcePowersActive |= ( 1 << forcePower );
+ADDRLP4 68
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 848
+ADDP4
+ASGNP4
+ADDRLP4 68
+INDIRP4
+ADDRLP4 68
+INDIRP4
+INDIRI4
+CNSTI4 1
+ADDRFP4 4
+INDIRI4
+LSHI4
+BORI4
+ASGNI4
+line 904
+;904:		break;
+ADDRGP4 $359
+JUMPV
+LABELV $395
+line 906
+;905:	case FP_DRAIN:
+;906:		hearable = qtrue;
+ADDRLP4 0
+CNSTI4 1
+ASGNI4
+line 907
+;907:		hearDist = 256;
+ADDRLP4 8
+CNSTF4 1132462080
+ASGNF4
+line 908
+;908:		duration = overrideAmt;
+ADDRLP4 4
+ADDRFP4 8
+INDIRI4
+ASGNI4
+line 909
+;909:		overrideAmt = 0;
+ADDRFP4 8
+CNSTI4 0
+ASGNI4
+line 910
+;910:		self->client->ps.fd.forcePowersActive |= ( 1 << forcePower );
+ADDRLP4 72
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 848
+ADDP4
+ASGNP4
+ADDRLP4 72
+INDIRP4
+ADDRLP4 72
+INDIRP4
+INDIRI4
+CNSTI4 1
+ADDRFP4 4
+INDIRI4
+LSHI4
+BORI4
+ASGNI4
+line 912
+;911:		//self->client->ps.activeForcePass = self->client->ps.fd.forcePowerLevel[FP_DRAIN];
+;912:		break;
+ADDRGP4 $359
+JUMPV
+LABELV $396
+line 914
+;913:	case FP_SEE:
+;914:		hearable = qtrue;
+ADDRLP4 0
+CNSTI4 1
+ASGNI4
+line 915
+;915:		hearDist = 256;
+ADDRLP4 8
+CNSTF4 1132462080
+ASGNF4
+line 916
+;916:		if (self->client->ps.fd.forcePowerLevel[FP_SEE] == FORCE_LEVEL_1)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1000
+ADDP4
+INDIRI4
+CNSTI4 1
+NEI4 $397
+line 917
+;917:		{
+line 918
+;918:			duration = 10000;
+ADDRLP4 4
+CNSTI4 10000
+ASGNI4
+line 919
+;919:		}
+ADDRGP4 $398
+JUMPV
+LABELV $397
+line 920
+;920:		else if (self->client->ps.fd.forcePowerLevel[FP_SEE] == FORCE_LEVEL_2)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1000
+ADDP4
+INDIRI4
+CNSTI4 2
+NEI4 $399
+line 921
+;921:		{
+line 922
+;922:			duration = 20000;
+ADDRLP4 4
+CNSTI4 20000
+ASGNI4
+line 923
+;923:		}
+ADDRGP4 $400
+JUMPV
+LABELV $399
+line 924
+;924:		else if (self->client->ps.fd.forcePowerLevel[FP_SEE] == FORCE_LEVEL_3)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1000
+ADDP4
+INDIRI4
+CNSTI4 3
+NEI4 $359
+line 925
+;925:		{
+line 926
+;926:			duration = 30000;
+ADDRLP4 4
+CNSTI4 30000
+ASGNI4
+line 927
+;927:		}
+line 929
+;928:		else //shouldn't get here
+;929:		{
+line 930
+;930:			break;
+LABELV $402
+LABELV $400
+LABELV $398
+line 933
+;931:		}
+;932:
+;933:		self->client->ps.fd.forcePowersActive |= ( 1 << forcePower );
+ADDRLP4 76
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 848
+ADDP4
+ASGNP4
+ADDRLP4 76
+INDIRP4
+ADDRLP4 76
+INDIRP4
+INDIRI4
+CNSTI4 1
+ADDRFP4 4
+INDIRI4
+LSHI4
+BORI4
+ASGNI4
+line 934
+;934:		break;
+line 936
+;935:	case FP_SABERATTACK:
+;936:		break;
+line 938
+;937:	case FP_SABERDEFEND:
+;938:		break;
+line 940
+;939:	case FP_SABERTHROW:
+;940:		break;
+line 942
+;941:	default:
+;942:		break;
+LABELV $359
+line 945
+;943:	}
+;944:
+;945:	if ( duration )
+ADDRLP4 4
+INDIRI4
+CNSTI4 0
+EQI4 $407
+line 946
+;946:	{
+line 947
+;947:		self->client->ps.fd.forcePowerDuration[forcePower] = level.time + duration;
+ADDRFP4 4
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 860
+ADDP4
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+ADDRLP4 4
+INDIRI4
+ADDI4
+ASGNI4
+line 948
+;948:	}
+ADDRGP4 $408
+JUMPV
+LABELV $407
+line 950
+;949:	else
+;950:	{
+line 951
+;951:		self->client->ps.fd.forcePowerDuration[forcePower] = 0;
+ADDRFP4 4
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 860
+ADDP4
+ADDP4
+CNSTI4 0
+ASGNI4
+line 952
+;952:	}
+LABELV $408
+line 954
+;953:
+;954:	if (hearable)
+ADDRLP4 0
+INDIRI4
+CNSTI4 0
+EQI4 $410
+line 955
+;955:	{
+line 956
+;956:		self->client->ps.otherSoundLen = hearDist;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1280
+ADDP4
+ADDRLP4 8
+INDIRF4
+ASGNF4
+line 957
+;957:		self->client->ps.otherSoundTime = level.time + 100;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1276
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 100
+ADDI4
+ASGNI4
+line 958
+;958:	}
+LABELV $410
+line 960
+;959:	
+;960:	self->client->ps.fd.forcePowerDebounce[forcePower] = 0;
+ADDRFP4 4
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 772
+ADDP4
+ADDP4
+CNSTI4 0
+ASGNI4
+line 962
+;961:
+;962:	if ((int)forcePower == FP_SPEED && overrideAmt)
+ADDRFP4 4
+INDIRI4
+CNSTI4 2
+NEI4 $413
+ADDRFP4 8
+INDIRI4
+CNSTI4 0
+EQI4 $413
+line 963
+;963:	{
+line 964
+;964:		BG_ForcePowerDrain( &self->client->ps, forcePower, overrideAmt*0.025 );
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ARGP4
+ADDRFP4 4
+INDIRI4
+ARGI4
+CNSTF4 1020054733
+ADDRFP4 8
+INDIRI4
+CVIF4 4
+MULF4
+CVFI4 4
+ARGI4
+ADDRGP4 BG_ForcePowerDrain
+CALLV
+pop
+line 965
+;965:	}
+ADDRGP4 $414
+JUMPV
+LABELV $413
+line 966
+;966:	else if ((int)forcePower != FP_GRIP && (int)forcePower != FP_DRAIN)
+ADDRLP4 24
+ADDRFP4 4
+INDIRI4
+ASGNI4
+ADDRLP4 24
+INDIRI4
+CNSTI4 6
+EQI4 $415
+ADDRLP4 24
+INDIRI4
+CNSTI4 13
+EQI4 $415
+line 967
+;967:	{ //grip and drain drain as damage is done
+line 968
+;968:		BG_ForcePowerDrain( &self->client->ps, forcePower, overrideAmt );
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ARGP4
+ADDRFP4 4
+INDIRI4
+ARGI4
+ADDRFP4 8
+INDIRI4
+ARGI4
+ADDRGP4 BG_ForcePowerDrain
+CALLV
+pop
+line 969
+;969:	}
+LABELV $415
+LABELV $414
+line 970
+;970:}
+LABELV $355
+endproc WP_ForcePowerStart 80 12
+export ForceHeal
+proc ForceHeal 20 12
+line 973
+;971:
+;972:void ForceHeal( gentity_t *self )
+;973:{
+line 974
+;974:	if ( self->health <= 0 )
+ADDRFP4 0
+INDIRP4
+CNSTI4 676
+ADDP4
+INDIRI4
+CNSTI4 0
+GTI4 $418
+line 975
+;975:	{
+line 976
+;976:		return;
+ADDRGP4 $417
+JUMPV
+LABELV $418
+line 979
+;977:	}
+;978:
+;979:	if ( !WP_ForcePowerUsable( self, FP_HEAL ) )
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 0
+ARGI4
+ADDRLP4 0
+ADDRGP4 WP_ForcePowerUsable
+CALLI4
+ASGNI4
+ADDRLP4 0
+INDIRI4
+CNSTI4 0
+NEI4 $420
+line 980
+;980:	{
+line 981
+;981:		return;
+ADDRGP4 $417
+JUMPV
+LABELV $420
+line 984
+;982:	}
+;983:
+;984:	if ( self->health >= self->client->ps.stats[STAT_MAX_HEALTH])
+ADDRLP4 4
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 4
+INDIRP4
+CNSTI4 676
+ADDP4
+INDIRI4
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 248
+ADDP4
+INDIRI4
+LTI4 $422
+line 985
+;985:	{
+line 986
+;986:		return;
+ADDRGP4 $417
+JUMPV
+LABELV $422
+line 989
+;987:	}
+;988:
+;989:	if (self->client->ps.fd.forcePowerLevel[FP_HEAL] == FORCE_LEVEL_3)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 944
+ADDP4
+INDIRI4
+CNSTI4 3
+NEI4 $424
+line 990
+;990:	{
+line 991
+;991:		self->health += 25; //JediDog: This was 25, for 1.04, but we changed it back to 1.03's settings... +50
+ADDRLP4 8
+ADDRFP4 0
+INDIRP4
+CNSTI4 676
+ADDP4
+ASGNP4
+ADDRLP4 8
+INDIRP4
+ADDRLP4 8
+INDIRP4
+INDIRI4
+CNSTI4 25
+ADDI4
+ASGNI4
+line 993
+;992:		
+;993:		if (self->health > self->client->ps.stats[STAT_MAX_HEALTH])
+ADDRLP4 12
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 12
+INDIRP4
+CNSTI4 676
+ADDP4
+INDIRI4
+ADDRLP4 12
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 248
+ADDP4
+INDIRI4
+LEI4 $426
+line 994
+;994:		{
+line 995
+;995:			self->health = self->client->ps.stats[STAT_MAX_HEALTH];
+ADDRLP4 16
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 16
+INDIRP4
+CNSTI4 676
+ADDP4
+ADDRLP4 16
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 248
+ADDP4
+INDIRI4
+ASGNI4
+line 996
+;996:		}
+LABELV $426
+line 997
+;997:		BG_ForcePowerDrain( &self->client->ps, FP_HEAL, 0 );
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ARGP4
+ADDRLP4 16
+CNSTI4 0
+ASGNI4
+ADDRLP4 16
+INDIRI4
+ARGI4
+ADDRLP4 16
+INDIRI4
+ARGI4
+ADDRGP4 BG_ForcePowerDrain
+CALLV
+pop
+line 998
+;998:	}
+ADDRGP4 $425
+JUMPV
+LABELV $424
+line 999
+;999:	else if (self->client->ps.fd.forcePowerLevel[FP_HEAL] == FORCE_LEVEL_2)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 944
+ADDP4
+INDIRI4
+CNSTI4 2
+NEI4 $428
+line 1000
+;1000:	{
+line 1001
+;1001:		self->health += 10; //JediDog: This was 10 for 1.04, but we changed it back to +20
+ADDRLP4 8
+ADDRFP4 0
+INDIRP4
+CNSTI4 676
+ADDP4
+ASGNP4
+ADDRLP4 8
+INDIRP4
+ADDRLP4 8
+INDIRP4
+INDIRI4
+CNSTI4 10
+ADDI4
+ASGNI4
+line 1003
+;1002:		
+;1003:		if (self->health > self->client->ps.stats[STAT_MAX_HEALTH])
+ADDRLP4 12
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 12
+INDIRP4
+CNSTI4 676
+ADDP4
+INDIRI4
+ADDRLP4 12
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 248
+ADDP4
+INDIRI4
+LEI4 $430
+line 1004
+;1004:		{
+line 1005
+;1005:			self->health = self->client->ps.stats[STAT_MAX_HEALTH];
+ADDRLP4 16
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 16
+INDIRP4
+CNSTI4 676
+ADDP4
+ADDRLP4 16
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 248
+ADDP4
+INDIRI4
+ASGNI4
+line 1006
+;1006:		}
+LABELV $430
+line 1007
+;1007:		BG_ForcePowerDrain( &self->client->ps, FP_HEAL, 0 );
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ARGP4
+ADDRLP4 16
+CNSTI4 0
+ASGNI4
+ADDRLP4 16
+INDIRI4
+ARGI4
+ADDRLP4 16
+INDIRI4
+ARGI4
+ADDRGP4 BG_ForcePowerDrain
+CALLV
+pop
+line 1008
+;1008:	}
+ADDRGP4 $429
+JUMPV
+LABELV $428
+line 1010
+;1009:	else
+;1010:	{
+line 1011
+;1011:		self->health += 5; //JediDog: This was 5 for 1.03, but we changed it back to +10.
+ADDRLP4 8
+ADDRFP4 0
+INDIRP4
+CNSTI4 676
+ADDP4
+ASGNP4
+ADDRLP4 8
+INDIRP4
+ADDRLP4 8
+INDIRP4
+INDIRI4
+CNSTI4 5
+ADDI4
+ASGNI4
+line 1013
+;1012:		
+;1013:		if (self->health > self->client->ps.stats[STAT_MAX_HEALTH])
+ADDRLP4 12
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 12
+INDIRP4
+CNSTI4 676
+ADDP4
+INDIRI4
+ADDRLP4 12
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 248
+ADDP4
+INDIRI4
+LEI4 $432
+line 1014
+;1014:		{
+line 1015
+;1015:			self->health = self->client->ps.stats[STAT_MAX_HEALTH];
+ADDRLP4 16
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 16
+INDIRP4
+CNSTI4 676
+ADDP4
+ADDRLP4 16
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 248
+ADDP4
+INDIRI4
+ASGNI4
+line 1016
+;1016:		}
+LABELV $432
+line 1017
+;1017:		BG_ForcePowerDrain( &self->client->ps, FP_HEAL, 0 );
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ARGP4
+ADDRLP4 16
+CNSTI4 0
+ASGNI4
+ADDRLP4 16
+INDIRI4
+ARGI4
+ADDRLP4 16
+INDIRI4
+ARGI4
+ADDRGP4 BG_ForcePowerDrain
+CALLV
+pop
+line 1018
+;1018:	}
+LABELV $429
+LABELV $425
+line 1027
+;1019:	/*
+;1020:	else
+;1021:	{
+;1022:		WP_ForcePowerStart( self, FP_HEAL, 0 );
+;1023:	}
+;1024:	*/
+;1025:	//NOTE: Decided to make all levels instant.
+;1026:
+;1027:	G_Sound( self, CHAN_ITEM, G_SoundIndex("sound/weapons/force/heal.wav") );
+ADDRGP4 $434
+ARGP4
+ADDRLP4 8
+ADDRGP4 G_SoundIndex
+CALLI4
+ASGNI4
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 4
+ARGI4
+ADDRLP4 8
+INDIRI4
+ARGI4
+ADDRGP4 G_Sound
+CALLV
+pop
+line 1028
+;1028:}
+LABELV $417
+endproc ForceHeal 20 12
+export WP_AddToClientBitflags
+proc WP_AddToClientBitflags 4 0
+line 1031
+;1029:
+;1030:void WP_AddToClientBitflags(gentity_t *ent, int entNum)
+;1031:{
+line 1032
+;1032:	if (!ent)
+ADDRFP4 0
+INDIRP4
+CVPU4 4
+CNSTU4 0
+NEU4 $436
+line 1033
+;1033:	{
+line 1034
+;1034:		return;
+ADDRGP4 $435
+JUMPV
+LABELV $436
+line 1037
+;1035:	}
+;1036:
+;1037:	if (entNum > 47)
+ADDRFP4 4
+INDIRI4
+CNSTI4 47
+LEI4 $438
+line 1038
+;1038:	{
+line 1039
+;1039:		ent->s.trickedentindex4 |= (1 << (entNum-48));
+ADDRLP4 0
+ADDRFP4 0
+INDIRP4
+CNSTI4 160
+ADDP4
+ASGNP4
+ADDRLP4 0
+INDIRP4
+ADDRLP4 0
+INDIRP4
+INDIRI4
+CNSTI4 1
+ADDRFP4 4
+INDIRI4
+CNSTI4 48
+SUBI4
+LSHI4
+BORI4
+ASGNI4
+line 1040
+;1040:	}
+ADDRGP4 $439
+JUMPV
+LABELV $438
+line 1041
+;1041:	else if (entNum > 31)
+ADDRFP4 4
+INDIRI4
+CNSTI4 31
+LEI4 $440
+line 1042
+;1042:	{
+line 1043
+;1043:		ent->s.trickedentindex3 |= (1 << (entNum-32));
+ADDRLP4 0
+ADDRFP4 0
+INDIRP4
+CNSTI4 156
+ADDP4
+ASGNP4
+ADDRLP4 0
+INDIRP4
+ADDRLP4 0
+INDIRP4
+INDIRI4
+CNSTI4 1
+ADDRFP4 4
+INDIRI4
+CNSTI4 32
+SUBI4
+LSHI4
+BORI4
+ASGNI4
+line 1044
+;1044:	}
+ADDRGP4 $441
+JUMPV
+LABELV $440
+line 1045
+;1045:	else if (entNum > 15)
+ADDRFP4 4
+INDIRI4
+CNSTI4 15
+LEI4 $442
+line 1046
+;1046:	{
+line 1047
+;1047:		ent->s.trickedentindex2 |= (1 << (entNum-16));
+ADDRLP4 0
+ADDRFP4 0
+INDIRP4
+CNSTI4 152
+ADDP4
+ASGNP4
+ADDRLP4 0
+INDIRP4
+ADDRLP4 0
+INDIRP4
+INDIRI4
+CNSTI4 1
+ADDRFP4 4
+INDIRI4
+CNSTI4 16
+SUBI4
+LSHI4
+BORI4
+ASGNI4
+line 1048
+;1048:	}
+ADDRGP4 $443
+JUMPV
+LABELV $442
+line 1050
+;1049:	else
+;1050:	{
+line 1051
+;1051:		ent->s.trickedentindex |= (1 << entNum);
+ADDRLP4 0
+ADDRFP4 0
+INDIRP4
+CNSTI4 148
+ADDP4
+ASGNP4
+ADDRLP4 0
+INDIRP4
+ADDRLP4 0
+INDIRP4
+INDIRI4
+CNSTI4 1
+ADDRFP4 4
+INDIRI4
+LSHI4
+BORI4
+ASGNI4
+line 1052
+;1052:	}
+LABELV $443
+LABELV $441
+LABELV $439
+line 1053
+;1053:}
+LABELV $435
+endproc WP_AddToClientBitflags 4 0
+export ForceTeamHeal
+proc ForceTeamHeal 252 12
+line 1056
+;1054:
+;1055:void ForceTeamHeal( gentity_t *self )
+;1056:{
+line 1057
+;1057:	float radius = 256;
+ADDRLP4 156
+CNSTF4 1132462080
+ASGNF4
+line 1058
+;1058:	int i = 0;
+ADDRLP4 4
+CNSTI4 0
+ASGNI4
+line 1061
+;1059:	gentity_t *ent;
+;1060:	vec3_t a;
+;1061:	int numpl = 0;
+ADDRLP4 148
+CNSTI4 0
+ASGNI4
+line 1063
+;1062:	int pl[MAX_CLIENTS];
+;1063:	int healthadd = 0;
+ADDRLP4 160
+CNSTI4 0
+ASGNI4
+line 1064
+;1064:	gentity_t *te = NULL;
+ADDRLP4 152
+CNSTP4 0
+ASGNP4
+line 1066
+;1065:
+;1066:	if ( self->health <= 0 )
+ADDRFP4 0
+INDIRP4
+CNSTI4 676
+ADDP4
+INDIRI4
+CNSTI4 0
+GTI4 $445
+line 1067
+;1067:	{
+line 1068
+;1068:		return;
+ADDRGP4 $444
+JUMPV
+LABELV $445
+line 1071
+;1069:	}
+;1070:
+;1071:	if ( !WP_ForcePowerUsable( self, FP_TEAM_HEAL ) )
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 11
+ARGI4
+ADDRLP4 164
+ADDRGP4 WP_ForcePowerUsable
+CALLI4
+ASGNI4
+ADDRLP4 164
+INDIRI4
+CNSTI4 0
+NEI4 $447
+line 1072
+;1072:	{
+line 1073
+;1073:		return;
+ADDRGP4 $444
+JUMPV
+LABELV $447
+line 1076
+;1074:	}
+;1075:
+;1076:	if (self->client->ps.fd.forcePowerLevel[FP_TEAM_HEAL] == FORCE_LEVEL_2)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 988
+ADDP4
+INDIRI4
+CNSTI4 2
+NEI4 $449
+line 1077
+;1077:	{
+line 1078
+;1078:		radius *= 1.5;
+ADDRLP4 156
+CNSTF4 1069547520
+ADDRLP4 156
+INDIRF4
+MULF4
+ASGNF4
+line 1079
+;1079:	}
+LABELV $449
+line 1080
+;1080:	if (self->client->ps.fd.forcePowerLevel[FP_TEAM_HEAL] == FORCE_LEVEL_3)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 988
+ADDP4
+INDIRI4
+CNSTI4 3
+NEI4 $454
+line 1081
+;1081:	{
+line 1082
+;1082:		radius *= 2;
+ADDRLP4 156
+CNSTF4 1073741824
+ADDRLP4 156
+INDIRF4
+MULF4
+ASGNF4
+line 1083
+;1083:	}
+ADDRGP4 $454
+JUMPV
+LABELV $453
+line 1086
+;1084:
+;1085:	while (i < MAX_CLIENTS)
+;1086:	{
+line 1087
+;1087:		ent = &g_entities[i];
+ADDRLP4 0
+CNSTI4 852
+ADDRLP4 4
+INDIRI4
+MULI4
+ADDRGP4 g_entities
+ADDP4
+ASGNP4
+line 1089
+;1088:
+;1089:		if (ent && ent->client && self != ent && OnSameTeam(self, ent) && ent->client->ps.stats[STAT_HEALTH] < ent->client->ps.stats[STAT_MAX_HEALTH] && ent->client->ps.stats[STAT_HEALTH] > 0 && ForcePowerUsableOn(self, ent, FP_TEAM_HEAL) &&
+ADDRLP4 172
+ADDRLP4 0
+INDIRP4
+CVPU4 4
+ASGNU4
+ADDRLP4 176
+CNSTU4 0
+ASGNU4
+ADDRLP4 172
+INDIRU4
+ADDRLP4 176
+INDIRU4
+EQU4 $456
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CVPU4 4
+ADDRLP4 176
+INDIRU4
+EQU4 $456
+ADDRLP4 180
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 180
+INDIRP4
+CVPU4 4
+ADDRLP4 172
+INDIRU4
+EQU4 $456
+ADDRLP4 180
+INDIRP4
+ARGP4
+ADDRLP4 0
+INDIRP4
+ARGP4
+ADDRLP4 184
+ADDRGP4 OnSameTeam
+CALLI4
+ASGNI4
+ADDRLP4 188
+CNSTI4 0
+ASGNI4
+ADDRLP4 184
+INDIRI4
+ADDRLP4 188
+INDIRI4
+EQI4 $456
+ADDRLP4 196
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 200
+ADDRLP4 196
+INDIRP4
+CNSTI4 216
+ADDP4
+INDIRI4
+ASGNI4
+ADDRLP4 200
+INDIRI4
+ADDRLP4 196
+INDIRP4
+CNSTI4 248
+ADDP4
+INDIRI4
+GEI4 $456
+ADDRLP4 200
+INDIRI4
+ADDRLP4 188
+INDIRI4
+LEI4 $456
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRLP4 0
+INDIRP4
+ARGP4
+CNSTI4 11
+ARGI4
+ADDRLP4 204
+ADDRGP4 ForcePowerUsableOn
+CALLI4
+ASGNI4
+ADDRLP4 204
+INDIRI4
+CNSTI4 0
+EQI4 $456
+ADDRLP4 208
+CNSTI4 408
+ASGNI4
+ADDRLP4 212
+CNSTI4 20
+ASGNI4
+ADDRFP4 0
+INDIRP4
+ADDRLP4 208
+INDIRI4
+ADDP4
+INDIRP4
+ADDRLP4 212
+INDIRI4
+ADDP4
+ARGP4
+ADDRLP4 0
+INDIRP4
+ADDRLP4 208
+INDIRI4
+ADDP4
+INDIRP4
+ADDRLP4 212
+INDIRI4
+ADDP4
+ARGP4
+ADDRLP4 216
+ADDRGP4 trap_InPVS
+CALLI4
+ASGNI4
+ADDRLP4 216
+INDIRI4
+CNSTI4 0
+EQI4 $456
+line 1091
+;1090:			trap_InPVS(self->client->ps.origin, ent->client->ps.origin))
+;1091:		{
+line 1092
+;1092:			VectorSubtract(self->client->ps.origin, ent->client->ps.origin, a);
+ADDRLP4 220
+CNSTI4 408
+ASGNI4
+ADDRLP4 224
+ADDRFP4 0
+INDIRP4
+ADDRLP4 220
+INDIRI4
+ADDP4
+ASGNP4
+ADDRLP4 228
+CNSTI4 20
+ASGNI4
+ADDRLP4 232
+ADDRLP4 0
+INDIRP4
+ADDRLP4 220
+INDIRI4
+ADDP4
+ASGNP4
+ADDRLP4 136
+ADDRLP4 224
+INDIRP4
+INDIRP4
+ADDRLP4 228
+INDIRI4
+ADDP4
+INDIRF4
+ADDRLP4 232
+INDIRP4
+INDIRP4
+ADDRLP4 228
+INDIRI4
+ADDP4
+INDIRF4
+SUBF4
+ASGNF4
+ADDRLP4 236
+CNSTI4 24
+ASGNI4
+ADDRLP4 136+4
+ADDRLP4 224
+INDIRP4
+INDIRP4
+ADDRLP4 236
+INDIRI4
+ADDP4
+INDIRF4
+ADDRLP4 232
+INDIRP4
+INDIRP4
+ADDRLP4 236
+INDIRI4
+ADDP4
+INDIRF4
+SUBF4
+ASGNF4
+ADDRLP4 240
+CNSTI4 408
+ASGNI4
+ADDRLP4 244
+CNSTI4 28
+ASGNI4
+ADDRLP4 136+8
+ADDRFP4 0
+INDIRP4
+ADDRLP4 240
+INDIRI4
+ADDP4
+INDIRP4
+ADDRLP4 244
+INDIRI4
+ADDP4
+INDIRF4
+ADDRLP4 0
+INDIRP4
+ADDRLP4 240
+INDIRI4
+ADDP4
+INDIRP4
+ADDRLP4 244
+INDIRI4
+ADDP4
+INDIRF4
+SUBF4
+ASGNF4
+line 1094
+;1093:
+;1094:			if (VectorLength(a) <= radius)
+ADDRLP4 136
+ARGP4
+ADDRLP4 248
+ADDRGP4 VectorLength
+CALLF4
+ASGNF4
+ADDRLP4 248
+INDIRF4
+ADDRLP4 156
+INDIRF4
+GTF4 $460
+line 1095
+;1095:			{
+line 1096
+;1096:				pl[numpl] = i;
+ADDRLP4 148
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 8
+ADDP4
+ADDRLP4 4
+INDIRI4
+ASGNI4
+line 1097
+;1097:				numpl++;
+ADDRLP4 148
+ADDRLP4 148
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 1098
+;1098:			}
+LABELV $460
+line 1099
+;1099:		}
+LABELV $456
+line 1101
+;1100:
+;1101:		i++;
+ADDRLP4 4
+ADDRLP4 4
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 1102
+;1102:	}
+LABELV $454
+line 1085
+ADDRLP4 4
+INDIRI4
+CNSTI4 32
+LTI4 $453
+line 1104
+;1103:
+;1104:	if (numpl < 1)
+ADDRLP4 148
+INDIRI4
+CNSTI4 1
+GEI4 $462
+line 1105
+;1105:	{
+line 1106
+;1106:		return;
+ADDRGP4 $444
+JUMPV
+LABELV $462
+line 1109
+;1107:	}
+;1108:
+;1109:	if (numpl == 1)
+ADDRLP4 148
+INDIRI4
+CNSTI4 1
+NEI4 $464
+line 1110
+;1110:	{
+line 1111
+;1111:		healthadd = 50;
+ADDRLP4 160
+CNSTI4 50
+ASGNI4
+line 1112
+;1112:	}
+ADDRGP4 $465
+JUMPV
+LABELV $464
+line 1113
+;1113:	else if (numpl == 2)
+ADDRLP4 148
+INDIRI4
+CNSTI4 2
+NEI4 $466
+line 1114
+;1114:	{
+line 1115
+;1115:		healthadd = 33;
+ADDRLP4 160
+CNSTI4 33
+ASGNI4
+line 1116
+;1116:	}
+ADDRGP4 $467
+JUMPV
+LABELV $466
+line 1118
+;1117:	else
+;1118:	{
+line 1119
+;1119:		healthadd = 25;
+ADDRLP4 160
+CNSTI4 25
+ASGNI4
+line 1120
+;1120:	}
+LABELV $467
+LABELV $465
+line 1122
+;1121:
+;1122:	i = 0;
+ADDRLP4 4
+CNSTI4 0
+ASGNI4
+ADDRGP4 $469
+JUMPV
+LABELV $468
+line 1125
+;1123:
+;1124:	while (i < numpl)
+;1125:	{
+line 1126
+;1126:		if (g_entities[pl[i]].client->ps.stats[STAT_HEALTH] > 0 &&
+ADDRLP4 168
+CNSTI4 852
+ADDRLP4 4
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 8
+ADDP4
+INDIRI4
+MULI4
+ASGNI4
+ADDRLP4 172
+CNSTI4 0
+ASGNI4
+ADDRLP4 168
+INDIRI4
+ADDRGP4 g_entities+408
+ADDP4
+INDIRP4
+CNSTI4 216
+ADDP4
+INDIRI4
+ADDRLP4 172
+INDIRI4
+LEI4 $471
+ADDRLP4 168
+INDIRI4
+ADDRGP4 g_entities+676
+ADDP4
+INDIRI4
+ADDRLP4 172
+INDIRI4
+LEI4 $471
+line 1128
+;1127:			g_entities[pl[i]].health > 0)
+;1128:		{
+line 1129
+;1129:			g_entities[pl[i]].client->ps.stats[STAT_HEALTH] += healthadd;
+ADDRLP4 176
+CNSTI4 852
+ADDRLP4 4
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 8
+ADDP4
+INDIRI4
+MULI4
+ADDRGP4 g_entities+408
+ADDP4
+INDIRP4
+CNSTI4 216
+ADDP4
+ASGNP4
+ADDRLP4 176
+INDIRP4
+ADDRLP4 176
+INDIRP4
+INDIRI4
+ADDRLP4 160
+INDIRI4
+ADDI4
+ASGNI4
+line 1130
+;1130:			if (g_entities[pl[i]].client->ps.stats[STAT_HEALTH] > g_entities[pl[i]].client->ps.stats[STAT_MAX_HEALTH])
+ADDRLP4 180
+CNSTI4 852
+ADDRLP4 4
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 8
+ADDP4
+INDIRI4
+MULI4
+ASGNI4
+ADDRLP4 180
+INDIRI4
+ADDRGP4 g_entities+408
+ADDP4
+INDIRP4
+CNSTI4 216
+ADDP4
+INDIRI4
+ADDRLP4 180
+INDIRI4
+ADDRGP4 g_entities+408
+ADDP4
+INDIRP4
+CNSTI4 248
+ADDP4
+INDIRI4
+LEI4 $476
+line 1131
+;1131:			{
+line 1132
+;1132:				g_entities[pl[i]].client->ps.stats[STAT_HEALTH] = g_entities[pl[i]].client->ps.stats[STAT_MAX_HEALTH];
+ADDRLP4 184
+CNSTI4 852
+ADDRLP4 4
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 8
+ADDP4
+INDIRI4
+MULI4
+ASGNI4
+ADDRLP4 184
+INDIRI4
+ADDRGP4 g_entities+408
+ADDP4
+INDIRP4
+CNSTI4 216
+ADDP4
+ADDRLP4 184
+INDIRI4
+ADDRGP4 g_entities+408
+ADDP4
+INDIRP4
+CNSTI4 248
+ADDP4
+INDIRI4
+ASGNI4
+line 1133
+;1133:			}
+LABELV $476
+line 1135
+;1134:
+;1135:			g_entities[pl[i]].health = g_entities[pl[i]].client->ps.stats[STAT_HEALTH];
+ADDRLP4 184
+CNSTI4 852
+ADDRLP4 4
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 8
+ADDP4
+INDIRI4
+MULI4
+ASGNI4
+ADDRLP4 184
+INDIRI4
+ADDRGP4 g_entities+676
+ADDP4
+ADDRLP4 184
+INDIRI4
+ADDRGP4 g_entities+408
+ADDP4
+INDIRP4
+CNSTI4 216
+ADDP4
+INDIRI4
+ASGNI4
+line 1138
+;1136:
+;1137:			//At this point we know we got one, so add him into the collective event client bitflag
+;1138:			if (!te)
+ADDRLP4 152
+INDIRP4
+CVPU4 4
+CNSTU4 0
+NEU4 $484
+line 1139
+;1139:			{
+line 1140
+;1140:				te = G_TempEntity( self->client->ps.origin, EV_TEAM_POWER);
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 20
+ADDP4
+ARGP4
+CNSTI4 37
+ARGI4
+ADDRLP4 188
+ADDRGP4 G_TempEntity
+CALLP4
+ASGNP4
+ADDRLP4 152
+ADDRLP4 188
+INDIRP4
+ASGNP4
+line 1141
+;1141:				te->s.eventParm = 1; //eventParm 1 is heal, eventParm 2 is force regen
+ADDRLP4 152
+INDIRP4
+CNSTI4 256
+ADDP4
+CNSTI4 1
+ASGNI4
+line 1144
+;1142:
+;1143:				//since we had an extra check above, do the drain now because we got at least one guy
+;1144:				BG_ForcePowerDrain( &self->client->ps, FP_TEAM_HEAL, forcePowerNeeded[self->client->ps.fd.forcePowerLevel[FP_TEAM_HEAL]][FP_TEAM_HEAL] );
+ADDRLP4 192
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 192
+INDIRP4
+ARGP4
+CNSTI4 11
+ARGI4
+CNSTI4 72
+ADDRLP4 192
+INDIRP4
+CNSTI4 988
+ADDP4
+INDIRI4
+MULI4
+ADDRGP4 forcePowerNeeded+44
+ADDP4
+INDIRI4
+ARGI4
+ADDRGP4 BG_ForcePowerDrain
+CALLV
+pop
+line 1145
+;1145:			}
+LABELV $484
+line 1147
+;1146:
+;1147:			WP_AddToClientBitflags(te, pl[i]);
+ADDRLP4 152
+INDIRP4
+ARGP4
+ADDRLP4 4
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 8
+ADDP4
+INDIRI4
+ARGI4
+ADDRGP4 WP_AddToClientBitflags
+CALLV
+pop
+line 1149
+;1148:			//Now cramming it all into one event.. doing this many g_sound events at once was a Bad Thing.
+;1149:		}
+LABELV $471
+line 1150
+;1150:		i++;
+ADDRLP4 4
+ADDRLP4 4
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 1151
+;1151:	}
+LABELV $469
+line 1124
+ADDRLP4 4
+INDIRI4
+ADDRLP4 148
+INDIRI4
+LTI4 $468
+line 1152
+;1152:}
+LABELV $444
+endproc ForceTeamHeal 252 12
+export ForceTeamForceReplenish
+proc ForceTeamForceReplenish 240 12
+line 1155
+;1153:
+;1154:void ForceTeamForceReplenish( gentity_t *self )
+;1155:{
+line 1156
+;1156:	float radius = 256;
+ADDRLP4 160
+CNSTF4 1132462080
+ASGNF4
+line 1157
+;1157:	int i = 0;
+ADDRLP4 4
+CNSTI4 0
+ASGNI4
+line 1160
+;1158:	gentity_t *ent;
+;1159:	vec3_t a;
+;1160:	int numpl = 0;
+ADDRLP4 152
+CNSTI4 0
+ASGNI4
+line 1162
+;1161:	int pl[MAX_CLIENTS];
+;1162:	int poweradd = 0;
+ADDRLP4 156
+CNSTI4 0
+ASGNI4
+line 1163
+;1163:	gentity_t *te = NULL;
+ADDRLP4 136
+CNSTP4 0
+ASGNP4
+line 1165
+;1164:
+;1165:	if ( self->health <= 0 )
+ADDRFP4 0
+INDIRP4
+CNSTI4 676
+ADDP4
+INDIRI4
+CNSTI4 0
+GTI4 $488
+line 1166
+;1166:	{
+line 1167
+;1167:		return;
+ADDRGP4 $487
+JUMPV
+LABELV $488
+line 1170
+;1168:	}
+;1169:
+;1170:	if ( !WP_ForcePowerUsable( self, FP_TEAM_FORCE ) )
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 12
+ARGI4
+ADDRLP4 164
+ADDRGP4 WP_ForcePowerUsable
+CALLI4
+ASGNI4
+ADDRLP4 164
+INDIRI4
+CNSTI4 0
+NEI4 $490
+line 1171
+;1171:	{
+line 1172
+;1172:		return;
+ADDRGP4 $487
+JUMPV
+LABELV $490
+line 1175
+;1173:	}
+;1174:
+;1175:	if (self->client->ps.fd.forcePowerLevel[FP_TEAM_FORCE] == FORCE_LEVEL_2)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 992
+ADDP4
+INDIRI4
+CNSTI4 2
+NEI4 $492
+line 1176
+;1176:	{
+line 1177
+;1177:		radius *= 1.5;
+ADDRLP4 160
+CNSTF4 1069547520
+ADDRLP4 160
+INDIRF4
+MULF4
+ASGNF4
+line 1178
+;1178:	}
+LABELV $492
+line 1179
+;1179:	if (self->client->ps.fd.forcePowerLevel[FP_TEAM_FORCE] == FORCE_LEVEL_3)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 992
+ADDP4
+INDIRI4
+CNSTI4 3
+NEI4 $497
+line 1180
+;1180:	{
+line 1181
+;1181:		radius *= 2;
+ADDRLP4 160
+CNSTF4 1073741824
+ADDRLP4 160
+INDIRF4
+MULF4
+ASGNF4
+line 1182
+;1182:	}
+ADDRGP4 $497
+JUMPV
+LABELV $496
+line 1185
+;1183:
+;1184:	while (i < MAX_CLIENTS)
+;1185:	{
+line 1186
+;1186:		ent = &g_entities[i];
+ADDRLP4 0
+CNSTI4 852
+ADDRLP4 4
+INDIRI4
+MULI4
+ADDRGP4 g_entities
+ADDP4
+ASGNP4
+line 1188
+;1187:
+;1188:		if (ent && ent->client && self != ent && OnSameTeam(self, ent) && ent->client->ps.fd.forcePower < 100 && ForcePowerUsableOn(self, ent, FP_TEAM_FORCE) &&
+ADDRLP4 172
+ADDRLP4 0
+INDIRP4
+CVPU4 4
+ASGNU4
+ADDRLP4 176
+CNSTU4 0
+ASGNU4
+ADDRLP4 172
+INDIRU4
+ADDRLP4 176
+INDIRU4
+EQU4 $499
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CVPU4 4
+ADDRLP4 176
+INDIRU4
+EQU4 $499
+ADDRLP4 180
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 180
+INDIRP4
+CVPU4 4
+ADDRLP4 172
+INDIRU4
+EQU4 $499
+ADDRLP4 180
+INDIRP4
+ARGP4
+ADDRLP4 0
+INDIRP4
+ARGP4
+ADDRLP4 184
+ADDRGP4 OnSameTeam
+CALLI4
+ASGNI4
+ADDRLP4 184
+INDIRI4
+CNSTI4 0
+EQI4 $499
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 932
+ADDP4
+INDIRI4
+CNSTI4 100
+GEI4 $499
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRLP4 0
+INDIRP4
+ARGP4
+CNSTI4 12
+ARGI4
+ADDRLP4 192
+ADDRGP4 ForcePowerUsableOn
+CALLI4
+ASGNI4
+ADDRLP4 192
+INDIRI4
+CNSTI4 0
+EQI4 $499
+ADDRLP4 196
+CNSTI4 408
+ASGNI4
+ADDRLP4 200
+CNSTI4 20
+ASGNI4
+ADDRFP4 0
+INDIRP4
+ADDRLP4 196
+INDIRI4
+ADDP4
+INDIRP4
+ADDRLP4 200
+INDIRI4
+ADDP4
+ARGP4
+ADDRLP4 0
+INDIRP4
+ADDRLP4 196
+INDIRI4
+ADDP4
+INDIRP4
+ADDRLP4 200
+INDIRI4
+ADDP4
+ARGP4
+ADDRLP4 204
+ADDRGP4 trap_InPVS
+CALLI4
+ASGNI4
+ADDRLP4 204
+INDIRI4
+CNSTI4 0
+EQI4 $499
+line 1190
+;1189:			trap_InPVS(self->client->ps.origin, ent->client->ps.origin))
+;1190:		{
+line 1191
+;1191:			VectorSubtract(self->client->ps.origin, ent->client->ps.origin, a);
+ADDRLP4 208
+CNSTI4 408
+ASGNI4
+ADDRLP4 212
+ADDRFP4 0
+INDIRP4
+ADDRLP4 208
+INDIRI4
+ADDP4
+ASGNP4
+ADDRLP4 216
+CNSTI4 20
+ASGNI4
+ADDRLP4 220
+ADDRLP4 0
+INDIRP4
+ADDRLP4 208
+INDIRI4
+ADDP4
+ASGNP4
+ADDRLP4 140
+ADDRLP4 212
+INDIRP4
+INDIRP4
+ADDRLP4 216
+INDIRI4
+ADDP4
+INDIRF4
+ADDRLP4 220
+INDIRP4
+INDIRP4
+ADDRLP4 216
+INDIRI4
+ADDP4
+INDIRF4
+SUBF4
+ASGNF4
+ADDRLP4 224
+CNSTI4 24
+ASGNI4
+ADDRLP4 140+4
+ADDRLP4 212
+INDIRP4
+INDIRP4
+ADDRLP4 224
+INDIRI4
+ADDP4
+INDIRF4
+ADDRLP4 220
+INDIRP4
+INDIRP4
+ADDRLP4 224
+INDIRI4
+ADDP4
+INDIRF4
+SUBF4
+ASGNF4
+ADDRLP4 228
+CNSTI4 408
+ASGNI4
+ADDRLP4 232
+CNSTI4 28
+ASGNI4
+ADDRLP4 140+8
+ADDRFP4 0
+INDIRP4
+ADDRLP4 228
+INDIRI4
+ADDP4
+INDIRP4
+ADDRLP4 232
+INDIRI4
+ADDP4
+INDIRF4
+ADDRLP4 0
+INDIRP4
+ADDRLP4 228
+INDIRI4
+ADDP4
+INDIRP4
+ADDRLP4 232
+INDIRI4
+ADDP4
+INDIRF4
+SUBF4
+ASGNF4
+line 1193
+;1192:
+;1193:			if (VectorLength(a) <= radius)
+ADDRLP4 140
+ARGP4
+ADDRLP4 236
+ADDRGP4 VectorLength
+CALLF4
+ASGNF4
+ADDRLP4 236
+INDIRF4
+ADDRLP4 160
+INDIRF4
+GTF4 $503
+line 1194
+;1194:			{
+line 1195
+;1195:				pl[numpl] = i;
+ADDRLP4 152
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 8
+ADDP4
+ADDRLP4 4
+INDIRI4
+ASGNI4
+line 1196
+;1196:				numpl++;
+ADDRLP4 152
+ADDRLP4 152
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 1197
+;1197:			}
+LABELV $503
+line 1198
+;1198:		}
+LABELV $499
+line 1200
+;1199:
+;1200:		i++;
+ADDRLP4 4
+ADDRLP4 4
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 1201
+;1201:	}
+LABELV $497
+line 1184
+ADDRLP4 4
+INDIRI4
+CNSTI4 32
+LTI4 $496
+line 1203
+;1202:
+;1203:	if (numpl < 1)
+ADDRLP4 152
+INDIRI4
+CNSTI4 1
+GEI4 $505
+line 1204
+;1204:	{
+line 1205
+;1205:		return;
+ADDRGP4 $487
+JUMPV
+LABELV $505
+line 1208
+;1206:	}
+;1207:
+;1208:	if (numpl == 1)
+ADDRLP4 152
+INDIRI4
+CNSTI4 1
+NEI4 $507
+line 1209
+;1209:	{
+line 1210
+;1210:		poweradd = 50;
+ADDRLP4 156
+CNSTI4 50
+ASGNI4
+line 1211
+;1211:	}
+ADDRGP4 $508
+JUMPV
+LABELV $507
+line 1212
+;1212:	else if (numpl == 2)
+ADDRLP4 152
+INDIRI4
+CNSTI4 2
+NEI4 $509
+line 1213
+;1213:	{
+line 1214
+;1214:		poweradd = 33;
+ADDRLP4 156
+CNSTI4 33
+ASGNI4
+line 1215
+;1215:	}
+ADDRGP4 $510
+JUMPV
+LABELV $509
+line 1217
+;1216:	else
+;1217:	{
+line 1218
+;1218:		poweradd = 25;
+ADDRLP4 156
+CNSTI4 25
+ASGNI4
+line 1219
+;1219:	}
+LABELV $510
+LABELV $508
+line 1221
+;1220:
+;1221:	BG_ForcePowerDrain( &self->client->ps, FP_TEAM_FORCE, forcePowerNeeded[self->client->ps.fd.forcePowerLevel[FP_TEAM_FORCE]][FP_TEAM_FORCE] );
+ADDRLP4 168
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 168
+INDIRP4
+ARGP4
+CNSTI4 12
+ARGI4
+CNSTI4 72
+ADDRLP4 168
+INDIRP4
+CNSTI4 992
+ADDP4
+INDIRI4
+MULI4
+ADDRGP4 forcePowerNeeded+48
+ADDP4
+INDIRI4
+ARGI4
+ADDRGP4 BG_ForcePowerDrain
+CALLV
+pop
+line 1223
+;1222:
+;1223:	i = 0;
+ADDRLP4 4
+CNSTI4 0
+ASGNI4
+ADDRGP4 $513
+JUMPV
+LABELV $512
+line 1226
+;1224:
+;1225:	while (i < numpl)
+;1226:	{
+line 1227
+;1227:		g_entities[pl[i]].client->ps.fd.forcePower += poweradd;
+ADDRLP4 172
+CNSTI4 852
+ADDRLP4 4
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 8
+ADDP4
+INDIRI4
+MULI4
+ADDRGP4 g_entities+408
+ADDP4
+INDIRP4
+CNSTI4 932
+ADDP4
+ASGNP4
+ADDRLP4 172
+INDIRP4
+ADDRLP4 172
+INDIRP4
+INDIRI4
+ADDRLP4 156
+INDIRI4
+ADDI4
+ASGNI4
+line 1228
+;1228:		if (g_entities[pl[i]].client->ps.fd.forcePower > 100)
+CNSTI4 852
+ADDRLP4 4
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 8
+ADDP4
+INDIRI4
+MULI4
+ADDRGP4 g_entities+408
+ADDP4
+INDIRP4
+CNSTI4 932
+ADDP4
+INDIRI4
+CNSTI4 100
+LEI4 $516
+line 1229
+;1229:		{
+line 1230
+;1230:			g_entities[pl[i]].client->ps.fd.forcePower = 100;
+CNSTI4 852
+ADDRLP4 4
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 8
+ADDP4
+INDIRI4
+MULI4
+ADDRGP4 g_entities+408
+ADDP4
+INDIRP4
+CNSTI4 932
+ADDP4
+CNSTI4 100
+ASGNI4
+line 1231
+;1231:		}
+LABELV $516
+line 1234
+;1232:
+;1233:		//At this point we know we got one, so add him into the collective event client bitflag
+;1234:		if (!te)
+ADDRLP4 136
+INDIRP4
+CVPU4 4
+CNSTU4 0
+NEU4 $520
+line 1235
+;1235:		{
+line 1236
+;1236:			te = G_TempEntity( self->client->ps.origin, EV_TEAM_POWER);
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 20
+ADDP4
+ARGP4
+CNSTI4 37
+ARGI4
+ADDRLP4 176
+ADDRGP4 G_TempEntity
+CALLP4
+ASGNP4
+ADDRLP4 136
+ADDRLP4 176
+INDIRP4
+ASGNP4
+line 1237
+;1237:			te->s.eventParm = 2; //eventParm 1 is heal, eventParm 2 is force regen
+ADDRLP4 136
+INDIRP4
+CNSTI4 256
+ADDP4
+CNSTI4 2
+ASGNI4
+line 1238
+;1238:		}
+LABELV $520
+line 1240
+;1239:
+;1240:		WP_AddToClientBitflags(te, pl[i]);
+ADDRLP4 136
+INDIRP4
+ARGP4
+ADDRLP4 4
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 8
+ADDP4
+INDIRI4
+ARGI4
+ADDRGP4 WP_AddToClientBitflags
+CALLV
+pop
+line 1243
+;1241:		//Now cramming it all into one event.. doing this many g_sound events at once was a Bad Thing.
+;1242:		
+;1243:		i++;
+ADDRLP4 4
+ADDRLP4 4
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 1244
+;1244:	}
+LABELV $513
+line 1225
+ADDRLP4 4
+INDIRI4
+ADDRLP4 152
+INDIRI4
+LTI4 $512
+line 1245
+;1245:}
+LABELV $487
+endproc ForceTeamForceReplenish 240 12
+export ForceGrip
+proc ForceGrip 1144 28
+line 1248
+;1246:
+;1247:void ForceGrip( gentity_t *self )
+;1248:{
+line 1252
+;1249:	trace_t tr;
+;1250:	vec3_t tfrom, tto, fwd;
+;1251:
+;1252:	if ( self->health <= 0 )
+ADDRFP4 0
+INDIRP4
+CNSTI4 676
+ADDP4
+INDIRI4
+CNSTI4 0
+GTI4 $523
+line 1253
+;1253:	{
+line 1254
+;1254:		return;
+ADDRGP4 $522
+JUMPV
+LABELV $523
+line 1257
+;1255:	}
+;1256:
+;1257:	if (self->client->ps.forceHandExtend != HANDEXTEND_NONE)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1248
+ADDP4
+INDIRI4
+CNSTI4 0
+EQI4 $525
+line 1258
+;1258:	{
+line 1259
+;1259:		return;
+ADDRGP4 $522
+JUMPV
+LABELV $525
+line 1262
+;1260:	}
+;1261:
+;1262:	if (self->client->ps.weaponTime > 0)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 44
+ADDP4
+INDIRI4
+CNSTI4 0
+LEI4 $527
+line 1263
+;1263:	{
+line 1264
+;1264:		return;
+ADDRGP4 $522
+JUMPV
+LABELV $527
+line 1267
+;1265:	}
+;1266:
+;1267:	if (self->client->ps.fd.forceGripUseTime > level.time)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1124
+ADDP4
+INDIRI4
+ADDRGP4 level+32
+INDIRI4
+LEI4 $529
+line 1268
+;1268:	{
+line 1269
+;1269:		return;
+ADDRGP4 $522
+JUMPV
+LABELV $529
+line 1272
+;1270:	}
+;1271:
+;1272:	if ( !WP_ForcePowerUsable( self, FP_GRIP ) )
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 6
+ARGI4
+ADDRLP4 1116
+ADDRGP4 WP_ForcePowerUsable
+CALLI4
+ASGNI4
+ADDRLP4 1116
+INDIRI4
+CNSTI4 0
+NEI4 $532
+line 1273
+;1273:	{
+line 1274
+;1274:		return;
+ADDRGP4 $522
+JUMPV
+LABELV $532
+line 1277
+;1275:	}
+;1276:
+;1277:	VectorCopy(self->client->ps.origin, tfrom);
+ADDRLP4 1080
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 20
+ADDP4
+INDIRB
+ASGNB 12
+line 1278
+;1278:	tfrom[2] += self->client->ps.viewheight;
+ADDRLP4 1080+8
+ADDRLP4 1080+8
+INDIRF4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 168
+ADDP4
+INDIRI4
+CVIF4 4
+ADDF4
+ASGNF4
+line 1279
+;1279:	AngleVectors(self->client->ps.viewangles, fwd, NULL, NULL);
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 156
+ADDP4
+ARGP4
+ADDRLP4 1104
+ARGP4
+ADDRLP4 1120
+CNSTP4 0
+ASGNP4
+ADDRLP4 1120
+INDIRP4
+ARGP4
+ADDRLP4 1120
+INDIRP4
+ARGP4
+ADDRGP4 AngleVectors
+CALLV
+pop
+line 1280
+;1280:	tto[0] = tfrom[0] + fwd[0]*MAX_GRIP_DISTANCE;
+ADDRLP4 1092
+ADDRLP4 1080
+INDIRF4
+CNSTF4 1132462080
+ADDRLP4 1104
+INDIRF4
+MULF4
+ADDF4
+ASGNF4
+line 1281
+;1281:	tto[1] = tfrom[1] + fwd[1]*MAX_GRIP_DISTANCE;
+ADDRLP4 1092+4
+ADDRLP4 1080+4
+INDIRF4
+CNSTF4 1132462080
+ADDRLP4 1104+4
+INDIRF4
+MULF4
+ADDF4
+ASGNF4
+line 1282
+;1282:	tto[2] = tfrom[2] + fwd[2]*MAX_GRIP_DISTANCE;
+ADDRLP4 1092+8
+ADDRLP4 1080+8
+INDIRF4
+CNSTF4 1132462080
+ADDRLP4 1104+8
+INDIRF4
+MULF4
+ADDF4
+ASGNF4
+line 1284
+;1283:
+;1284:	trap_Trace(&tr, tfrom, NULL, NULL, tto, self->s.number, MASK_PLAYERSOLID);
+ADDRLP4 0
+ARGP4
+ADDRLP4 1080
+ARGP4
+ADDRLP4 1124
+CNSTP4 0
+ASGNP4
+ADDRLP4 1124
+INDIRP4
+ARGP4
+ADDRLP4 1124
+INDIRP4
+ARGP4
+ADDRLP4 1092
+ARGP4
+ADDRFP4 0
+INDIRP4
+INDIRI4
+ARGI4
+CNSTI4 273
+ARGI4
+ADDRGP4 trap_Trace
+CALLV
+pop
+line 1286
+;1285:
+;1286:	if ( tr.fraction != 1.0 &&
+ADDRLP4 0+8
+INDIRF4
+CNSTF4 1065353216
+EQF4 $541
+ADDRLP4 0+52
+INDIRI4
+CNSTI4 1023
+EQI4 $541
+ADDRLP4 1128
+CNSTI4 852
+ASGNI4
+ADDRLP4 1128
+INDIRI4
+ADDRLP4 0+52
+INDIRI4
+MULI4
+ADDRGP4 g_entities+408
+ADDP4
+INDIRP4
+CVPU4 4
+CNSTU4 0
+EQU4 $541
+ADDRLP4 1128
+INDIRI4
+ADDRLP4 0+52
+INDIRI4
+MULI4
+ADDRGP4 g_entities+408
+ADDP4
+INDIRP4
+CNSTI4 1120
+ADDP4
+INDIRI4
+CNSTI4 0
+NEI4 $541
+ADDRLP4 1128
+INDIRI4
+ADDRLP4 0+52
+INDIRI4
+MULI4
+ADDRGP4 g_entities+408
+ADDP4
+INDIRP4
+CNSTI4 1116
+ADDP4
+INDIRF4
+ADDRGP4 level+32
+INDIRI4
+CVIF4 4
+GEF4 $541
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRLP4 1128
+INDIRI4
+ADDRLP4 0+52
+INDIRI4
+MULI4
+ADDRGP4 g_entities
+ADDP4
+ARGP4
+CNSTI4 6
+ARGI4
+ADDRLP4 1132
+ADDRGP4 ForcePowerUsableOn
+CALLI4
+ASGNI4
+ADDRLP4 1136
+CNSTI4 0
+ASGNI4
+ADDRLP4 1132
+INDIRI4
+ADDRLP4 1136
+INDIRI4
+EQI4 $541
+ADDRGP4 g_friendlyFire+12
+INDIRI4
+ADDRLP4 1136
+INDIRI4
+NEI4 $555
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 852
+ADDRLP4 0+52
+INDIRI4
+MULI4
+ADDRGP4 g_entities
+ADDP4
+ARGP4
+ADDRLP4 1140
+ADDRGP4 OnSameTeam
+CALLI4
+ASGNI4
+ADDRLP4 1140
+INDIRI4
+CNSTI4 0
+NEI4 $541
+LABELV $555
+line 1293
+;1287:		tr.entityNum != ENTITYNUM_NONE &&
+;1288:		g_entities[tr.entityNum].client &&
+;1289:		!g_entities[tr.entityNum].client->ps.fd.forceGripCripple &&
+;1290:		g_entities[tr.entityNum].client->ps.fd.forceGripBeingGripped < level.time &&
+;1291:		ForcePowerUsableOn(self, &g_entities[tr.entityNum], FP_GRIP) &&
+;1292:		(g_friendlyFire.integer || !OnSameTeam(self, &g_entities[tr.entityNum])) ) //don't grip someone who's still crippled
+;1293:	{
+line 1294
+;1294:		self->client->ps.fd.forceGripEntityNum = tr.entityNum;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1108
+ADDP4
+ADDRLP4 0+52
+INDIRI4
+ASGNI4
+line 1295
+;1295:		g_entities[tr.entityNum].client->ps.fd.forceGripStarted = level.time;
+CNSTI4 852
+ADDRLP4 0+52
+INDIRI4
+MULI4
+ADDRGP4 g_entities+408
+ADDP4
+INDIRP4
+CNSTI4 1132
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CVIF4 4
+ASGNF4
+line 1296
+;1296:		self->client->ps.fd.forceGripDamageDebounceTime = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1112
+ADDP4
+CNSTI4 0
+ASGNI4
+line 1298
+;1297:
+;1298:		self->client->ps.forceHandExtend = HANDEXTEND_FORCEGRIP;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1248
+ADDP4
+CNSTI4 3
+ASGNI4
+line 1299
+;1299:		self->client->ps.forceHandExtendTime = level.time + 5000;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1252
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 5000
+ADDI4
+ASGNI4
+line 1300
+;1300:	}
+ADDRGP4 $542
+JUMPV
+LABELV $541
+line 1302
+;1301:	else
+;1302:	{
+line 1303
+;1303:		self->client->ps.fd.forceGripEntityNum = ENTITYNUM_NONE;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1108
+ADDP4
+CNSTI4 1023
+ASGNI4
+line 1304
+;1304:		return;
+LABELV $542
+line 1306
+;1305:	}
+;1306:}
+LABELV $522
+endproc ForceGrip 1144 28
+export ForceSpeed
+proc ForceSpeed 12 12
+line 1309
+;1307:
+;1308:void ForceSpeed( gentity_t *self, int forceDuration )
+;1309:{
+line 1310
+;1310:	if ( self->health <= 0 )
+ADDRFP4 0
+INDIRP4
+CNSTI4 676
+ADDP4
+INDIRI4
+CNSTI4 0
+GTI4 $562
+line 1311
+;1311:	{
+line 1312
+;1312:		return;
+ADDRGP4 $561
+JUMPV
+LABELV $562
+line 1315
+;1313:	}
+;1314:
+;1315:	if (self->client->ps.forceAllowDeactivateTime < level.time &&
+ADDRLP4 0
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 0
+INDIRP4
+CNSTI4 1328
+ADDP4
+INDIRI4
+ADDRGP4 level+32
+INDIRI4
+GEI4 $564
+ADDRLP4 0
+INDIRP4
+CNSTI4 848
+ADDP4
+INDIRI4
+CNSTI4 4
+BANDI4
+CNSTI4 0
+EQI4 $564
+line 1317
+;1316:		(self->client->ps.fd.forcePowersActive & (1 << FP_SPEED)) )
+;1317:	{
+line 1318
+;1318:		WP_ForcePowerStop( self, FP_SPEED );
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 2
+ARGI4
+ADDRGP4 WP_ForcePowerStop
+CALLV
+pop
+line 1319
+;1319:		return;
+ADDRGP4 $561
+JUMPV
+LABELV $564
+line 1322
+;1320:	}
+;1321:
+;1322:	if ( !WP_ForcePowerUsable( self, FP_SPEED ) )
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 2
+ARGI4
+ADDRLP4 4
+ADDRGP4 WP_ForcePowerUsable
+CALLI4
+ASGNI4
+ADDRLP4 4
+INDIRI4
+CNSTI4 0
+NEI4 $567
+line 1323
+;1323:	{
+line 1324
+;1324:		return;
+ADDRGP4 $561
+JUMPV
+LABELV $567
+line 1327
+;1325:	}
+;1326:
+;1327:	self->client->ps.forceAllowDeactivateTime = level.time + 1500;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1328
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 1500
+ADDI4
+ASGNI4
+line 1329
+;1328:
+;1329:	WP_ForcePowerStart( self, FP_SPEED, forceDuration );
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 2
+ARGI4
+ADDRFP4 4
+INDIRI4
+ARGI4
+ADDRGP4 WP_ForcePowerStart
+CALLV
+pop
+line 1330
+;1330:	G_Sound( self, CHAN_BODY, G_SoundIndex("sound/weapons/force/speed.wav") );
+ADDRGP4 $570
+ARGP4
+ADDRLP4 8
+ADDRGP4 G_SoundIndex
+CALLI4
+ASGNI4
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 5
+ARGI4
+ADDRLP4 8
+INDIRI4
+ARGI4
+ADDRGP4 G_Sound
+CALLV
+pop
+line 1331
+;1331:	G_Sound( self, TRACK_CHANNEL_2, speedLoopSound );
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 52
+ARGI4
+ADDRGP4 speedLoopSound
+INDIRI4
+ARGI4
+ADDRGP4 G_Sound
+CALLV
+pop
+line 1332
+;1332:	self->client->ps.fd.forceSpeedSmash = 2; //initial boost (will automax to whatever is appropriate for force level)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1136
+ADDP4
+CNSTF4 1073741824
+ASGNF4
+line 1333
+;1333:	self->client->ps.fd.forceSpeedDoDamage = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1140
+ADDP4
+CNSTF4 0
+ASGNF4
+line 1334
+;1334:}
+LABELV $561
+endproc ForceSpeed 12 12
+export ForceSeeing
+proc ForceSeeing 12 12
+line 1337
+;1335:
+;1336:void ForceSeeing( gentity_t *self )
+;1337:{
+line 1338
+;1338:	if ( self->health <= 0 )
+ADDRFP4 0
+INDIRP4
+CNSTI4 676
+ADDP4
+INDIRI4
+CNSTI4 0
+GTI4 $572
+line 1339
+;1339:	{
+line 1340
+;1340:		return;
+ADDRGP4 $571
+JUMPV
+LABELV $572
+line 1343
+;1341:	}
+;1342:
+;1343:	if (self->client->ps.forceAllowDeactivateTime < level.time &&
+ADDRLP4 0
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 0
+INDIRP4
+CNSTI4 1328
+ADDP4
+INDIRI4
+ADDRGP4 level+32
+INDIRI4
+GEI4 $574
+ADDRLP4 0
+INDIRP4
+CNSTI4 848
+ADDP4
+INDIRI4
+CNSTI4 16384
+BANDI4
+CNSTI4 0
+EQI4 $574
+line 1345
+;1344:		(self->client->ps.fd.forcePowersActive & (1 << FP_SEE)) )
+;1345:	{
+line 1346
+;1346:		WP_ForcePowerStop( self, FP_SEE );
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 14
+ARGI4
+ADDRGP4 WP_ForcePowerStop
+CALLV
+pop
+line 1347
+;1347:		return;
+ADDRGP4 $571
+JUMPV
+LABELV $574
+line 1350
+;1348:	}
+;1349:
+;1350:	if ( !WP_ForcePowerUsable( self, FP_SEE ) )
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 14
+ARGI4
+ADDRLP4 4
+ADDRGP4 WP_ForcePowerUsable
+CALLI4
+ASGNI4
+ADDRLP4 4
+INDIRI4
+CNSTI4 0
+NEI4 $577
+line 1351
+;1351:	{
+line 1352
+;1352:		return;
+ADDRGP4 $571
+JUMPV
+LABELV $577
+line 1355
+;1353:	}
+;1354:
+;1355:	self->client->ps.forceAllowDeactivateTime = level.time + 1500;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1328
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 1500
+ADDI4
+ASGNI4
+line 1357
+;1356:
+;1357:	WP_ForcePowerStart( self, FP_SEE, 0 );
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 14
+ARGI4
+CNSTI4 0
+ARGI4
+ADDRGP4 WP_ForcePowerStart
+CALLV
+pop
+line 1359
+;1358:
+;1359:	G_Sound( self, CHAN_AUTO, G_SoundIndex("sound/weapons/force/see.wav") );
+ADDRGP4 $580
+ARGP4
+ADDRLP4 8
+ADDRGP4 G_SoundIndex
+CALLI4
+ASGNI4
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 0
+ARGI4
+ADDRLP4 8
+INDIRI4
+ARGI4
+ADDRGP4 G_Sound
+CALLV
+pop
+line 1360
+;1360:	G_Sound( self, TRACK_CHANNEL_5, seeLoopSound );
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 55
+ARGI4
+ADDRGP4 seeLoopSound
+INDIRI4
+ARGI4
+ADDRGP4 G_Sound
+CALLV
+pop
+line 1361
+;1361:}
+LABELV $571
+endproc ForceSeeing 12 12
+export ForceProtect
+proc ForceProtect 8 12
+line 1364
+;1362:
+;1363:void ForceProtect( gentity_t *self )
+;1364:{
+line 1365
+;1365:	if ( self->health <= 0 )
+ADDRFP4 0
+INDIRP4
+CNSTI4 676
+ADDP4
+INDIRI4
+CNSTI4 0
+GTI4 $582
+line 1366
+;1366:	{
+line 1367
+;1367:		return;
+ADDRGP4 $581
+JUMPV
+LABELV $582
+line 1370
+;1368:	}
+;1369:
+;1370:	if (self->client->ps.forceAllowDeactivateTime < level.time &&
+ADDRLP4 0
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 0
+INDIRP4
+CNSTI4 1328
+ADDP4
+INDIRI4
+ADDRGP4 level+32
+INDIRI4
+GEI4 $584
+ADDRLP4 0
+INDIRP4
+CNSTI4 848
+ADDP4
+INDIRI4
+CNSTI4 512
+BANDI4
+CNSTI4 0
+EQI4 $584
+line 1372
+;1371:		(self->client->ps.fd.forcePowersActive & (1 << FP_PROTECT)) )
+;1372:	{
+line 1373
+;1373:		WP_ForcePowerStop( self, FP_PROTECT );
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 9
+ARGI4
+ADDRGP4 WP_ForcePowerStop
+CALLV
+pop
+line 1374
+;1374:		return;
+ADDRGP4 $581
+JUMPV
+LABELV $584
+line 1377
+;1375:	}
+;1376:
+;1377:	if ( !WP_ForcePowerUsable( self, FP_PROTECT ) )
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 9
+ARGI4
+ADDRLP4 4
+ADDRGP4 WP_ForcePowerUsable
+CALLI4
+ASGNI4
+ADDRLP4 4
+INDIRI4
+CNSTI4 0
+NEI4 $587
+line 1378
+;1378:	{
+line 1379
+;1379:		return;
+ADDRGP4 $581
+JUMPV
+LABELV $587
+line 1383
+;1380:	}
+;1381:
+;1382:	// Make sure to turn off Force Rage and Force Absorb.
+;1383:	if (self->client->ps.fd.forcePowersActive & (1 << FP_RAGE) )
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 848
+ADDP4
+INDIRI4
+CNSTI4 256
+BANDI4
+CNSTI4 0
+EQI4 $589
+line 1384
+;1384:	{
+line 1385
+;1385:		WP_ForcePowerStop( self, FP_RAGE );
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 8
+ARGI4
+ADDRGP4 WP_ForcePowerStop
+CALLV
+pop
+line 1386
+;1386:	}
+LABELV $589
+line 1387
+;1387:	if (self->client->ps.fd.forcePowersActive & (1 << FP_ABSORB) )
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 848
+ADDP4
+INDIRI4
+CNSTI4 1024
+BANDI4
+CNSTI4 0
+EQI4 $591
+line 1388
+;1388:	{
+line 1389
+;1389:		WP_ForcePowerStop( self, FP_ABSORB );
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 10
+ARGI4
+ADDRGP4 WP_ForcePowerStop
+CALLV
+pop
+line 1390
+;1390:	}
+LABELV $591
+line 1392
+;1391:
+;1392:	self->client->ps.forceAllowDeactivateTime = level.time + 1500;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1328
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 1500
+ADDI4
+ASGNI4
+line 1394
+;1393:
+;1394:	WP_ForcePowerStart( self, FP_PROTECT, 0 );
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 9
+ARGI4
+CNSTI4 0
+ARGI4
+ADDRGP4 WP_ForcePowerStart
+CALLV
+pop
+line 1395
+;1395:	G_PreDefSound(self->client->ps.origin, PDSOUND_PROTECT);
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 20
+ADDP4
+ARGP4
+CNSTI4 2
+ARGI4
+ADDRGP4 G_PreDefSound
+CALLP4
+pop
+line 1396
+;1396:	G_Sound( self, TRACK_CHANNEL_3, protectLoopSound );
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 53
+ARGI4
+ADDRGP4 protectLoopSound
+INDIRI4
+ARGI4
+ADDRGP4 G_Sound
+CALLV
+pop
+line 1397
+;1397:}
+LABELV $581
+endproc ForceProtect 8 12
+export ForceAbsorb
+proc ForceAbsorb 8 12
+line 1400
+;1398:
+;1399:void ForceAbsorb( gentity_t *self )
+;1400:{
+line 1401
+;1401:	if ( self->health <= 0 )
+ADDRFP4 0
+INDIRP4
+CNSTI4 676
+ADDP4
+INDIRI4
+CNSTI4 0
+GTI4 $595
+line 1402
+;1402:	{
+line 1403
+;1403:		return;
+ADDRGP4 $594
+JUMPV
+LABELV $595
+line 1406
+;1404:	}
+;1405:
+;1406:	if (self->client->ps.forceAllowDeactivateTime < level.time &&
+ADDRLP4 0
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 0
+INDIRP4
+CNSTI4 1328
+ADDP4
+INDIRI4
+ADDRGP4 level+32
+INDIRI4
+GEI4 $597
+ADDRLP4 0
+INDIRP4
+CNSTI4 848
+ADDP4
+INDIRI4
+CNSTI4 1024
+BANDI4
+CNSTI4 0
+EQI4 $597
+line 1408
+;1407:		(self->client->ps.fd.forcePowersActive & (1 << FP_ABSORB)) )
+;1408:	{
+line 1409
+;1409:		WP_ForcePowerStop( self, FP_ABSORB );
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 10
+ARGI4
+ADDRGP4 WP_ForcePowerStop
+CALLV
+pop
+line 1410
+;1410:		return;
+ADDRGP4 $594
+JUMPV
+LABELV $597
+line 1413
+;1411:	}
+;1412:
+;1413:	if ( !WP_ForcePowerUsable( self, FP_ABSORB ) )
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 10
+ARGI4
+ADDRLP4 4
+ADDRGP4 WP_ForcePowerUsable
+CALLI4
+ASGNI4
+ADDRLP4 4
+INDIRI4
+CNSTI4 0
+NEI4 $600
+line 1414
+;1414:	{
+line 1415
+;1415:		return;
+ADDRGP4 $594
+JUMPV
+LABELV $600
+line 1419
+;1416:	}
+;1417:
+;1418:	// Make sure to turn off Force Rage and Force Protection.
+;1419:	if (self->client->ps.fd.forcePowersActive & (1 << FP_RAGE) )
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 848
+ADDP4
+INDIRI4
+CNSTI4 256
+BANDI4
+CNSTI4 0
+EQI4 $602
+line 1420
+;1420:	{
+line 1421
+;1421:		WP_ForcePowerStop( self, FP_RAGE );
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 8
+ARGI4
+ADDRGP4 WP_ForcePowerStop
+CALLV
+pop
+line 1422
+;1422:	}
+LABELV $602
+line 1423
+;1423:	if (self->client->ps.fd.forcePowersActive & (1 << FP_PROTECT) )
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 848
+ADDP4
+INDIRI4
+CNSTI4 512
+BANDI4
+CNSTI4 0
+EQI4 $604
+line 1424
+;1424:	{
+line 1425
+;1425:		WP_ForcePowerStop( self, FP_PROTECT );
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 9
+ARGI4
+ADDRGP4 WP_ForcePowerStop
+CALLV
+pop
+line 1426
+;1426:	}
+LABELV $604
+line 1428
+;1427:
+;1428:	self->client->ps.forceAllowDeactivateTime = level.time + 1500;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1328
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 1500
+ADDI4
+ASGNI4
+line 1430
+;1429:
+;1430:	WP_ForcePowerStart( self, FP_ABSORB, 0 );
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 10
+ARGI4
+CNSTI4 0
+ARGI4
+ADDRGP4 WP_ForcePowerStart
+CALLV
+pop
+line 1431
+;1431:	G_PreDefSound(self->client->ps.origin, PDSOUND_ABSORB);
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 20
+ADDP4
+ARGP4
+CNSTI4 4
+ARGI4
+ADDRGP4 G_PreDefSound
+CALLP4
+pop
+line 1432
+;1432:	G_Sound( self, TRACK_CHANNEL_3, absorbLoopSound );
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 53
+ARGI4
+ADDRGP4 absorbLoopSound
+INDIRI4
+ARGI4
+ADDRGP4 G_Sound
+CALLV
+pop
+line 1433
+;1433:}
+LABELV $594
+endproc ForceAbsorb 8 12
+export ForceRage
+proc ForceRage 12 12
+line 1436
+;1434:
+;1435:void ForceRage( gentity_t *self )
+;1436:{
+line 1437
+;1437:	if ( self->health <= 0 )
+ADDRFP4 0
+INDIRP4
+CNSTI4 676
+ADDP4
+INDIRI4
+CNSTI4 0
+GTI4 $608
+line 1438
+;1438:	{
+line 1439
+;1439:		return;
+ADDRGP4 $607
+JUMPV
+LABELV $608
+line 1442
+;1440:	}
+;1441:
+;1442:	if (self->client->ps.forceAllowDeactivateTime < level.time &&
+ADDRLP4 0
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 0
+INDIRP4
+CNSTI4 1328
+ADDP4
+INDIRI4
+ADDRGP4 level+32
+INDIRI4
+GEI4 $610
+ADDRLP4 0
+INDIRP4
+CNSTI4 848
+ADDP4
+INDIRI4
+CNSTI4 256
+BANDI4
+CNSTI4 0
+EQI4 $610
+line 1444
+;1443:		(self->client->ps.fd.forcePowersActive & (1 << FP_RAGE)) )
+;1444:	{
+line 1445
+;1445:		WP_ForcePowerStop( self, FP_RAGE );
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 8
+ARGI4
+ADDRGP4 WP_ForcePowerStop
+CALLV
+pop
+line 1446
+;1446:		return;
+ADDRGP4 $607
+JUMPV
+LABELV $610
+line 1449
+;1447:	}
+;1448:
+;1449:	if ( !WP_ForcePowerUsable( self, FP_RAGE ) )
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 8
+ARGI4
+ADDRLP4 4
+ADDRGP4 WP_ForcePowerUsable
+CALLI4
+ASGNI4
+ADDRLP4 4
+INDIRI4
+CNSTI4 0
+NEI4 $613
+line 1450
+;1450:	{
+line 1451
+;1451:		return;
+ADDRGP4 $607
+JUMPV
+LABELV $613
+line 1454
+;1452:	}
+;1453:
+;1454:	if (self->client->ps.fd.forceRageRecoveryTime >= level.time)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1172
+ADDP4
+INDIRI4
+ADDRGP4 level+32
+INDIRI4
+LTI4 $615
+line 1455
+;1455:	{
+line 1456
+;1456:		return;
+ADDRGP4 $607
+JUMPV
+LABELV $615
+line 1459
+;1457:	}
+;1458:
+;1459:	if (self->health < 10)
+ADDRFP4 0
+INDIRP4
+CNSTI4 676
+ADDP4
+INDIRI4
+CNSTI4 10
+GEI4 $618
+line 1460
+;1460:	{
+line 1461
+;1461:		return;
+ADDRGP4 $607
+JUMPV
+LABELV $618
+line 1465
+;1462:	}
+;1463:
+;1464:	// Make sure to turn off Force Protection and Force Absorb.
+;1465:	if (self->client->ps.fd.forcePowersActive & (1 << FP_PROTECT) )
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 848
+ADDP4
+INDIRI4
+CNSTI4 512
+BANDI4
+CNSTI4 0
+EQI4 $620
+line 1466
+;1466:	{
+line 1467
+;1467:		WP_ForcePowerStop( self, FP_PROTECT );
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 9
+ARGI4
+ADDRGP4 WP_ForcePowerStop
+CALLV
+pop
+line 1468
+;1468:	}
+LABELV $620
+line 1469
+;1469:	if (self->client->ps.fd.forcePowersActive & (1 << FP_ABSORB) )
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 848
+ADDP4
+INDIRI4
+CNSTI4 1024
+BANDI4
+CNSTI4 0
+EQI4 $622
+line 1470
+;1470:	{
+line 1471
+;1471:		WP_ForcePowerStop( self, FP_ABSORB );
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 10
+ARGI4
+ADDRGP4 WP_ForcePowerStop
+CALLV
+pop
+line 1472
+;1472:	}
+LABELV $622
+line 1474
+;1473:
+;1474:	self->client->ps.forceAllowDeactivateTime = level.time + 1500;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1328
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 1500
+ADDI4
+ASGNI4
+line 1476
+;1475:
+;1476:	WP_ForcePowerStart( self, FP_RAGE, 0 );
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 8
+ARGI4
+CNSTI4 0
+ARGI4
+ADDRGP4 WP_ForcePowerStart
+CALLV
+pop
+line 1478
+;1477:
+;1478:	G_Sound( self, TRACK_CHANNEL_4, G_SoundIndex("sound/weapons/force/rage.wav") );
+ADDRGP4 $625
+ARGP4
+ADDRLP4 8
+ADDRGP4 G_SoundIndex
+CALLI4
+ASGNI4
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 54
+ARGI4
+ADDRLP4 8
+INDIRI4
+ARGI4
+ADDRGP4 G_Sound
+CALLV
+pop
+line 1479
+;1479:	G_Sound( self, TRACK_CHANNEL_3, rageLoopSound );
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 53
+ARGI4
+ADDRGP4 rageLoopSound
+INDIRI4
+ARGI4
+ADDRGP4 G_Sound
+CALLV
+pop
+line 1480
+;1480:}
+LABELV $607
+endproc ForceRage 12 12
+export ForceLightning
+proc ForceLightning 12 12
+line 1483
+;1481:
+;1482:void ForceLightning( gentity_t *self )
+;1483:{
+line 1484
+;1484:	if ( self->health <= 0 )
+ADDRFP4 0
+INDIRP4
+CNSTI4 676
+ADDP4
+INDIRI4
+CNSTI4 0
+GTI4 $627
+line 1485
+;1485:	{
+line 1486
+;1486:		return;
+ADDRGP4 $626
+JUMPV
+LABELV $627
+line 1488
+;1487:	}
+;1488:	if ( self->client->ps.fd.forcePower < 25 || !WP_ForcePowerUsable( self, FP_LIGHTNING ) )
+ADDRLP4 0
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 932
+ADDP4
+INDIRI4
+CNSTI4 25
+LTI4 $631
+ADDRLP4 0
+INDIRP4
+ARGP4
+CNSTI4 7
+ARGI4
+ADDRLP4 4
+ADDRGP4 WP_ForcePowerUsable
+CALLI4
+ASGNI4
+ADDRLP4 4
+INDIRI4
+CNSTI4 0
+NEI4 $629
+LABELV $631
+line 1489
+;1489:	{
+line 1490
+;1490:		return;
+ADDRGP4 $626
+JUMPV
+LABELV $629
+line 1492
+;1491:	}
+;1492:	if ( self->client->ps.fd.forcePowerDebounce[FP_LIGHTNING] > level.time )
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 800
+ADDP4
+INDIRI4
+ADDRGP4 level+32
+INDIRI4
+LEI4 $632
+line 1493
+;1493:	{//stops it while using it and also after using it, up to 3 second delay
+line 1494
+;1494:		return;
+ADDRGP4 $626
+JUMPV
+LABELV $632
+line 1497
+;1495:	}
+;1496:
+;1497:	if (self->client->ps.forceHandExtend != HANDEXTEND_NONE)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1248
+ADDP4
+INDIRI4
+CNSTI4 0
+EQI4 $635
+line 1498
+;1498:	{
+line 1499
+;1499:		return;
+ADDRGP4 $626
+JUMPV
+LABELV $635
+line 1502
+;1500:	}
+;1501:
+;1502:	if (self->client->ps.weaponTime > 0)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 44
+ADDP4
+INDIRI4
+CNSTI4 0
+LEI4 $637
+line 1503
+;1503:	{
+line 1504
+;1504:		return;
+ADDRGP4 $626
+JUMPV
+LABELV $637
+line 1509
+;1505:	}
+;1506:
+;1507:	//Shoot lightning from hand
+;1508:	//using grip anim now, to extend the burst time
+;1509:	self->client->ps.forceHandExtend = HANDEXTEND_FORCEGRIP;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1248
+ADDP4
+CNSTI4 3
+ASGNI4
+line 1510
+;1510:	self->client->ps.forceHandExtendTime = level.time + 20000;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1252
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 20000
+ADDI4
+ASGNI4
+line 1512
+;1511:
+;1512:	G_Sound( self, CHAN_BODY, G_SoundIndex("sound/weapons/force/lightning.wav") );
+ADDRGP4 $640
+ARGP4
+ADDRLP4 8
+ADDRGP4 G_SoundIndex
+CALLI4
+ASGNI4
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 5
+ARGI4
+ADDRLP4 8
+INDIRI4
+ARGI4
+ADDRGP4 G_Sound
+CALLV
+pop
+line 1514
+;1513:	
+;1514:	WP_ForcePowerStart( self, FP_LIGHTNING, 500 );
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 7
+ARGI4
+CNSTI4 500
+ARGI4
+ADDRGP4 WP_ForcePowerStart
+CALLV
+pop
+line 1515
+;1515:}
+LABELV $626
+endproc ForceLightning 12 12
+export ForceLightningDamage
+proc ForceLightningDamage 44 32
+line 1518
+;1516:
+;1517:void ForceLightningDamage( gentity_t *self, gentity_t *traceEnt, vec3_t dir, vec3_t impactPoint )
+;1518:{
+line 1519
+;1519:	self->client->dangerTime = level.time;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 2948
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+ASGNI4
+line 1520
+;1520:	self->client->ps.eFlags &= ~EF_INVULNERABLE;
+ADDRLP4 0
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 108
+ADDP4
+ASGNP4
+ADDRLP4 0
+INDIRP4
+ADDRLP4 0
+INDIRP4
+INDIRI4
+CNSTI4 -67108865
+BANDI4
+ASGNI4
+line 1521
+;1521:	self->client->invulnerableTimer = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1700
+ADDP4
+CNSTI4 0
+ASGNI4
+line 1523
+;1522:
+;1523:	if ( traceEnt && traceEnt->takedamage )
+ADDRLP4 4
+ADDRFP4 4
+INDIRP4
+ASGNP4
+ADDRLP4 4
+INDIRP4
+CVPU4 4
+CNSTU4 0
+EQU4 $643
+ADDRLP4 4
+INDIRP4
+CNSTI4 680
+ADDP4
+INDIRI4
+CNSTI4 0
+EQI4 $643
+line 1524
+;1524:	{
+line 1525
+;1525:		if (!traceEnt->client && traceEnt->s.eType == ET_GRAPPLE)
+ADDRLP4 8
+ADDRFP4 4
+INDIRP4
+ASGNP4
+ADDRLP4 8
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CVPU4 4
+CNSTU4 0
+NEU4 $645
+ADDRLP4 8
+INDIRP4
+CNSTI4 4
+ADDP4
+INDIRI4
+CNSTI4 13
+NEI4 $645
+line 1526
+;1526:		{ //g2animent
+line 1527
+;1527:			if (traceEnt->s.genericenemyindex < level.time)
+ADDRFP4 4
+INDIRP4
+CNSTI4 172
+ADDP4
+INDIRI4
+ADDRGP4 level+32
+INDIRI4
+GEI4 $647
+line 1528
+;1528:			{
+line 1529
+;1529:				traceEnt->s.genericenemyindex = level.time + 2000;
+ADDRFP4 4
+INDIRP4
+CNSTI4 172
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 2000
+ADDI4
+ASGNI4
+line 1530
+;1530:			}
+LABELV $647
+line 1531
+;1531:		}
+LABELV $645
+line 1532
+;1532:		if ( traceEnt->client )
+ADDRFP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CVPU4 4
+CNSTU4 0
+EQU4 $651
+line 1533
+;1533:		{//an enemy or object
+line 1534
+;1534:			if (ForcePowerUsableOn(self, traceEnt, FP_LIGHTNING))
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRFP4 4
+INDIRP4
+ARGP4
+CNSTI4 7
+ARGI4
+ADDRLP4 12
+ADDRGP4 ForcePowerUsableOn
+CALLI4
+ASGNI4
+ADDRLP4 12
+INDIRI4
+CNSTI4 0
+EQI4 $653
+line 1535
+;1535:			{
+line 1536
+;1536:				int	dmg = Q_irand(1,2); //Q_irand( 1, 3 );
+CNSTI4 1
+ARGI4
+CNSTI4 2
+ARGI4
+ADDRLP4 24
+ADDRGP4 Q_irand
+CALLI4
+ASGNI4
+ADDRLP4 20
+ADDRLP4 24
+INDIRI4
+ASGNI4
+line 1538
+;1537:				
+;1538:				int modPowerLevel = -1;
+ADDRLP4 16
+CNSTI4 -1
+ASGNI4
+line 1540
+;1539:				
+;1540:				if (traceEnt->client)
+ADDRFP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CVPU4 4
+CNSTU4 0
+EQU4 $655
+line 1541
+;1541:				{
+line 1542
+;1542:					modPowerLevel = WP_AbsorbConversion(traceEnt, traceEnt->client->ps.fd.forcePowerLevel[FP_ABSORB], self, FP_LIGHTNING, self->client->ps.fd.forcePowerLevel[FP_LIGHTNING], 1);
+ADDRLP4 28
+ADDRFP4 4
+INDIRP4
+ASGNP4
+ADDRLP4 28
+INDIRP4
+ARGP4
+ADDRLP4 32
+CNSTI4 408
+ASGNI4
+ADDRLP4 28
+INDIRP4
+ADDRLP4 32
+INDIRI4
+ADDP4
+INDIRP4
+CNSTI4 984
+ADDP4
+INDIRI4
+ARGI4
+ADDRLP4 36
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 36
+INDIRP4
+ARGP4
+CNSTI4 7
+ARGI4
+ADDRLP4 36
+INDIRP4
+ADDRLP4 32
+INDIRI4
+ADDP4
+INDIRP4
+CNSTI4 972
+ADDP4
+INDIRI4
+ARGI4
+CNSTI4 1
+ARGI4
+ADDRLP4 40
+ADDRGP4 WP_AbsorbConversion
+CALLI4
+ASGNI4
+ADDRLP4 16
+ADDRLP4 40
+INDIRI4
+ASGNI4
+line 1543
+;1543:				}
+LABELV $655
+line 1545
+;1544:
+;1545:				if (modPowerLevel != -1)
+ADDRLP4 16
+INDIRI4
+CNSTI4 -1
+EQI4 $657
+line 1546
+;1546:				{
+line 1547
+;1547:					if (!modPowerLevel)
+ADDRLP4 16
+INDIRI4
+CNSTI4 0
+NEI4 $659
+line 1548
+;1548:					{
+line 1549
+;1549:						dmg = 0;
+ADDRLP4 20
+CNSTI4 0
+ASGNI4
+line 1550
+;1550:					}
+ADDRGP4 $660
+JUMPV
+LABELV $659
+line 1551
+;1551:					else if (modPowerLevel == 1)
+ADDRLP4 16
+INDIRI4
+CNSTI4 1
+NEI4 $661
+line 1552
+;1552:					{
+line 1553
+;1553:						dmg = 1;
+ADDRLP4 20
+CNSTI4 1
+ASGNI4
+line 1554
+;1554:					}
+ADDRGP4 $662
+JUMPV
+LABELV $661
+line 1555
+;1555:					else if (modPowerLevel == 2)
+ADDRLP4 16
+INDIRI4
+CNSTI4 2
+NEI4 $663
+line 1556
+;1556:					{
+line 1557
+;1557:						dmg = 1;
+ADDRLP4 20
+CNSTI4 1
+ASGNI4
+line 1558
+;1558:					}
+LABELV $663
+LABELV $662
+LABELV $660
+line 1559
+;1559:				}
+LABELV $657
+line 1561
+;1560:
+;1561:				if (dmg)
+ADDRLP4 20
+INDIRI4
+CNSTI4 0
+EQI4 $665
+line 1562
+;1562:				{
+line 1564
+;1563:					//rww - Shields can now absorb lightning too.
+;1564:					G_Damage( traceEnt, self, self, dir, impactPoint, dmg, 0, MOD_FORCE_DARK );
+ADDRFP4 4
+INDIRP4
+ARGP4
+ADDRLP4 28
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 28
+INDIRP4
+ARGP4
+ADDRLP4 28
+INDIRP4
+ARGP4
+ADDRFP4 8
+INDIRP4
+ARGP4
+ADDRFP4 12
+INDIRP4
+ARGP4
+ADDRLP4 20
+INDIRI4
+ARGI4
+CNSTI4 0
+ARGI4
+CNSTI4 27
+ARGI4
+ADDRGP4 G_Damage
+CALLV
+pop
+line 1565
+;1565:				}
+LABELV $665
+line 1566
+;1566:				if ( traceEnt->client )
+ADDRFP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CVPU4 4
+CNSTU4 0
+EQU4 $667
+line 1567
+;1567:				{
+line 1568
+;1568:					if ( !Q_irand( 0, 2 ) )
+CNSTI4 0
+ARGI4
+CNSTI4 2
+ARGI4
+ADDRLP4 28
+ADDRGP4 Q_irand
+CALLI4
+ASGNI4
+ADDRLP4 28
+INDIRI4
+CNSTI4 0
+NEI4 $669
+line 1569
+;1569:					{
+line 1570
+;1570:						G_Sound( traceEnt, CHAN_BODY, G_SoundIndex( "sound/weapons/force/lightninghit.wav" ) );
+ADDRGP4 $671
+ARGP4
+ADDRLP4 32
+ADDRGP4 G_SoundIndex
+CALLI4
+ASGNI4
+ADDRFP4 4
+INDIRP4
+ARGP4
+CNSTI4 5
+ARGI4
+ADDRLP4 32
+INDIRI4
+ARGI4
+ADDRGP4 G_Sound
+CALLV
+pop
+line 1571
+;1571:					}
+LABELV $669
+line 1573
+;1572:
+;1573:					if (traceEnt->client->ps.electrifyTime < (level.time + 400))
+ADDRFP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 740
+ADDP4
+INDIRI4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 400
+ADDI4
+GEI4 $672
+line 1574
+;1574:					{ //only update every 400ms to reduce bandwidth usage (as it is passing a 32-bit time value)
+line 1575
+;1575:						traceEnt->client->ps.electrifyTime = level.time + 800;
+ADDRFP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 740
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 800
+ADDI4
+ASGNI4
+line 1576
+;1576:					}
+LABELV $672
+line 1577
+;1577:				}
+LABELV $667
+line 1578
+;1578:			}
+LABELV $653
+line 1579
+;1579:		}
+LABELV $651
+line 1580
+;1580:	}
+LABELV $643
+line 1581
+;1581:}
+LABELV $641
+endproc ForceLightningDamage 44 32
+export ForceShootLightning
+proc ForceShootLightning 9460 28
+line 1584
+;1582:
+;1583:void ForceShootLightning( gentity_t *self )
+;1584:{
+line 1589
+;1585:	trace_t	tr;
+;1586:	vec3_t	end, forward;
+;1587:	gentity_t	*traceEnt;
+;1588:
+;1589:	if ( self->health <= 0 )
+ADDRFP4 0
+INDIRP4
+CNSTI4 676
+ADDP4
+INDIRI4
+CNSTI4 0
+GTI4 $677
+line 1590
+;1590:	{
+line 1591
+;1591:		return;
+ADDRGP4 $676
+JUMPV
+LABELV $677
+line 1593
+;1592:	}
+;1593:	AngleVectors( self->client->ps.viewangles, forward, NULL, NULL );
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 156
+ADDP4
+ARGP4
+ADDRLP4 4
+ARGP4
+ADDRLP4 1108
+CNSTP4 0
+ASGNP4
+ADDRLP4 1108
+INDIRP4
+ARGP4
+ADDRLP4 1108
+INDIRP4
+ARGP4
+ADDRGP4 AngleVectors
+CALLV
+pop
+line 1594
+;1594:	VectorNormalize( forward );
+ADDRLP4 4
+ARGP4
+ADDRGP4 VectorNormalize
+CALLF4
+pop
+line 1596
+;1595:
+;1596:	if ( self->client->ps.fd.forcePowerLevel[FP_LIGHTNING] > FORCE_LEVEL_2 )
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 972
+ADDP4
+INDIRI4
+CNSTI4 2
+LEI4 $679
+line 1597
+;1597:	{//arc
+line 1599
+;1598:		vec3_t	center, mins, maxs, dir, ent_org, size, v;
+;1599:		float	radius = FORCE_LIGHTNING_RADIUS, dot, dist;
+ADDRLP4 1176
+CNSTF4 1133903872
+ASGNF4
+line 1604
+;1600:		gentity_t	*entityList[MAX_GENTITIES];
+;1601:		int			iEntityList[MAX_GENTITIES];
+;1602:		int		e, numListedEntities, i;
+;1603:
+;1604:		VectorCopy( self->client->ps.origin, center );
+ADDRLP4 1116
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 20
+ADDP4
+INDIRB
+ASGNB 12
+line 1605
+;1605:		for ( i = 0 ; i < 3 ; i++ ) 
+ADDRLP4 1112
+CNSTI4 0
+ASGNI4
+LABELV $681
+line 1606
+;1606:		{
+line 1607
+;1607:			mins[i] = center[i] - radius;
+ADDRLP4 9412
+ADDRLP4 1112
+INDIRI4
+CNSTI4 2
+LSHI4
+ASGNI4
+ADDRLP4 9412
+INDIRI4
+ADDRLP4 5288
+ADDP4
+ADDRLP4 9412
+INDIRI4
+ADDRLP4 1116
+ADDP4
+INDIRF4
+ADDRLP4 1176
+INDIRF4
+SUBF4
+ASGNF4
+line 1608
+;1608:			maxs[i] = center[i] + radius;
+ADDRLP4 9416
+ADDRLP4 1112
+INDIRI4
+CNSTI4 2
+LSHI4
+ASGNI4
+ADDRLP4 9416
+INDIRI4
+ADDRLP4 5300
+ADDP4
+ADDRLP4 9416
+INDIRI4
+ADDRLP4 1116
+ADDP4
+INDIRF4
+ADDRLP4 1176
+INDIRF4
+ADDF4
+ASGNF4
+line 1609
+;1609:		}
+LABELV $682
+line 1605
+ADDRLP4 1112
+ADDRLP4 1112
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+ADDRLP4 1112
+INDIRI4
+CNSTI4 3
+LTI4 $681
+line 1610
+;1610:		numListedEntities = trap_EntitiesInBox( mins, maxs, iEntityList, MAX_GENTITIES );
+ADDRLP4 5288
+ARGP4
+ADDRLP4 5300
+ARGP4
+ADDRLP4 5312
+ARGP4
+CNSTI4 1024
+ARGI4
+ADDRLP4 9412
+ADDRGP4 trap_EntitiesInBox
+CALLI4
+ASGNI4
+ADDRLP4 1184
+ADDRLP4 9412
+INDIRI4
+ASGNI4
+line 1612
+;1611:
+;1612:		i = 0;
+ADDRLP4 1112
+CNSTI4 0
+ASGNI4
+ADDRGP4 $686
+JUMPV
+LABELV $685
+line 1614
+;1613:		while (i < numListedEntities)
+;1614:		{
+line 1615
+;1615:			entityList[i] = &g_entities[iEntityList[i]];
+ADDRLP4 9416
+ADDRLP4 1112
+INDIRI4
+CNSTI4 2
+LSHI4
+ASGNI4
+ADDRLP4 9416
+INDIRI4
+ADDRLP4 1192
+ADDP4
+CNSTI4 852
+ADDRLP4 9416
+INDIRI4
+ADDRLP4 5312
+ADDP4
+INDIRI4
+MULI4
+ADDRGP4 g_entities
+ADDP4
+ASGNP4
+line 1617
+;1616:
+;1617:			i++;
+ADDRLP4 1112
+ADDRLP4 1112
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 1618
+;1618:		}
+LABELV $686
+line 1613
+ADDRLP4 1112
+INDIRI4
+ADDRLP4 1184
+INDIRI4
+LTI4 $685
+line 1620
+;1619:
+;1620:		for ( e = 0 ; e < numListedEntities ; e++ ) 
+ADDRLP4 1180
+CNSTI4 0
+ASGNI4
+ADDRGP4 $691
+JUMPV
+LABELV $688
+line 1621
+;1621:		{
+line 1622
+;1622:			traceEnt = entityList[e];
+ADDRLP4 0
+ADDRLP4 1180
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 1192
+ADDP4
+INDIRP4
+ASGNP4
+line 1624
+;1623:
+;1624:			if ( !traceEnt )
+ADDRLP4 0
+INDIRP4
+CVPU4 4
+CNSTU4 0
+NEU4 $692
+line 1625
+;1625:				continue;
+ADDRGP4 $689
+JUMPV
+LABELV $692
+line 1626
+;1626:			if ( traceEnt == self )
+ADDRLP4 0
+INDIRP4
+CVPU4 4
+ADDRFP4 0
+INDIRP4
+CVPU4 4
+NEU4 $694
+line 1627
+;1627:				continue;
+ADDRGP4 $689
+JUMPV
+LABELV $694
+line 1628
+;1628:			if ( traceEnt->r.ownerNum == self->s.number && traceEnt->s.weapon != WP_THERMAL )//can push your own thermals
+ADDRLP4 0
+INDIRP4
+CNSTI4 396
+ADDP4
+INDIRI4
+ADDRFP4 0
+INDIRP4
+INDIRI4
+NEI4 $696
+ADDRLP4 0
+INDIRP4
+CNSTI4 276
+ADDP4
+INDIRI4
+CNSTI4 11
+EQI4 $696
+line 1629
+;1629:				continue;
+ADDRGP4 $689
+JUMPV
+LABELV $696
+line 1630
+;1630:			if ( !traceEnt->inuse )
+ADDRLP4 0
+INDIRP4
+CNSTI4 412
+ADDP4
+INDIRI4
+CNSTI4 0
+NEI4 $698
+line 1631
+;1631:				continue;
+ADDRGP4 $689
+JUMPV
+LABELV $698
+line 1632
+;1632:			if ( !traceEnt->takedamage )
+ADDRLP4 0
+INDIRP4
+CNSTI4 680
+ADDP4
+INDIRI4
+CNSTI4 0
+NEI4 $700
+line 1633
+;1633:				continue;
+ADDRGP4 $689
+JUMPV
+LABELV $700
+line 1634
+;1634:			if ( traceEnt->health <= 0 )//no torturing corpses
+ADDRLP4 0
+INDIRP4
+CNSTI4 676
+ADDP4
+INDIRI4
+CNSTI4 0
+GTI4 $702
+line 1635
+;1635:				continue;
+ADDRGP4 $689
+JUMPV
+LABELV $702
+line 1636
+;1636:			if ( !g_friendlyFire.integer && OnSameTeam(self, traceEnt))
+ADDRGP4 g_friendlyFire+12
+INDIRI4
+CNSTI4 0
+NEI4 $704
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRLP4 0
+INDIRP4
+ARGP4
+ADDRLP4 9420
+ADDRGP4 OnSameTeam
+CALLI4
+ASGNI4
+ADDRLP4 9420
+INDIRI4
+CNSTI4 0
+EQI4 $704
+line 1637
+;1637:				continue;
+ADDRGP4 $689
+JUMPV
+LABELV $704
+line 1640
+;1638:			//this is all to see if we need to start a saber attack, if it's in flight, this doesn't matter
+;1639:			// find the distance from the edge of the bounding box
+;1640:			for ( i = 0 ; i < 3 ; i++ ) 
+ADDRLP4 1112
+CNSTI4 0
+ASGNI4
+LABELV $707
+line 1641
+;1641:			{
+line 1642
+;1642:				if ( center[i] < traceEnt->r.absmin[i] ) 
+ADDRLP4 9424
+ADDRLP4 1112
+INDIRI4
+CNSTI4 2
+LSHI4
+ASGNI4
+ADDRLP4 9424
+INDIRI4
+ADDRLP4 1116
+ADDP4
+INDIRF4
+ADDRLP4 9424
+INDIRI4
+ADDRLP4 0
+INDIRP4
+CNSTI4 344
+ADDP4
+ADDP4
+INDIRF4
+GEF4 $711
+line 1643
+;1643:				{
+line 1644
+;1644:					v[i] = traceEnt->r.absmin[i] - center[i];
+ADDRLP4 9428
+ADDRLP4 1112
+INDIRI4
+CNSTI4 2
+LSHI4
+ASGNI4
+ADDRLP4 9428
+INDIRI4
+ADDRLP4 1128
+ADDP4
+ADDRLP4 9428
+INDIRI4
+ADDRLP4 0
+INDIRP4
+CNSTI4 344
+ADDP4
+ADDP4
+INDIRF4
+ADDRLP4 9428
+INDIRI4
+ADDRLP4 1116
+ADDP4
+INDIRF4
+SUBF4
+ASGNF4
+line 1645
+;1645:				} else if ( center[i] > traceEnt->r.absmax[i] ) 
+ADDRGP4 $712
+JUMPV
+LABELV $711
+ADDRLP4 9428
+ADDRLP4 1112
+INDIRI4
+CNSTI4 2
+LSHI4
+ASGNI4
+ADDRLP4 9428
+INDIRI4
+ADDRLP4 1116
+ADDP4
+INDIRF4
+ADDRLP4 9428
+INDIRI4
+ADDRLP4 0
+INDIRP4
+CNSTI4 356
+ADDP4
+ADDP4
+INDIRF4
+LEF4 $713
+line 1646
+;1646:				{
+line 1647
+;1647:					v[i] = center[i] - traceEnt->r.absmax[i];
+ADDRLP4 9432
+ADDRLP4 1112
+INDIRI4
+CNSTI4 2
+LSHI4
+ASGNI4
+ADDRLP4 9432
+INDIRI4
+ADDRLP4 1128
+ADDP4
+ADDRLP4 9432
+INDIRI4
+ADDRLP4 1116
+ADDP4
+INDIRF4
+ADDRLP4 9432
+INDIRI4
+ADDRLP4 0
+INDIRP4
+CNSTI4 356
+ADDP4
+ADDP4
+INDIRF4
+SUBF4
+ASGNF4
+line 1648
+;1648:				} else 
+ADDRGP4 $714
+JUMPV
+LABELV $713
+line 1649
+;1649:				{
+line 1650
+;1650:					v[i] = 0;
+ADDRLP4 1112
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 1128
+ADDP4
+CNSTF4 0
+ASGNF4
+line 1651
+;1651:				}
+LABELV $714
+LABELV $712
+line 1652
+;1652:			}
+LABELV $708
+line 1640
+ADDRLP4 1112
+ADDRLP4 1112
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+ADDRLP4 1112
+INDIRI4
+CNSTI4 3
+LTI4 $707
+line 1654
+;1653:
+;1654:			VectorSubtract( traceEnt->r.absmax, traceEnt->r.absmin, size );
+ADDRLP4 1164
+ADDRLP4 0
+INDIRP4
+CNSTI4 356
+ADDP4
+INDIRF4
+ADDRLP4 0
+INDIRP4
+CNSTI4 344
+ADDP4
+INDIRF4
+SUBF4
+ASGNF4
+ADDRLP4 1164+4
+ADDRLP4 0
+INDIRP4
+CNSTI4 360
+ADDP4
+INDIRF4
+ADDRLP4 0
+INDIRP4
+CNSTI4 348
+ADDP4
+INDIRF4
+SUBF4
+ASGNF4
+ADDRLP4 1164+8
+ADDRLP4 0
+INDIRP4
+CNSTI4 364
+ADDP4
+INDIRF4
+ADDRLP4 0
+INDIRP4
+CNSTI4 352
+ADDP4
+INDIRF4
+SUBF4
+ASGNF4
+line 1655
+;1655:			VectorMA( traceEnt->r.absmin, 0.5, size, ent_org );
+ADDRLP4 9436
+CNSTF4 1056964608
+ASGNF4
+ADDRLP4 1140
+ADDRLP4 0
+INDIRP4
+CNSTI4 344
+ADDP4
+INDIRF4
+ADDRLP4 9436
+INDIRF4
+ADDRLP4 1164
+INDIRF4
+MULF4
+ADDF4
+ASGNF4
+ADDRLP4 1140+4
+ADDRLP4 0
+INDIRP4
+CNSTI4 348
+ADDP4
+INDIRF4
+ADDRLP4 9436
+INDIRF4
+ADDRLP4 1164+4
+INDIRF4
+MULF4
+ADDF4
+ASGNF4
+ADDRLP4 1140+8
+ADDRLP4 0
+INDIRP4
+CNSTI4 352
+ADDP4
+INDIRF4
+CNSTF4 1056964608
+ADDRLP4 1164+8
+INDIRF4
+MULF4
+ADDF4
+ASGNF4
+line 1659
+;1656:
+;1657:			//see if they're in front of me
+;1658:			//must be within the forward cone
+;1659:			VectorSubtract( ent_org, center, dir );
+ADDRLP4 1152
+ADDRLP4 1140
+INDIRF4
+ADDRLP4 1116
+INDIRF4
+SUBF4
+ASGNF4
+ADDRLP4 1152+4
+ADDRLP4 1140+4
+INDIRF4
+ADDRLP4 1116+4
+INDIRF4
+SUBF4
+ASGNF4
+ADDRLP4 1152+8
+ADDRLP4 1140+8
+INDIRF4
+ADDRLP4 1116+8
+INDIRF4
+SUBF4
+ASGNF4
+line 1660
+;1660:			VectorNormalize( dir );
+ADDRLP4 1152
+ARGP4
+ADDRGP4 VectorNormalize
+CALLF4
+pop
+line 1661
+;1661:			if ( (dot = DotProduct( dir, forward )) < 0.5 )
+ADDRLP4 9440
+ADDRLP4 1152
+INDIRF4
+ADDRLP4 4
+INDIRF4
+MULF4
+ADDRLP4 1152+4
+INDIRF4
+ADDRLP4 4+4
+INDIRF4
+MULF4
+ADDF4
+ADDRLP4 1152+8
+INDIRF4
+ADDRLP4 4+8
+INDIRF4
+MULF4
+ADDF4
+ASGNF4
+ADDRLP4 9408
+ADDRLP4 9440
+INDIRF4
+ASGNF4
+ADDRLP4 9440
+INDIRF4
+CNSTF4 1056964608
+GEF4 $727
+line 1662
+;1662:				continue;
+ADDRGP4 $689
+JUMPV
+LABELV $727
+line 1665
+;1663:
+;1664:			//must be close enough
+;1665:			dist = VectorLength( v );
+ADDRLP4 1128
+ARGP4
+ADDRLP4 9444
+ADDRGP4 VectorLength
+CALLF4
+ASGNF4
+ADDRLP4 1188
+ADDRLP4 9444
+INDIRF4
+ASGNF4
+line 1666
+;1666:			if ( dist >= radius ) 
+ADDRLP4 1188
+INDIRF4
+ADDRLP4 1176
+INDIRF4
+LTF4 $733
+line 1667
+;1667:			{
+line 1668
+;1668:				continue;
+ADDRGP4 $689
+JUMPV
+LABELV $733
+line 1672
+;1669:			}
+;1670:		
+;1671:			//in PVS?
+;1672:			if ( !traceEnt->r.bmodel && !trap_InPVS( ent_org, self->client->ps.origin ) )
+ADDRLP4 0
+INDIRP4
+CNSTI4 312
+ADDP4
+INDIRI4
+CNSTI4 0
+NEI4 $735
+ADDRLP4 1140
+ARGP4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 20
+ADDP4
+ARGP4
+ADDRLP4 9448
+ADDRGP4 trap_InPVS
+CALLI4
+ASGNI4
+ADDRLP4 9448
+INDIRI4
+CNSTI4 0
+NEI4 $735
+line 1673
+;1673:			{//must be in PVS
+line 1674
+;1674:				continue;
+ADDRGP4 $689
+JUMPV
+LABELV $735
+line 1678
+;1675:			}
+;1676:
+;1677:			//Now check and see if we can actually hit it
+;1678:			trap_Trace( &tr, self->client->ps.origin, vec3_origin, vec3_origin, ent_org, self->s.number, MASK_SHOT );
+ADDRLP4 16
+ARGP4
+ADDRLP4 9452
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 9452
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 20
+ADDP4
+ARGP4
+ADDRLP4 9456
+ADDRGP4 vec3_origin
+ASGNP4
+ADDRLP4 9456
+INDIRP4
+ARGP4
+ADDRLP4 9456
+INDIRP4
+ARGP4
+ADDRLP4 1140
+ARGP4
+ADDRLP4 9452
+INDIRP4
+INDIRI4
+ARGI4
+CNSTI4 769
+ARGI4
+ADDRGP4 trap_Trace
+CALLV
+pop
+line 1679
+;1679:			if ( tr.fraction < 1.0f && tr.entityNum != traceEnt->s.number )
+ADDRLP4 16+8
+INDIRF4
+CNSTF4 1065353216
+GEF4 $737
+ADDRLP4 16+52
+INDIRI4
+ADDRLP4 0
+INDIRP4
+INDIRI4
+EQI4 $737
+line 1680
+;1680:			{//must have clear LOS
+line 1681
+;1681:				continue;
+ADDRGP4 $689
+JUMPV
+LABELV $737
+line 1685
+;1682:			}
+;1683:
+;1684:			// ok, we are within the radius, add us to the incoming list
+;1685:			ForceLightningDamage( self, traceEnt, dir, ent_org );
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRLP4 0
+INDIRP4
+ARGP4
+ADDRLP4 1152
+ARGP4
+ADDRLP4 1140
+ARGP4
+ADDRGP4 ForceLightningDamage
+CALLV
+pop
+line 1686
+;1686:		}
+LABELV $689
+line 1620
+ADDRLP4 1180
+ADDRLP4 1180
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+LABELV $691
+ADDRLP4 1180
+INDIRI4
+ADDRLP4 1184
+INDIRI4
+LTI4 $688
+line 1687
+;1687:	}
+ADDRGP4 $680
+JUMPV
+LABELV $679
+line 1689
+;1688:	else
+;1689:	{//trace-line
+line 1690
+;1690:		VectorMA( self->client->ps.origin, 2048, forward, end );
+ADDRLP4 1112
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+ASGNP4
+ADDRLP4 1116
+CNSTF4 1157627904
+ASGNF4
+ADDRLP4 1096
+ADDRLP4 1112
+INDIRP4
+INDIRP4
+CNSTI4 20
+ADDP4
+INDIRF4
+ADDRLP4 1116
+INDIRF4
+ADDRLP4 4
+INDIRF4
+MULF4
+ADDF4
+ASGNF4
+ADDRLP4 1096+4
+ADDRLP4 1112
+INDIRP4
+INDIRP4
+CNSTI4 24
+ADDP4
+INDIRF4
+ADDRLP4 1116
+INDIRF4
+ADDRLP4 4+4
+INDIRF4
+MULF4
+ADDF4
+ASGNF4
+ADDRLP4 1096+8
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 28
+ADDP4
+INDIRF4
+CNSTF4 1157627904
+ADDRLP4 4+8
+INDIRF4
+MULF4
+ADDF4
+ASGNF4
+line 1692
+;1691:		
+;1692:		trap_Trace( &tr, self->client->ps.origin, vec3_origin, vec3_origin, end, self->s.number, MASK_SHOT );
+ADDRLP4 16
+ARGP4
+ADDRLP4 1120
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 1120
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 20
+ADDP4
+ARGP4
+ADDRLP4 1124
+ADDRGP4 vec3_origin
+ASGNP4
+ADDRLP4 1124
+INDIRP4
+ARGP4
+ADDRLP4 1124
+INDIRP4
+ARGP4
+ADDRLP4 1096
+ARGP4
+ADDRLP4 1120
+INDIRP4
+INDIRI4
+ARGI4
+CNSTI4 769
+ARGI4
+ADDRGP4 trap_Trace
+CALLV
+pop
+line 1693
+;1693:		if ( tr.entityNum == ENTITYNUM_NONE || tr.fraction == 1.0 || tr.allsolid || tr.startsolid )
+ADDRLP4 16+52
+INDIRI4
+CNSTI4 1023
+EQI4 $752
+ADDRLP4 16+8
+INDIRF4
+CNSTF4 1065353216
+EQF4 $752
+ADDRLP4 1128
+CNSTI4 0
+ASGNI4
+ADDRLP4 16
+INDIRI4
+ADDRLP4 1128
+INDIRI4
+NEI4 $752
+ADDRLP4 16+4
+INDIRI4
+ADDRLP4 1128
+INDIRI4
+EQI4 $745
+LABELV $752
+line 1694
+;1694:		{
+line 1695
+;1695:			return;
+ADDRGP4 $676
+JUMPV
+LABELV $745
+line 1698
+;1696:		}
+;1697:		
+;1698:		traceEnt = &g_entities[tr.entityNum];
+ADDRLP4 0
+CNSTI4 852
+ADDRLP4 16+52
+INDIRI4
+MULI4
+ADDRGP4 g_entities
+ADDP4
+ASGNP4
+line 1699
+;1699:		ForceLightningDamage( self, traceEnt, forward, tr.endpos );
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRLP4 0
+INDIRP4
+ARGP4
+ADDRLP4 4
+ARGP4
+ADDRLP4 16+12
+ARGP4
+ADDRGP4 ForceLightningDamage
+CALLV
+pop
+line 1700
+;1700:	}
+LABELV $680
+line 1701
+;1701:}
+LABELV $676
+endproc ForceShootLightning 9460 28
+export ForceDrain
+proc ForceDrain 12 12
+line 1704
+;1702:
+;1703:void ForceDrain( gentity_t *self )
+;1704:{
+line 1705
+;1705:	if ( self->health <= 0 )
+ADDRFP4 0
+INDIRP4
+CNSTI4 676
+ADDP4
+INDIRI4
+CNSTI4 0
+GTI4 $756
+line 1706
+;1706:	{
+line 1707
+;1707:		return;
+ADDRGP4 $755
+JUMPV
+LABELV $756
+line 1710
+;1708:	}
+;1709:
+;1710:	if (self->client->ps.forceHandExtend != HANDEXTEND_NONE)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1248
+ADDP4
+INDIRI4
+CNSTI4 0
+EQI4 $758
+line 1711
+;1711:	{
+line 1712
+;1712:		return;
+ADDRGP4 $755
+JUMPV
+LABELV $758
+line 1715
+;1713:	}
+;1714:
+;1715:	if (self->client->ps.weaponTime > 0)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 44
+ADDP4
+INDIRI4
+CNSTI4 0
+LEI4 $760
+line 1716
+;1716:	{
+line 1717
+;1717:		return;
+ADDRGP4 $755
+JUMPV
+LABELV $760
+line 1720
+;1718:	}
+;1719:
+;1720:	if ( self->client->ps.fd.forcePower < 25 || !WP_ForcePowerUsable( self, FP_DRAIN ) )
+ADDRLP4 0
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 932
+ADDP4
+INDIRI4
+CNSTI4 25
+LTI4 $764
+ADDRLP4 0
+INDIRP4
+ARGP4
+CNSTI4 13
+ARGI4
+ADDRLP4 4
+ADDRGP4 WP_ForcePowerUsable
+CALLI4
+ASGNI4
+ADDRLP4 4
+INDIRI4
+CNSTI4 0
+NEI4 $762
+LABELV $764
+line 1721
+;1721:	{
+line 1722
+;1722:		return;
+ADDRGP4 $755
+JUMPV
+LABELV $762
+line 1724
+;1723:	}
+;1724:	if ( self->client->ps.fd.forcePowerDebounce[FP_DRAIN] > level.time )
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 824
+ADDP4
+INDIRI4
+ADDRGP4 level+32
+INDIRI4
+LEI4 $765
+line 1725
+;1725:	{//stops it while using it and also after using it, up to 3 second delay
+line 1726
+;1726:		return;
+ADDRGP4 $755
+JUMPV
+LABELV $765
+line 1731
+;1727:	}
+;1728:
+;1729://	self->client->ps.forceHandExtend = HANDEXTEND_FORCEPUSH;
+;1730://	self->client->ps.forceHandExtendTime = level.time + 1000;
+;1731:	self->client->ps.forceHandExtend = HANDEXTEND_FORCEGRIP;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1248
+ADDP4
+CNSTI4 3
+ASGNI4
+line 1732
+;1732:	self->client->ps.forceHandExtendTime = level.time + 20000;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1252
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 20000
+ADDI4
+ASGNI4
+line 1734
+;1733:
+;1734:	G_Sound( self, CHAN_BODY, G_SoundIndex("sound/weapons/force/drain.wav") );
+ADDRGP4 $769
+ARGP4
+ADDRLP4 8
+ADDRGP4 G_SoundIndex
+CALLI4
+ASGNI4
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 5
+ARGI4
+ADDRLP4 8
+INDIRI4
+ARGI4
+ADDRGP4 G_Sound
+CALLV
+pop
+line 1736
+;1735:	
+;1736:	WP_ForcePowerStart( self, FP_DRAIN, 500 );
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 13
+ARGI4
+CNSTI4 500
+ARGI4
+ADDRGP4 WP_ForcePowerStart
+CALLV
+pop
+line 1737
+;1737:}
+LABELV $755
+endproc ForceDrain 12 12
+export ForceDrainDamage
+proc ForceDrainDamage 72 24
+line 1740
+;1738:
+;1739:void ForceDrainDamage( gentity_t *self, gentity_t *traceEnt, vec3_t dir, vec3_t impactPoint )
+;1740:{
+line 1743
+;1741:	gentity_t *tent;
+;1742:
+;1743:	self->client->dangerTime = level.time;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 2948
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+ASGNI4
+line 1744
+;1744:	self->client->ps.eFlags &= ~EF_INVULNERABLE;
+ADDRLP4 4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 108
+ADDP4
+ASGNP4
+ADDRLP4 4
+INDIRP4
+ADDRLP4 4
+INDIRP4
+INDIRI4
+CNSTI4 -67108865
+BANDI4
+ASGNI4
+line 1745
+;1745:	self->client->invulnerableTimer = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1700
+ADDP4
+CNSTI4 0
+ASGNI4
+line 1747
+;1746:
+;1747:	if ( traceEnt && traceEnt->takedamage )
+ADDRLP4 8
+ADDRFP4 4
+INDIRP4
+ASGNP4
+ADDRLP4 8
+INDIRP4
+CVPU4 4
+CNSTU4 0
+EQU4 $772
+ADDRLP4 8
+INDIRP4
+CNSTI4 680
+ADDP4
+INDIRI4
+CNSTI4 0
+EQI4 $772
+line 1748
+;1748:	{
+line 1749
+;1749:		if ( traceEnt->client && (!OnSameTeam(self, traceEnt) || g_friendlyFire.integer) && self->client->ps.fd.forceDrainTime < level.time && traceEnt->client->ps.fd.forcePower )
+ADDRLP4 12
+ADDRFP4 4
+INDIRP4
+ASGNP4
+ADDRLP4 12
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CVPU4 4
+CNSTU4 0
+EQU4 $774
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRLP4 12
+INDIRP4
+ARGP4
+ADDRLP4 16
+ADDRGP4 OnSameTeam
+CALLI4
+ASGNI4
+ADDRLP4 20
+CNSTI4 0
+ASGNI4
+ADDRLP4 16
+INDIRI4
+ADDRLP4 20
+INDIRI4
+EQI4 $778
+ADDRGP4 g_friendlyFire+12
+INDIRI4
+ADDRLP4 20
+INDIRI4
+EQI4 $774
+LABELV $778
+ADDRLP4 24
+CNSTI4 408
+ASGNI4
+ADDRFP4 0
+INDIRP4
+ADDRLP4 24
+INDIRI4
+ADDP4
+INDIRP4
+CNSTI4 1180
+ADDP4
+INDIRF4
+ADDRGP4 level+32
+INDIRI4
+CVIF4 4
+GEF4 $774
+ADDRFP4 4
+INDIRP4
+ADDRLP4 24
+INDIRI4
+ADDP4
+INDIRP4
+CNSTI4 932
+ADDP4
+INDIRI4
+CNSTI4 0
+EQI4 $774
+line 1750
+;1750:		{//an enemy or object
+line 1751
+;1751:			if (!traceEnt->client && traceEnt->s.eType == ET_GRAPPLE)
+ADDRLP4 28
+ADDRFP4 4
+INDIRP4
+ASGNP4
+ADDRLP4 28
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CVPU4 4
+CNSTU4 0
+NEU4 $779
+ADDRLP4 28
+INDIRP4
+CNSTI4 4
+ADDP4
+INDIRI4
+CNSTI4 13
+NEI4 $779
+line 1752
+;1752:			{ //g2animent
+line 1753
+;1753:				if (traceEnt->s.genericenemyindex < level.time)
+ADDRFP4 4
+INDIRP4
+CNSTI4 172
+ADDP4
+INDIRI4
+ADDRGP4 level+32
+INDIRI4
+GEI4 $781
+line 1754
+;1754:				{
+line 1755
+;1755:					traceEnt->s.genericenemyindex = level.time + 2000;
+ADDRFP4 4
+INDIRP4
+CNSTI4 172
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 2000
+ADDI4
+ASGNI4
+line 1756
+;1756:				}
+LABELV $781
+line 1757
+;1757:			}
+LABELV $779
+line 1758
+;1758:			if (ForcePowerUsableOn(self, traceEnt, FP_DRAIN))
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRFP4 4
+INDIRP4
+ARGP4
+CNSTI4 13
+ARGI4
+ADDRLP4 32
+ADDRGP4 ForcePowerUsableOn
+CALLI4
+ASGNI4
+ADDRLP4 32
+INDIRI4
+CNSTI4 0
+EQI4 $785
+line 1759
+;1759:			{
+line 1760
+;1760:				int modPowerLevel = -1;
+ADDRLP4 40
+CNSTI4 -1
+ASGNI4
+line 1761
+;1761:				int	dmg = 0; //Q_irand( 1, 3 );
+ADDRLP4 36
+CNSTI4 0
+ASGNI4
+line 1762
+;1762:				if (self->client->ps.fd.forcePowerLevel[FP_DRAIN] == FORCE_LEVEL_1)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 996
+ADDP4
+INDIRI4
+CNSTI4 1
+NEI4 $787
+line 1763
+;1763:				{
+line 1764
+;1764:					dmg = 2; //because it's one-shot
+ADDRLP4 36
+CNSTI4 2
+ASGNI4
+line 1765
+;1765:				}
+ADDRGP4 $788
+JUMPV
+LABELV $787
+line 1766
+;1766:				else if (self->client->ps.fd.forcePowerLevel[FP_DRAIN] == FORCE_LEVEL_2)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 996
+ADDP4
+INDIRI4
+CNSTI4 2
+NEI4 $789
+line 1767
+;1767:				{
+line 1768
+;1768:					dmg = 3;
+ADDRLP4 36
+CNSTI4 3
+ASGNI4
+line 1769
+;1769:				}
+ADDRGP4 $790
+JUMPV
+LABELV $789
+line 1770
+;1770:				else if (self->client->ps.fd.forcePowerLevel[FP_DRAIN] == FORCE_LEVEL_3)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 996
+ADDP4
+INDIRI4
+CNSTI4 3
+NEI4 $791
+line 1771
+;1771:				{
+line 1772
+;1772:					dmg = 4;
+ADDRLP4 36
+CNSTI4 4
+ASGNI4
+line 1773
+;1773:				}
+LABELV $791
+LABELV $790
+LABELV $788
+line 1775
+;1774:			
+;1775:				if (traceEnt->client)
+ADDRFP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CVPU4 4
+CNSTU4 0
+EQU4 $793
+line 1776
+;1776:				{
+line 1777
+;1777:					modPowerLevel = WP_AbsorbConversion(traceEnt, traceEnt->client->ps.fd.forcePowerLevel[FP_ABSORB], self, FP_DRAIN, self->client->ps.fd.forcePowerLevel[FP_DRAIN], 0);
+ADDRLP4 44
+ADDRFP4 4
+INDIRP4
+ASGNP4
+ADDRLP4 44
+INDIRP4
+ARGP4
+ADDRLP4 48
+CNSTI4 408
+ASGNI4
+ADDRLP4 44
+INDIRP4
+ADDRLP4 48
+INDIRI4
+ADDP4
+INDIRP4
+CNSTI4 984
+ADDP4
+INDIRI4
+ARGI4
+ADDRLP4 52
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 52
+INDIRP4
+ARGP4
+CNSTI4 13
+ARGI4
+ADDRLP4 52
+INDIRP4
+ADDRLP4 48
+INDIRI4
+ADDP4
+INDIRP4
+CNSTI4 996
+ADDP4
+INDIRI4
+ARGI4
+CNSTI4 0
+ARGI4
+ADDRLP4 56
+ADDRGP4 WP_AbsorbConversion
+CALLI4
+ASGNI4
+ADDRLP4 40
+ADDRLP4 56
+INDIRI4
+ASGNI4
+line 1779
+;1778:					//Since this is drain, don't absorb any power, but nullify the affect it has
+;1779:				}
+LABELV $793
+line 1781
+;1780:
+;1781:				if (modPowerLevel != -1)
+ADDRLP4 40
+INDIRI4
+CNSTI4 -1
+EQI4 $795
+line 1782
+;1782:				{
+line 1783
+;1783:					if (!modPowerLevel)
+ADDRLP4 40
+INDIRI4
+CNSTI4 0
+NEI4 $797
+line 1784
+;1784:					{
+line 1785
+;1785:						dmg = 0;
+ADDRLP4 36
+CNSTI4 0
+ASGNI4
+line 1786
+;1786:					}
+ADDRGP4 $798
+JUMPV
+LABELV $797
+line 1787
+;1787:					else if (modPowerLevel == 1)
+ADDRLP4 40
+INDIRI4
+CNSTI4 1
+NEI4 $799
+line 1788
+;1788:					{
+line 1789
+;1789:						dmg = 1;
+ADDRLP4 36
+CNSTI4 1
+ASGNI4
+line 1790
+;1790:					}
+ADDRGP4 $800
+JUMPV
+LABELV $799
+line 1791
+;1791:					else if (modPowerLevel == 2)
+ADDRLP4 40
+INDIRI4
+CNSTI4 2
+NEI4 $801
+line 1792
+;1792:					{
+line 1793
+;1793:						dmg = 2;
+ADDRLP4 36
+CNSTI4 2
+ASGNI4
+line 1794
+;1794:					}
+LABELV $801
+LABELV $800
+LABELV $798
+line 1795
+;1795:				}
+LABELV $795
+line 1798
+;1796:				//G_Damage( traceEnt, self, self, dir, impactPoint, dmg, 0, MOD_FORCE_DARK );
+;1797:
+;1798:				if (dmg)
+ADDRLP4 36
+INDIRI4
+CNSTI4 0
+EQI4 $803
+line 1799
+;1799:				{
+line 1800
+;1800:					traceEnt->client->ps.fd.forcePower -= (dmg);
+ADDRLP4 44
+ADDRFP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 932
+ADDP4
+ASGNP4
+ADDRLP4 44
+INDIRP4
+ADDRLP4 44
+INDIRP4
+INDIRI4
+ADDRLP4 36
+INDIRI4
+SUBI4
+ASGNI4
+line 1801
+;1801:				}
+LABELV $803
+line 1802
+;1802:				if (traceEnt->client->ps.fd.forcePower < 0)
+ADDRFP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 932
+ADDP4
+INDIRI4
+CNSTI4 0
+GEI4 $805
+line 1803
+;1803:				{
+line 1804
+;1804:					traceEnt->client->ps.fd.forcePower = 0;
+ADDRFP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 932
+ADDP4
+CNSTI4 0
+ASGNI4
+line 1805
+;1805:				}
+LABELV $805
+line 1807
+;1806:
+;1807:				if (self->client->ps.stats[STAT_HEALTH] < self->client->ps.stats[STAT_MAX_HEALTH] &&
+ADDRLP4 44
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 48
+ADDRLP4 44
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 52
+ADDRLP4 48
+INDIRP4
+CNSTI4 216
+ADDP4
+INDIRI4
+ASGNI4
+ADDRLP4 52
+INDIRI4
+ADDRLP4 48
+INDIRP4
+CNSTI4 248
+ADDP4
+INDIRI4
+GEI4 $807
+ADDRLP4 56
+CNSTI4 0
+ASGNI4
+ADDRLP4 44
+INDIRP4
+CNSTI4 676
+ADDP4
+INDIRI4
+ADDRLP4 56
+INDIRI4
+LEI4 $807
+ADDRLP4 52
+INDIRI4
+ADDRLP4 56
+INDIRI4
+LEI4 $807
+line 1809
+;1808:					self->health > 0 && self->client->ps.stats[STAT_HEALTH] > 0)
+;1809:				{
+line 1810
+;1810:					self->health += dmg;
+ADDRLP4 60
+ADDRFP4 0
+INDIRP4
+CNSTI4 676
+ADDP4
+ASGNP4
+ADDRLP4 60
+INDIRP4
+ADDRLP4 60
+INDIRP4
+INDIRI4
+ADDRLP4 36
+INDIRI4
+ADDI4
+ASGNI4
+line 1811
+;1811:					if (self->health > self->client->ps.stats[STAT_MAX_HEALTH])
+ADDRLP4 64
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 64
+INDIRP4
+CNSTI4 676
+ADDP4
+INDIRI4
+ADDRLP4 64
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 248
+ADDP4
+INDIRI4
+LEI4 $809
+line 1812
+;1812:					{
+line 1813
+;1813:						self->health = self->client->ps.stats[STAT_MAX_HEALTH];
+ADDRLP4 68
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 68
+INDIRP4
+CNSTI4 676
+ADDP4
+ADDRLP4 68
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 248
+ADDP4
+INDIRI4
+ASGNI4
+line 1814
+;1814:					}
+LABELV $809
+line 1815
+;1815:					self->client->ps.stats[STAT_HEALTH] = self->health;
+ADDRLP4 68
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 68
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 216
+ADDP4
+ADDRLP4 68
+INDIRP4
+CNSTI4 676
+ADDP4
+INDIRI4
+ASGNI4
+line 1816
+;1816:				}
+LABELV $807
+line 1818
+;1817:
+;1818:				traceEnt->client->ps.fd.forcePowerRegenDebounceTime = level.time + 800; //don't let the client being drained get force power back right away
+ADDRFP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 940
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 800
+ADDI4
+ASGNI4
+line 1842
+;1819:
+;1820:				//Drain the standard amount since we just drained someone else
+;1821:
+;1822:				/*
+;1823:				if (self->client->ps.fd.forcePowerLevel[FP_DRAIN] == FORCE_LEVEL_1)
+;1824:				{
+;1825:					BG_ForcePowerDrain( &self->client->ps, FP_DRAIN, 0 );
+;1826:				}
+;1827:				else
+;1828:				{
+;1829:					BG_ForcePowerDrain( &self->client->ps, FP_DRAIN, forcePowerNeeded[self->client->ps.fd.forcePowerLevel[FP_DRAIN]][FP_DRAIN]/5 );
+;1830:				}
+;1831:
+;1832:				if (self->client->ps.fd.forcePowerLevel[FP_DRAIN] == FORCE_LEVEL_1)
+;1833:				{
+;1834:					self->client->ps.fd.forceDrainTime = level.time + 100;
+;1835:				}
+;1836:				else
+;1837:				{
+;1838:					self->client->ps.fd.forceDrainTime = level.time + 20;
+;1839:				}
+;1840:				*/
+;1841:
+;1842:				if ( traceEnt->client )
+ADDRFP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CVPU4 4
+CNSTU4 0
+EQU4 $812
+line 1843
+;1843:				{
+line 1844
+;1844:					if ( !Q_irand( 0, 2 ) )
+CNSTI4 0
+ARGI4
+CNSTI4 2
+ARGI4
+ADDRLP4 60
+ADDRGP4 Q_irand
+CALLI4
+ASGNI4
+ADDRLP4 60
+INDIRI4
+CNSTI4 0
+NEI4 $814
+line 1845
+;1845:					{
+line 1847
+;1846:						//G_Sound( traceEnt, CHAN_BODY, G_SoundIndex( "sound/weapons/force/lightninghit.wav" ) );
+;1847:					}
+LABELV $814
+line 1851
+;1848:				//	traceEnt->s.powerups |= ( 1 << PW_DISINT_1 );
+;1849:
+;1850:				//	traceEnt->client->ps.powerups[PW_DISINT_1] = level.time + 500;
+;1851:				}
+LABELV $812
+line 1853
+;1852:
+;1853:				if (traceEnt->client->forcePowerSoundDebounce < level.time)
+ADDRFP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 2952
+ADDP4
+INDIRI4
+ADDRGP4 level+32
+INDIRI4
+GEI4 $816
+line 1854
+;1854:				{
+line 1855
+;1855:					tent = G_TempEntity( impactPoint, EV_FORCE_DRAINED);
+ADDRFP4 12
+INDIRP4
+ARGP4
+CNSTI4 84
+ARGI4
+ADDRLP4 60
+ADDRGP4 G_TempEntity
+CALLP4
+ASGNP4
+ADDRLP4 0
+ADDRLP4 60
+INDIRP4
+ASGNP4
+line 1856
+;1856:					tent->s.eventParm = DirToByte(dir);
+ADDRFP4 8
+INDIRP4
+ARGP4
+ADDRLP4 64
+ADDRGP4 DirToByte
+CALLI4
+ASGNI4
+ADDRLP4 0
+INDIRP4
+CNSTI4 256
+ADDP4
+ADDRLP4 64
+INDIRI4
+ASGNI4
+line 1857
+;1857:					tent->s.owner = traceEnt->s.number;
+ADDRLP4 0
+INDIRP4
+CNSTI4 260
+ADDP4
+ADDRFP4 4
+INDIRP4
+INDIRI4
+ASGNI4
+line 1859
+;1858:
+;1859:					traceEnt->client->forcePowerSoundDebounce = level.time + 400;
+ADDRFP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 2952
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 400
+ADDI4
+ASGNI4
+line 1860
+;1860:				}
+LABELV $816
+line 1861
+;1861:			}
+LABELV $785
+line 1862
+;1862:		}
+LABELV $774
+line 1863
+;1863:	}
+LABELV $772
+line 1864
+;1864:}
+LABELV $770
+endproc ForceDrainDamage 72 24
+export ForceShootDrain
+proc ForceShootDrain 9460 28
+line 1867
+;1865:
+;1866:int ForceShootDrain( gentity_t *self )
+;1867:{
+line 1871
+;1868:	trace_t	tr;
+;1869:	vec3_t	end, forward;
+;1870:	gentity_t	*traceEnt;
+;1871:	int			gotOneOrMore = 0;
+ADDRLP4 1096
+CNSTI4 0
+ASGNI4
+line 1873
+;1872:
+;1873:	if ( self->health <= 0 )
+ADDRFP4 0
+INDIRP4
+CNSTI4 676
+ADDP4
+INDIRI4
+CNSTI4 0
+GTI4 $821
+line 1874
+;1874:	{
+line 1875
+;1875:		return 0;
+CNSTI4 0
+RETI4
+ADDRGP4 $820
+JUMPV
+LABELV $821
+line 1877
+;1876:	}
+;1877:	AngleVectors( self->client->ps.viewangles, forward, NULL, NULL );
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 156
+ADDP4
+ARGP4
+ADDRLP4 1084
+ARGP4
+ADDRLP4 1112
+CNSTP4 0
+ASGNP4
+ADDRLP4 1112
+INDIRP4
+ARGP4
+ADDRLP4 1112
+INDIRP4
+ARGP4
+ADDRGP4 AngleVectors
+CALLV
+pop
+line 1878
+;1878:	VectorNormalize( forward );
+ADDRLP4 1084
+ARGP4
+ADDRGP4 VectorNormalize
+CALLF4
+pop
+line 1880
+;1879:
+;1880:	if ( self->client->ps.fd.forcePowerLevel[FP_DRAIN] > FORCE_LEVEL_2 )
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 996
+ADDP4
+INDIRI4
+CNSTI4 2
+LEI4 $823
+line 1881
+;1881:	{//arc
+line 1883
+;1882:		vec3_t	center, mins, maxs, dir, ent_org, size, v;
+;1883:		float	radius = MAX_DRAIN_DISTANCE, dot, dist;
+ADDRLP4 1180
+CNSTF4 1140850688
+ASGNF4
+line 1888
+;1884:		gentity_t	*entityList[MAX_GENTITIES];
+;1885:		int			iEntityList[MAX_GENTITIES];
+;1886:		int		e, numListedEntities, i;
+;1887:
+;1888:		VectorCopy( self->client->ps.origin, center );
+ADDRLP4 1120
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 20
+ADDP4
+INDIRB
+ASGNB 12
+line 1889
+;1889:		for ( i = 0 ; i < 3 ; i++ ) 
+ADDRLP4 1116
+CNSTI4 0
+ASGNI4
+LABELV $825
+line 1890
+;1890:		{
+line 1891
+;1891:			mins[i] = center[i] - radius;
+ADDRLP4 9416
+ADDRLP4 1116
+INDIRI4
+CNSTI4 2
+LSHI4
+ASGNI4
+ADDRLP4 9416
+INDIRI4
+ADDRLP4 5292
+ADDP4
+ADDRLP4 9416
+INDIRI4
+ADDRLP4 1120
+ADDP4
+INDIRF4
+ADDRLP4 1180
+INDIRF4
+SUBF4
+ASGNF4
+line 1892
+;1892:			maxs[i] = center[i] + radius;
+ADDRLP4 9420
+ADDRLP4 1116
+INDIRI4
+CNSTI4 2
+LSHI4
+ASGNI4
+ADDRLP4 9420
+INDIRI4
+ADDRLP4 5304
+ADDP4
+ADDRLP4 9420
+INDIRI4
+ADDRLP4 1120
+ADDP4
+INDIRF4
+ADDRLP4 1180
+INDIRF4
+ADDF4
+ASGNF4
+line 1893
+;1893:		}
+LABELV $826
+line 1889
+ADDRLP4 1116
+ADDRLP4 1116
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+ADDRLP4 1116
+INDIRI4
+CNSTI4 3
+LTI4 $825
+line 1894
+;1894:		numListedEntities = trap_EntitiesInBox( mins, maxs, iEntityList, MAX_GENTITIES );
+ADDRLP4 5292
+ARGP4
+ADDRLP4 5304
+ARGP4
+ADDRLP4 5316
+ARGP4
+CNSTI4 1024
+ARGI4
+ADDRLP4 9416
+ADDRGP4 trap_EntitiesInBox
+CALLI4
+ASGNI4
+ADDRLP4 1188
+ADDRLP4 9416
+INDIRI4
+ASGNI4
+line 1896
+;1895:
+;1896:		i = 0;
+ADDRLP4 1116
+CNSTI4 0
+ASGNI4
+ADDRGP4 $830
+JUMPV
+LABELV $829
+line 1898
+;1897:		while (i < numListedEntities)
+;1898:		{
+line 1899
+;1899:			entityList[i] = &g_entities[iEntityList[i]];
+ADDRLP4 9420
+ADDRLP4 1116
+INDIRI4
+CNSTI4 2
+LSHI4
+ASGNI4
+ADDRLP4 9420
+INDIRI4
+ADDRLP4 1196
+ADDP4
+CNSTI4 852
+ADDRLP4 9420
+INDIRI4
+ADDRLP4 5316
+ADDP4
+INDIRI4
+MULI4
+ADDRGP4 g_entities
+ADDP4
+ASGNP4
+line 1901
+;1900:
+;1901:			i++;
+ADDRLP4 1116
+ADDRLP4 1116
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 1902
+;1902:		}
+LABELV $830
+line 1897
+ADDRLP4 1116
+INDIRI4
+ADDRLP4 1188
+INDIRI4
+LTI4 $829
+line 1904
+;1903:
+;1904:		for ( e = 0 ; e < numListedEntities ; e++ ) 
+ADDRLP4 1184
+CNSTI4 0
+ASGNI4
+ADDRGP4 $835
+JUMPV
+LABELV $832
+line 1905
+;1905:		{
+line 1906
+;1906:			traceEnt = entityList[e];
+ADDRLP4 0
+ADDRLP4 1184
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 1196
+ADDP4
+INDIRP4
+ASGNP4
+line 1908
+;1907:
+;1908:			if ( !traceEnt )
+ADDRLP4 0
+INDIRP4
+CVPU4 4
+CNSTU4 0
+NEU4 $836
+line 1909
+;1909:				continue;
+ADDRGP4 $833
+JUMPV
+LABELV $836
+line 1910
+;1910:			if ( traceEnt == self )
+ADDRLP4 0
+INDIRP4
+CVPU4 4
+ADDRFP4 0
+INDIRP4
+CVPU4 4
+NEU4 $838
+line 1911
+;1911:				continue;
+ADDRGP4 $833
+JUMPV
+LABELV $838
+line 1912
+;1912:			if ( !traceEnt->inuse )
+ADDRLP4 0
+INDIRP4
+CNSTI4 412
+ADDP4
+INDIRI4
+CNSTI4 0
+NEI4 $840
+line 1913
+;1913:				continue;
+ADDRGP4 $833
+JUMPV
+LABELV $840
+line 1914
+;1914:			if ( !traceEnt->takedamage )
+ADDRLP4 0
+INDIRP4
+CNSTI4 680
+ADDP4
+INDIRI4
+CNSTI4 0
+NEI4 $842
+line 1915
+;1915:				continue;
+ADDRGP4 $833
+JUMPV
+LABELV $842
+line 1916
+;1916:			if ( traceEnt->health <= 0 )//no torturing corpses
+ADDRLP4 0
+INDIRP4
+CNSTI4 676
+ADDP4
+INDIRI4
+CNSTI4 0
+GTI4 $844
+line 1917
+;1917:				continue;
+ADDRGP4 $833
+JUMPV
+LABELV $844
+line 1918
+;1918:			if ( !traceEnt->client )
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CVPU4 4
+CNSTU4 0
+NEU4 $846
+line 1919
+;1919:				continue;
+ADDRGP4 $833
+JUMPV
+LABELV $846
+line 1920
+;1920:			if ( !traceEnt->client->ps.fd.forcePower )
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 932
+ADDP4
+INDIRI4
+CNSTI4 0
+NEI4 $848
+line 1921
+;1921:				continue;
+ADDRGP4 $833
+JUMPV
+LABELV $848
+line 1922
+;1922:			if (OnSameTeam(self, traceEnt))
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRLP4 0
+INDIRP4
+ARGP4
+ADDRLP4 9420
+ADDRGP4 OnSameTeam
+CALLI4
+ASGNI4
+ADDRLP4 9420
+INDIRI4
+CNSTI4 0
+EQI4 $850
+line 1923
+;1923:				continue;
+ADDRGP4 $833
+JUMPV
+LABELV $850
+line 1926
+;1924:			//this is all to see if we need to start a saber attack, if it's in flight, this doesn't matter
+;1925:			// find the distance from the edge of the bounding box
+;1926:			for ( i = 0 ; i < 3 ; i++ ) 
+ADDRLP4 1116
+CNSTI4 0
+ASGNI4
+LABELV $852
+line 1927
+;1927:			{
+line 1928
+;1928:				if ( center[i] < traceEnt->r.absmin[i] ) 
+ADDRLP4 9424
+ADDRLP4 1116
+INDIRI4
+CNSTI4 2
+LSHI4
+ASGNI4
+ADDRLP4 9424
+INDIRI4
+ADDRLP4 1120
+ADDP4
+INDIRF4
+ADDRLP4 9424
+INDIRI4
+ADDRLP4 0
+INDIRP4
+CNSTI4 344
+ADDP4
+ADDP4
+INDIRF4
+GEF4 $856
+line 1929
+;1929:				{
+line 1930
+;1930:					v[i] = traceEnt->r.absmin[i] - center[i];
+ADDRLP4 9428
+ADDRLP4 1116
+INDIRI4
+CNSTI4 2
+LSHI4
+ASGNI4
+ADDRLP4 9428
+INDIRI4
+ADDRLP4 1132
+ADDP4
+ADDRLP4 9428
+INDIRI4
+ADDRLP4 0
+INDIRP4
+CNSTI4 344
+ADDP4
+ADDP4
+INDIRF4
+ADDRLP4 9428
+INDIRI4
+ADDRLP4 1120
+ADDP4
+INDIRF4
+SUBF4
+ASGNF4
+line 1931
+;1931:				} else if ( center[i] > traceEnt->r.absmax[i] ) 
+ADDRGP4 $857
+JUMPV
+LABELV $856
+ADDRLP4 9428
+ADDRLP4 1116
+INDIRI4
+CNSTI4 2
+LSHI4
+ASGNI4
+ADDRLP4 9428
+INDIRI4
+ADDRLP4 1120
+ADDP4
+INDIRF4
+ADDRLP4 9428
+INDIRI4
+ADDRLP4 0
+INDIRP4
+CNSTI4 356
+ADDP4
+ADDP4
+INDIRF4
+LEF4 $858
+line 1932
+;1932:				{
+line 1933
+;1933:					v[i] = center[i] - traceEnt->r.absmax[i];
+ADDRLP4 9432
+ADDRLP4 1116
+INDIRI4
+CNSTI4 2
+LSHI4
+ASGNI4
+ADDRLP4 9432
+INDIRI4
+ADDRLP4 1132
+ADDP4
+ADDRLP4 9432
+INDIRI4
+ADDRLP4 1120
+ADDP4
+INDIRF4
+ADDRLP4 9432
+INDIRI4
+ADDRLP4 0
+INDIRP4
+CNSTI4 356
+ADDP4
+ADDP4
+INDIRF4
+SUBF4
+ASGNF4
+line 1934
+;1934:				} else 
+ADDRGP4 $859
+JUMPV
+LABELV $858
+line 1935
+;1935:				{
+line 1936
+;1936:					v[i] = 0;
+ADDRLP4 1116
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 1132
+ADDP4
+CNSTF4 0
+ASGNF4
+line 1937
+;1937:				}
+LABELV $859
+LABELV $857
+line 1938
+;1938:			}
+LABELV $853
+line 1926
+ADDRLP4 1116
+ADDRLP4 1116
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+ADDRLP4 1116
+INDIRI4
+CNSTI4 3
+LTI4 $852
+line 1940
+;1939:
+;1940:			VectorSubtract( traceEnt->r.absmax, traceEnt->r.absmin, size );
+ADDRLP4 1168
+ADDRLP4 0
+INDIRP4
+CNSTI4 356
+ADDP4
+INDIRF4
+ADDRLP4 0
+INDIRP4
+CNSTI4 344
+ADDP4
+INDIRF4
+SUBF4
+ASGNF4
+ADDRLP4 1168+4
+ADDRLP4 0
+INDIRP4
+CNSTI4 360
+ADDP4
+INDIRF4
+ADDRLP4 0
+INDIRP4
+CNSTI4 348
+ADDP4
+INDIRF4
+SUBF4
+ASGNF4
+ADDRLP4 1168+8
+ADDRLP4 0
+INDIRP4
+CNSTI4 364
+ADDP4
+INDIRF4
+ADDRLP4 0
+INDIRP4
+CNSTI4 352
+ADDP4
+INDIRF4
+SUBF4
+ASGNF4
+line 1941
+;1941:			VectorMA( traceEnt->r.absmin, 0.5, size, ent_org );
+ADDRLP4 9436
+CNSTF4 1056964608
+ASGNF4
+ADDRLP4 1144
+ADDRLP4 0
+INDIRP4
+CNSTI4 344
+ADDP4
+INDIRF4
+ADDRLP4 9436
+INDIRF4
+ADDRLP4 1168
+INDIRF4
+MULF4
+ADDF4
+ASGNF4
+ADDRLP4 1144+4
+ADDRLP4 0
+INDIRP4
+CNSTI4 348
+ADDP4
+INDIRF4
+ADDRLP4 9436
+INDIRF4
+ADDRLP4 1168+4
+INDIRF4
+MULF4
+ADDF4
+ASGNF4
+ADDRLP4 1144+8
+ADDRLP4 0
+INDIRP4
+CNSTI4 352
+ADDP4
+INDIRF4
+CNSTF4 1056964608
+ADDRLP4 1168+8
+INDIRF4
+MULF4
+ADDF4
+ASGNF4
+line 1945
+;1942:
+;1943:			//see if they're in front of me
+;1944:			//must be within the forward cone
+;1945:			VectorSubtract( ent_org, center, dir );
+ADDRLP4 1156
+ADDRLP4 1144
+INDIRF4
+ADDRLP4 1120
+INDIRF4
+SUBF4
+ASGNF4
+ADDRLP4 1156+4
+ADDRLP4 1144+4
+INDIRF4
+ADDRLP4 1120+4
+INDIRF4
+SUBF4
+ASGNF4
+ADDRLP4 1156+8
+ADDRLP4 1144+8
+INDIRF4
+ADDRLP4 1120+8
+INDIRF4
+SUBF4
+ASGNF4
+line 1946
+;1946:			VectorNormalize( dir );
+ADDRLP4 1156
+ARGP4
+ADDRGP4 VectorNormalize
+CALLF4
+pop
+line 1947
+;1947:			if ( (dot = DotProduct( dir, forward )) < 0.5 )
+ADDRLP4 9440
+ADDRLP4 1156
+INDIRF4
+ADDRLP4 1084
+INDIRF4
+MULF4
+ADDRLP4 1156+4
+INDIRF4
+ADDRLP4 1084+4
+INDIRF4
+MULF4
+ADDF4
+ADDRLP4 1156+8
+INDIRF4
+ADDRLP4 1084+8
+INDIRF4
+MULF4
+ADDF4
+ASGNF4
+ADDRLP4 9412
+ADDRLP4 9440
+INDIRF4
+ASGNF4
+ADDRLP4 9440
+INDIRF4
+CNSTF4 1056964608
+GEF4 $872
+line 1948
+;1948:				continue;
+ADDRGP4 $833
+JUMPV
+LABELV $872
+line 1951
+;1949:
+;1950:			//must be close enough
+;1951:			dist = VectorLength( v );
+ADDRLP4 1132
+ARGP4
+ADDRLP4 9444
+ADDRGP4 VectorLength
+CALLF4
+ASGNF4
+ADDRLP4 1192
+ADDRLP4 9444
+INDIRF4
+ASGNF4
+line 1952
+;1952:			if ( dist >= radius ) 
+ADDRLP4 1192
+INDIRF4
+ADDRLP4 1180
+INDIRF4
+LTF4 $878
+line 1953
+;1953:			{
+line 1954
+;1954:				continue;
+ADDRGP4 $833
+JUMPV
+LABELV $878
+line 1958
+;1955:			}
+;1956:		
+;1957:			//in PVS?
+;1958:			if ( !traceEnt->r.bmodel && !trap_InPVS( ent_org, self->client->ps.origin ) )
+ADDRLP4 0
+INDIRP4
+CNSTI4 312
+ADDP4
+INDIRI4
+CNSTI4 0
+NEI4 $880
+ADDRLP4 1144
+ARGP4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 20
+ADDP4
+ARGP4
+ADDRLP4 9448
+ADDRGP4 trap_InPVS
+CALLI4
+ASGNI4
+ADDRLP4 9448
+INDIRI4
+CNSTI4 0
+NEI4 $880
+line 1959
+;1959:			{//must be in PVS
+line 1960
+;1960:				continue;
+ADDRGP4 $833
+JUMPV
+LABELV $880
+line 1964
+;1961:			}
+;1962:
+;1963:			//Now check and see if we can actually hit it
+;1964:			trap_Trace( &tr, self->client->ps.origin, vec3_origin, vec3_origin, ent_org, self->s.number, MASK_SHOT );
+ADDRLP4 4
+ARGP4
+ADDRLP4 9452
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 9452
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 20
+ADDP4
+ARGP4
+ADDRLP4 9456
+ADDRGP4 vec3_origin
+ASGNP4
+ADDRLP4 9456
+INDIRP4
+ARGP4
+ADDRLP4 9456
+INDIRP4
+ARGP4
+ADDRLP4 1144
+ARGP4
+ADDRLP4 9452
+INDIRP4
+INDIRI4
+ARGI4
+CNSTI4 769
+ARGI4
+ADDRGP4 trap_Trace
+CALLV
+pop
+line 1965
+;1965:			if ( tr.fraction < 1.0f && tr.entityNum != traceEnt->s.number )
+ADDRLP4 4+8
+INDIRF4
+CNSTF4 1065353216
+GEF4 $882
+ADDRLP4 4+52
+INDIRI4
+ADDRLP4 0
+INDIRP4
+INDIRI4
+EQI4 $882
+line 1966
+;1966:			{//must have clear LOS
+line 1967
+;1967:				continue;
+ADDRGP4 $833
+JUMPV
+LABELV $882
+line 1971
+;1968:			}
+;1969:
+;1970:			// ok, we are within the radius, add us to the incoming list
+;1971:			ForceDrainDamage( self, traceEnt, dir, ent_org );
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRLP4 0
+INDIRP4
+ARGP4
+ADDRLP4 1156
+ARGP4
+ADDRLP4 1144
+ARGP4
+ADDRGP4 ForceDrainDamage
+CALLV
+pop
+line 1972
+;1972:			gotOneOrMore = 1;
+ADDRLP4 1096
+CNSTI4 1
+ASGNI4
+line 1973
+;1973:		}
+LABELV $833
+line 1904
+ADDRLP4 1184
+ADDRLP4 1184
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+LABELV $835
+ADDRLP4 1184
+INDIRI4
+ADDRLP4 1188
+INDIRI4
+LTI4 $832
+line 1974
+;1974:	}
+ADDRGP4 $824
+JUMPV
+LABELV $823
+line 1976
+;1975:	else
+;1976:	{//trace-line
+line 1977
+;1977:		VectorMA( self->client->ps.origin, 2048, forward, end );
+ADDRLP4 1116
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+ASGNP4
+ADDRLP4 1120
+CNSTF4 1157627904
+ASGNF4
+ADDRLP4 1100
+ADDRLP4 1116
+INDIRP4
+INDIRP4
+CNSTI4 20
+ADDP4
+INDIRF4
+ADDRLP4 1120
+INDIRF4
+ADDRLP4 1084
+INDIRF4
+MULF4
+ADDF4
+ASGNF4
+ADDRLP4 1100+4
+ADDRLP4 1116
+INDIRP4
+INDIRP4
+CNSTI4 24
+ADDP4
+INDIRF4
+ADDRLP4 1120
+INDIRF4
+ADDRLP4 1084+4
+INDIRF4
+MULF4
+ADDF4
+ASGNF4
+ADDRLP4 1100+8
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 28
+ADDP4
+INDIRF4
+CNSTF4 1157627904
+ADDRLP4 1084+8
+INDIRF4
+MULF4
+ADDF4
+ASGNF4
+line 1979
+;1978:		
+;1979:		trap_Trace( &tr, self->client->ps.origin, vec3_origin, vec3_origin, end, self->s.number, MASK_SHOT );
+ADDRLP4 4
+ARGP4
+ADDRLP4 1124
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 1124
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 20
+ADDP4
+ARGP4
+ADDRLP4 1128
+ADDRGP4 vec3_origin
+ASGNP4
+ADDRLP4 1128
+INDIRP4
+ARGP4
+ADDRLP4 1128
+INDIRP4
+ARGP4
+ADDRLP4 1100
+ARGP4
+ADDRLP4 1124
+INDIRP4
+INDIRI4
+ARGI4
+CNSTI4 769
+ARGI4
+ADDRGP4 trap_Trace
+CALLV
+pop
+line 1980
+;1980:		if ( tr.entityNum == ENTITYNUM_NONE || tr.fraction == 1.0 || tr.allsolid || tr.startsolid || !g_entities[tr.entityNum].client || !g_entities[tr.entityNum].inuse )
+ADDRLP4 4+52
+INDIRI4
+CNSTI4 1023
+EQI4 $903
+ADDRLP4 4+8
+INDIRF4
+CNSTF4 1065353216
+EQF4 $903
+ADDRLP4 1132
+CNSTI4 0
+ASGNI4
+ADDRLP4 4
+INDIRI4
+ADDRLP4 1132
+INDIRI4
+NEI4 $903
+ADDRLP4 4+4
+INDIRI4
+ADDRLP4 1132
+INDIRI4
+NEI4 $903
+ADDRLP4 1136
+CNSTI4 852
+ASGNI4
+ADDRLP4 1136
+INDIRI4
+ADDRLP4 4+52
+INDIRI4
+MULI4
+ADDRGP4 g_entities+408
+ADDP4
+INDIRP4
+CVPU4 4
+CNSTU4 0
+EQU4 $903
+ADDRLP4 1136
+INDIRI4
+ADDRLP4 4+52
+INDIRI4
+MULI4
+ADDRGP4 g_entities+412
+ADDP4
+INDIRI4
+ADDRLP4 1132
+INDIRI4
+NEI4 $890
+LABELV $903
+line 1981
+;1981:		{
+line 1982
+;1982:			return 0;
+CNSTI4 0
+RETI4
+ADDRGP4 $820
+JUMPV
+LABELV $890
+line 1985
+;1983:		}
+;1984:		
+;1985:		traceEnt = &g_entities[tr.entityNum];
+ADDRLP4 0
+CNSTI4 852
+ADDRLP4 4+52
+INDIRI4
+MULI4
+ADDRGP4 g_entities
+ADDP4
+ASGNP4
+line 1986
+;1986:		ForceDrainDamage( self, traceEnt, forward, tr.endpos );
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRLP4 0
+INDIRP4
+ARGP4
+ADDRLP4 1084
+ARGP4
+ADDRLP4 4+12
+ARGP4
+ADDRGP4 ForceDrainDamage
+CALLV
+pop
+line 1987
+;1987:		gotOneOrMore = 1;
+ADDRLP4 1096
+CNSTI4 1
+ASGNI4
+line 1988
+;1988:	}
+LABELV $824
+line 1990
+;1989:
+;1990:	self->client->ps.activeForcePass = self->client->ps.fd.forcePowerLevel[FP_DRAIN] + FORCE_LEVEL_3;
+ADDRLP4 1116
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 1116
+INDIRP4
+CNSTI4 636
+ADDP4
+ADDRLP4 1116
+INDIRP4
+CNSTI4 996
+ADDP4
+INDIRI4
+CNSTI4 3
+ADDI4
+ASGNI4
+line 1992
+;1991:
+;1992:	BG_ForcePowerDrain( &self->client->ps, FP_DRAIN, 5 ); //used to be 1, but this did, too, anger the God of Balance.
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ARGP4
+CNSTI4 13
+ARGI4
+CNSTI4 5
+ARGI4
+ADDRGP4 BG_ForcePowerDrain
+CALLV
+pop
+line 1994
+;1993:
+;1994:	self->client->ps.fd.forcePowerRegenDebounceTime = level.time + 500;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 940
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 500
+ADDI4
+ASGNI4
+line 1996
+;1995:
+;1996:	return gotOneOrMore;
+ADDRLP4 1096
+INDIRI4
+RETI4
+LABELV $820
+endproc ForceShootDrain 9460 28
+export ForceJumpCharge
+proc ForceJumpCharge 24 12
+line 2000
+;1997:}
+;1998:
+;1999:void ForceJumpCharge( gentity_t *self, usercmd_t *ucmd )
+;2000:{ //I guess this is unused now. Was used for the "charge" jump type.
+line 2001
+;2001:	float forceJumpChargeInterval = forceJumpStrength[0] / (FORCE_JUMP_CHARGE_TIME/FRAMETIME);
+ADDRLP4 0
+ADDRGP4 forceJumpStrength
+INDIRF4
+CNSTF4 1115684864
+DIVF4
+ASGNF4
+line 2003
+;2002:
+;2003:	if ( self->health <= 0 )
+ADDRFP4 0
+INDIRP4
+CNSTI4 676
+ADDP4
+INDIRI4
+CNSTI4 0
+GTI4 $908
+line 2004
+;2004:	{
+line 2005
+;2005:		return;
+ADDRGP4 $907
+JUMPV
+LABELV $908
+line 2008
+;2006:	}
+;2007:
+;2008:	if (!self->client->ps.fd.forceJumpCharge && self->client->ps.groundEntityNum == ENTITYNUM_NONE)
+ADDRLP4 4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 4
+INDIRP4
+CNSTI4 1096
+ADDP4
+INDIRF4
+CNSTF4 0
+NEF4 $910
+ADDRLP4 4
+INDIRP4
+CNSTI4 84
+ADDP4
+INDIRI4
+CNSTI4 1023
+NEI4 $910
+line 2009
+;2009:	{
+line 2010
+;2010:		return;
+ADDRGP4 $907
+JUMPV
+LABELV $910
+line 2013
+;2011:	}
+;2012:
+;2013:	if (self->client->ps.fd.forcePower < forcePowerNeeded[self->client->ps.fd.forcePowerLevel[FP_LEVITATION]][FP_LEVITATION])
+ADDRLP4 8
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 8
+INDIRP4
+CNSTI4 932
+ADDP4
+INDIRI4
+CNSTI4 72
+ADDRLP4 8
+INDIRP4
+CNSTI4 948
+ADDP4
+INDIRI4
+MULI4
+ADDRGP4 forcePowerNeeded+4
+ADDP4
+INDIRI4
+GEI4 $912
+line 2014
+;2014:	{
+line 2015
+;2015:		G_MuteSound(self->client->ps.fd.killSoundEntIndex[TRACK_CHANNEL_1-50], CHAN_VOICE);
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1204
+ADDP4
+INDIRI4
+ARGI4
+CNSTI4 3
+ARGI4
+ADDRGP4 G_MuteSound
+CALLV
+pop
+line 2016
+;2016:		return;
+ADDRGP4 $907
+JUMPV
+LABELV $912
+line 2019
+;2017:	}
+;2018:
+;2019:	if (!self->client->ps.fd.forceJumpCharge)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1096
+ADDP4
+INDIRF4
+CNSTF4 0
+NEF4 $915
+line 2020
+;2020:	{
+line 2021
+;2021:		self->client->ps.fd.forceJumpAddTime = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1104
+ADDP4
+CNSTI4 0
+ASGNI4
+line 2022
+;2022:	}
+LABELV $915
+line 2024
+;2023:
+;2024:	if (self->client->ps.fd.forceJumpAddTime >= level.time)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1104
+ADDP4
+INDIRI4
+ADDRGP4 level+32
+INDIRI4
+LTI4 $917
+line 2025
+;2025:	{
+line 2026
+;2026:		return;
+ADDRGP4 $907
+JUMPV
+LABELV $917
+line 2030
+;2027:	}
+;2028:
+;2029:	//need to play sound
+;2030:	if ( !self->client->ps.fd.forceJumpCharge )
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1096
+ADDP4
+INDIRF4
+CNSTF4 0
+NEF4 $920
+line 2031
+;2031:	{
+line 2032
+;2032:		G_Sound( self, TRACK_CHANNEL_1, G_SoundIndex("sound/weapons/force/jumpbuild.wav") );
+ADDRGP4 $922
+ARGP4
+ADDRLP4 12
+ADDRGP4 G_SoundIndex
+CALLI4
+ASGNI4
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 51
+ARGI4
+ADDRLP4 12
+INDIRI4
+ARGI4
+ADDRGP4 G_Sound
+CALLV
+pop
+line 2033
+;2033:	}
+LABELV $920
+line 2036
+;2034:
+;2035:	//Increment
+;2036:	if (self->client->ps.fd.forceJumpAddTime < level.time)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1104
+ADDP4
+INDIRI4
+ADDRGP4 level+32
+INDIRI4
+GEI4 $923
+line 2037
+;2037:	{
+line 2038
+;2038:		self->client->ps.fd.forceJumpCharge += forceJumpChargeInterval*50;
+ADDRLP4 12
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1096
+ADDP4
+ASGNP4
+ADDRLP4 12
+INDIRP4
+ADDRLP4 12
+INDIRP4
+INDIRF4
+CNSTF4 1112014848
+ADDRLP4 0
+INDIRF4
+MULF4
+ADDF4
+ASGNF4
+line 2039
+;2039:		self->client->ps.fd.forceJumpAddTime = level.time + 500;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1104
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 500
+ADDI4
+ASGNI4
+line 2040
+;2040:	}
+LABELV $923
+line 2043
+;2041:
+;2042:	//clamp to max strength for current level
+;2043:	if ( self->client->ps.fd.forceJumpCharge > forceJumpStrength[self->client->ps.fd.forcePowerLevel[FP_LEVITATION]] )
+ADDRLP4 12
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 12
+INDIRP4
+CNSTI4 1096
+ADDP4
+INDIRF4
+ADDRLP4 12
+INDIRP4
+CNSTI4 948
+ADDP4
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRGP4 forceJumpStrength
+ADDP4
+INDIRF4
+LEF4 $927
+line 2044
+;2044:	{
+line 2045
+;2045:		self->client->ps.fd.forceJumpCharge = forceJumpStrength[self->client->ps.fd.forcePowerLevel[FP_LEVITATION]];
+ADDRLP4 16
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 16
+INDIRP4
+CNSTI4 1096
+ADDP4
+ADDRLP4 16
+INDIRP4
+CNSTI4 948
+ADDP4
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRGP4 forceJumpStrength
+ADDP4
+INDIRF4
+ASGNF4
+line 2046
+;2046:		G_MuteSound(self->client->ps.fd.killSoundEntIndex[TRACK_CHANNEL_1-50], CHAN_VOICE);
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1204
+ADDP4
+INDIRI4
+ARGI4
+CNSTI4 3
+ARGI4
+ADDRGP4 G_MuteSound
+CALLV
+pop
+line 2047
+;2047:	}
+LABELV $927
+line 2050
+;2048:
+;2049:	//clamp to max available force power
+;2050:	if ( self->client->ps.fd.forceJumpCharge/forceJumpChargeInterval/(FORCE_JUMP_CHARGE_TIME/FRAMETIME)*forcePowerNeeded[self->client->ps.fd.forcePowerLevel[FP_LEVITATION]][FP_LEVITATION] > self->client->ps.fd.forcePower )
+ADDRLP4 16
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 16
+INDIRP4
+CNSTI4 1096
+ADDP4
+INDIRF4
+ADDRLP4 0
+INDIRF4
+DIVF4
+CNSTF4 1115684864
+DIVF4
+CNSTI4 72
+ADDRLP4 16
+INDIRP4
+CNSTI4 948
+ADDP4
+INDIRI4
+MULI4
+ADDRGP4 forcePowerNeeded+4
+ADDP4
+INDIRI4
+CVIF4 4
+MULF4
+ADDRLP4 16
+INDIRP4
+CNSTI4 932
+ADDP4
+INDIRI4
+CVIF4 4
+LEF4 $929
+line 2051
+;2051:	{//can't use more than you have
+line 2052
+;2052:		G_MuteSound(self->client->ps.fd.killSoundEntIndex[TRACK_CHANNEL_1-50], CHAN_VOICE);
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1204
+ADDP4
+INDIRI4
+ARGI4
+CNSTI4 3
+ARGI4
+ADDRGP4 G_MuteSound
+CALLV
+pop
+line 2053
+;2053:		self->client->ps.fd.forceJumpCharge = self->client->ps.fd.forcePower*forceJumpChargeInterval/(FORCE_JUMP_CHARGE_TIME/FRAMETIME);
+ADDRLP4 20
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 20
+INDIRP4
+CNSTI4 1096
+ADDP4
+ADDRLP4 20
+INDIRP4
+CNSTI4 932
+ADDP4
+INDIRI4
+CVIF4 4
+ADDRLP4 0
+INDIRF4
+MULF4
+CNSTF4 1115684864
+DIVF4
+ASGNF4
+line 2054
+;2054:	}
+LABELV $929
+line 2057
+;2055:	
+;2056:	//G_Printf("%f\n", self->client->ps.fd.forceJumpCharge);
+;2057:}
+LABELV $907
+endproc ForceJumpCharge 24 12
+export WP_GetVelocityForForceJump
+proc WP_GetVelocityForForceJump 64 16
+line 2060
+;2058:
+;2059:int WP_GetVelocityForForceJump( gentity_t *self, vec3_t jumpVel, usercmd_t *ucmd )
+;2060:{
+line 2061
+;2061:	float pushFwd = 0, pushRt = 0;
+ADDRLP4 0
+CNSTF4 0
+ASGNF4
+ADDRLP4 4
+CNSTF4 0
+ASGNF4
+line 2063
+;2062:	vec3_t	view, forward, right;
+;2063:	VectorCopy( self->client->ps.viewangles, view );
+ADDRLP4 32
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 156
+ADDP4
+INDIRB
+ASGNB 12
+line 2064
+;2064:	view[0] = 0;
+ADDRLP4 32
+CNSTF4 0
+ASGNF4
+line 2065
+;2065:	AngleVectors( view, forward, right, NULL );
+ADDRLP4 32
+ARGP4
+ADDRLP4 8
+ARGP4
+ADDRLP4 20
+ARGP4
+CNSTP4 0
+ARGP4
+ADDRGP4 AngleVectors
+CALLV
+pop
+line 2066
+;2066:	if ( ucmd->forwardmove && ucmd->rightmove )
+ADDRLP4 44
+ADDRFP4 8
+INDIRP4
+ASGNP4
+ADDRLP4 48
+CNSTI4 0
+ASGNI4
+ADDRLP4 44
+INDIRP4
+CNSTI4 24
+ADDP4
+INDIRI1
+CVII4 1
+ADDRLP4 48
+INDIRI4
+EQI4 $933
+ADDRLP4 44
+INDIRP4
+CNSTI4 25
+ADDP4
+INDIRI1
+CVII4 1
+ADDRLP4 48
+INDIRI4
+EQI4 $933
+line 2067
+;2067:	{
+line 2068
+;2068:		if ( ucmd->forwardmove > 0 )
+ADDRFP4 8
+INDIRP4
+CNSTI4 24
+ADDP4
+INDIRI1
+CVII4 1
+CNSTI4 0
+LEI4 $935
+line 2069
+;2069:		{
+line 2070
+;2070:			pushFwd = 50;
+ADDRLP4 0
+CNSTF4 1112014848
+ASGNF4
+line 2071
+;2071:		}
+ADDRGP4 $936
+JUMPV
+LABELV $935
+line 2073
+;2072:		else
+;2073:		{
+line 2074
+;2074:			pushFwd = -50;
+ADDRLP4 0
+CNSTF4 3259498496
+ASGNF4
+line 2075
+;2075:		}
+LABELV $936
+line 2076
+;2076:		if ( ucmd->rightmove > 0 )
+ADDRFP4 8
+INDIRP4
+CNSTI4 25
+ADDP4
+INDIRI1
+CVII4 1
+CNSTI4 0
+LEI4 $937
+line 2077
+;2077:		{
+line 2078
+;2078:			pushRt = 50;
+ADDRLP4 4
+CNSTF4 1112014848
+ASGNF4
+line 2079
+;2079:		}
+ADDRGP4 $934
+JUMPV
+LABELV $937
+line 2081
+;2080:		else
+;2081:		{
+line 2082
+;2082:			pushRt = -50;
+ADDRLP4 4
+CNSTF4 3259498496
+ASGNF4
+line 2083
+;2083:		}
+line 2084
+;2084:	}
+ADDRGP4 $934
+JUMPV
+LABELV $933
+line 2085
+;2085:	else if ( ucmd->forwardmove || ucmd->rightmove )
+ADDRLP4 52
+ADDRFP4 8
+INDIRP4
+ASGNP4
+ADDRLP4 56
+CNSTI4 0
+ASGNI4
+ADDRLP4 52
+INDIRP4
+CNSTI4 24
+ADDP4
+INDIRI1
+CVII4 1
+ADDRLP4 56
+INDIRI4
+NEI4 $941
+ADDRLP4 52
+INDIRP4
+CNSTI4 25
+ADDP4
+INDIRI1
+CVII4 1
+ADDRLP4 56
+INDIRI4
+EQI4 $939
+LABELV $941
+line 2086
+;2086:	{
+line 2087
+;2087:		if ( ucmd->forwardmove > 0 )
+ADDRFP4 8
+INDIRP4
+CNSTI4 24
+ADDP4
+INDIRI1
+CVII4 1
+CNSTI4 0
+LEI4 $942
+line 2088
+;2088:		{
+line 2089
+;2089:			pushFwd = 100;
+ADDRLP4 0
+CNSTF4 1120403456
+ASGNF4
+line 2090
+;2090:		}
+ADDRGP4 $943
+JUMPV
+LABELV $942
+line 2091
+;2091:		else if ( ucmd->forwardmove < 0 )
+ADDRFP4 8
+INDIRP4
+CNSTI4 24
+ADDP4
+INDIRI1
+CVII4 1
+CNSTI4 0
+GEI4 $944
+line 2092
+;2092:		{
+line 2093
+;2093:			pushFwd = -100;
+ADDRLP4 0
+CNSTF4 3267887104
+ASGNF4
+line 2094
+;2094:		}
+ADDRGP4 $945
+JUMPV
+LABELV $944
+line 2095
+;2095:		else if ( ucmd->rightmove > 0 )
+ADDRFP4 8
+INDIRP4
+CNSTI4 25
+ADDP4
+INDIRI1
+CVII4 1
+CNSTI4 0
+LEI4 $946
+line 2096
+;2096:		{
+line 2097
+;2097:			pushRt = 100;
+ADDRLP4 4
+CNSTF4 1120403456
+ASGNF4
+line 2098
+;2098:		}
+ADDRGP4 $947
+JUMPV
+LABELV $946
+line 2099
+;2099:		else if ( ucmd->rightmove < 0 )
+ADDRFP4 8
+INDIRP4
+CNSTI4 25
+ADDP4
+INDIRI1
+CVII4 1
+CNSTI4 0
+GEI4 $948
+line 2100
+;2100:		{
+line 2101
+;2101:			pushRt = -100;
+ADDRLP4 4
+CNSTF4 3267887104
+ASGNF4
+line 2102
+;2102:		}
+LABELV $948
+LABELV $947
+LABELV $945
+LABELV $943
+line 2103
+;2103:	}
+LABELV $939
+LABELV $934
+line 2105
+;2104:
+;2105:	G_MuteSound(self->client->ps.fd.killSoundEntIndex[TRACK_CHANNEL_1-50], CHAN_VOICE);
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1204
+ADDP4
+INDIRI4
+ARGI4
+CNSTI4 3
+ARGI4
+ADDRGP4 G_MuteSound
+CALLV
+pop
+line 2107
+;2106:
+;2107:	G_PreDefSound(self->client->ps.origin, PDSOUND_FORCEJUMP);
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 20
+ADDP4
+ARGP4
+CNSTI4 5
+ARGI4
+ADDRGP4 G_PreDefSound
+CALLP4
+pop
+line 2109
+;2108:
+;2109:	if (self->client->ps.fd.forceJumpCharge < JUMP_VELOCITY+40)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1096
+ADDP4
+INDIRF4
+CNSTF4 1132756992
+GEF4 $950
+line 2110
+;2110:	{ //give him at least a tiny boost from just a tap
+line 2111
+;2111:		self->client->ps.fd.forceJumpCharge = JUMP_VELOCITY+400;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1096
+ADDP4
+CNSTF4 1142702080
+ASGNF4
+line 2112
+;2112:	}
+LABELV $950
+line 2114
+;2113:
+;2114:	if (self->client->ps.velocity[2] < -30)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 40
+ADDP4
+INDIRF4
+CNSTF4 3253731328
+GEF4 $952
+line 2115
+;2115:	{ //so that we can get a good boost when force jumping in a fall
+line 2116
+;2116:		self->client->ps.velocity[2] = -30;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 40
+ADDP4
+CNSTF4 3253731328
+ASGNF4
+line 2117
+;2117:	}
+LABELV $952
+line 2119
+;2118:
+;2119:	VectorMA( self->client->ps.velocity, pushFwd, forward, jumpVel );
+ADDRFP4 4
+INDIRP4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 32
+ADDP4
+INDIRF4
+ADDRLP4 8
+INDIRF4
+ADDRLP4 0
+INDIRF4
+MULF4
+ADDF4
+ASGNF4
+ADDRFP4 4
+INDIRP4
+CNSTI4 4
+ADDP4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 36
+ADDP4
+INDIRF4
+ADDRLP4 8+4
+INDIRF4
+ADDRLP4 0
+INDIRF4
+MULF4
+ADDF4
+ASGNF4
+ADDRFP4 4
+INDIRP4
+CNSTI4 8
+ADDP4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 40
+ADDP4
+INDIRF4
+ADDRLP4 8+8
+INDIRF4
+ADDRLP4 0
+INDIRF4
+MULF4
+ADDF4
+ASGNF4
+line 2120
+;2120:	VectorMA( self->client->ps.velocity, pushRt, right, jumpVel );
+ADDRFP4 4
+INDIRP4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 32
+ADDP4
+INDIRF4
+ADDRLP4 20
+INDIRF4
+ADDRLP4 4
+INDIRF4
+MULF4
+ADDF4
+ASGNF4
+ADDRFP4 4
+INDIRP4
+CNSTI4 4
+ADDP4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 36
+ADDP4
+INDIRF4
+ADDRLP4 20+4
+INDIRF4
+ADDRLP4 4
+INDIRF4
+MULF4
+ADDF4
+ASGNF4
+ADDRFP4 4
+INDIRP4
+CNSTI4 8
+ADDP4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 40
+ADDP4
+INDIRF4
+ADDRLP4 20+8
+INDIRF4
+ADDRLP4 4
+INDIRF4
+MULF4
+ADDF4
+ASGNF4
+line 2121
+;2121:	jumpVel[2] += self->client->ps.fd.forceJumpCharge;
+ADDRLP4 60
+ADDRFP4 4
+INDIRP4
+CNSTI4 8
+ADDP4
+ASGNP4
+ADDRLP4 60
+INDIRP4
+ADDRLP4 60
+INDIRP4
+INDIRF4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1096
+ADDP4
+INDIRF4
+ADDF4
+ASGNF4
+line 2122
+;2122:	if ( pushFwd > 0 && self->client->ps.fd.forceJumpCharge > 200 )
+ADDRLP4 0
+INDIRF4
+CNSTF4 0
+LEF4 $958
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1096
+ADDP4
+INDIRF4
+CNSTF4 1128792064
+LEF4 $958
+line 2123
+;2123:	{
+line 2124
+;2124:		return FJ_FORWARD;
+CNSTI4 0
+RETI4
+ADDRGP4 $932
+JUMPV
+LABELV $958
+line 2126
+;2125:	}
+;2126:	else if ( pushFwd < 0 && self->client->ps.fd.forceJumpCharge > 200 )
+ADDRLP4 0
+INDIRF4
+CNSTF4 0
+GEF4 $960
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1096
+ADDP4
+INDIRF4
+CNSTF4 1128792064
+LEF4 $960
+line 2127
+;2127:	{
+line 2128
+;2128:		return FJ_BACKWARD;
+CNSTI4 1
+RETI4
+ADDRGP4 $932
+JUMPV
+LABELV $960
+line 2130
+;2129:	}
+;2130:	else if ( pushRt > 0 && self->client->ps.fd.forceJumpCharge > 200 )
+ADDRLP4 4
+INDIRF4
+CNSTF4 0
+LEF4 $962
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1096
+ADDP4
+INDIRF4
+CNSTF4 1128792064
+LEF4 $962
+line 2131
+;2131:	{
+line 2132
+;2132:		return FJ_RIGHT;
+CNSTI4 2
+RETI4
+ADDRGP4 $932
+JUMPV
+LABELV $962
+line 2134
+;2133:	}
+;2134:	else if ( pushRt < 0 && self->client->ps.fd.forceJumpCharge > 200 )
+ADDRLP4 4
+INDIRF4
+CNSTF4 0
+GEF4 $964
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1096
+ADDP4
+INDIRF4
+CNSTF4 1128792064
+LEF4 $964
+line 2135
+;2135:	{
+line 2136
+;2136:		return FJ_LEFT;
+CNSTI4 3
+RETI4
+ADDRGP4 $932
+JUMPV
+LABELV $964
+line 2139
+;2137:	}
+;2138:	else
+;2139:	{
+line 2140
+;2140:		return FJ_UP;
+CNSTI4 4
+RETI4
+LABELV $932
+endproc WP_GetVelocityForForceJump 64 16
+export ForceJump
+proc ForceJump 32 12
+line 2145
+;2141:	}
+;2142:}
+;2143:
+;2144:void ForceJump( gentity_t *self, usercmd_t *ucmd )
+;2145:{
+line 2149
+;2146:	float forceJumpChargeInterval;
+;2147:	vec3_t	jumpVel;
+;2148:
+;2149:	if ( self->client->ps.fd.forcePowerDuration[FP_LEVITATION] > level.time )
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 864
+ADDP4
+INDIRI4
+ADDRGP4 level+32
+INDIRI4
+LEI4 $967
+line 2150
+;2150:	{
+line 2151
+;2151:		return;
+ADDRGP4 $966
+JUMPV
+LABELV $967
+line 2153
+;2152:	}
+;2153:	if ( !WP_ForcePowerUsable( self, FP_LEVITATION ) )
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 1
+ARGI4
+ADDRLP4 16
+ADDRGP4 WP_ForcePowerUsable
+CALLI4
+ASGNI4
+ADDRLP4 16
+INDIRI4
+CNSTI4 0
+NEI4 $970
+line 2154
+;2154:	{
+line 2155
+;2155:		return;
+ADDRGP4 $966
+JUMPV
+LABELV $970
+line 2157
+;2156:	}
+;2157:	if ( self->s.groundEntityNum == ENTITYNUM_NONE )
+ADDRFP4 0
+INDIRP4
+CNSTI4 192
+ADDP4
+INDIRI4
+CNSTI4 1023
+NEI4 $972
+line 2158
+;2158:	{
+line 2159
+;2159:		return;
+ADDRGP4 $966
+JUMPV
+LABELV $972
+line 2161
+;2160:	}
+;2161:	if ( self->health <= 0 )
+ADDRFP4 0
+INDIRP4
+CNSTI4 676
+ADDP4
+INDIRI4
+CNSTI4 0
+GTI4 $974
+line 2162
+;2162:	{
+line 2163
+;2163:		return;
+ADDRGP4 $966
+JUMPV
+LABELV $974
+line 2166
+;2164:	}
+;2165:
+;2166:	self->client->fjDidJump = qtrue;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 2956
+ADDP4
+CNSTI4 1
+ASGNI4
+line 2168
+;2167:
+;2168:	forceJumpChargeInterval = forceJumpStrength[self->client->ps.fd.forcePowerLevel[FP_LEVITATION]]/(FORCE_JUMP_CHARGE_TIME/FRAMETIME);
+ADDRLP4 0
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 948
+ADDP4
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRGP4 forceJumpStrength
+ADDP4
+INDIRF4
+CNSTF4 1115684864
+DIVF4
+ASGNF4
+line 2170
+;2169:
+;2170:	WP_GetVelocityForForceJump( self, jumpVel, ucmd );
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRLP4 4
+ARGP4
+ADDRFP4 4
+INDIRP4
+ARGP4
+ADDRGP4 WP_GetVelocityForForceJump
+CALLI4
+pop
+line 2173
+;2171:
+;2172:	//FIXME: sound effect
+;2173:	self->client->ps.fd.forceJumpZStart = self->client->ps.origin[2];//remember this for when we land
+ADDRLP4 20
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 20
+INDIRP4
+CNSTI4 1092
+ADDP4
+ADDRLP4 20
+INDIRP4
+CNSTI4 28
+ADDP4
+INDIRF4
+ASGNF4
+line 2174
+;2174:	VectorCopy( jumpVel, self->client->ps.velocity );
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 32
+ADDP4
+ADDRLP4 4
+INDIRB
+ASGNB 12
+line 2178
+;2175:	//wasn't allowing them to attack when jumping, but that was annoying
+;2176:	//self->client->ps.weaponTime = self->client->ps.torsoAnimTimer;
+;2177:
+;2178:	WP_ForcePowerStart( self, FP_LEVITATION, self->client->ps.fd.forceJumpCharge/forceJumpChargeInterval/(FORCE_JUMP_CHARGE_TIME/FRAMETIME)*forcePowerNeeded[self->client->ps.fd.forcePowerLevel[FP_LEVITATION]][FP_LEVITATION] );
+ADDRLP4 24
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 24
+INDIRP4
+ARGP4
+CNSTI4 1
+ARGI4
+ADDRLP4 28
+ADDRLP4 24
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 28
+INDIRP4
+CNSTI4 1096
+ADDP4
+INDIRF4
+ADDRLP4 0
+INDIRF4
+DIVF4
+CNSTF4 1115684864
+DIVF4
+CNSTI4 72
+ADDRLP4 28
+INDIRP4
+CNSTI4 948
+ADDP4
+INDIRI4
+MULI4
+ADDRGP4 forcePowerNeeded+4
+ADDP4
+INDIRI4
+CVIF4 4
+MULF4
+CVFI4 4
+ARGI4
+ADDRGP4 WP_ForcePowerStart
+CALLV
+pop
+line 2180
+;2179:	//self->client->ps.fd.forcePowerDuration[FP_LEVITATION] = level.time + self->client->ps.weaponTime;
+;2180:	self->client->ps.fd.forceJumpCharge = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1096
+ADDP4
+CNSTF4 0
+ASGNF4
+line 2181
+;2181:	self->client->ps.forceJumpFlip = qtrue;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1244
+ADDP4
+CNSTI4 1
+ASGNI4
+line 2182
+;2182:}
+LABELV $966
+endproc ForceJump 32 12
+export WP_AddAsMindtricked
+proc WP_AddAsMindtricked 4 0
+line 2185
+;2183:
+;2184:void WP_AddAsMindtricked(forcedata_t *fd, int entNum)
+;2185:{
+line 2186
+;2186:	if (!fd)
+ADDRFP4 0
+INDIRP4
+CVPU4 4
+CNSTU4 0
+NEU4 $978
+line 2187
+;2187:	{
+line 2188
+;2188:		return;
+ADDRGP4 $977
+JUMPV
+LABELV $978
+line 2191
+;2189:	}
+;2190:
+;2191:	if (entNum > 47)
+ADDRFP4 4
+INDIRI4
+CNSTI4 47
+LEI4 $980
+line 2192
+;2192:	{
+line 2193
+;2193:		fd->forceMindtrickTargetIndex4 |= (1 << (entNum-48));
+ADDRLP4 0
+ADDRFP4 0
+INDIRP4
+CNSTI4 396
+ADDP4
+ASGNP4
+ADDRLP4 0
+INDIRP4
+ADDRLP4 0
+INDIRP4
+INDIRI4
+CNSTI4 1
+ADDRFP4 4
+INDIRI4
+CNSTI4 48
+SUBI4
+LSHI4
+BORI4
+ASGNI4
+line 2194
+;2194:	}
+ADDRGP4 $981
+JUMPV
+LABELV $980
+line 2195
+;2195:	else if (entNum > 31)
+ADDRFP4 4
+INDIRI4
+CNSTI4 31
+LEI4 $982
+line 2196
+;2196:	{
+line 2197
+;2197:		fd->forceMindtrickTargetIndex3 |= (1 << (entNum-32));
+ADDRLP4 0
+ADDRFP4 0
+INDIRP4
+CNSTI4 392
+ADDP4
+ASGNP4
+ADDRLP4 0
+INDIRP4
+ADDRLP4 0
+INDIRP4
+INDIRI4
+CNSTI4 1
+ADDRFP4 4
+INDIRI4
+CNSTI4 32
+SUBI4
+LSHI4
+BORI4
+ASGNI4
+line 2198
+;2198:	}
+ADDRGP4 $983
+JUMPV
+LABELV $982
+line 2199
+;2199:	else if (entNum > 15)
+ADDRFP4 4
+INDIRI4
+CNSTI4 15
+LEI4 $984
+line 2200
+;2200:	{
+line 2201
+;2201:		fd->forceMindtrickTargetIndex2 |= (1 << (entNum-16));
+ADDRLP4 0
+ADDRFP4 0
+INDIRP4
+CNSTI4 388
+ADDP4
+ASGNP4
+ADDRLP4 0
+INDIRP4
+ADDRLP4 0
+INDIRP4
+INDIRI4
+CNSTI4 1
+ADDRFP4 4
+INDIRI4
+CNSTI4 16
+SUBI4
+LSHI4
+BORI4
+ASGNI4
+line 2202
+;2202:	}
+ADDRGP4 $985
+JUMPV
+LABELV $984
+line 2204
+;2203:	else
+;2204:	{
+line 2205
+;2205:		fd->forceMindtrickTargetIndex |= (1 << entNum);
+ADDRLP4 0
+ADDRFP4 0
+INDIRP4
+CNSTI4 384
+ADDP4
+ASGNP4
+ADDRLP4 0
+INDIRP4
+ADDRLP4 0
+INDIRP4
+INDIRI4
+CNSTI4 1
+ADDRFP4 4
+INDIRI4
+LSHI4
+BORI4
+ASGNI4
+line 2206
+;2206:	}
+LABELV $985
+LABELV $983
+LABELV $981
+line 2207
+;2207:}
+LABELV $977
+endproc WP_AddAsMindtricked 4 0
+export ForceTelepathy
+proc ForceTelepathy 5388 28
+line 2210
+;2208:
+;2209:void ForceTelepathy(gentity_t *self)
+;2210:{
+line 2222
+;2211:	trace_t tr;
+;2212:	vec3_t tfrom, tto, fwd, thispush_org, a;
+;2213:	vec3_t mins, maxs, fwdangles, forward, right, center;
+;2214:	int i, e;
+;2215:	int entityList[MAX_GENTITIES];
+;2216:	int numListedEntities;
+;2217:	int gotatleastone;
+;2218:	float visionArc;
+;2219:	float radius;
+;2220:	gentity_t *ent;
+;2221:
+;2222:	visionArc = 0;
+ADDRLP4 5284
+CNSTF4 0
+ASGNF4
+line 2224
+;2223:
+;2224:	radius = MAX_TRICK_DISTANCE;
+ADDRLP4 12
+CNSTF4 1140850688
+ASGNF4
+line 2226
+;2225:
+;2226:	gotatleastone = 0;
+ADDRLP4 4164
+CNSTI4 0
+ASGNI4
+line 2228
+;2227:
+;2228:	if ( self->health <= 0 )
+ADDRFP4 0
+INDIRP4
+CNSTI4 676
+ADDP4
+INDIRI4
+CNSTI4 0
+GTI4 $987
+line 2229
+;2229:	{
+line 2230
+;2230:		return;
+ADDRGP4 $986
+JUMPV
+LABELV $987
+line 2233
+;2231:	}
+;2232:
+;2233:	if (self->client->ps.forceHandExtend != HANDEXTEND_NONE)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1248
+ADDP4
+INDIRI4
+CNSTI4 0
+EQI4 $989
+line 2234
+;2234:	{
+line 2235
+;2235:		return;
+ADDRGP4 $986
+JUMPV
+LABELV $989
+line 2238
+;2236:	}
+;2237:
+;2238:	if (self->client->ps.weaponTime > 0)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 44
+ADDP4
+INDIRI4
+CNSTI4 0
+LEI4 $991
+line 2239
+;2239:	{
+line 2240
+;2240:		return;
+ADDRGP4 $986
+JUMPV
+LABELV $991
+line 2243
+;2241:	}
+;2242:
+;2243:	if (self->client->ps.powerups[PW_REDFLAG] ||
+ADDRLP4 5336
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 5340
+CNSTI4 0
+ASGNI4
+ADDRLP4 5336
+INDIRP4
+CNSTI4 360
+ADDP4
+INDIRI4
+ADDRLP4 5340
+INDIRI4
+NEI4 $995
+ADDRLP4 5336
+INDIRP4
+CNSTI4 364
+ADDP4
+INDIRI4
+ADDRLP4 5340
+INDIRI4
+EQI4 $993
+LABELV $995
+line 2245
+;2244:		self->client->ps.powerups[PW_BLUEFLAG])
+;2245:	{ //can't mindtrick while carrying the flag
+line 2246
+;2246:		return;
+ADDRGP4 $986
+JUMPV
+LABELV $993
+line 2249
+;2247:	}
+;2248:
+;2249:	if (self->client->ps.forceAllowDeactivateTime < level.time &&
+ADDRLP4 5344
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 5344
+INDIRP4
+CNSTI4 1328
+ADDP4
+INDIRI4
+ADDRGP4 level+32
+INDIRI4
+GEI4 $996
+ADDRLP4 5344
+INDIRP4
+CNSTI4 848
+ADDP4
+INDIRI4
+CNSTI4 32
+BANDI4
+CNSTI4 0
+EQI4 $996
+line 2251
+;2250:		(self->client->ps.fd.forcePowersActive & (1 << FP_TELEPATHY)) )
+;2251:	{
+line 2252
+;2252:		WP_ForcePowerStop( self, FP_TELEPATHY );
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 5
+ARGI4
+ADDRGP4 WP_ForcePowerStop
+CALLV
+pop
+line 2253
+;2253:		return;
+ADDRGP4 $986
+JUMPV
+LABELV $996
+line 2256
+;2254:	}
+;2255:
+;2256:	if ( !WP_ForcePowerUsable( self, FP_TELEPATHY ) )
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 5
+ARGI4
+ADDRLP4 5348
+ADDRGP4 WP_ForcePowerUsable
+CALLI4
+ASGNI4
+ADDRLP4 5348
+INDIRI4
+CNSTI4 0
+NEI4 $999
+line 2257
+;2257:	{
+line 2258
+;2258:		return;
+ADDRGP4 $986
+JUMPV
+LABELV $999
+line 2261
+;2259:	}
+;2260:
+;2261:	if (self->client->ps.fd.forcePowerLevel[FP_TELEPATHY] == FORCE_LEVEL_2)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 964
+ADDP4
+INDIRI4
+CNSTI4 2
+NEI4 $1001
+line 2262
+;2262:	{
+line 2263
+;2263:		visionArc = 360;
+ADDRLP4 5284
+CNSTF4 1135869952
+ASGNF4
+line 2264
+;2264:	}
+ADDRGP4 $1002
+JUMPV
+LABELV $1001
+line 2265
+;2265:	else if (self->client->ps.fd.forcePowerLevel[FP_TELEPATHY] == FORCE_LEVEL_3)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 964
+ADDP4
+INDIRI4
+CNSTI4 3
+NEI4 $1003
+line 2266
+;2266:	{
+line 2267
+;2267:		visionArc = 360;
+ADDRLP4 5284
+CNSTF4 1135869952
+ASGNF4
+line 2268
+;2268:	}
+LABELV $1003
+LABELV $1002
+line 2270
+;2269:
+;2270:	VectorCopy( self->client->ps.viewangles, fwdangles );
+ADDRLP4 5300
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 156
+ADDP4
+INDIRB
+ASGNB 12
+line 2271
+;2271:	AngleVectors( fwdangles, forward, right, NULL );
+ADDRLP4 5300
+ARGP4
+ADDRLP4 5312
+ARGP4
+ADDRLP4 5324
+ARGP4
+CNSTP4 0
+ARGP4
+ADDRGP4 AngleVectors
+CALLV
+pop
+line 2272
+;2272:	VectorCopy( self->client->ps.origin, center );
+ADDRLP4 16
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 20
+ADDP4
+INDIRB
+ASGNB 12
+line 2274
+;2273:
+;2274:	for ( i = 0 ; i < 3 ; i++ ) 
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+LABELV $1005
+line 2275
+;2275:	{
+line 2276
+;2276:		mins[i] = center[i] - radius;
+ADDRLP4 5352
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+ASGNI4
+ADDRLP4 5352
+INDIRI4
+ADDRLP4 4128
+ADDP4
+ADDRLP4 5352
+INDIRI4
+ADDRLP4 16
+ADDP4
+INDIRF4
+ADDRLP4 12
+INDIRF4
+SUBF4
+ASGNF4
+line 2277
+;2277:		maxs[i] = center[i] + radius;
+ADDRLP4 5356
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+ASGNI4
+ADDRLP4 5356
+INDIRI4
+ADDRLP4 4140
+ADDP4
+ADDRLP4 5356
+INDIRI4
+ADDRLP4 16
+ADDP4
+INDIRF4
+ADDRLP4 12
+INDIRF4
+ADDF4
+ASGNF4
+line 2278
+;2278:	}
+LABELV $1006
+line 2274
+ADDRLP4 0
+ADDRLP4 0
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+ADDRLP4 0
+INDIRI4
+CNSTI4 3
+LTI4 $1005
+line 2280
+;2279:
+;2280:	if (self->client->ps.fd.forcePowerLevel[FP_TELEPATHY] == FORCE_LEVEL_1)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 964
+ADDP4
+INDIRI4
+CNSTI4 1
+NEI4 $1009
+line 2281
+;2281:	{
+line 2282
+;2282:		VectorCopy(self->client->ps.origin, tfrom);
+ADDRLP4 5272
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 20
+ADDP4
+INDIRB
+ASGNB 12
+line 2283
+;2283:		tfrom[2] += self->client->ps.viewheight;
+ADDRLP4 5272+8
+ADDRLP4 5272+8
+INDIRF4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 168
+ADDP4
+INDIRI4
+CVIF4 4
+ADDF4
+ASGNF4
+line 2284
+;2284:		AngleVectors(self->client->ps.viewangles, fwd, NULL, NULL);
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 156
+ADDP4
+ARGP4
+ADDRLP4 5288
+ARGP4
+ADDRLP4 5352
+CNSTP4 0
+ASGNP4
+ADDRLP4 5352
+INDIRP4
+ARGP4
+ADDRLP4 5352
+INDIRP4
+ARGP4
+ADDRGP4 AngleVectors
+CALLV
+pop
+line 2285
+;2285:		tto[0] = tfrom[0] + fwd[0]*radius/2;
+ADDRLP4 4152
+ADDRLP4 5272
+INDIRF4
+ADDRLP4 5288
+INDIRF4
+ADDRLP4 12
+INDIRF4
+MULF4
+CNSTF4 1073741824
+DIVF4
+ADDF4
+ASGNF4
+line 2286
+;2286:		tto[1] = tfrom[1] + fwd[1]*radius/2;
+ADDRLP4 4152+4
+ADDRLP4 5272+4
+INDIRF4
+ADDRLP4 5288+4
+INDIRF4
+ADDRLP4 12
+INDIRF4
+MULF4
+CNSTF4 1073741824
+DIVF4
+ADDF4
+ASGNF4
+line 2287
+;2287:		tto[2] = tfrom[2] + fwd[2]*radius/2;
+ADDRLP4 4152+8
+ADDRLP4 5272+8
+INDIRF4
+ADDRLP4 5288+8
+INDIRF4
+ADDRLP4 12
+INDIRF4
+MULF4
+CNSTF4 1073741824
+DIVF4
+ADDF4
+ASGNF4
+line 2289
+;2288:
+;2289:		trap_Trace(&tr, tfrom, NULL, NULL, tto, self->s.number, MASK_PLAYERSOLID);
+ADDRLP4 4192
+ARGP4
+ADDRLP4 5272
+ARGP4
+ADDRLP4 5356
+CNSTP4 0
+ASGNP4
+ADDRLP4 5356
+INDIRP4
+ARGP4
+ADDRLP4 5356
+INDIRP4
+ARGP4
+ADDRLP4 4152
+ARGP4
+ADDRFP4 0
+INDIRP4
+INDIRI4
+ARGI4
+CNSTI4 273
+ARGI4
+ADDRGP4 trap_Trace
+CALLV
+pop
+line 2291
+;2290:
+;2291:		if (tr.fraction != 1.0 &&
+ADDRLP4 4192+8
+INDIRF4
+CNSTF4 1065353216
+EQF4 $986
+ADDRLP4 4192+52
+INDIRI4
+CNSTI4 1023
+EQI4 $986
+ADDRLP4 5360
+CNSTI4 852
+ASGNI4
+ADDRLP4 5364
+CNSTI4 0
+ASGNI4
+ADDRLP4 5360
+INDIRI4
+ADDRLP4 4192+52
+INDIRI4
+MULI4
+ADDRGP4 g_entities+412
+ADDP4
+INDIRI4
+ADDRLP4 5364
+INDIRI4
+EQI4 $986
+ADDRLP4 5360
+INDIRI4
+ADDRLP4 4192+52
+INDIRI4
+MULI4
+ADDRGP4 g_entities+408
+ADDP4
+INDIRP4
+CVPU4 4
+CNSTU4 0
+EQU4 $986
+ADDRLP4 5360
+INDIRI4
+ADDRLP4 4192+52
+INDIRI4
+MULI4
+ADDRGP4 g_entities+408
+ADDP4
+INDIRP4
+CNSTI4 1380
+ADDP4
+INDIRI4
+ADDRLP4 5364
+INDIRI4
+EQI4 $986
+ADDRLP4 5360
+INDIRI4
+ADDRLP4 4192+52
+INDIRI4
+MULI4
+ADDRGP4 g_entities+408
+ADDP4
+INDIRP4
+CNSTI4 1632
+ADDP4
+INDIRI4
+CNSTI4 3
+EQI4 $986
+line 2297
+;2292:			tr.entityNum != ENTITYNUM_NONE &&
+;2293:			g_entities[tr.entityNum].inuse &&
+;2294:			g_entities[tr.entityNum].client &&
+;2295:			g_entities[tr.entityNum].client->pers.connected &&
+;2296:			g_entities[tr.entityNum].client->sess.sessionTeam != TEAM_SPECTATOR)
+;2297:		{
+line 2298
+;2298:			WP_AddAsMindtricked(&self->client->ps.fd, tr.entityNum);
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 772
+ADDP4
+ARGP4
+ADDRLP4 4192+52
+INDIRI4
+ARGI4
+ADDRGP4 WP_AddAsMindtricked
+CALLV
+pop
+line 2299
+;2299:			WP_ForcePowerStart( self, FP_TELEPATHY, 0 );
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 5
+ARGI4
+CNSTI4 0
+ARGI4
+ADDRGP4 WP_ForcePowerStart
+CALLV
+pop
+line 2301
+;2300:
+;2301:			G_Sound( self, CHAN_AUTO, G_SoundIndex("sound/weapons/force/distract.wav") );
+ADDRGP4 $1031
+ARGP4
+ADDRLP4 5368
+ADDRGP4 G_SoundIndex
+CALLI4
+ASGNI4
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 0
+ARGI4
+ADDRLP4 5368
+INDIRI4
+ARGI4
+ADDRGP4 G_Sound
+CALLV
+pop
+line 2303
+;2302:
+;2303:			self->client->ps.forceHandExtend = HANDEXTEND_FORCEPUSH;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1248
+ADDP4
+CNSTI4 1
+ASGNI4
+line 2304
+;2304:			self->client->ps.forceHandExtendTime = level.time + 1000;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1252
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 1000
+ADDI4
+ASGNI4
+line 2306
+;2305:
+;2306:			return;
+ADDRGP4 $986
+JUMPV
+line 2309
+;2307:		}
+;2308:		else
+;2309:		{
+line 2310
+;2310:			return;
+LABELV $1009
+line 2313
+;2311:		}
+;2312:	}
+;2313:	else if (self->client->ps.fd.forcePowerLevel[FP_TELEPATHY] == FORCE_LEVEL_3)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 964
+ADDP4
+INDIRI4
+CNSTI4 3
+NEI4 $1033
+line 2314
+;2314:	{ //Level 3 tricks everyone on the level..
+line 2316
+;2315:		gentity_t *ent;
+;2316:		qboolean gotAtLeastOne = qfalse;
+ADDRLP4 5356
+CNSTI4 0
+ASGNI4
+line 2318
+;2317:
+;2318:		e = 0;
+ADDRLP4 8
+CNSTI4 0
+ASGNI4
+ADDRGP4 $1036
+JUMPV
+LABELV $1035
+line 2321
+;2319:
+;2320:		while (e < MAX_CLIENTS)
+;2321:		{
+line 2322
+;2322:			ent = &g_entities[e];
+ADDRLP4 5352
+CNSTI4 852
+ADDRLP4 8
+INDIRI4
+MULI4
+ADDRGP4 g_entities
+ADDP4
+ASGNP4
+line 2323
+;2323:			e++;
+ADDRLP4 8
+ADDRLP4 8
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 2325
+;2324:
+;2325:			if (ent && ent->inuse && ent->client)
+ADDRLP4 5364
+CNSTU4 0
+ASGNU4
+ADDRLP4 5352
+INDIRP4
+CVPU4 4
+ADDRLP4 5364
+INDIRU4
+EQU4 $1038
+ADDRLP4 5352
+INDIRP4
+CNSTI4 412
+ADDP4
+INDIRI4
+CNSTI4 0
+EQI4 $1038
+ADDRLP4 5352
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CVPU4 4
+ADDRLP4 5364
+INDIRU4
+EQU4 $1038
+line 2326
+;2326:			{
+line 2327
+;2327:				if (!ForcePowerUsableOn(self, ent, FP_TELEPATHY))
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRLP4 5352
+INDIRP4
+ARGP4
+CNSTI4 5
+ARGI4
+ADDRLP4 5368
+ADDRGP4 ForcePowerUsableOn
+CALLI4
+ASGNI4
+ADDRLP4 5368
+INDIRI4
+CNSTI4 0
+NEI4 $1040
+line 2328
+;2328:				{
+line 2329
+;2329:					continue;
+ADDRGP4 $1036
+JUMPV
+LABELV $1040
+line 2332
+;2330:				}
+;2331:				
+;2332:				if (OnSameTeam(self, ent))
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRLP4 5352
+INDIRP4
+ARGP4
+ADDRLP4 5372
+ADDRGP4 OnSameTeam
+CALLI4
+ASGNI4
+ADDRLP4 5372
+INDIRI4
+CNSTI4 0
+EQI4 $1042
+line 2333
+;2333:				{
+line 2334
+;2334:					continue;
+ADDRGP4 $1036
+JUMPV
+LABELV $1042
+line 2337
+;2335:				}
+;2336:
+;2337:				if (self == ent)
+ADDRFP4 0
+INDIRP4
+CVPU4 4
+ADDRLP4 5352
+INDIRP4
+CVPU4 4
+NEU4 $1044
+line 2338
+;2338:				{
+line 2339
+;2339:					continue;
+ADDRGP4 $1036
+JUMPV
+LABELV $1044
+line 2342
+;2340:				}
+;2341:
+;2342:				if (self->s.number == ent->s.number)
+ADDRFP4 0
+INDIRP4
+INDIRI4
+ADDRLP4 5352
+INDIRP4
+INDIRI4
+NEI4 $1046
+line 2343
+;2343:				{
+line 2344
+;2344:					continue;
+ADDRGP4 $1036
+JUMPV
+LABELV $1046
+line 2347
+;2345:				}
+;2346:
+;2347:				if (!ent->client->pers.connected)
+ADDRLP4 5352
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1380
+ADDP4
+INDIRI4
+CNSTI4 0
+NEI4 $1048
+line 2348
+;2348:				{
+line 2349
+;2349:					continue;
+ADDRGP4 $1036
+JUMPV
+LABELV $1048
+line 2352
+;2350:				}
+;2351:
+;2352:				if (ent->client->sess.sessionTeam == TEAM_SPECTATOR)
+ADDRLP4 5352
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1632
+ADDP4
+INDIRI4
+CNSTI4 3
+NEI4 $1050
+line 2353
+;2353:				{
+line 2354
+;2354:					continue;
+ADDRGP4 $1036
+JUMPV
+LABELV $1050
+line 2357
+;2355:				}
+;2356:
+;2357:				if (!trap_InPVS(self->client->ps.origin, ent->client->ps.origin))
+ADDRLP4 5376
+CNSTI4 408
+ASGNI4
+ADDRLP4 5380
+CNSTI4 20
+ASGNI4
+ADDRFP4 0
+INDIRP4
+ADDRLP4 5376
+INDIRI4
+ADDP4
+INDIRP4
+ADDRLP4 5380
+INDIRI4
+ADDP4
+ARGP4
+ADDRLP4 5352
+INDIRP4
+ADDRLP4 5376
+INDIRI4
+ADDP4
+INDIRP4
+ADDRLP4 5380
+INDIRI4
+ADDP4
+ARGP4
+ADDRLP4 5384
+ADDRGP4 trap_InPVS
+CALLI4
+ASGNI4
+ADDRLP4 5384
+INDIRI4
+CNSTI4 0
+NEI4 $1052
+line 2358
+;2358:				{
+line 2359
+;2359:					continue;
+ADDRGP4 $1036
+JUMPV
+LABELV $1052
+line 2362
+;2360:				}
+;2361:
+;2362:				WP_AddAsMindtricked(&self->client->ps.fd, ent->s.number);
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 772
+ADDP4
+ARGP4
+ADDRLP4 5352
+INDIRP4
+INDIRI4
+ARGI4
+ADDRGP4 WP_AddAsMindtricked
+CALLV
+pop
+line 2363
+;2363:				gotAtLeastOne = qtrue;
+ADDRLP4 5356
+CNSTI4 1
+ASGNI4
+line 2364
+;2364:			}
+LABELV $1038
+line 2365
+;2365:		}
+LABELV $1036
+line 2320
+ADDRLP4 8
+INDIRI4
+CNSTI4 32
+LTI4 $1035
+line 2367
+;2366:
+;2367:		if (gotAtLeastOne)
+ADDRLP4 5356
+INDIRI4
+CNSTI4 0
+EQI4 $986
+line 2368
+;2368:		{
+line 2369
+;2369:			self->client->ps.forceAllowDeactivateTime = level.time + 1500;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1328
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 1500
+ADDI4
+ASGNI4
+line 2371
+;2370:
+;2371:			WP_ForcePowerStart( self, FP_TELEPATHY, 0 );
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 5
+ARGI4
+CNSTI4 0
+ARGI4
+ADDRGP4 WP_ForcePowerStart
+CALLV
+pop
+line 2373
+;2372:
+;2373:			G_Sound( self, CHAN_AUTO, G_SoundIndex("sound/weapons/force/distract.wav") );
+ADDRGP4 $1031
+ARGP4
+ADDRLP4 5360
+ADDRGP4 G_SoundIndex
+CALLI4
+ASGNI4
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 0
+ARGI4
+ADDRLP4 5360
+INDIRI4
+ARGI4
+ADDRGP4 G_Sound
+CALLV
+pop
+line 2375
+;2374:
+;2375:			self->client->ps.forceHandExtend = HANDEXTEND_FORCEPUSH;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1248
+ADDP4
+CNSTI4 1
+ASGNI4
+line 2376
+;2376:			self->client->ps.forceHandExtendTime = level.time + 1000;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1252
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 1000
+ADDI4
+ASGNI4
+line 2377
+;2377:		}
+line 2379
+;2378:
+;2379:		return;
+ADDRGP4 $986
+JUMPV
+LABELV $1033
+line 2382
+;2380:	}
+;2381:	else
+;2382:	{
+line 2383
+;2383:		numListedEntities = trap_EntitiesInBox( mins, maxs, entityList, MAX_GENTITIES );
+ADDRLP4 4128
+ARGP4
+ADDRLP4 4140
+ARGP4
+ADDRLP4 28
+ARGP4
+CNSTI4 1024
+ARGI4
+ADDRLP4 5352
+ADDRGP4 trap_EntitiesInBox
+CALLI4
+ASGNI4
+ADDRLP4 4124
+ADDRLP4 5352
+INDIRI4
+ASGNI4
+line 2385
+;2384:
+;2385:		e = 0;
+ADDRLP4 8
+CNSTI4 0
+ASGNI4
+ADDRGP4 $1059
+JUMPV
+LABELV $1058
+line 2388
+;2386:
+;2387:		while (e < numListedEntities)
+;2388:		{
+line 2389
+;2389:			ent = &g_entities[entityList[e]];
+ADDRLP4 4
+CNSTI4 852
+ADDRLP4 8
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 28
+ADDP4
+INDIRI4
+MULI4
+ADDRGP4 g_entities
+ADDP4
+ASGNP4
+line 2391
+;2390:
+;2391:			if (ent)
+ADDRLP4 4
+INDIRP4
+CVPU4 4
+CNSTU4 0
+EQU4 $1061
+line 2392
+;2392:			{
+line 2393
+;2393:				if (ent->client)
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CVPU4 4
+CNSTU4 0
+EQU4 $1063
+line 2394
+;2394:				{
+line 2395
+;2395:					VectorCopy(ent->client->ps.origin, thispush_org);
+ADDRLP4 4180
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 20
+ADDP4
+INDIRB
+ASGNB 12
+line 2396
+;2396:				}
+ADDRGP4 $1064
+JUMPV
+LABELV $1063
+line 2398
+;2397:				else
+;2398:				{
+line 2399
+;2399:					VectorCopy(ent->s.pos.trBase, thispush_org);
+ADDRLP4 4180
+ADDRLP4 4
+INDIRP4
+CNSTI4 24
+ADDP4
+INDIRB
+ASGNB 12
+line 2400
+;2400:				}
+LABELV $1064
+line 2401
+;2401:			}
+LABELV $1061
+line 2403
+;2402:
+;2403:			if (ent)
+ADDRLP4 4
+INDIRP4
+CVPU4 4
+CNSTU4 0
+EQU4 $1065
+line 2404
+;2404:			{ //not in the arc, don't consider it
+line 2405
+;2405:				VectorCopy(self->client->ps.origin, tto);
+ADDRLP4 4152
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 20
+ADDP4
+INDIRB
+ASGNB 12
+line 2406
+;2406:				tto[2] += self->client->ps.viewheight;
+ADDRLP4 4152+8
+ADDRLP4 4152+8
+INDIRF4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 168
+ADDP4
+INDIRI4
+CVIF4 4
+ADDF4
+ASGNF4
+line 2407
+;2407:				VectorSubtract(thispush_org, tto, a);
+ADDRLP4 4168
+ADDRLP4 4180
+INDIRF4
+ADDRLP4 4152
+INDIRF4
+SUBF4
+ASGNF4
+ADDRLP4 4168+4
+ADDRLP4 4180+4
+INDIRF4
+ADDRLP4 4152+4
+INDIRF4
+SUBF4
+ASGNF4
+ADDRLP4 4168+8
+ADDRLP4 4180+8
+INDIRF4
+ADDRLP4 4152+8
+INDIRF4
+SUBF4
+ASGNF4
+line 2408
+;2408:				vectoangles(a, a);
+ADDRLP4 4168
+ARGP4
+ADDRLP4 4168
+ARGP4
+ADDRGP4 vectoangles
+CALLV
+pop
+line 2410
+;2409:
+;2410:				if (!ent->client)
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CVPU4 4
+CNSTU4 0
+NEU4 $1074
+line 2411
+;2411:				{
+line 2412
+;2412:					entityList[e] = ENTITYNUM_NONE;
+ADDRLP4 8
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 28
+ADDP4
+CNSTI4 1023
+ASGNI4
+line 2413
+;2413:				}
+ADDRGP4 $1075
+JUMPV
+LABELV $1074
+line 2414
+;2414:				else if (!InFieldOfVision(self->client->ps.viewangles, visionArc, a))
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 156
+ADDP4
+ARGP4
+ADDRLP4 5284
+INDIRF4
+ARGF4
+ADDRLP4 4168
+ARGP4
+ADDRLP4 5356
+ADDRGP4 InFieldOfVision
+CALLI4
+ASGNI4
+ADDRLP4 5356
+INDIRI4
+CNSTI4 0
+NEI4 $1076
+line 2415
+;2415:				{ //only bother with arc rules if the victim is a client
+line 2416
+;2416:					entityList[e] = ENTITYNUM_NONE;
+ADDRLP4 8
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 28
+ADDP4
+CNSTI4 1023
+ASGNI4
+line 2417
+;2417:				}
+ADDRGP4 $1077
+JUMPV
+LABELV $1076
+line 2418
+;2418:				else if (!ForcePowerUsableOn(self, ent, FP_TELEPATHY))
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRLP4 4
+INDIRP4
+ARGP4
+CNSTI4 5
+ARGI4
+ADDRLP4 5360
+ADDRGP4 ForcePowerUsableOn
+CALLI4
+ASGNI4
+ADDRLP4 5360
+INDIRI4
+CNSTI4 0
+NEI4 $1078
+line 2419
+;2419:				{
+line 2420
+;2420:					entityList[e] = ENTITYNUM_NONE;
+ADDRLP4 8
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 28
+ADDP4
+CNSTI4 1023
+ASGNI4
+line 2421
+;2421:				}
+ADDRGP4 $1079
+JUMPV
+LABELV $1078
+line 2422
+;2422:				else if (OnSameTeam(self, ent))
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRLP4 4
+INDIRP4
+ARGP4
+ADDRLP4 5364
+ADDRGP4 OnSameTeam
+CALLI4
+ASGNI4
+ADDRLP4 5364
+INDIRI4
+CNSTI4 0
+EQI4 $1080
+line 2423
+;2423:				{
+line 2424
+;2424:					entityList[e] = ENTITYNUM_NONE;
+ADDRLP4 8
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 28
+ADDP4
+CNSTI4 1023
+ASGNI4
+line 2425
+;2425:				}
+LABELV $1080
+LABELV $1079
+LABELV $1077
+LABELV $1075
+line 2426
+;2426:			}
+LABELV $1065
+line 2427
+;2427:			e++;
+ADDRLP4 8
+ADDRLP4 8
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 2428
+;2428:		}
+LABELV $1059
+line 2387
+ADDRLP4 8
+INDIRI4
+ADDRLP4 4124
+INDIRI4
+LTI4 $1058
+line 2429
+;2429:	}
+line 2431
+;2430:
+;2431:	e = 0;
+ADDRLP4 8
+CNSTI4 0
+ASGNI4
+ADDRGP4 $1083
+JUMPV
+LABELV $1082
+line 2434
+;2432:
+;2433:	while (e < numListedEntities)
+;2434:	{
+line 2435
+;2435:		ent = &g_entities[entityList[e]];
+ADDRLP4 4
+CNSTI4 852
+ADDRLP4 8
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 28
+ADDP4
+INDIRI4
+MULI4
+ADDRGP4 g_entities
+ADDP4
+ASGNP4
+line 2437
+;2436:
+;2437:		if (ent && ent != self && ent->client)
+ADDRLP4 5356
+ADDRLP4 4
+INDIRP4
+CVPU4 4
+ASGNU4
+ADDRLP4 5360
+CNSTU4 0
+ASGNU4
+ADDRLP4 5356
+INDIRU4
+ADDRLP4 5360
+INDIRU4
+EQU4 $1085
+ADDRLP4 5356
+INDIRU4
+ADDRFP4 0
+INDIRP4
+CVPU4 4
+EQU4 $1085
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CVPU4 4
+ADDRLP4 5360
+INDIRU4
+EQU4 $1085
+line 2438
+;2438:		{
+line 2439
+;2439:			gotatleastone = 1;
+ADDRLP4 4164
+CNSTI4 1
+ASGNI4
+line 2440
+;2440:			WP_AddAsMindtricked(&self->client->ps.fd, ent->s.number);
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 772
+ADDP4
+ARGP4
+ADDRLP4 4
+INDIRP4
+INDIRI4
+ARGI4
+ADDRGP4 WP_AddAsMindtricked
+CALLV
+pop
+line 2441
+;2441:		}
+LABELV $1085
+line 2443
+;2442:
+;2443:		e++;
+ADDRLP4 8
+ADDRLP4 8
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 2444
+;2444:	}
+LABELV $1083
+line 2433
+ADDRLP4 8
+INDIRI4
+ADDRLP4 4124
+INDIRI4
+LTI4 $1082
+line 2446
+;2445:
+;2446:	if (gotatleastone)
+ADDRLP4 4164
+INDIRI4
+CNSTI4 0
+EQI4 $1087
+line 2447
+;2447:	{
+line 2448
+;2448:		self->client->ps.forceAllowDeactivateTime = level.time + 1500;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1328
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 1500
+ADDI4
+ASGNI4
+line 2450
+;2449:
+;2450:		WP_ForcePowerStart( self, FP_TELEPATHY, 0 );
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 5
+ARGI4
+CNSTI4 0
+ARGI4
+ADDRGP4 WP_ForcePowerStart
+CALLV
+pop
+line 2452
+;2451:
+;2452:		G_Sound( self, CHAN_AUTO, G_SoundIndex("sound/weapons/force/distract.wav") );
+ADDRGP4 $1031
+ARGP4
+ADDRLP4 5352
+ADDRGP4 G_SoundIndex
+CALLI4
+ASGNI4
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 0
+ARGI4
+ADDRLP4 5352
+INDIRI4
+ARGI4
+ADDRGP4 G_Sound
+CALLV
+pop
+line 2454
+;2453:
+;2454:		self->client->ps.forceHandExtend = HANDEXTEND_FORCEPUSH;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1248
+ADDP4
+CNSTI4 1
+ASGNI4
+line 2455
+;2455:		self->client->ps.forceHandExtendTime = level.time + 1000;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1252
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 1000
+ADDI4
+ASGNI4
+line 2456
+;2456:	}
+LABELV $1087
+line 2457
+;2457:}
+LABELV $986
+endproc ForceTelepathy 5388 28
+export GEntity_UseFunc
+proc GEntity_UseFunc 4 12
+line 2460
+;2458:
+;2459:void GEntity_UseFunc( gentity_t *self, gentity_t *other, gentity_t *activator )
+;2460:{
+line 2461
+;2461:	self->use(self, other, activator);
+ADDRLP4 0
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 0
+INDIRP4
+ARGP4
+ADDRFP4 4
+INDIRP4
+ARGP4
+ADDRFP4 8
+INDIRP4
+ARGP4
+ADDRLP4 0
+INDIRP4
+CNSTI4 652
+ADDP4
+INDIRP4
+CALLV
+pop
+line 2462
+;2462:}
+LABELV $1091
+endproc GEntity_UseFunc 4 12
+export CanCounterThrow
+proc CanCounterThrow 8 8
+line 2465
+;2463:
+;2464:qboolean CanCounterThrow(gentity_t *self, qboolean pull)
+;2465:{
+line 2466
+;2466:	int powerUse = 0;
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+line 2468
+;2467:
+;2468:	if (self->client->ps.forceHandExtend != HANDEXTEND_NONE)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1248
+ADDP4
+INDIRI4
+CNSTI4 0
+EQI4 $1093
+line 2469
+;2469:	{
+line 2470
+;2470:		return 0;
+CNSTI4 0
+RETI4
+ADDRGP4 $1092
+JUMPV
+LABELV $1093
+line 2473
+;2471:	}
+;2472:
+;2473:	if (self->client->ps.weaponTime > 0)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 44
+ADDP4
+INDIRI4
+CNSTI4 0
+LEI4 $1095
+line 2474
+;2474:	{
+line 2475
+;2475:		return 0;
+CNSTI4 0
+RETI4
+ADDRGP4 $1092
+JUMPV
+LABELV $1095
+line 2478
+;2476:	}
+;2477:
+;2478:	if ( self->health <= 0 )
+ADDRFP4 0
+INDIRP4
+CNSTI4 676
+ADDP4
+INDIRI4
+CNSTI4 0
+GTI4 $1097
+line 2479
+;2479:	{
+line 2480
+;2480:		return 0;
+CNSTI4 0
+RETI4
+ADDRGP4 $1092
+JUMPV
+LABELV $1097
+line 2483
+;2481:	}
+;2482:
+;2483:	if ( self->client->ps.powerups[PW_DISINT_4] > level.time )
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 380
+ADDP4
+INDIRI4
+ADDRGP4 level+32
+INDIRI4
+LEI4 $1099
+line 2484
+;2484:	{
+line 2485
+;2485:		return 0;
+CNSTI4 0
+RETI4
+ADDRGP4 $1092
+JUMPV
+LABELV $1099
+line 2488
+;2486:	}
+;2487:
+;2488:	if (pull)
+ADDRFP4 4
+INDIRI4
+CNSTI4 0
+EQI4 $1102
+line 2489
+;2489:	{
+line 2490
+;2490:		powerUse = FP_PULL;
+ADDRLP4 0
+CNSTI4 4
+ASGNI4
+line 2491
+;2491:	}
+ADDRGP4 $1103
+JUMPV
+LABELV $1102
+line 2493
+;2492:	else
+;2493:	{
+line 2494
+;2494:		powerUse = FP_PUSH;
+ADDRLP4 0
+CNSTI4 3
+ASGNI4
+line 2495
+;2495:	}
+LABELV $1103
+line 2497
+;2496:
+;2497:	if ( !WP_ForcePowerUsable( self, powerUse ) )
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRLP4 0
+INDIRI4
+ARGI4
+ADDRLP4 4
+ADDRGP4 WP_ForcePowerUsable
+CALLI4
+ASGNI4
+ADDRLP4 4
+INDIRI4
+CNSTI4 0
+NEI4 $1104
+line 2498
+;2498:	{
+line 2499
+;2499:		return 0;
+CNSTI4 0
+RETI4
+ADDRGP4 $1092
+JUMPV
+LABELV $1104
+line 2502
+;2500:	}
+;2501:
+;2502:	if (self->client->ps.groundEntityNum == ENTITYNUM_NONE)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 84
+ADDP4
+INDIRI4
+CNSTI4 1023
+NEI4 $1106
+line 2503
+;2503:	{ //you cannot counter a push/pull if you're in the air
+line 2504
+;2504:		return 0;
+CNSTI4 0
+RETI4
+ADDRGP4 $1092
+JUMPV
+LABELV $1106
+line 2507
+;2505:	}
+;2506:
+;2507:	return 1;
+CNSTI4 1
+RETI4
+LABELV $1092
+endproc CanCounterThrow 8 8
+export G_InGetUpAnim
+proc G_InGetUpAnim 16 0
+line 2511
+;2508:}
+;2509:
+;2510:qboolean G_InGetUpAnim(playerState_t *ps)
+;2511:{
+line 2512
+;2512:	switch( (ps->legsAnim&~ANIM_TOGGLEBIT) )
+ADDRLP4 0
+ADDRFP4 0
+INDIRP4
+CNSTI4 92
+ADDP4
+INDIRI4
+CNSTI4 -2049
+BANDI4
+ASGNI4
+ADDRLP4 0
+INDIRI4
+CNSTI4 929
+LTI4 $1109
+ADDRLP4 0
+INDIRI4
+CNSTI4 942
+GTI4 $1109
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRGP4 $1113-3716
+ADDP4
+INDIRP4
+JUMPV
+lit
+align 4
+LABELV $1113
+address $1112
+address $1112
+address $1112
+address $1112
+address $1112
+address $1109
+address $1109
+address $1112
+address $1112
+address $1112
+address $1112
+address $1112
+address $1112
+address $1112
+code
+line 2513
+;2513:	{
+LABELV $1112
+line 2526
+;2514:	case BOTH_GETUP1:
+;2515:	case BOTH_GETUP2:
+;2516:	case BOTH_GETUP3:
+;2517:	case BOTH_GETUP4:
+;2518:	case BOTH_GETUP5:
+;2519:	case BOTH_FORCE_GETUP_F1:
+;2520:	case BOTH_FORCE_GETUP_F2:
+;2521:	case BOTH_FORCE_GETUP_B1:
+;2522:	case BOTH_FORCE_GETUP_B2:
+;2523:	case BOTH_FORCE_GETUP_B3:
+;2524:	case BOTH_FORCE_GETUP_B4:
+;2525:	case BOTH_FORCE_GETUP_B5:
+;2526:		return qtrue;
+CNSTI4 1
+RETI4
+ADDRGP4 $1108
+JUMPV
+LABELV $1109
+line 2529
+;2527:	}
+;2528:
+;2529:	switch( (ps->torsoAnim&~ANIM_TOGGLEBIT) )
+ADDRLP4 8
+ADDRFP4 0
+INDIRP4
+CNSTI4 100
+ADDP4
+INDIRI4
+CNSTI4 -2049
+BANDI4
+ASGNI4
+ADDRLP4 8
+INDIRI4
+CNSTI4 929
+LTI4 $1115
+ADDRLP4 8
+INDIRI4
+CNSTI4 942
+GTI4 $1115
+ADDRLP4 8
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRGP4 $1119-3716
+ADDP4
+INDIRP4
+JUMPV
+lit
+align 4
+LABELV $1119
+address $1118
+address $1118
+address $1118
+address $1118
+address $1118
+address $1115
+address $1115
+address $1118
+address $1118
+address $1118
+address $1118
+address $1118
+address $1118
+address $1118
+code
+line 2530
+;2530:	{
+LABELV $1118
+line 2543
+;2531:	case BOTH_GETUP1:
+;2532:	case BOTH_GETUP2:
+;2533:	case BOTH_GETUP3:
+;2534:	case BOTH_GETUP4:
+;2535:	case BOTH_GETUP5:
+;2536:	case BOTH_FORCE_GETUP_F1:
+;2537:	case BOTH_FORCE_GETUP_F2:
+;2538:	case BOTH_FORCE_GETUP_B1:
+;2539:	case BOTH_FORCE_GETUP_B2:
+;2540:	case BOTH_FORCE_GETUP_B3:
+;2541:	case BOTH_FORCE_GETUP_B4:
+;2542:	case BOTH_FORCE_GETUP_B5:
+;2543:		return qtrue;
+CNSTI4 1
+RETI4
+ADDRGP4 $1108
+JUMPV
+LABELV $1115
+line 2546
+;2544:	}
+;2545:
+;2546:	return qfalse;
+CNSTI4 0
+RETI4
+LABELV $1108
+endproc G_InGetUpAnim 16 0
+lit
+align 4
+LABELV $1122
+byte 4 0
+skip 8
+export ForceThrow
+code
+proc ForceThrow 9688 28
+line 2551
+;2547:}
+;2548:
+;2549:extern void Touch_Button(gentity_t *ent, gentity_t *other, trace_t *trace );
+;2550:void ForceThrow( gentity_t *self, qboolean pull )
+;2551:{
+line 2561
+;2552:	//shove things in front of you away
+;2553:	float		dist;
+;2554:	gentity_t	*ent;
+;2555:	int			entityList[MAX_GENTITIES];
+;2556:	gentity_t	*push_list[MAX_GENTITIES];
+;2557:	int			numListedEntities;
+;2558:	vec3_t		mins, maxs;
+;2559:	vec3_t		v;
+;2560:	int			i, e;
+;2561:	int			ent_count = 0;
+ADDRLP4 9364
+CNSTI4 0
+ASGNI4
+line 2562
+;2562:	int			radius = 1024; //since it's view-based now. //350;
+ADDRLP4 9360
+CNSTI4 1024
+ASGNI4
+line 2567
+;2563:	int			powerLevel;
+;2564:	int			visionArc;
+;2565:	int			pushPower;
+;2566:	int			pushPowerMod;
+;2567:	vec3_t		center, ent_org, size, forward, right, end, dir, fwdangles = {0};
+ADDRLP4 9476
+ADDRGP4 $1122
+INDIRB
+ASGNB 12
+line 2574
+;2568:	float		dot1;
+;2569:	trace_t		tr;
+;2570:	int			x;
+;2571:	vec3_t		pushDir;
+;2572:	vec3_t		thispush_org;
+;2573:	vec3_t		tfrom, tto, fwd, a;
+;2574:	float		knockback = pull?0:200;
+ADDRFP4 4
+INDIRI4
+CNSTI4 0
+EQI4 $1124
+ADDRLP4 9536
+CNSTI4 0
+ASGNI4
+ADDRGP4 $1125
+JUMPV
+LABELV $1124
+ADDRLP4 9536
+CNSTI4 200
+ASGNI4
+LABELV $1125
+ADDRLP4 9472
+ADDRLP4 9536
+INDIRI4
+CVIF4 4
+ASGNF4
+line 2575
+;2575:	int			powerUse = 0;
+ADDRLP4 9396
+CNSTI4 0
+ASGNI4
+line 2577
+;2576:
+;2577:	visionArc = 0;
+ADDRLP4 9468
+CNSTI4 0
+ASGNI4
+line 2579
+;2578:
+;2579:	if (self->client->ps.forceHandExtend != HANDEXTEND_NONE)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1248
+ADDP4
+INDIRI4
+CNSTI4 0
+EQI4 $1126
+line 2580
+;2580:	{
+line 2581
+;2581:		return;
+ADDRGP4 $1121
+JUMPV
+LABELV $1126
+line 2584
+;2582:	}
+;2583:
+;2584:	if (self->client->ps.forceHandExtend != HANDEXTEND_NONE && (self->client->ps.forceHandExtend != HANDEXTEND_KNOCKDOWN || !G_InGetUpAnim(&self->client->ps)))
+ADDRLP4 9540
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 9544
+ADDRLP4 9540
+INDIRP4
+CNSTI4 1248
+ADDP4
+INDIRI4
+ASGNI4
+ADDRLP4 9544
+INDIRI4
+CNSTI4 0
+EQI4 $1128
+ADDRLP4 9544
+INDIRI4
+CNSTI4 8
+NEI4 $1130
+ADDRLP4 9540
+INDIRP4
+ARGP4
+ADDRLP4 9548
+ADDRGP4 G_InGetUpAnim
+CALLI4
+ASGNI4
+ADDRLP4 9548
+INDIRI4
+CNSTI4 0
+NEI4 $1128
+LABELV $1130
+line 2585
+;2585:	{
+line 2586
+;2586:		return;
+ADDRGP4 $1121
+JUMPV
+LABELV $1128
+line 2589
+;2587:	}
+;2588:
+;2589:	if (self->client->ps.weaponTime > 0)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 44
+ADDP4
+INDIRI4
+CNSTI4 0
+LEI4 $1131
+line 2590
+;2590:	{
+line 2591
+;2591:		return;
+ADDRGP4 $1121
+JUMPV
+LABELV $1131
+line 2594
+;2592:	}
+;2593:
+;2594:	if ( self->health <= 0 )
+ADDRFP4 0
+INDIRP4
+CNSTI4 676
+ADDP4
+INDIRI4
+CNSTI4 0
+GTI4 $1133
+line 2595
+;2595:	{
+line 2596
+;2596:		return;
+ADDRGP4 $1121
+JUMPV
+LABELV $1133
+line 2598
+;2597:	}
+;2598:	if ( self->client->ps.powerups[PW_DISINT_4] > level.time )
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 380
+ADDP4
+INDIRI4
+ADDRGP4 level+32
+INDIRI4
+LEI4 $1135
+line 2599
+;2599:	{
+line 2600
+;2600:		return;
+ADDRGP4 $1121
+JUMPV
+LABELV $1135
+line 2602
+;2601:	}
+;2602:	if (pull)
+ADDRFP4 4
+INDIRI4
+CNSTI4 0
+EQI4 $1138
+line 2603
+;2603:	{
+line 2604
+;2604:		powerUse = FP_PULL;
+ADDRLP4 9396
+CNSTI4 4
+ASGNI4
+line 2605
+;2605:	}
+ADDRGP4 $1139
+JUMPV
+LABELV $1138
+line 2607
+;2606:	else
+;2607:	{
+line 2608
+;2608:		powerUse = FP_PUSH;
+ADDRLP4 9396
+CNSTI4 3
+ASGNI4
+line 2609
+;2609:	}
+LABELV $1139
+line 2611
+;2610:
+;2611:	if ( !WP_ForcePowerUsable( self, powerUse ) )
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRLP4 9396
+INDIRI4
+ARGI4
+ADDRLP4 9552
+ADDRGP4 WP_ForcePowerUsable
+CALLI4
+ASGNI4
+ADDRLP4 9552
+INDIRI4
+CNSTI4 0
+NEI4 $1140
+line 2612
+;2612:	{
+line 2613
+;2613:		return;
+ADDRGP4 $1121
+JUMPV
+LABELV $1140
+line 2616
+;2614:	}
+;2615:
+;2616:	if (!pull && self->client->ps.saberLockTime > level.time && self->client->ps.saberLockFrame)
+ADDRLP4 9556
+CNSTI4 0
+ASGNI4
+ADDRFP4 4
+INDIRI4
+ADDRLP4 9556
+INDIRI4
+NEI4 $1142
+ADDRLP4 9560
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 9560
+INDIRP4
+CNSTI4 524
+ADDP4
+INDIRI4
+ADDRGP4 level+32
+INDIRI4
+LEI4 $1142
+ADDRLP4 9560
+INDIRP4
+CNSTI4 532
+ADDP4
+INDIRI4
+ADDRLP4 9556
+INDIRI4
+EQI4 $1142
+line 2617
+;2617:	{
+line 2618
+;2618:		G_Sound( self, CHAN_BODY, G_SoundIndex( "sound/weapons/force/push.wav" ) );
+ADDRGP4 $1145
+ARGP4
+ADDRLP4 9564
+ADDRGP4 G_SoundIndex
+CALLI4
+ASGNI4
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 5
+ARGI4
+ADDRLP4 9564
+INDIRI4
+ARGI4
+ADDRGP4 G_Sound
+CALLV
+pop
+line 2619
+;2619:		self->client->ps.powerups[PW_DISINT_4] = level.time + 1500;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 380
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 1500
+ADDI4
+ASGNI4
+line 2621
+;2620:
+;2621:		self->client->ps.saberLockHits += self->client->ps.fd.forcePowerLevel[FP_PUSH]*2;
+ADDRLP4 9568
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 9572
+ADDRLP4 9568
+INDIRP4
+CNSTI4 536
+ADDP4
+ASGNP4
+ADDRLP4 9572
+INDIRP4
+ADDRLP4 9572
+INDIRP4
+INDIRI4
+ADDRLP4 9568
+INDIRP4
+CNSTI4 956
+ADDP4
+INDIRI4
+CNSTI4 1
+LSHI4
+ADDI4
+ASGNI4
+line 2623
+;2622:
+;2623:		WP_ForcePowerStart( self, FP_PUSH, 0 );
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 3
+ARGI4
+CNSTI4 0
+ARGI4
+ADDRGP4 WP_ForcePowerStart
+CALLV
+pop
+line 2624
+;2624:		return;
+ADDRGP4 $1121
+JUMPV
+LABELV $1142
+line 2627
+;2625:	}
+;2626:
+;2627:	WP_ForcePowerStart( self, powerUse, 0 );
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRLP4 9396
+INDIRI4
+ARGI4
+CNSTI4 0
+ARGI4
+ADDRGP4 WP_ForcePowerStart
+CALLV
+pop
+line 2630
+;2628:
+;2629:	//make sure this plays and that you cannot press fire for about 1 second after this
+;2630:	if ( pull )
+ADDRFP4 4
+INDIRI4
+CNSTI4 0
+EQI4 $1147
+line 2631
+;2631:	{
+line 2632
+;2632:		G_Sound( self, CHAN_BODY, G_SoundIndex( "sound/weapons/force/pull.wav" ) );
+ADDRGP4 $1149
+ARGP4
+ADDRLP4 9564
+ADDRGP4 G_SoundIndex
+CALLI4
+ASGNI4
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 5
+ARGI4
+ADDRLP4 9564
+INDIRI4
+ARGI4
+ADDRGP4 G_Sound
+CALLV
+pop
+line 2633
+;2633:		if (self->client->ps.forceHandExtend == HANDEXTEND_NONE)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1248
+ADDP4
+INDIRI4
+CNSTI4 0
+NEI4 $1150
+line 2634
+;2634:		{
+line 2635
+;2635:			self->client->ps.forceHandExtend = HANDEXTEND_FORCEPULL;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1248
+ADDP4
+CNSTI4 2
+ASGNI4
+line 2636
+;2636:			self->client->ps.forceHandExtendTime = level.time + 400;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1252
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 400
+ADDI4
+ASGNI4
+line 2637
+;2637:		}
+LABELV $1150
+line 2638
+;2638:		self->client->ps.powerups[PW_DISINT_4] = self->client->ps.forceHandExtendTime + 200;
+ADDRLP4 9568
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 9568
+INDIRP4
+CNSTI4 380
+ADDP4
+ADDRLP4 9568
+INDIRP4
+CNSTI4 1252
+ADDP4
+INDIRI4
+CNSTI4 200
+ADDI4
+ASGNI4
+line 2639
+;2639:	}
+ADDRGP4 $1148
+JUMPV
+LABELV $1147
+line 2641
+;2640:	else
+;2641:	{
+line 2642
+;2642:		G_Sound( self, CHAN_BODY, G_SoundIndex( "sound/weapons/force/push.wav" ) );
+ADDRGP4 $1145
+ARGP4
+ADDRLP4 9564
+ADDRGP4 G_SoundIndex
+CALLI4
+ASGNI4
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 5
+ARGI4
+ADDRLP4 9564
+INDIRI4
+ARGI4
+ADDRGP4 G_Sound
+CALLV
+pop
+line 2643
+;2643:		if (self->client->ps.forceHandExtend == HANDEXTEND_NONE)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1248
+ADDP4
+INDIRI4
+CNSTI4 0
+NEI4 $1153
+line 2644
+;2644:		{
+line 2645
+;2645:			self->client->ps.forceHandExtend = HANDEXTEND_FORCEPUSH;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1248
+ADDP4
+CNSTI4 1
+ASGNI4
+line 2646
+;2646:			self->client->ps.forceHandExtendTime = level.time + 1000;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1252
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 1000
+ADDI4
+ASGNI4
+line 2647
+;2647:		}
+ADDRGP4 $1154
+JUMPV
+LABELV $1153
+line 2648
+;2648:		else if (self->client->ps.forceHandExtend == HANDEXTEND_KNOCKDOWN && G_InGetUpAnim(&self->client->ps))
+ADDRLP4 9568
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 9568
+INDIRP4
+CNSTI4 1248
+ADDP4
+INDIRI4
+CNSTI4 8
+NEI4 $1156
+ADDRLP4 9568
+INDIRP4
+ARGP4
+ADDRLP4 9572
+ADDRGP4 G_InGetUpAnim
+CALLI4
+ASGNI4
+ADDRLP4 9572
+INDIRI4
+CNSTI4 0
+EQI4 $1156
+line 2649
+;2649:		{
+line 2650
+;2650:			if (self->client->ps.forceDodgeAnim > 4)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1260
+ADDP4
+INDIRI4
+CNSTI4 4
+LEI4 $1158
+line 2651
+;2651:			{
+line 2652
+;2652:				self->client->ps.forceDodgeAnim -= 8;
+ADDRLP4 9576
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1260
+ADDP4
+ASGNP4
+ADDRLP4 9576
+INDIRP4
+ADDRLP4 9576
+INDIRP4
+INDIRI4
+CNSTI4 8
+SUBI4
+ASGNI4
+line 2653
+;2653:			}
+LABELV $1158
+line 2654
+;2654:			self->client->ps.forceDodgeAnim += 8; //special case, play push on upper torso, but keep playing current knockdown anim on legs
+ADDRLP4 9576
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1260
+ADDP4
+ASGNP4
+ADDRLP4 9576
+INDIRP4
+ADDRLP4 9576
+INDIRP4
+INDIRI4
+CNSTI4 8
+ADDI4
+ASGNI4
+line 2655
+;2655:		}
+LABELV $1156
+LABELV $1154
+line 2656
+;2656:		self->client->ps.powerups[PW_DISINT_4] = level.time + 1100;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 380
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 1100
+ADDI4
+ASGNI4
+line 2657
+;2657:	}
+LABELV $1148
+line 2659
+;2658:
+;2659:	VectorCopy( self->client->ps.viewangles, fwdangles );
+ADDRLP4 9476
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 156
+ADDP4
+INDIRB
+ASGNB 12
+line 2660
+;2660:	AngleVectors( fwdangles, forward, right, NULL );
+ADDRLP4 9476
+ARGP4
+ADDRLP4 8268
+ARGP4
+ADDRLP4 9524
+ARGP4
+CNSTP4 0
+ARGP4
+ADDRGP4 AngleVectors
+CALLV
+pop
+line 2661
+;2661:	VectorCopy( self->client->ps.origin, center );
+ADDRLP4 8
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 20
+ADDP4
+INDIRB
+ASGNB 12
+line 2663
+;2662:
+;2663:	for ( i = 0 ; i < 3 ; i++ ) 
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+LABELV $1161
+line 2664
+;2664:	{
+line 2665
+;2665:		mins[i] = center[i] - radius;
+ADDRLP4 9564
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+ASGNI4
+ADDRLP4 9564
+INDIRI4
+ADDRLP4 9436
+ADDP4
+ADDRLP4 9564
+INDIRI4
+ADDRLP4 8
+ADDP4
+INDIRF4
+ADDRLP4 9360
+INDIRI4
+CVIF4 4
+SUBF4
+ASGNF4
+line 2666
+;2666:		maxs[i] = center[i] + radius;
+ADDRLP4 9568
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+ASGNI4
+ADDRLP4 9568
+INDIRI4
+ADDRLP4 9448
+ADDP4
+ADDRLP4 9568
+INDIRI4
+ADDRLP4 8
+ADDP4
+INDIRF4
+ADDRLP4 9360
+INDIRI4
+CVIF4 4
+ADDF4
+ASGNF4
+line 2667
+;2667:	}
+LABELV $1162
+line 2663
+ADDRLP4 0
+ADDRLP4 0
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+ADDRLP4 0
+INDIRI4
+CNSTI4 3
+LTI4 $1161
+line 2670
+;2668:
+;2669:
+;2670:	if (pull)
+ADDRFP4 4
+INDIRI4
+CNSTI4 0
+EQI4 $1165
+line 2671
+;2671:	{
+line 2672
+;2672:		powerLevel = self->client->ps.fd.forcePowerLevel[FP_PULL];
+ADDRLP4 9428
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 960
+ADDP4
+INDIRI4
+ASGNI4
+line 2673
+;2673:		pushPower = 256*self->client->ps.fd.forcePowerLevel[FP_PULL];
+ADDRLP4 9464
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 960
+ADDP4
+INDIRI4
+CNSTI4 8
+LSHI4
+ASGNI4
+line 2674
+;2674:	}
+ADDRGP4 $1166
+JUMPV
+LABELV $1165
+line 2676
+;2675:	else
+;2676:	{
+line 2677
+;2677:		powerLevel = self->client->ps.fd.forcePowerLevel[FP_PUSH];
+ADDRLP4 9428
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 956
+ADDP4
+INDIRI4
+ASGNI4
+line 2678
+;2678:		pushPower = 256*self->client->ps.fd.forcePowerLevel[FP_PUSH];
+ADDRLP4 9464
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 956
+ADDP4
+INDIRI4
+CNSTI4 8
+LSHI4
+ASGNI4
+line 2679
+;2679:	}
+LABELV $1166
+line 2681
+;2680:
+;2681:	if (!powerLevel)
+ADDRLP4 9428
+INDIRI4
+CNSTI4 0
+NEI4 $1167
+line 2682
+;2682:	{ //Shouldn't have made it here..
+line 2683
+;2683:		return;
+ADDRGP4 $1121
+JUMPV
+LABELV $1167
+line 2686
+;2684:	}
+;2685:
+;2686:	if (powerLevel == FORCE_LEVEL_2)
+ADDRLP4 9428
+INDIRI4
+CNSTI4 2
+NEI4 $1169
+line 2687
+;2687:	{
+line 2688
+;2688:		visionArc = 60;
+ADDRLP4 9468
+CNSTI4 60
+ASGNI4
+line 2689
+;2689:	}
+ADDRGP4 $1170
+JUMPV
+LABELV $1169
+line 2690
+;2690:	else if (powerLevel == FORCE_LEVEL_3)
+ADDRLP4 9428
+INDIRI4
+CNSTI4 3
+NEI4 $1171
+line 2691
+;2691:	{
+line 2692
+;2692:		visionArc = 180;
+ADDRLP4 9468
+CNSTI4 180
+ASGNI4
+line 2693
+;2693:	}
+LABELV $1171
+LABELV $1170
+line 2695
+;2694:
+;2695:	if (powerLevel == FORCE_LEVEL_1)
+ADDRLP4 9428
+INDIRI4
+CNSTI4 1
+NEI4 $1173
+line 2696
+;2696:	{ //can only push/pull targeted things at level 1
+line 2697
+;2697:		VectorCopy(self->client->ps.origin, tfrom);
+ADDRLP4 9488
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 20
+ADDP4
+INDIRB
+ASGNB 12
+line 2698
+;2698:		tfrom[2] += self->client->ps.viewheight;
+ADDRLP4 9488+8
+ADDRLP4 9488+8
+INDIRF4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 168
+ADDP4
+INDIRI4
+CVIF4 4
+ADDF4
+ASGNF4
+line 2699
+;2699:		AngleVectors(self->client->ps.viewangles, fwd, NULL, NULL);
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 156
+ADDP4
+ARGP4
+ADDRLP4 9500
+ARGP4
+ADDRLP4 9564
+CNSTP4 0
+ASGNP4
+ADDRLP4 9564
+INDIRP4
+ARGP4
+ADDRLP4 9564
+INDIRP4
+ARGP4
+ADDRGP4 AngleVectors
+CALLV
+pop
+line 2700
+;2700:		tto[0] = tfrom[0] + fwd[0]*radius/2;
+ADDRLP4 9416
+ADDRLP4 9488
+INDIRF4
+ADDRLP4 9500
+INDIRF4
+ADDRLP4 9360
+INDIRI4
+CVIF4 4
+MULF4
+CNSTF4 1073741824
+DIVF4
+ADDF4
+ASGNF4
+line 2701
+;2701:		tto[1] = tfrom[1] + fwd[1]*radius/2;
+ADDRLP4 9416+4
+ADDRLP4 9488+4
+INDIRF4
+ADDRLP4 9500+4
+INDIRF4
+ADDRLP4 9360
+INDIRI4
+CVIF4 4
+MULF4
+CNSTF4 1073741824
+DIVF4
+ADDF4
+ASGNF4
+line 2702
+;2702:		tto[2] = tfrom[2] + fwd[2]*radius/2;
+ADDRLP4 9416+8
+ADDRLP4 9488+8
+INDIRF4
+ADDRLP4 9500+8
+INDIRF4
+ADDRLP4 9360
+INDIRI4
+CVIF4 4
+MULF4
+CNSTF4 1073741824
+DIVF4
+ADDF4
+ASGNF4
+line 2704
+;2703:
+;2704:		trap_Trace(&tr, tfrom, NULL, NULL, tto, self->s.number, MASK_PLAYERSOLID);
+ADDRLP4 8280
+ARGP4
+ADDRLP4 9488
+ARGP4
+ADDRLP4 9568
+CNSTP4 0
+ASGNP4
+ADDRLP4 9568
+INDIRP4
+ARGP4
+ADDRLP4 9568
+INDIRP4
+ARGP4
+ADDRLP4 9416
+ARGP4
+ADDRFP4 0
+INDIRP4
+INDIRI4
+ARGI4
+CNSTI4 273
+ARGI4
+ADDRGP4 trap_Trace
+CALLV
+pop
+line 2706
+;2705:
+;2706:		if (tr.fraction != 1.0 &&
+ADDRLP4 8280+8
+INDIRF4
+CNSTF4 1065353216
+EQF4 $1121
+ADDRLP4 8280+52
+INDIRI4
+CNSTI4 1023
+EQI4 $1121
+line 2708
+;2707:			tr.entityNum != ENTITYNUM_NONE)
+;2708:		{
+line 2709
+;2709:			if (!g_entities[tr.entityNum].client && g_entities[tr.entityNum].s.eType == ET_GRAPPLE)
+ADDRLP4 9572
+CNSTI4 852
+ASGNI4
+ADDRLP4 9572
+INDIRI4
+ADDRLP4 8280+52
+INDIRI4
+MULI4
+ADDRGP4 g_entities+408
+ADDP4
+INDIRP4
+CVPU4 4
+CNSTU4 0
+NEU4 $1186
+ADDRLP4 9572
+INDIRI4
+ADDRLP4 8280+52
+INDIRI4
+MULI4
+ADDRGP4 g_entities+4
+ADDP4
+INDIRI4
+CNSTI4 13
+NEI4 $1186
+line 2710
+;2710:			{ //g2animent
+line 2711
+;2711:				if (g_entities[tr.entityNum].s.genericenemyindex < level.time)
+CNSTI4 852
+ADDRLP4 8280+52
+INDIRI4
+MULI4
+ADDRGP4 g_entities+172
+ADDP4
+INDIRI4
+ADDRGP4 level+32
+INDIRI4
+GEI4 $1192
+line 2712
+;2712:				{
+line 2713
+;2713:					g_entities[tr.entityNum].s.genericenemyindex = level.time + 2000;
+CNSTI4 852
+ADDRLP4 8280+52
+INDIRI4
+MULI4
+ADDRGP4 g_entities+172
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 2000
+ADDI4
+ASGNI4
+line 2714
+;2714:				}
+LABELV $1192
+line 2715
+;2715:			}
+LABELV $1186
+line 2717
+;2716:
+;2717:			numListedEntities = 0;
+ADDRLP4 9400
+CNSTI4 0
+ASGNI4
+line 2718
+;2718:			entityList[numListedEntities] = tr.entityNum;
+ADDRLP4 9400
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 4172
+ADDP4
+ADDRLP4 8280+52
+INDIRI4
+ASGNI4
+line 2719
+;2719:			numListedEntities++;
+ADDRLP4 9400
+ADDRLP4 9400
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 2720
+;2720:		}
+line 2722
+;2721:		else
+;2722:		{
+line 2724
+;2723:			//didn't get anything, so just
+;2724:			return;
+line 2726
+;2725:		}
+;2726:	}
+ADDRGP4 $1174
+JUMPV
+LABELV $1173
+line 2728
+;2727:	else
+;2728:	{
+line 2729
+;2729:		numListedEntities = trap_EntitiesInBox( mins, maxs, entityList, MAX_GENTITIES );
+ADDRLP4 9436
+ARGP4
+ADDRLP4 9448
+ARGP4
+ADDRLP4 4172
+ARGP4
+CNSTI4 1024
+ARGI4
+ADDRLP4 9564
+ADDRGP4 trap_EntitiesInBox
+CALLI4
+ASGNI4
+ADDRLP4 9400
+ADDRLP4 9564
+INDIRI4
+ASGNI4
+line 2731
+;2730:
+;2731:		e = 0;
+ADDRLP4 4144
+CNSTI4 0
+ASGNI4
+ADDRGP4 $1202
+JUMPV
+LABELV $1201
+line 2734
+;2732:
+;2733:		while (e < numListedEntities)
+;2734:		{
+line 2735
+;2735:			ent = &g_entities[entityList[e]];
+ADDRLP4 4
+CNSTI4 852
+ADDRLP4 4144
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 4172
+ADDP4
+INDIRI4
+MULI4
+ADDRGP4 g_entities
+ADDP4
+ASGNP4
+line 2737
+;2736:
+;2737:			if (!ent->client && ent->s.eType == ET_GRAPPLE)
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CVPU4 4
+CNSTU4 0
+NEU4 $1204
+ADDRLP4 4
+INDIRP4
+CNSTI4 4
+ADDP4
+INDIRI4
+CNSTI4 13
+NEI4 $1204
+line 2738
+;2738:			{ //g2animent
+line 2739
+;2739:				if (ent->s.genericenemyindex < level.time)
+ADDRLP4 4
+INDIRP4
+CNSTI4 172
+ADDP4
+INDIRI4
+ADDRGP4 level+32
+INDIRI4
+GEI4 $1206
+line 2740
+;2740:				{
+line 2741
+;2741:					ent->s.genericenemyindex = level.time + 2000;
+ADDRLP4 4
+INDIRP4
+CNSTI4 172
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 2000
+ADDI4
+ASGNI4
+line 2742
+;2742:				}
+LABELV $1206
+line 2743
+;2743:			}
+LABELV $1204
+line 2745
+;2744:
+;2745:			if (ent)
+ADDRLP4 4
+INDIRP4
+CVPU4 4
+CNSTU4 0
+EQU4 $1210
+line 2746
+;2746:			{
+line 2747
+;2747:				if (ent->client)
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CVPU4 4
+CNSTU4 0
+EQU4 $1212
+line 2748
+;2748:				{
+line 2749
+;2749:					VectorCopy(ent->client->ps.origin, thispush_org);
+ADDRLP4 9368
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 20
+ADDP4
+INDIRB
+ASGNB 12
+line 2750
+;2750:				}
+ADDRGP4 $1213
+JUMPV
+LABELV $1212
+line 2752
+;2751:				else
+;2752:				{
+line 2753
+;2753:					VectorCopy(ent->s.pos.trBase, thispush_org);
+ADDRLP4 9368
+ADDRLP4 4
+INDIRP4
+CNSTI4 24
+ADDP4
+INDIRB
+ASGNB 12
+line 2754
+;2754:				}
+LABELV $1213
+line 2755
+;2755:			}
+LABELV $1210
+line 2757
+;2756:
+;2757:			if (ent)
+ADDRLP4 4
+INDIRP4
+CVPU4 4
+CNSTU4 0
+EQU4 $1214
+line 2758
+;2758:			{ //not in the arc, don't consider it
+line 2759
+;2759:				VectorCopy(self->client->ps.origin, tto);
+ADDRLP4 9416
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 20
+ADDP4
+INDIRB
+ASGNB 12
+line 2760
+;2760:				tto[2] += self->client->ps.viewheight;
+ADDRLP4 9416+8
+ADDRLP4 9416+8
+INDIRF4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 168
+ADDP4
+INDIRI4
+CVIF4 4
+ADDF4
+ASGNF4
+line 2761
+;2761:				VectorSubtract(thispush_org, tto, a);
+ADDRLP4 9404
+ADDRLP4 9368
+INDIRF4
+ADDRLP4 9416
+INDIRF4
+SUBF4
+ASGNF4
+ADDRLP4 9404+4
+ADDRLP4 9368+4
+INDIRF4
+ADDRLP4 9416+4
+INDIRF4
+SUBF4
+ASGNF4
+ADDRLP4 9404+8
+ADDRLP4 9368+8
+INDIRF4
+ADDRLP4 9416+8
+INDIRF4
+SUBF4
+ASGNF4
+line 2762
+;2762:				vectoangles(a, a);
+ADDRLP4 9404
+ARGP4
+ADDRLP4 9404
+ARGP4
+ADDRGP4 vectoangles
+CALLV
+pop
+line 2764
+;2763:
+;2764:				if (ent->client && !InFieldOfVision(self->client->ps.viewangles, visionArc, a) &&
+ADDRLP4 9572
+CNSTI4 408
+ASGNI4
+ADDRLP4 4
+INDIRP4
+ADDRLP4 9572
+INDIRI4
+ADDP4
+INDIRP4
+CVPU4 4
+CNSTU4 0
+EQU4 $1223
+ADDRFP4 0
+INDIRP4
+ADDRLP4 9572
+INDIRI4
+ADDP4
+INDIRP4
+CNSTI4 156
+ADDP4
+ARGP4
+ADDRLP4 9468
+INDIRI4
+CVIF4 4
+ARGF4
+ADDRLP4 9404
+ARGP4
+ADDRLP4 9576
+ADDRGP4 InFieldOfVision
+CALLI4
+ASGNI4
+ADDRLP4 9576
+INDIRI4
+CNSTI4 0
+NEI4 $1223
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRLP4 4
+INDIRP4
+ARGP4
+ADDRLP4 9396
+INDIRI4
+ARGI4
+ADDRLP4 9580
+ADDRGP4 ForcePowerUsableOn
+CALLI4
+ASGNI4
+ADDRLP4 9580
+INDIRI4
+CNSTI4 0
+EQI4 $1223
+line 2766
+;2765:					ForcePowerUsableOn(self, ent, powerUse))
+;2766:				{ //only bother with arc rules if the victim is a client
+line 2767
+;2767:					entityList[e] = ENTITYNUM_NONE;
+ADDRLP4 4144
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 4172
+ADDP4
+CNSTI4 1023
+ASGNI4
+line 2768
+;2768:				}
+ADDRGP4 $1224
+JUMPV
+LABELV $1223
+line 2769
+;2769:				else if (ent->client)
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CVPU4 4
+CNSTU4 0
+EQU4 $1225
+line 2770
+;2770:				{
+line 2771
+;2771:					if (pull)
+ADDRFP4 4
+INDIRI4
+CNSTI4 0
+EQI4 $1227
+line 2772
+;2772:					{
+line 2773
+;2773:						if (!ForcePowerUsableOn(self, ent, FP_PULL))
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRLP4 4
+INDIRP4
+ARGP4
+CNSTI4 4
+ARGI4
+ADDRLP4 9584
+ADDRGP4 ForcePowerUsableOn
+CALLI4
+ASGNI4
+ADDRLP4 9584
+INDIRI4
+CNSTI4 0
+NEI4 $1228
+line 2774
+;2774:						{
+line 2775
+;2775:							entityList[e] = ENTITYNUM_NONE;
+ADDRLP4 4144
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 4172
+ADDP4
+CNSTI4 1023
+ASGNI4
+line 2776
+;2776:						}
+line 2777
+;2777:					}
+ADDRGP4 $1228
+JUMPV
+LABELV $1227
+line 2779
+;2778:					else
+;2779:					{
+line 2780
+;2780:						if (!ForcePowerUsableOn(self, ent, FP_PUSH))
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRLP4 4
+INDIRP4
+ARGP4
+CNSTI4 3
+ARGI4
+ADDRLP4 9584
+ADDRGP4 ForcePowerUsableOn
+CALLI4
+ASGNI4
+ADDRLP4 9584
+INDIRI4
+CNSTI4 0
+NEI4 $1231
+line 2781
+;2781:						{
+line 2782
+;2782:							entityList[e] = ENTITYNUM_NONE;
+ADDRLP4 4144
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 4172
+ADDP4
+CNSTI4 1023
+ASGNI4
+line 2783
+;2783:						}
+LABELV $1231
+line 2784
+;2784:					}
+LABELV $1228
+line 2785
+;2785:				}
+LABELV $1225
+LABELV $1224
+line 2786
+;2786:			}
+LABELV $1214
+line 2787
+;2787:			e++;
+ADDRLP4 4144
+ADDRLP4 4144
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 2788
+;2788:		}
+LABELV $1202
+line 2733
+ADDRLP4 4144
+INDIRI4
+ADDRLP4 9400
+INDIRI4
+LTI4 $1201
+line 2789
+;2789:	}
+LABELV $1174
+line 2791
+;2790:
+;2791:	for ( e = 0 ; e < numListedEntities ; e++ ) 
+ADDRLP4 4144
+CNSTI4 0
+ASGNI4
+ADDRGP4 $1236
+JUMPV
+LABELV $1233
+line 2792
+;2792:	{
+line 2793
+;2793:		if (entityList[e] != ENTITYNUM_NONE &&
+ADDRLP4 9564
+ADDRLP4 4144
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 4172
+ADDP4
+INDIRI4
+ASGNI4
+ADDRLP4 9564
+INDIRI4
+CNSTI4 1023
+EQI4 $1237
+ADDRLP4 9564
+INDIRI4
+CNSTI4 0
+LTI4 $1237
+ADDRLP4 9564
+INDIRI4
+CNSTI4 1024
+GEI4 $1237
+line 2796
+;2794:			entityList[e] >= 0 &&
+;2795:			entityList[e] < MAX_GENTITIES)
+;2796:		{
+line 2797
+;2797:			ent = &g_entities[entityList[e]];
+ADDRLP4 4
+CNSTI4 852
+ADDRLP4 4144
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 4172
+ADDP4
+INDIRI4
+MULI4
+ADDRGP4 g_entities
+ADDP4
+ASGNP4
+line 2798
+;2798:		}
+ADDRGP4 $1238
+JUMPV
+LABELV $1237
+line 2800
+;2799:		else
+;2800:		{
+line 2801
+;2801:			ent = NULL;
+ADDRLP4 4
+CNSTP4 0
+ASGNP4
+line 2802
+;2802:		}
+LABELV $1238
+line 2804
+;2803:
+;2804:		if (!ent)
+ADDRLP4 4
+INDIRP4
+CVPU4 4
+CNSTU4 0
+NEU4 $1239
+line 2805
+;2805:			continue;
+ADDRGP4 $1234
+JUMPV
+LABELV $1239
+line 2806
+;2806:		if (ent == self)
+ADDRLP4 4
+INDIRP4
+CVPU4 4
+ADDRFP4 0
+INDIRP4
+CVPU4 4
+NEU4 $1241
+line 2807
+;2807:			continue;
+ADDRGP4 $1234
+JUMPV
+LABELV $1241
+line 2808
+;2808:		if (ent->client && OnSameTeam(ent, self))
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CVPU4 4
+CNSTU4 0
+EQU4 $1243
+ADDRLP4 4
+INDIRP4
+ARGP4
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRLP4 9572
+ADDRGP4 OnSameTeam
+CALLI4
+ASGNI4
+ADDRLP4 9572
+INDIRI4
+CNSTI4 0
+EQI4 $1243
+line 2809
+;2809:		{
+line 2810
+;2810:			continue;
+ADDRGP4 $1234
+JUMPV
+LABELV $1243
+line 2812
+;2811:		}
+;2812:		if ( !(ent->inuse) )
+ADDRLP4 4
+INDIRP4
+CNSTI4 412
+ADDP4
+INDIRI4
+CNSTI4 0
+NEI4 $1245
+line 2813
+;2813:			continue;
+ADDRGP4 $1234
+JUMPV
+LABELV $1245
+line 2814
+;2814:		if ( ent->s.eType != ET_MISSILE )
+ADDRLP4 4
+INDIRP4
+CNSTI4 4
+ADDP4
+INDIRI4
+CNSTI4 3
+EQI4 $1247
+line 2815
+;2815:		{
+line 2816
+;2816:			if ( mod_pushall.integer || ent->s.eType != ET_ITEM )
+ADDRGP4 mod_pushall+12
+INDIRI4
+CNSTI4 0
+NEI4 $1252
+ADDRLP4 4
+INDIRP4
+CNSTI4 4
+ADDP4
+INDIRI4
+CNSTI4 2
+EQI4 $1248
+LABELV $1252
+line 2817
+;2817:			{
+line 2819
+;2818:				//FIXME: need pushable objects
+;2819:				if ( Q_stricmp( "func_button", ent->classname ) == 0 )
+ADDRGP4 $1255
+ARGP4
+ADDRLP4 4
+INDIRP4
+CNSTI4 416
+ADDP4
+INDIRP4
+ARGP4
+ADDRLP4 9576
+ADDRGP4 Q_stricmp
+CALLI4
+ASGNI4
+ADDRLP4 9576
+INDIRI4
+CNSTI4 0
+NEI4 $1253
+line 2820
+;2820:				{//we might push it
+line 2821
+;2821:					if ( pull || !(ent->spawnflags&SPF_BUTTON_FPUSHABLE) )
+ADDRLP4 9580
+CNSTI4 0
+ASGNI4
+ADDRFP4 4
+INDIRI4
+ADDRLP4 9580
+INDIRI4
+NEI4 $1258
+ADDRLP4 4
+INDIRP4
+CNSTI4 420
+ADDP4
+INDIRI4
+CNSTI4 2
+BANDI4
+ADDRLP4 9580
+INDIRI4
+NEI4 $1248
+LABELV $1258
+line 2822
+;2822:					{//not force-pushable, never pullable
+line 2823
+;2823:						continue;
+ADDRGP4 $1234
+JUMPV
+line 2825
+;2824:					}
+;2825:				}
+LABELV $1253
+line 2827
+;2826:				else
+;2827:				{
+line 2828
+;2828:					if ( ent->s.eFlags & EF_NODRAW )
+ADDRLP4 4
+INDIRP4
+CNSTI4 8
+ADDP4
+INDIRI4
+CNSTI4 128
+BANDI4
+CNSTI4 0
+EQI4 $1259
+line 2829
+;2829:					{
+line 2830
+;2830:						continue;
+ADDRGP4 $1234
+JUMPV
+LABELV $1259
+line 2832
+;2831:					}
+;2832:					if ( !ent->client )
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CVPU4 4
+CNSTU4 0
+NEU4 $1248
+line 2833
+;2833:					{
+line 2834
+;2834:						if (!mod_pushall.integer)
+ADDRGP4 mod_pushall+12
+INDIRI4
+CNSTI4 0
+NEI4 $1248
+line 2835
+;2835:						{
+line 2836
+;2836:							if ( Q_stricmp( "lightsaber", ent->classname ) != 0 )
+ADDRGP4 $1268
+ARGP4
+ADDRLP4 4
+INDIRP4
+CNSTI4 416
+ADDP4
+INDIRP4
+ARGP4
+ADDRLP4 9580
+ADDRGP4 Q_stricmp
+CALLI4
+ASGNI4
+ADDRLP4 9580
+INDIRI4
+CNSTI4 0
+EQI4 $1248
+line 2837
+;2837:							{//not a lightsaber 
+line 2838
+;2838:								if ( Q_stricmp( "func_door", ent->classname ) != 0 || !(ent->spawnflags & 2/*MOVER_FORCE_ACTIVATE*/) )
+ADDRGP4 $1271
+ARGP4
+ADDRLP4 4
+INDIRP4
+CNSTI4 416
+ADDP4
+INDIRP4
+ARGP4
+ADDRLP4 9584
+ADDRGP4 Q_stricmp
+CALLI4
+ASGNI4
+ADDRLP4 9588
+CNSTI4 0
+ASGNI4
+ADDRLP4 9584
+INDIRI4
+ADDRLP4 9588
+INDIRI4
+NEI4 $1272
+ADDRLP4 4
+INDIRP4
+CNSTI4 420
+ADDP4
+INDIRI4
+CNSTI4 2
+BANDI4
+ADDRLP4 9588
+INDIRI4
+NEI4 $1269
+LABELV $1272
+line 2839
+;2839:								{//not a force-usable door
+line 2840
+;2840:									if ( Q_stricmp( "limb", ent->classname ) )
+ADDRGP4 $1275
+ARGP4
+ADDRLP4 4
+INDIRP4
+CNSTI4 416
+ADDP4
+INDIRP4
+ARGP4
+ADDRLP4 9592
+ADDRGP4 Q_stricmp
+CALLI4
+ASGNI4
+ADDRLP4 9592
+INDIRI4
+CNSTI4 0
+EQI4 $1248
+line 2841
+;2841:									{//not a limb
+line 2842
+;2842:										continue;
+ADDRGP4 $1234
+JUMPV
+line 2844
+;2843:									}
+;2844:								}
+LABELV $1269
+line 2845
+;2845:								else if ( ent->moverState != MOVER_POS1 && ent->moverState != MOVER_POS2 )
+ADDRLP4 9592
+ADDRLP4 4
+INDIRP4
+CNSTI4 512
+ADDP4
+INDIRI4
+ASGNI4
+ADDRLP4 9592
+INDIRI4
+CNSTI4 0
+EQI4 $1248
+ADDRLP4 9592
+INDIRI4
+CNSTI4 1
+EQI4 $1248
+line 2846
+;2846:								{//not at rest
+line 2847
+;2847:									continue;
+ADDRGP4 $1234
+JUMPV
+line 2849
+;2848:								}
+;2849:							}
+line 2850
+;2850:						}
+line 2851
+;2851:					}
+line 2852
+;2852:				}
+line 2853
+;2853:			}
+line 2854
+;2854:		}
+LABELV $1247
+line 2856
+;2855:		else
+;2856:		{
+line 2857
+;2857:			if ( ent->s.pos.trType == TR_STATIONARY && (ent->s.eFlags&EF_MISSILE_STICK) )
+ADDRLP4 9580
+CNSTI4 0
+ASGNI4
+ADDRLP4 4
+INDIRP4
+CNSTI4 12
+ADDP4
+INDIRI4
+ADDRLP4 9580
+INDIRI4
+NEI4 $1278
+ADDRLP4 4
+INDIRP4
+CNSTI4 8
+ADDP4
+INDIRI4
+CNSTI4 2097152
+BANDI4
+ADDRLP4 9580
+INDIRI4
+EQI4 $1278
+line 2858
+;2858:			{//can't force-push/pull stuck missiles (detpacks, tripmines)
+line 2859
+;2859:				continue;
+ADDRGP4 $1234
+JUMPV
+LABELV $1278
+line 2861
+;2860:			}
+;2861:			if ( ent->s.pos.trType == TR_STATIONARY && ent->s.weapon != WP_THERMAL )
+ADDRLP4 4
+INDIRP4
+CNSTI4 12
+ADDP4
+INDIRI4
+CNSTI4 0
+NEI4 $1280
+ADDRLP4 4
+INDIRP4
+CNSTI4 276
+ADDP4
+INDIRI4
+CNSTI4 11
+EQI4 $1280
+line 2862
+;2862:			{//only thermal detonators can be pushed once stopped
+line 2863
+;2863:				continue;
+ADDRGP4 $1234
+JUMPV
+LABELV $1280
+line 2865
+;2864:			}
+;2865:		}
+LABELV $1248
+line 2869
+;2866:
+;2867:		//this is all to see if we need to start a saber attack, if it's in flight, this doesn't matter
+;2868:		// find the distance from the edge of the bounding box
+;2869:		for ( i = 0 ; i < 3 ; i++ ) 
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+LABELV $1282
+line 2870
+;2870:		{
+line 2871
+;2871:			if ( center[i] < ent->r.absmin[i] ) 
+ADDRLP4 9576
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+ASGNI4
+ADDRLP4 9576
+INDIRI4
+ADDRLP4 8
+ADDP4
+INDIRF4
+ADDRLP4 9576
+INDIRI4
+ADDRLP4 4
+INDIRP4
+CNSTI4 344
+ADDP4
+ADDP4
+INDIRF4
+GEF4 $1286
+line 2872
+;2872:			{
+line 2873
+;2873:				v[i] = ent->r.absmin[i] - center[i];
+ADDRLP4 9580
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+ASGNI4
+ADDRLP4 9580
+INDIRI4
+ADDRLP4 20
+ADDP4
+ADDRLP4 9580
+INDIRI4
+ADDRLP4 4
+INDIRP4
+CNSTI4 344
+ADDP4
+ADDP4
+INDIRF4
+ADDRLP4 9580
+INDIRI4
+ADDRLP4 8
+ADDP4
+INDIRF4
+SUBF4
+ASGNF4
+line 2874
+;2874:			} else if ( center[i] > ent->r.absmax[i] ) 
+ADDRGP4 $1287
+JUMPV
+LABELV $1286
+ADDRLP4 9580
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+ASGNI4
+ADDRLP4 9580
+INDIRI4
+ADDRLP4 8
+ADDP4
+INDIRF4
+ADDRLP4 9580
+INDIRI4
+ADDRLP4 4
+INDIRP4
+CNSTI4 356
+ADDP4
+ADDP4
+INDIRF4
+LEF4 $1288
+line 2875
+;2875:			{
+line 2876
+;2876:				v[i] = center[i] - ent->r.absmax[i];
+ADDRLP4 9584
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+ASGNI4
+ADDRLP4 9584
+INDIRI4
+ADDRLP4 20
+ADDP4
+ADDRLP4 9584
+INDIRI4
+ADDRLP4 8
+ADDP4
+INDIRF4
+ADDRLP4 9584
+INDIRI4
+ADDRLP4 4
+INDIRP4
+CNSTI4 356
+ADDP4
+ADDP4
+INDIRF4
+SUBF4
+ASGNF4
+line 2877
+;2877:			} else 
+ADDRGP4 $1289
+JUMPV
+LABELV $1288
+line 2878
+;2878:			{
+line 2879
+;2879:				v[i] = 0;
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 20
+ADDP4
+CNSTF4 0
+ASGNF4
+line 2880
+;2880:			}
+LABELV $1289
+LABELV $1287
+line 2881
+;2881:		}
+LABELV $1283
+line 2869
+ADDRLP4 0
+ADDRLP4 0
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+ADDRLP4 0
+INDIRI4
+CNSTI4 3
+LTI4 $1282
+line 2883
+;2882:
+;2883:		VectorSubtract( ent->r.absmax, ent->r.absmin, size );
+ADDRLP4 4160
+ADDRLP4 4
+INDIRP4
+CNSTI4 356
+ADDP4
+INDIRF4
+ADDRLP4 4
+INDIRP4
+CNSTI4 344
+ADDP4
+INDIRF4
+SUBF4
+ASGNF4
+ADDRLP4 4160+4
+ADDRLP4 4
+INDIRP4
+CNSTI4 360
+ADDP4
+INDIRF4
+ADDRLP4 4
+INDIRP4
+CNSTI4 348
+ADDP4
+INDIRF4
+SUBF4
+ASGNF4
+ADDRLP4 4160+8
+ADDRLP4 4
+INDIRP4
+CNSTI4 364
+ADDP4
+INDIRF4
+ADDRLP4 4
+INDIRP4
+CNSTI4 352
+ADDP4
+INDIRF4
+SUBF4
+ASGNF4
+line 2884
+;2884:		VectorMA( ent->r.absmin, 0.5, size, ent_org );
+ADDRLP4 9588
+CNSTF4 1056964608
+ASGNF4
+ADDRLP4 4132
+ADDRLP4 4
+INDIRP4
+CNSTI4 344
+ADDP4
+INDIRF4
+ADDRLP4 9588
+INDIRF4
+ADDRLP4 4160
+INDIRF4
+MULF4
+ADDF4
+ASGNF4
+ADDRLP4 4132+4
+ADDRLP4 4
+INDIRP4
+CNSTI4 348
+ADDP4
+INDIRF4
+ADDRLP4 9588
+INDIRF4
+ADDRLP4 4160+4
+INDIRF4
+MULF4
+ADDF4
+ASGNF4
+ADDRLP4 4132+8
+ADDRLP4 4
+INDIRP4
+CNSTI4 352
+ADDP4
+INDIRF4
+CNSTF4 1056964608
+ADDRLP4 4160+8
+INDIRF4
+MULF4
+ADDF4
+ASGNF4
+line 2886
+;2885:
+;2886:		VectorSubtract( ent_org, center, dir );
+ADDRLP4 4148
+ADDRLP4 4132
+INDIRF4
+ADDRLP4 8
+INDIRF4
+SUBF4
+ASGNF4
+ADDRLP4 4148+4
+ADDRLP4 4132+4
+INDIRF4
+ADDRLP4 8+4
+INDIRF4
+SUBF4
+ASGNF4
+ADDRLP4 4148+8
+ADDRLP4 4132+8
+INDIRF4
+ADDRLP4 8+8
+INDIRF4
+SUBF4
+ASGNF4
+line 2887
+;2887:		VectorNormalize( dir );
+ADDRLP4 4148
+ARGP4
+ADDRGP4 VectorNormalize
+CALLF4
+pop
+line 2888
+;2888:		if ( (dot1 = DotProduct( dir, forward )) < 0.6 )
+ADDRLP4 9592
+ADDRLP4 4148
+INDIRF4
+ADDRLP4 8268
+INDIRF4
+MULF4
+ADDRLP4 4148+4
+INDIRF4
+ADDRLP4 8268+4
+INDIRF4
+MULF4
+ADDF4
+ADDRLP4 4148+8
+INDIRF4
+ADDRLP4 8268+8
+INDIRF4
+MULF4
+ADDF4
+ASGNF4
+ADDRLP4 9460
+ADDRLP4 9592
+INDIRF4
+ASGNF4
+ADDRLP4 9592
+INDIRF4
+CNSTF4 1058642330
+GEF4 $1302
+line 2889
+;2889:			continue;
+ADDRGP4 $1234
+JUMPV
+LABELV $1302
+line 2891
+;2890:
+;2891:		dist = VectorLength( v );
+ADDRLP4 20
+ARGP4
+ADDRLP4 9596
+ADDRGP4 VectorLength
+CALLF4
+ASGNF4
+ADDRLP4 9380
+ADDRLP4 9596
+INDIRF4
+ASGNF4
+line 2896
+;2892:
+;2893:		//Now check and see if we can actually deflect it
+;2894:		//method1
+;2895:		//if within a certain range, deflect it
+;2896:		if ( dist >= radius ) 
+ADDRLP4 9380
+INDIRF4
+ADDRLP4 9360
+INDIRI4
+CVIF4 4
+LTF4 $1308
+line 2897
+;2897:		{
+line 2898
+;2898:			continue;
+ADDRGP4 $1234
+JUMPV
+LABELV $1308
+line 2902
+;2899:		}
+;2900:	
+;2901:		//in PVS?
+;2902:		if ( !ent->r.bmodel && !trap_InPVS( ent_org, self->client->ps.origin ) )
+ADDRLP4 4
+INDIRP4
+CNSTI4 312
+ADDP4
+INDIRI4
+CNSTI4 0
+NEI4 $1310
+ADDRLP4 4132
+ARGP4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 20
+ADDP4
+ARGP4
+ADDRLP4 9600
+ADDRGP4 trap_InPVS
+CALLI4
+ASGNI4
+ADDRLP4 9600
+INDIRI4
+CNSTI4 0
+NEI4 $1310
+line 2903
+;2903:		{//must be in PVS
+line 2904
+;2904:			continue;
+ADDRGP4 $1234
+JUMPV
+LABELV $1310
+line 2908
+;2905:		}
+;2906:
+;2907:		//really should have a clear LOS to this thing...
+;2908:		trap_Trace( &tr, self->client->ps.origin, vec3_origin, vec3_origin, ent_org, self->s.number, MASK_SHOT );
+ADDRLP4 8280
+ARGP4
+ADDRLP4 9604
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 9604
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 20
+ADDP4
+ARGP4
+ADDRLP4 9608
+ADDRGP4 vec3_origin
+ASGNP4
+ADDRLP4 9608
+INDIRP4
+ARGP4
+ADDRLP4 9608
+INDIRP4
+ARGP4
+ADDRLP4 4132
+ARGP4
+ADDRLP4 9604
+INDIRP4
+INDIRI4
+ARGI4
+CNSTI4 769
+ARGI4
+ADDRGP4 trap_Trace
+CALLV
+pop
+line 2909
+;2909:		if ( tr.fraction < 1.0f && tr.entityNum != ent->s.number )
+ADDRLP4 8280+8
+INDIRF4
+CNSTF4 1065353216
+GEF4 $1312
+ADDRLP4 8280+52
+INDIRI4
+ADDRLP4 4
+INDIRP4
+INDIRI4
+EQI4 $1312
+line 2910
+;2910:		{//must have clear LOS
+line 2911
+;2911:			continue;
+ADDRGP4 $1234
+JUMPV
+LABELV $1312
+line 2915
+;2912:		}
+;2913:
+;2914:		// ok, we are within the radius, add us to the incoming list
+;2915:		push_list[ent_count] = ent;
+ADDRLP4 9364
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+ADDRLP4 4
+INDIRP4
+ASGNP4
+line 2916
+;2916:		ent_count++;
+ADDRLP4 9364
+ADDRLP4 9364
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 2917
+;2917:	}
+LABELV $1234
+line 2791
+ADDRLP4 4144
+ADDRLP4 4144
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+LABELV $1236
+ADDRLP4 4144
+INDIRI4
+ADDRLP4 9400
+INDIRI4
+LTI4 $1233
+line 2919
+;2918:
+;2919:	if ( ent_count )
+ADDRLP4 9364
+INDIRI4
+CNSTI4 0
+EQI4 $1316
+line 2920
+;2920:	{
+line 2922
+;2921:		//method1:
+;2922:		for ( x = 0; x < ent_count; x++ )
+ADDRLP4 32
+CNSTI4 0
+ASGNI4
+ADDRGP4 $1321
+JUMPV
+LABELV $1318
+line 2923
+;2923:		{
+line 2924
+;2924:			int modPowerLevel = powerLevel;
+ADDRLP4 9564
+ADDRLP4 9428
+INDIRI4
+ASGNI4
+line 2927
+;2925:
+;2926:	
+;2927:			if (push_list[x]->client)
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CVPU4 4
+CNSTU4 0
+EQU4 $1322
+line 2928
+;2928:			{
+line 2929
+;2929:				modPowerLevel = WP_AbsorbConversion(push_list[x], push_list[x]->client->ps.fd.forcePowerLevel[FP_ABSORB], self, powerUse, powerLevel, forcePowerNeeded[self->client->ps.fd.forcePowerLevel[powerUse]][powerUse]);
+ADDRLP4 9568
+CNSTI4 2
+ASGNI4
+ADDRLP4 9572
+ADDRLP4 32
+INDIRI4
+ADDRLP4 9568
+INDIRI4
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 9572
+INDIRP4
+ARGP4
+ADDRLP4 9576
+CNSTI4 408
+ASGNI4
+ADDRLP4 9572
+INDIRP4
+ADDRLP4 9576
+INDIRI4
+ADDP4
+INDIRP4
+CNSTI4 984
+ADDP4
+INDIRI4
+ARGI4
+ADDRLP4 9580
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 9580
+INDIRP4
+ARGP4
+ADDRLP4 9396
+INDIRI4
+ARGI4
+ADDRLP4 9428
+INDIRI4
+ARGI4
+ADDRLP4 9588
+ADDRLP4 9396
+INDIRI4
+ADDRLP4 9568
+INDIRI4
+LSHI4
+ASGNI4
+ADDRLP4 9588
+INDIRI4
+CNSTI4 72
+ADDRLP4 9588
+INDIRI4
+ADDRLP4 9580
+INDIRP4
+ADDRLP4 9576
+INDIRI4
+ADDP4
+INDIRP4
+CNSTI4 944
+ADDP4
+ADDP4
+INDIRI4
+MULI4
+ADDRGP4 forcePowerNeeded
+ADDP4
+ADDP4
+INDIRI4
+ARGI4
+ADDRLP4 9592
+ADDRGP4 WP_AbsorbConversion
+CALLI4
+ASGNI4
+ADDRLP4 9564
+ADDRLP4 9592
+INDIRI4
+ASGNI4
+line 2930
+;2930:				if (modPowerLevel == -1)
+ADDRLP4 9564
+INDIRI4
+CNSTI4 -1
+NEI4 $1324
+line 2931
+;2931:				{
+line 2932
+;2932:					modPowerLevel = powerLevel;
+ADDRLP4 9564
+ADDRLP4 9428
+INDIRI4
+ASGNI4
+line 2933
+;2933:				}
+LABELV $1324
+line 2934
+;2934:			}
+LABELV $1322
+line 2936
+;2935:
+;2936:			pushPower = 256*modPowerLevel;
+ADDRLP4 9464
+ADDRLP4 9564
+INDIRI4
+CNSTI4 8
+LSHI4
+ASGNI4
+line 2938
+;2937:
+;2938:			if (push_list[x]->client)
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CVPU4 4
+CNSTU4 0
+EQU4 $1326
+line 2939
+;2939:			{
+line 2940
+;2940:				VectorCopy(push_list[x]->client->ps.origin, thispush_org);
+ADDRLP4 9368
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 20
+ADDP4
+INDIRB
+ASGNB 12
+line 2941
+;2941:			}
+ADDRGP4 $1327
+JUMPV
+LABELV $1326
+line 2943
+;2942:			else
+;2943:			{
+line 2944
+;2944:				VectorCopy(push_list[x]->s.origin, thispush_org);
+ADDRLP4 9368
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 92
+ADDP4
+INDIRB
+ASGNB 12
+line 2945
+;2945:			}
+LABELV $1327
+line 2947
+;2946:
+;2947:			if ( push_list[x]->client )
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CVPU4 4
+CNSTU4 0
+EQU4 $1328
+line 2948
+;2948:			{//FIXME: make enemy jedi able to hunker down and resist this?
+line 2949
+;2949:				int otherPushPower = push_list[x]->client->ps.fd.forcePowerLevel[powerUse];
+ADDRLP4 9580
+CNSTI4 2
+ASGNI4
+ADDRLP4 9568
+ADDRLP4 9396
+INDIRI4
+ADDRLP4 9580
+INDIRI4
+LSHI4
+ADDRLP4 32
+INDIRI4
+ADDRLP4 9580
+INDIRI4
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 944
+ADDP4
+ADDP4
+INDIRI4
+ASGNI4
+line 2950
+;2950:				qboolean canPullWeapon = qtrue;
+ADDRLP4 9576
+CNSTI4 1
+ASGNI4
+line 2951
+;2951:				float dirLen = 0;
+ADDRLP4 9572
+CNSTF4 0
+ASGNF4
+line 2953
+;2952:
+;2953:				knockback = pull?0:200;
+ADDRFP4 4
+INDIRI4
+CNSTI4 0
+EQI4 $1331
+ADDRLP4 9584
+CNSTI4 0
+ASGNI4
+ADDRGP4 $1332
+JUMPV
+LABELV $1331
+ADDRLP4 9584
+CNSTI4 200
+ASGNI4
+LABELV $1332
+ADDRLP4 9472
+ADDRLP4 9584
+INDIRI4
+CVIF4 4
+ASGNF4
+line 2955
+;2954:
+;2955:				pushPowerMod = pushPower;
+ADDRLP4 9432
+ADDRLP4 9464
+INDIRI4
+ASGNI4
+line 2957
+;2956:
+;2957:				if (push_list[x]->client->pers.cmd.forwardmove ||
+ADDRLP4 9588
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 9592
+CNSTI4 0
+ASGNI4
+ADDRLP4 9588
+INDIRP4
+CNSTI4 1408
+ADDP4
+INDIRI1
+CVII4 1
+ADDRLP4 9592
+INDIRI4
+NEI4 $1335
+ADDRLP4 9588
+INDIRP4
+CNSTI4 1409
+ADDP4
+INDIRI1
+CVII4 1
+ADDRLP4 9592
+INDIRI4
+EQI4 $1333
+LABELV $1335
+line 2959
+;2958:					push_list[x]->client->pers.cmd.rightmove)
+;2959:				{ //if you are moving, you get one less level of defense
+line 2960
+;2960:					otherPushPower--;
+ADDRLP4 9568
+ADDRLP4 9568
+INDIRI4
+CNSTI4 1
+SUBI4
+ASGNI4
+line 2962
+;2961:
+;2962:					if (otherPushPower < 0)
+ADDRLP4 9568
+INDIRI4
+CNSTI4 0
+GEI4 $1336
+line 2963
+;2963:					{
+line 2964
+;2964:						otherPushPower = 0;
+ADDRLP4 9568
+CNSTI4 0
+ASGNI4
+line 2965
+;2965:					}
+LABELV $1336
+line 2966
+;2966:				}
+LABELV $1333
+line 2968
+;2967:
+;2968:				if (otherPushPower && CanCounterThrow(push_list[x], pull))
+ADDRLP4 9568
+INDIRI4
+CNSTI4 0
+EQI4 $1338
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+ARGP4
+ADDRFP4 4
+INDIRI4
+ARGI4
+ADDRLP4 9596
+ADDRGP4 CanCounterThrow
+CALLI4
+ASGNI4
+ADDRLP4 9596
+INDIRI4
+CNSTI4 0
+EQI4 $1338
+line 2969
+;2969:				{
+line 2970
+;2970:					if ( pull )
+ADDRFP4 4
+INDIRI4
+CNSTI4 0
+EQI4 $1340
+line 2971
+;2971:					{
+line 2972
+;2972:						G_Sound( push_list[x], CHAN_BODY, G_SoundIndex( "sound/weapons/force/pull.wav" ) );
+ADDRGP4 $1149
+ARGP4
+ADDRLP4 9600
+ADDRGP4 G_SoundIndex
+CALLI4
+ASGNI4
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+ARGP4
+CNSTI4 5
+ARGI4
+ADDRLP4 9600
+INDIRI4
+ARGI4
+ADDRGP4 G_Sound
+CALLV
+pop
+line 2973
+;2973:						push_list[x]->client->ps.forceHandExtend = HANDEXTEND_FORCEPULL;
+ADDRLP4 9604
+CNSTI4 2
+ASGNI4
+ADDRLP4 32
+INDIRI4
+ADDRLP4 9604
+INDIRI4
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1248
+ADDP4
+ADDRLP4 9604
+INDIRI4
+ASGNI4
+line 2974
+;2974:						push_list[x]->client->ps.forceHandExtendTime = level.time + 400;
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1252
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 400
+ADDI4
+ASGNI4
+line 2975
+;2975:					}
+ADDRGP4 $1341
+JUMPV
+LABELV $1340
+line 2977
+;2976:					else
+;2977:					{
+line 2978
+;2978:						G_Sound( push_list[x], CHAN_BODY, G_SoundIndex( "sound/weapons/force/push.wav" ) );
+ADDRGP4 $1145
+ARGP4
+ADDRLP4 9600
+ADDRGP4 G_SoundIndex
+CALLI4
+ASGNI4
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+ARGP4
+CNSTI4 5
+ARGI4
+ADDRLP4 9600
+INDIRI4
+ARGI4
+ADDRGP4 G_Sound
+CALLV
+pop
+line 2979
+;2979:						push_list[x]->client->ps.forceHandExtend = HANDEXTEND_FORCEPUSH;
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1248
+ADDP4
+CNSTI4 1
+ASGNI4
+line 2980
+;2980:						push_list[x]->client->ps.forceHandExtendTime = level.time + 1000;
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1252
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 1000
+ADDI4
+ASGNI4
+line 2981
+;2981:					}
+LABELV $1341
+line 2982
+;2982:					push_list[x]->client->ps.powerups[PW_DISINT_4] = push_list[x]->client->ps.forceHandExtendTime + 200;
+ADDRLP4 9600
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 9600
+INDIRP4
+CNSTI4 380
+ADDP4
+ADDRLP4 9600
+INDIRP4
+CNSTI4 1252
+ADDP4
+INDIRI4
+CNSTI4 200
+ADDI4
+ASGNI4
+line 2986
+;2983:
+;2984:					//Make a counter-throw effect
+;2985:
+;2986:					if (otherPushPower >= modPowerLevel)
+ADDRLP4 9568
+INDIRI4
+ADDRLP4 9564
+INDIRI4
+LTI4 $1344
+line 2987
+;2987:					{
+line 2988
+;2988:						pushPowerMod = 0;
+ADDRLP4 9432
+CNSTI4 0
+ASGNI4
+line 2989
+;2989:						canPullWeapon = qfalse;
+ADDRLP4 9576
+CNSTI4 0
+ASGNI4
+line 2990
+;2990:					}
+ADDRGP4 $1345
+JUMPV
+LABELV $1344
+line 2992
+;2991:					else
+;2992:					{
+line 2993
+;2993:						int powerDif = (modPowerLevel - otherPushPower);
+ADDRLP4 9604
+ADDRLP4 9564
+INDIRI4
+ADDRLP4 9568
+INDIRI4
+SUBI4
+ASGNI4
+line 2995
+;2994:
+;2995:						if (powerDif >= 3)
+ADDRLP4 9604
+INDIRI4
+CNSTI4 3
+LTI4 $1346
+line 2996
+;2996:						{
+line 2997
+;2997:							pushPowerMod -= pushPowerMod*0.2;
+ADDRLP4 9608
+ADDRLP4 9432
+INDIRI4
+CVIF4 4
+ASGNF4
+ADDRLP4 9432
+ADDRLP4 9608
+INDIRF4
+CNSTF4 1045220557
+ADDRLP4 9608
+INDIRF4
+MULF4
+SUBF4
+CVFI4 4
+ASGNI4
+line 2998
+;2998:						}
+ADDRGP4 $1347
+JUMPV
+LABELV $1346
+line 2999
+;2999:						else if (powerDif == 2)
+ADDRLP4 9604
+INDIRI4
+CNSTI4 2
+NEI4 $1348
+line 3000
+;3000:						{
+line 3001
+;3001:							pushPowerMod -= pushPowerMod*0.4;
+ADDRLP4 9608
+ADDRLP4 9432
+INDIRI4
+CVIF4 4
+ASGNF4
+ADDRLP4 9432
+ADDRLP4 9608
+INDIRF4
+CNSTF4 1053609165
+ADDRLP4 9608
+INDIRF4
+MULF4
+SUBF4
+CVFI4 4
+ASGNI4
+line 3002
+;3002:						}
+ADDRGP4 $1349
+JUMPV
+LABELV $1348
+line 3003
+;3003:						else if (powerDif == 1)
+ADDRLP4 9604
+INDIRI4
+CNSTI4 1
+NEI4 $1350
+line 3004
+;3004:						{
+line 3005
+;3005:							pushPowerMod -= pushPowerMod*0.8;
+ADDRLP4 9608
+ADDRLP4 9432
+INDIRI4
+CVIF4 4
+ASGNF4
+ADDRLP4 9432
+ADDRLP4 9608
+INDIRF4
+CNSTF4 1061997773
+ADDRLP4 9608
+INDIRF4
+MULF4
+SUBF4
+CVFI4 4
+ASGNI4
+line 3006
+;3006:						}
+LABELV $1350
+LABELV $1349
+LABELV $1347
+line 3008
+;3007:
+;3008:						if (pushPowerMod < 0)
+ADDRLP4 9432
+INDIRI4
+CNSTI4 0
+GEI4 $1352
+line 3009
+;3009:						{
+line 3010
+;3010:							pushPowerMod = 0;
+ADDRLP4 9432
+CNSTI4 0
+ASGNI4
+line 3011
+;3011:						}
+LABELV $1352
+line 3012
+;3012:					}
+LABELV $1345
+line 3013
+;3013:				}
+LABELV $1338
+line 3016
+;3014:
+;3015:				//shove them
+;3016:				if ( pull )
+ADDRFP4 4
+INDIRI4
+CNSTI4 0
+EQI4 $1354
+line 3017
+;3017:				{
+line 3018
+;3018:					VectorSubtract( self->client->ps.origin, thispush_org, pushDir );
+ADDRLP4 9600
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+ASGNP4
+ADDRLP4 9384
+ADDRLP4 9600
+INDIRP4
+INDIRP4
+CNSTI4 20
+ADDP4
+INDIRF4
+ADDRLP4 9368
+INDIRF4
+SUBF4
+ASGNF4
+ADDRLP4 9384+4
+ADDRLP4 9600
+INDIRP4
+INDIRP4
+CNSTI4 24
+ADDP4
+INDIRF4
+ADDRLP4 9368+4
+INDIRF4
+SUBF4
+ASGNF4
+ADDRLP4 9384+8
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 28
+ADDP4
+INDIRF4
+ADDRLP4 9368+8
+INDIRF4
+SUBF4
+ASGNF4
+line 3020
+;3019:
+;3020:					if (push_list[x]->client && VectorLength(pushDir) <= 256)
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CVPU4 4
+CNSTU4 0
+EQU4 $1355
+ADDRLP4 9384
+ARGP4
+ADDRLP4 9604
+ADDRGP4 VectorLength
+CALLF4
+ASGNF4
+ADDRLP4 9604
+INDIRF4
+CNSTF4 1132462080
+GTF4 $1355
+line 3021
+;3021:					{
+line 3022
+;3022:						int randfact = 0;
+ADDRLP4 9608
+CNSTI4 0
+ASGNI4
+line 3024
+;3023:
+;3024:						if (modPowerLevel == FORCE_LEVEL_1)
+ADDRLP4 9564
+INDIRI4
+CNSTI4 1
+NEI4 $1362
+line 3025
+;3025:						{
+line 3026
+;3026:							randfact = 3;
+ADDRLP4 9608
+CNSTI4 3
+ASGNI4
+line 3027
+;3027:						}
+ADDRGP4 $1363
+JUMPV
+LABELV $1362
+line 3028
+;3028:						else if (modPowerLevel == FORCE_LEVEL_2)
+ADDRLP4 9564
+INDIRI4
+CNSTI4 2
+NEI4 $1364
+line 3029
+;3029:						{
+line 3030
+;3030:							randfact = 7;
+ADDRLP4 9608
+CNSTI4 7
+ASGNI4
+line 3031
+;3031:						}
+ADDRGP4 $1365
+JUMPV
+LABELV $1364
+line 3032
+;3032:						else if (modPowerLevel == FORCE_LEVEL_3)
+ADDRLP4 9564
+INDIRI4
+CNSTI4 3
+NEI4 $1366
+line 3033
+;3033:						{
+line 3034
+;3034:							randfact = 10;
+ADDRLP4 9608
+CNSTI4 10
+ASGNI4
+line 3035
+;3035:						}
+LABELV $1366
+LABELV $1365
+LABELV $1363
+line 3037
+;3036:
+;3037:						if (!OnSameTeam(self, push_list[x]) && Q_irand(1, 10) <= randfact && canPullWeapon)
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+ARGP4
+ADDRLP4 9612
+ADDRGP4 OnSameTeam
+CALLI4
+ASGNI4
+ADDRLP4 9612
+INDIRI4
+CNSTI4 0
+NEI4 $1355
+CNSTI4 1
+ARGI4
+CNSTI4 10
+ARGI4
+ADDRLP4 9616
+ADDRGP4 Q_irand
+CALLI4
+ASGNI4
+ADDRLP4 9616
+INDIRI4
+ADDRLP4 9608
+INDIRI4
+GTI4 $1355
+ADDRLP4 9576
+INDIRI4
+CNSTI4 0
+EQI4 $1355
+line 3038
+;3038:						{
+line 3041
+;3039:							vec3_t uorg, vecnorm;
+;3040:
+;3041:							VectorCopy(self->client->ps.origin, uorg);
+ADDRLP4 9620
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 20
+ADDP4
+INDIRB
+ASGNB 12
+line 3042
+;3042:							uorg[2] += 64;
+ADDRLP4 9620+8
+ADDRLP4 9620+8
+INDIRF4
+CNSTF4 1115684864
+ADDF4
+ASGNF4
+line 3044
+;3043:
+;3044:							VectorSubtract(uorg, thispush_org, vecnorm);
+ADDRLP4 9632
+ADDRLP4 9620
+INDIRF4
+ADDRLP4 9368
+INDIRF4
+SUBF4
+ASGNF4
+ADDRLP4 9632+4
+ADDRLP4 9620+4
+INDIRF4
+ADDRLP4 9368+4
+INDIRF4
+SUBF4
+ASGNF4
+ADDRLP4 9632+8
+ADDRLP4 9620+8
+INDIRF4
+ADDRLP4 9368+8
+INDIRF4
+SUBF4
+ASGNF4
+line 3045
+;3045:							VectorNormalize(vecnorm);
+ADDRLP4 9632
+ARGP4
+ADDRGP4 VectorNormalize
+CALLF4
+pop
+line 3047
+;3046:
+;3047:							TossClientWeapon(push_list[x], vecnorm, 500);
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+ARGP4
+ADDRLP4 9632
+ARGP4
+CNSTF4 1140457472
+ARGF4
+ADDRGP4 TossClientWeapon
+CALLV
+pop
+line 3048
+;3048:						}
+line 3049
+;3049:					}
+line 3050
+;3050:				}
+ADDRGP4 $1355
+JUMPV
+LABELV $1354
+line 3052
+;3051:				else
+;3052:				{
+line 3053
+;3053:					VectorSubtract( thispush_org, self->client->ps.origin, pushDir );
+ADDRLP4 9600
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+ASGNP4
+ADDRLP4 9384
+ADDRLP4 9368
+INDIRF4
+ADDRLP4 9600
+INDIRP4
+INDIRP4
+CNSTI4 20
+ADDP4
+INDIRF4
+SUBF4
+ASGNF4
+ADDRLP4 9384+4
+ADDRLP4 9368+4
+INDIRF4
+ADDRLP4 9600
+INDIRP4
+INDIRP4
+CNSTI4 24
+ADDP4
+INDIRF4
+SUBF4
+ASGNF4
+ADDRLP4 9384+8
+ADDRLP4 9368+8
+INDIRF4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 28
+ADDP4
+INDIRF4
+SUBF4
+ASGNF4
+line 3054
+;3054:				}
+LABELV $1355
+line 3056
+;3055:
+;3056:				if (modPowerLevel > otherPushPower && push_list[x]->client)
+ADDRLP4 9564
+INDIRI4
+ADDRLP4 9568
+INDIRI4
+LEI4 $1381
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CVPU4 4
+CNSTU4 0
+EQU4 $1381
+line 3057
+;3057:				{
+line 3058
+;3058:					if (modPowerLevel == FORCE_LEVEL_3 &&
+ADDRLP4 9564
+INDIRI4
+CNSTI4 3
+NEI4 $1383
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1248
+ADDP4
+INDIRI4
+CNSTI4 8
+EQI4 $1383
+line 3060
+;3059:						push_list[x]->client->ps.forceHandExtend != HANDEXTEND_KNOCKDOWN)
+;3060:					{
+line 3061
+;3061:						dirLen = VectorLength(pushDir);
+ADDRLP4 9384
+ARGP4
+ADDRLP4 9600
+ADDRGP4 VectorLength
+CALLF4
+ASGNF4
+ADDRLP4 9572
+ADDRLP4 9600
+INDIRF4
+ASGNF4
+line 3063
+;3062:						//JediDog: Removed "- otherPushPower" to fix the Push and Pull system to 1.03's settings.
+;3063:						if (dirLen <= (64*((modPowerLevel /*- otherPushPower*/)-1)))
+ADDRLP4 9572
+INDIRF4
+ADDRLP4 9564
+INDIRI4
+CNSTI4 6
+LSHI4
+CNSTI4 64
+SUBI4
+CVIF4 4
+GTF4 $1385
+line 3064
+;3064:						{ //can only do a knockdown if fairly close
+line 3065
+;3065:							push_list[x]->client->ps.forceHandExtend = HANDEXTEND_KNOCKDOWN;
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1248
+ADDP4
+CNSTI4 8
+ASGNI4
+line 3066
+;3066:							push_list[x]->client->ps.forceHandExtendTime = level.time + 700;//JediDog: get up timing
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1252
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 700
+ADDI4
+ASGNI4
+line 3067
+;3067:							push_list[x]->client->ps.forceDodgeAnim = 0; //this toggles between 1 and 0, when it's 1 we should play the get up anim
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1260
+ADDP4
+CNSTI4 0
+ASGNI4
+line 3068
+;3068:							push_list[x]->client->ps.quickerGetup = qfalse;//JediDog: switched getting up time back to 1.03's settings, Change: qtrue to qfalse
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1264
+ADDP4
+CNSTI4 0
+ASGNI4
+line 3069
+;3069:						}
+LABELV $1385
+line 3070
+;3070:					}
+LABELV $1383
+line 3071
+;3071:				}
+LABELV $1381
+line 3073
+;3072:
+;3073:				if (!dirLen)
+ADDRLP4 9572
+INDIRF4
+CNSTF4 0
+NEF4 $1388
+line 3074
+;3074:				{
+line 3075
+;3075:					dirLen = VectorLength(pushDir);
+ADDRLP4 9384
+ARGP4
+ADDRLP4 9600
+ADDRGP4 VectorLength
+CALLF4
+ASGNF4
+ADDRLP4 9572
+ADDRLP4 9600
+INDIRF4
+ASGNF4
+line 3076
+;3076:				}
+LABELV $1388
+line 3078
+;3077:
+;3078:				VectorNormalize(pushDir);
+ADDRLP4 9384
+ARGP4
+ADDRGP4 VectorNormalize
+CALLF4
+pop
+line 3080
+;3079:
+;3080:				if (push_list[x]->client)
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CVPU4 4
+CNSTU4 0
+EQU4 $1329
+line 3081
+;3081:				{
+line 3083
+;3082:					//escape a force grip if we're in one
+;3083:					if (self->client->ps.fd.forceGripBeingGripped > level.time)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1116
+ADDP4
+INDIRF4
+ADDRGP4 level+32
+INDIRI4
+CVIF4 4
+LEF4 $1392
+line 3084
+;3084:					{ //force the enemy to stop gripping me if I managed to push him
+line 3085
+;3085:						if (push_list[x]->client->ps.fd.forceGripEntityNum == self->s.number)
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1108
+ADDP4
+INDIRI4
+ADDRFP4 0
+INDIRP4
+INDIRI4
+NEI4 $1395
+line 3086
+;3086:						{
+line 3087
+;3087:							if (modPowerLevel >= push_list[x]->client->ps.fd.forcePowerLevel[FP_GRIP])
+ADDRLP4 9564
+INDIRI4
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 968
+ADDP4
+INDIRI4
+LTI4 $1397
+line 3088
+;3088:							{ //only break the grip if our push/pull level is >= their grip level
+line 3089
+;3089:								WP_ForcePowerStop(push_list[x], FP_GRIP);
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+ARGP4
+CNSTI4 6
+ARGI4
+ADDRGP4 WP_ForcePowerStop
+CALLV
+pop
+line 3090
+;3090:								self->client->ps.fd.forceGripBeingGripped = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1116
+ADDP4
+CNSTF4 0
+ASGNF4
+line 3091
+;3091:								push_list[x]->client->ps.fd.forceGripUseTime = level.time + 1000; //since we just broke out of it..
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1124
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 1000
+ADDI4
+ASGNI4
+line 3092
+;3092:							}
+LABELV $1397
+line 3093
+;3093:						}
+LABELV $1395
+line 3094
+;3094:					}
+LABELV $1392
+line 3096
+;3095:
+;3096:					push_list[x]->client->ps.otherKiller = self->s.number;
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 760
+ADDP4
+ADDRFP4 0
+INDIRP4
+INDIRI4
+ASGNI4
+line 3097
+;3097:					push_list[x]->client->ps.otherKillerTime = level.time + 5000;
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 764
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 5000
+ADDI4
+ASGNI4
+line 3098
+;3098:					push_list[x]->client->ps.otherKillerDebounceTime = level.time + 100;
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 768
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 100
+ADDI4
+ASGNI4
+line 3100
+;3099:
+;3100:					pushPowerMod -= (dirLen*0.7);
+ADDRLP4 9432
+ADDRLP4 9432
+INDIRI4
+CVIF4 4
+CNSTF4 1060320051
+ADDRLP4 9572
+INDIRF4
+MULF4
+SUBF4
+CVFI4 4
+ASGNI4
+line 3101
+;3101:					if (pushPowerMod < 16)
+ADDRLP4 9432
+INDIRI4
+CNSTI4 16
+GEI4 $1402
+line 3102
+;3102:					{
+line 3103
+;3103:						pushPowerMod = 16;
+ADDRLP4 9432
+CNSTI4 16
+ASGNI4
+line 3104
+;3104:					}
+LABELV $1402
+line 3106
+;3105:
+;3106:					push_list[x]->client->ps.velocity[0] = pushDir[0]*pushPowerMod;
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 32
+ADDP4
+ADDRLP4 9384
+INDIRF4
+ADDRLP4 9432
+INDIRI4
+CVIF4 4
+MULF4
+ASGNF4
+line 3107
+;3107:					push_list[x]->client->ps.velocity[1] = pushDir[1]*pushPowerMod;
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 36
+ADDP4
+ADDRLP4 9384+4
+INDIRF4
+ADDRLP4 9432
+INDIRI4
+CVIF4 4
+MULF4
+ASGNF4
+line 3109
+;3108:
+;3109:					if ((int)push_list[x]->client->ps.velocity[2] == 0)
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 40
+ADDP4
+INDIRF4
+CVFI4 4
+CNSTI4 0
+NEI4 $1405
+line 3110
+;3110:					{ //if not going anywhere vertically, boost them up a bit
+line 3111
+;3111:						push_list[x]->client->ps.velocity[2] = pushDir[2]*pushPowerMod;
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 40
+ADDP4
+ADDRLP4 9384+8
+INDIRF4
+ADDRLP4 9432
+INDIRI4
+CVIF4 4
+MULF4
+ASGNF4
+line 3113
+;3112:
+;3113:						if (push_list[x]->client->ps.velocity[2] < 128)
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 40
+ADDP4
+INDIRF4
+CNSTF4 1124073472
+GEF4 $1329
+line 3114
+;3114:						{
+line 3115
+;3115:							push_list[x]->client->ps.velocity[2] = 128;
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 40
+ADDP4
+CNSTF4 1124073472
+ASGNF4
+line 3116
+;3116:						}
+line 3117
+;3117:					}
+ADDRGP4 $1329
+JUMPV
+LABELV $1405
+line 3119
+;3118:					else
+;3119:					{
+line 3120
+;3120:						push_list[x]->client->ps.velocity[2] = pushDir[2]*pushPowerMod;
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 40
+ADDP4
+ADDRLP4 9384+8
+INDIRF4
+ADDRLP4 9432
+INDIRI4
+CVIF4 4
+MULF4
+ASGNF4
+line 3121
+;3121:					}
+line 3122
+;3122:				}
+line 3123
+;3123:			}
+ADDRGP4 $1329
+JUMPV
+LABELV $1328
+line 3124
+;3124:			else if ( push_list[x]->s.eType == ET_MISSILE && push_list[x]->s.pos.trType != TR_STATIONARY && (push_list[x]->s.pos.trType != TR_INTERPOLATE||push_list[x]->s.weapon != WP_THERMAL) )//rolling and stationary thermal detonators are dealt with below
+ADDRLP4 9568
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 9568
+INDIRP4
+CNSTI4 4
+ADDP4
+INDIRI4
+CNSTI4 3
+NEI4 $1411
+ADDRLP4 9572
+ADDRLP4 9568
+INDIRP4
+CNSTI4 12
+ADDP4
+INDIRI4
+ASGNI4
+ADDRLP4 9572
+INDIRI4
+CNSTI4 0
+EQI4 $1411
+ADDRLP4 9572
+INDIRI4
+CNSTI4 1
+NEI4 $1413
+ADDRLP4 9568
+INDIRP4
+CNSTI4 276
+ADDP4
+INDIRI4
+CNSTI4 11
+EQI4 $1411
+LABELV $1413
+line 3125
+;3125:			{
+line 3126
+;3126:				if ( pull )
+ADDRFP4 4
+INDIRI4
+CNSTI4 0
+EQI4 $1414
+line 3127
+;3127:				{//deflect rather than reflect?
+line 3128
+;3128:				}
+ADDRGP4 $1412
+JUMPV
+LABELV $1414
+line 3130
+;3129:				else 
+;3130:				{
+line 3131
+;3131:					G_ReflectMissile( self, push_list[x], forward );
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+ARGP4
+ADDRLP4 8268
+ARGP4
+ADDRGP4 G_ReflectMissile
+CALLV
+pop
+line 3132
+;3132:				}
+line 3133
+;3133:			}
+ADDRGP4 $1412
+JUMPV
+LABELV $1411
+line 3134
+;3134:			else if ( mod_pushall.integer && push_list[x]->itemtype != IT_WEAPON && push_list[x]->s.eType == ET_ITEM )//rolling and stationary thermal detonators are dealt with below
+ADDRGP4 mod_pushall+12
+INDIRI4
+CNSTI4 0
+EQI4 $1416
+ADDRLP4 9576
+CNSTI4 2
+ASGNI4
+ADDRLP4 9580
+ADDRLP4 32
+INDIRI4
+ADDRLP4 9576
+INDIRI4
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 9580
+INDIRP4
+CNSTI4 848
+ADDP4
+INDIRI4
+CNSTI4 1
+EQI4 $1416
+ADDRLP4 9580
+INDIRP4
+CNSTI4 4
+ADDP4
+INDIRI4
+ADDRLP4 9576
+INDIRI4
+NEI4 $1416
+line 3135
+;3135:			{
+line 3136
+;3136:				push_list[x]->nextthink = level.time + 30000;
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 632
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 30000
+ADDI4
+ASGNI4
+line 3137
+;3137:				push_list[x]->think = ResetItem;//incase it falls off a cliff
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 636
+ADDP4
+ADDRGP4 ResetItem
+ASGNP4
+line 3139
+;3138:
+;3139:				if ( pull )
+ADDRFP4 4
+INDIRI4
+CNSTI4 0
+EQI4 $1420
+line 3140
+;3140:				{//pull the item
+line 3142
+;3141:
+;3142:					push_list[x]->s.pos.trType = TR_GRAVITY;
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 12
+ADDP4
+CNSTI4 5
+ASGNI4
+line 3143
+;3143:					push_list[x]->s.apos.trType = TR_GRAVITY;
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 48
+ADDP4
+CNSTI4 5
+ASGNI4
+line 3144
+;3144:					VectorScale( forward, -650.0f, push_list[x]->s.pos.trDelta );
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 36
+ADDP4
+CNSTF4 3290595328
+ADDRLP4 8268
+INDIRF4
+MULF4
+ASGNF4
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 40
+ADDP4
+CNSTF4 3290595328
+ADDRLP4 8268+4
+INDIRF4
+MULF4
+ASGNF4
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 44
+ADDP4
+CNSTF4 3290595328
+ADDRLP4 8268+8
+INDIRF4
+MULF4
+ASGNF4
+line 3145
+;3145:					VectorScale( forward, -650.0f, push_list[x]->s.apos.trDelta );
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 72
+ADDP4
+CNSTF4 3290595328
+ADDRLP4 8268
+INDIRF4
+MULF4
+ASGNF4
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 76
+ADDP4
+CNSTF4 3290595328
+ADDRLP4 8268+4
+INDIRF4
+MULF4
+ASGNF4
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 80
+ADDP4
+CNSTF4 3290595328
+ADDRLP4 8268+8
+INDIRF4
+MULF4
+ASGNF4
+line 3146
+;3146:					push_list[x]->s.pos.trTime = level.time;		// move a bit on the very first frame
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 16
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+ASGNI4
+line 3147
+;3147:					push_list[x]->s.apos.trTime = level.time;		// move a bit on the very first frame
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 52
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+ASGNI4
+line 3148
+;3148:					VectorCopy( push_list[x]->r.currentOrigin, push_list[x]->s.pos.trBase );
+ADDRLP4 9584
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 9584
+INDIRP4
+CNSTI4 24
+ADDP4
+ADDRLP4 9584
+INDIRP4
+CNSTI4 368
+ADDP4
+INDIRB
+ASGNB 12
+line 3149
+;3149:					VectorCopy( push_list[x]->r.currentOrigin, push_list[x]->s.apos.trBase );
+ADDRLP4 9588
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 9588
+INDIRP4
+CNSTI4 60
+ADDP4
+ADDRLP4 9588
+INDIRP4
+CNSTI4 368
+ADDP4
+INDIRB
+ASGNB 12
+line 3150
+;3150:					push_list[x]->s.eFlags = EF_BOUNCE_HALF;
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 8
+ADDP4
+CNSTI4 32
+ASGNI4
+line 3151
+;3151:				}
+ADDRGP4 $1417
+JUMPV
+LABELV $1420
+line 3153
+;3152:				else 
+;3153:				{
+line 3154
+;3154:					push_list[x]->s.pos.trType = TR_GRAVITY;
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 12
+ADDP4
+CNSTI4 5
+ASGNI4
+line 3155
+;3155:					push_list[x]->s.apos.trType = TR_GRAVITY;
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 48
+ADDP4
+CNSTI4 5
+ASGNI4
+line 3156
+;3156:					VectorScale( forward, 650.0f, push_list[x]->s.pos.trDelta );
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 36
+ADDP4
+CNSTF4 1143111680
+ADDRLP4 8268
+INDIRF4
+MULF4
+ASGNF4
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 40
+ADDP4
+CNSTF4 1143111680
+ADDRLP4 8268+4
+INDIRF4
+MULF4
+ASGNF4
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 44
+ADDP4
+CNSTF4 1143111680
+ADDRLP4 8268+8
+INDIRF4
+MULF4
+ASGNF4
+line 3157
+;3157:					VectorScale( forward, 650.0f, push_list[x]->s.apos.trDelta );
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 72
+ADDP4
+CNSTF4 1143111680
+ADDRLP4 8268
+INDIRF4
+MULF4
+ASGNF4
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 76
+ADDP4
+CNSTF4 1143111680
+ADDRLP4 8268+4
+INDIRF4
+MULF4
+ASGNF4
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 80
+ADDP4
+CNSTF4 1143111680
+ADDRLP4 8268+8
+INDIRF4
+MULF4
+ASGNF4
+line 3158
+;3158:					push_list[x]->s.pos.trTime = level.time;		// move a bit on the very first frame
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 16
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+ASGNI4
+line 3159
+;3159:					push_list[x]->s.apos.trTime = level.time;		// move a bit on the very first frame
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 52
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+ASGNI4
+line 3160
+;3160:					VectorCopy( push_list[x]->r.currentOrigin, push_list[x]->s.pos.trBase );
+ADDRLP4 9584
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 9584
+INDIRP4
+CNSTI4 24
+ADDP4
+ADDRLP4 9584
+INDIRP4
+CNSTI4 368
+ADDP4
+INDIRB
+ASGNB 12
+line 3161
+;3161:					VectorCopy( push_list[x]->r.currentOrigin, push_list[x]->s.apos.trBase );
+ADDRLP4 9588
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 9588
+INDIRP4
+CNSTI4 60
+ADDP4
+ADDRLP4 9588
+INDIRP4
+CNSTI4 368
+ADDP4
+INDIRB
+ASGNB 12
+line 3162
+;3162:					push_list[x]->s.eFlags = EF_BOUNCE_HALF;
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 8
+ADDP4
+CNSTI4 32
+ASGNI4
+line 3163
+;3163:				}
+line 3164
+;3164:			}
+ADDRGP4 $1417
+JUMPV
+LABELV $1416
+line 3165
+;3165:			else if ( !Q_stricmp( "func_door", push_list[x]->classname ) && (push_list[x]->spawnflags&2) )
+ADDRGP4 $1271
+ARGP4
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 416
+ADDP4
+INDIRP4
+ARGP4
+ADDRLP4 9584
+ADDRGP4 Q_stricmp
+CALLI4
+ASGNI4
+ADDRLP4 9588
+CNSTI4 0
+ASGNI4
+ADDRLP4 9584
+INDIRI4
+ADDRLP4 9588
+INDIRI4
+NEI4 $1434
+ADDRLP4 9592
+CNSTI4 2
+ASGNI4
+ADDRLP4 32
+INDIRI4
+ADDRLP4 9592
+INDIRI4
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 420
+ADDP4
+INDIRI4
+ADDRLP4 9592
+INDIRI4
+BANDI4
+ADDRLP4 9588
+INDIRI4
+EQI4 $1434
+line 3166
+;3166:			{//push/pull the door
+line 3169
+;3167:				vec3_t	pos1, pos2;
+;3168:
+;3169:				AngleVectors( self->client->ps.viewangles, forward, NULL, NULL );
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 156
+ADDP4
+ARGP4
+ADDRLP4 8268
+ARGP4
+ADDRLP4 9620
+CNSTP4 0
+ASGNP4
+ADDRLP4 9620
+INDIRP4
+ARGP4
+ADDRLP4 9620
+INDIRP4
+ARGP4
+ADDRGP4 AngleVectors
+CALLV
+pop
+line 3170
+;3170:				VectorNormalize( forward );
+ADDRLP4 8268
+ARGP4
+ADDRGP4 VectorNormalize
+CALLF4
+pop
+line 3171
+;3171:				VectorMA( self->client->ps.origin, radius, forward, end );
+ADDRLP4 9624
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+ASGNP4
+ADDRLP4 9628
+ADDRLP4 9360
+INDIRI4
+CVIF4 4
+ASGNF4
+ADDRLP4 9512
+ADDRLP4 9624
+INDIRP4
+INDIRP4
+CNSTI4 20
+ADDP4
+INDIRF4
+ADDRLP4 8268
+INDIRF4
+ADDRLP4 9628
+INDIRF4
+MULF4
+ADDF4
+ASGNF4
+ADDRLP4 9512+4
+ADDRLP4 9624
+INDIRP4
+INDIRP4
+CNSTI4 24
+ADDP4
+INDIRF4
+ADDRLP4 8268+4
+INDIRF4
+ADDRLP4 9628
+INDIRF4
+MULF4
+ADDF4
+ASGNF4
+ADDRLP4 9512+8
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 28
+ADDP4
+INDIRF4
+ADDRLP4 8268+8
+INDIRF4
+ADDRLP4 9360
+INDIRI4
+CVIF4 4
+MULF4
+ADDF4
+ASGNF4
+line 3172
+;3172:				trap_Trace( &tr, self->client->ps.origin, vec3_origin, vec3_origin, end, self->s.number, MASK_SHOT );
+ADDRLP4 8280
+ARGP4
+ADDRLP4 9632
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 9632
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 20
+ADDP4
+ARGP4
+ADDRLP4 9636
+ADDRGP4 vec3_origin
+ASGNP4
+ADDRLP4 9636
+INDIRP4
+ARGP4
+ADDRLP4 9636
+INDIRP4
+ARGP4
+ADDRLP4 9512
+ARGP4
+ADDRLP4 9632
+INDIRP4
+INDIRI4
+ARGI4
+CNSTI4 769
+ARGI4
+ADDRGP4 trap_Trace
+CALLV
+pop
+line 3173
+;3173:				if ( tr.entityNum != push_list[x]->s.number || tr.fraction == 1.0 || tr.allsolid || tr.startsolid )
+ADDRLP4 8280+52
+INDIRI4
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+INDIRI4
+NEI4 $1447
+ADDRLP4 8280+8
+INDIRF4
+CNSTF4 1065353216
+EQF4 $1447
+ADDRLP4 9640
+CNSTI4 0
+ASGNI4
+ADDRLP4 8280
+INDIRI4
+ADDRLP4 9640
+INDIRI4
+NEI4 $1447
+ADDRLP4 8280+4
+INDIRI4
+ADDRLP4 9640
+INDIRI4
+EQI4 $1440
+LABELV $1447
+line 3174
+;3174:				{//must be pointing right at it
+line 3175
+;3175:					continue;
+ADDRGP4 $1319
+JUMPV
+LABELV $1440
+line 3178
+;3176:				}
+;3177:
+;3178:				VectorSubtract( push_list[x]->r.absmax, push_list[x]->r.absmin, size );
+ADDRLP4 9644
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+ASGNP4
+ADDRLP4 9648
+ADDRLP4 9644
+INDIRP4
+INDIRP4
+ASGNP4
+ADDRLP4 4160
+ADDRLP4 9648
+INDIRP4
+CNSTI4 356
+ADDP4
+INDIRF4
+ADDRLP4 9648
+INDIRP4
+CNSTI4 344
+ADDP4
+INDIRF4
+SUBF4
+ASGNF4
+ADDRLP4 9652
+ADDRLP4 9644
+INDIRP4
+INDIRP4
+ASGNP4
+ADDRLP4 4160+4
+ADDRLP4 9652
+INDIRP4
+CNSTI4 360
+ADDP4
+INDIRF4
+ADDRLP4 9652
+INDIRP4
+CNSTI4 348
+ADDP4
+INDIRF4
+SUBF4
+ASGNF4
+ADDRLP4 9656
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 4160+8
+ADDRLP4 9656
+INDIRP4
+CNSTI4 364
+ADDP4
+INDIRF4
+ADDRLP4 9656
+INDIRP4
+CNSTI4 352
+ADDP4
+INDIRF4
+SUBF4
+ASGNF4
+line 3179
+;3179:				VectorMA( push_list[x]->r.absmin, 0.5, size, center );
+ADDRLP4 9660
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+ASGNP4
+ADDRLP4 9664
+CNSTF4 1056964608
+ASGNF4
+ADDRLP4 8
+ADDRLP4 9660
+INDIRP4
+INDIRP4
+CNSTI4 344
+ADDP4
+INDIRF4
+ADDRLP4 9664
+INDIRF4
+ADDRLP4 4160
+INDIRF4
+MULF4
+ADDF4
+ASGNF4
+ADDRLP4 8+4
+ADDRLP4 9660
+INDIRP4
+INDIRP4
+CNSTI4 348
+ADDP4
+INDIRF4
+ADDRLP4 9664
+INDIRF4
+ADDRLP4 4160+4
+INDIRF4
+MULF4
+ADDF4
+ASGNF4
+ADDRLP4 8+8
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 352
+ADDP4
+INDIRF4
+CNSTF4 1056964608
+ADDRLP4 4160+8
+INDIRF4
+MULF4
+ADDF4
+ASGNF4
+line 3180
+;3180:				VectorAdd( center, push_list[x]->pos1, pos1 );
+ADDRLP4 9668
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+ASGNP4
+ADDRLP4 9596
+ADDRLP4 8
+INDIRF4
+ADDRLP4 9668
+INDIRP4
+INDIRP4
+CNSTI4 548
+ADDP4
+INDIRF4
+ADDF4
+ASGNF4
+ADDRLP4 9596+4
+ADDRLP4 8+4
+INDIRF4
+ADDRLP4 9668
+INDIRP4
+INDIRP4
+CNSTI4 552
+ADDP4
+INDIRF4
+ADDF4
+ASGNF4
+ADDRLP4 9596+8
+ADDRLP4 8+8
+INDIRF4
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 556
+ADDP4
+INDIRF4
+ADDF4
+ASGNF4
+line 3181
+;3181:				VectorAdd( center, push_list[x]->pos2, pos2 );
+ADDRLP4 9672
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+ASGNP4
+ADDRLP4 9608
+ADDRLP4 8
+INDIRF4
+ADDRLP4 9672
+INDIRP4
+INDIRP4
+CNSTI4 560
+ADDP4
+INDIRF4
+ADDF4
+ASGNF4
+ADDRLP4 9608+4
+ADDRLP4 8+4
+INDIRF4
+ADDRLP4 9672
+INDIRP4
+INDIRP4
+CNSTI4 564
+ADDP4
+INDIRF4
+ADDF4
+ASGNF4
+ADDRLP4 9608+8
+ADDRLP4 8+8
+INDIRF4
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 568
+ADDP4
+INDIRF4
+ADDF4
+ASGNF4
+line 3183
+;3182:
+;3183:				if ( Distance( pos1, self->client->ps.origin ) < Distance( pos2, self->client->ps.origin ) )
+ADDRLP4 9596
+ARGP4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 20
+ADDP4
+ARGP4
+ADDRLP4 9676
+ADDRGP4 Distance
+CALLF4
+ASGNF4
+ADDRLP4 9608
+ARGP4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 20
+ADDP4
+ARGP4
+ADDRLP4 9680
+ADDRGP4 Distance
+CALLF4
+ASGNF4
+ADDRLP4 9676
+INDIRF4
+ADDRLP4 9680
+INDIRF4
+GEF4 $1462
+line 3184
+;3184:				{//pos1 is closer
+line 3185
+;3185:					if ( push_list[x]->moverState == MOVER_POS1 )
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 512
+ADDP4
+INDIRI4
+CNSTI4 0
+NEI4 $1464
+line 3186
+;3186:					{//at the closest pos
+line 3187
+;3187:						if ( pull )
+ADDRFP4 4
+INDIRI4
+CNSTI4 0
+EQI4 $1463
+line 3188
+;3188:						{//trying to pull, but already at closest point, so screw it
+line 3189
+;3189:							continue;
+ADDRGP4 $1319
+JUMPV
+line 3191
+;3190:						}
+;3191:					}
+LABELV $1464
+line 3192
+;3192:					else if ( push_list[x]->moverState == MOVER_POS2 )
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 512
+ADDP4
+INDIRI4
+CNSTI4 1
+NEI4 $1463
+line 3193
+;3193:					{//at farthest pos
+line 3194
+;3194:						if ( !pull )
+ADDRFP4 4
+INDIRI4
+CNSTI4 0
+NEI4 $1463
+line 3195
+;3195:						{//trying to push, but already at farthest point, so screw it
+line 3196
+;3196:							continue;
+ADDRGP4 $1319
+JUMPV
+line 3198
+;3197:						}
+;3198:					}
+line 3199
+;3199:				}
+LABELV $1462
+line 3201
+;3200:				else
+;3201:				{//pos2 is closer
+line 3202
+;3202:					if ( push_list[x]->moverState == MOVER_POS1 )
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 512
+ADDP4
+INDIRI4
+CNSTI4 0
+NEI4 $1472
+line 3203
+;3203:					{//at the farthest pos
+line 3204
+;3204:						if ( !pull )
+ADDRFP4 4
+INDIRI4
+CNSTI4 0
+NEI4 $1473
+line 3205
+;3205:						{//trying to push, but already at farthest point, so screw it
+line 3206
+;3206:							continue;
+ADDRGP4 $1319
+JUMPV
+line 3208
+;3207:						}
+;3208:					}
+LABELV $1472
+line 3209
+;3209:					else if ( push_list[x]->moverState == MOVER_POS2 )
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 512
+ADDP4
+INDIRI4
+CNSTI4 1
+NEI4 $1476
+line 3210
+;3210:					{//at closest pos
+line 3211
+;3211:						if ( pull )
+ADDRFP4 4
+INDIRI4
+CNSTI4 0
+EQI4 $1478
+line 3212
+;3212:						{//trying to pull, but already at closest point, so screw it
+line 3213
+;3213:							continue;
+ADDRGP4 $1319
+JUMPV
+LABELV $1478
+line 3215
+;3214:						}
+;3215:					}
+LABELV $1476
+LABELV $1473
+line 3216
+;3216:				}
+LABELV $1463
+line 3217
+;3217:				GEntity_UseFunc( push_list[x], self, self );
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+ARGP4
+ADDRLP4 9684
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 9684
+INDIRP4
+ARGP4
+ADDRLP4 9684
+INDIRP4
+ARGP4
+ADDRGP4 GEntity_UseFunc
+CALLV
+pop
+line 3218
+;3218:			}
+ADDRGP4 $1435
+JUMPV
+LABELV $1434
+line 3219
+;3219:			else if ( Q_stricmp( "func_button", push_list[x]->classname ) == 0 )
+ADDRGP4 $1255
+ARGP4
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+CNSTI4 416
+ADDP4
+INDIRP4
+ARGP4
+ADDRLP4 9596
+ADDRGP4 Q_stricmp
+CALLI4
+ASGNI4
+ADDRLP4 9596
+INDIRI4
+CNSTI4 0
+NEI4 $1480
+line 3220
+;3220:			{//pretend you pushed it
+line 3221
+;3221:				Touch_Button( push_list[x], self, NULL );
+ADDRLP4 32
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 36
+ADDP4
+INDIRP4
+ARGP4
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTP4 0
+ARGP4
+ADDRGP4 Touch_Button
+CALLV
+pop
+line 3222
+;3222:				continue;
+LABELV $1480
+LABELV $1435
+LABELV $1417
+LABELV $1412
+LABELV $1329
+line 3224
+;3223:			}
+;3224:		}
+LABELV $1319
+line 2922
+ADDRLP4 32
+ADDRLP4 32
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+LABELV $1321
+ADDRLP4 32
+INDIRI4
+ADDRLP4 9364
+INDIRI4
+LTI4 $1318
+line 3225
+;3225:	}
+LABELV $1316
+line 3229
+;3226:
+;3227:	//attempt to break any leftover grips
+;3228:	//if we're still in a current grip that wasn't broken by the push, it will still remain
+;3229:	self->client->dangerTime = level.time;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 2948
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+ASGNI4
+line 3230
+;3230:	self->client->ps.eFlags &= ~EF_INVULNERABLE;
+ADDRLP4 9564
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 108
+ADDP4
+ASGNP4
+ADDRLP4 9564
+INDIRP4
+ADDRLP4 9564
+INDIRP4
+INDIRI4
+CNSTI4 -67108865
+BANDI4
+ASGNI4
+line 3231
+;3231:	self->client->invulnerableTimer = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1700
+ADDP4
+CNSTI4 0
+ASGNI4
+line 3233
+;3232:
+;3233:	if (self->client->ps.fd.forceGripBeingGripped > level.time)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1116
+ADDP4
+INDIRF4
+ADDRGP4 level+32
+INDIRI4
+CVIF4 4
+LEF4 $1483
+line 3234
+;3234:	{
+line 3235
+;3235:		self->client->ps.fd.forceGripBeingGripped = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1116
+ADDP4
+CNSTF4 0
+ASGNF4
+line 3236
+;3236:	}
+LABELV $1483
+line 3237
+;3237:}
+LABELV $1121
+endproc ForceThrow 9688 28
+export WP_ForcePowerStop
+proc WP_ForcePowerStop 32 12
+line 3240
+;3238:
+;3239:void WP_ForcePowerStop( gentity_t *self, forcePowers_t forcePower )
+;3240:{
+line 3241
+;3241:	int wasActive = self->client->ps.fd.forcePowersActive;
+ADDRLP4 0
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 848
+ADDP4
+INDIRI4
+ASGNI4
+line 3243
+;3242:
+;3243:	self->client->ps.fd.forcePowersActive &= ~( 1 << forcePower );
+ADDRLP4 4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 848
+ADDP4
+ASGNP4
+ADDRLP4 4
+INDIRP4
+ADDRLP4 4
+INDIRP4
+INDIRI4
+CNSTI4 1
+ADDRFP4 4
+INDIRI4
+LSHI4
+BCOMI4
+BANDI4
+ASGNI4
+line 3245
+;3244:
+;3245:	switch( (int)forcePower )
+ADDRLP4 8
+ADDRFP4 4
+INDIRI4
+ASGNI4
+ADDRLP4 8
+INDIRI4
+CNSTI4 0
+LTI4 $1488
+ADDRLP4 8
+INDIRI4
+CNSTI4 14
+GTI4 $1488
+ADDRLP4 8
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRGP4 $1547
+ADDP4
+INDIRP4
+JUMPV
+lit
+align 4
+LABELV $1547
+address $1490
+address $1488
+address $1492
+address $1488
+address $1488
+address $1497
+address $1504
+address $1523
+address $1530
+address $1537
+address $1534
+address $1488
+address $1488
+address $1540
+address $1501
+code
+line 3246
+;3246:	{
+LABELV $1490
+line 3248
+;3247:	case FP_HEAL:
+;3248:		self->client->ps.fd.forceHealAmount = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1152
+ADDP4
+CNSTI4 0
+ASGNI4
+line 3249
+;3249:		self->client->ps.fd.forceHealTime = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1148
+ADDP4
+CNSTI4 0
+ASGNI4
+line 3250
+;3250:		break;
+ADDRGP4 $1488
+JUMPV
+line 3252
+;3251:	case FP_LEVITATION:
+;3252:		break;
+LABELV $1492
+line 3254
+;3253:	case FP_SPEED:
+;3254:		if (wasActive & (1 << FP_SPEED))
+ADDRLP4 0
+INDIRI4
+CNSTI4 4
+BANDI4
+CNSTI4 0
+EQI4 $1488
+line 3255
+;3255:		{
+line 3256
+;3256:			G_MuteSound(self->client->ps.fd.killSoundEntIndex[TRACK_CHANNEL_2-50], CHAN_VOICE);
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1208
+ADDP4
+INDIRI4
+ARGI4
+CNSTI4 3
+ARGI4
+ADDRGP4 G_MuteSound
+CALLV
+pop
+line 3257
+;3257:		}
+line 3258
+;3258:		break;
+ADDRGP4 $1488
+JUMPV
+line 3260
+;3259:	case FP_PUSH:
+;3260:		break;
+line 3262
+;3261:	case FP_PULL:
+;3262:		break;
+LABELV $1497
+line 3264
+;3263:	case FP_TELEPATHY:
+;3264:		if (wasActive & (1 << FP_TELEPATHY))
+ADDRLP4 0
+INDIRI4
+CNSTI4 32
+BANDI4
+CNSTI4 0
+EQI4 $1498
+line 3265
+;3265:		{
+line 3266
+;3266:			G_Sound( self, CHAN_AUTO, G_SoundIndex("sound/weapons/force/distractstop.wav") );
+ADDRGP4 $1500
+ARGP4
+ADDRLP4 16
+ADDRGP4 G_SoundIndex
+CALLI4
+ASGNI4
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 0
+ARGI4
+ADDRLP4 16
+INDIRI4
+ARGI4
+ADDRGP4 G_Sound
+CALLV
+pop
+line 3267
+;3267:		}
+LABELV $1498
+line 3268
+;3268:		self->client->ps.fd.forceMindtrickTargetIndex = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1156
+ADDP4
+CNSTI4 0
+ASGNI4
+line 3269
+;3269:		self->client->ps.fd.forceMindtrickTargetIndex2 = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1160
+ADDP4
+CNSTI4 0
+ASGNI4
+line 3270
+;3270:		self->client->ps.fd.forceMindtrickTargetIndex3 = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1164
+ADDP4
+CNSTI4 0
+ASGNI4
+line 3271
+;3271:		self->client->ps.fd.forceMindtrickTargetIndex4 = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1168
+ADDP4
+CNSTI4 0
+ASGNI4
+line 3272
+;3272:		break;
+ADDRGP4 $1488
+JUMPV
+LABELV $1501
+line 3274
+;3273:	case FP_SEE:
+;3274:		if (wasActive & (1 << FP_SEE))
+ADDRLP4 0
+INDIRI4
+CNSTI4 16384
+BANDI4
+CNSTI4 0
+EQI4 $1488
+line 3275
+;3275:		{
+line 3276
+;3276:			G_MuteSound(self->client->ps.fd.killSoundEntIndex[TRACK_CHANNEL_5-50], CHAN_VOICE);
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1220
+ADDP4
+INDIRI4
+ARGI4
+CNSTI4 3
+ARGI4
+ADDRGP4 G_MuteSound
+CALLV
+pop
+line 3277
+;3277:		}
+line 3278
+;3278:		break;
+ADDRGP4 $1488
+JUMPV
+LABELV $1504
+line 3280
+;3279:	case FP_GRIP:
+;3280:		self->client->ps.fd.forceGripUseTime = level.time + 3000;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1124
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 3000
+ADDI4
+ASGNI4
+line 3281
+;3281:		if (self->client->ps.fd.forcePowerLevel[FP_GRIP] > FORCE_LEVEL_1 &&
+ADDRLP4 16
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 16
+INDIRP4
+CNSTI4 968
+ADDP4
+INDIRI4
+CNSTI4 1
+LEI4 $1506
+ADDRLP4 20
+CNSTI4 852
+ADDRLP4 16
+INDIRP4
+CNSTI4 1108
+ADDP4
+INDIRI4
+MULI4
+ASGNI4
+ADDRLP4 20
+INDIRI4
+ADDRGP4 g_entities+408
+ADDP4
+INDIRP4
+CVPU4 4
+CNSTU4 0
+EQU4 $1506
+ADDRLP4 24
+CNSTI4 0
+ASGNI4
+ADDRLP4 20
+INDIRI4
+ADDRGP4 g_entities+676
+ADDP4
+INDIRI4
+ADDRLP4 24
+INDIRI4
+LEI4 $1506
+ADDRLP4 20
+INDIRI4
+ADDRGP4 g_entities+412
+ADDP4
+INDIRI4
+ADDRLP4 24
+INDIRI4
+EQI4 $1506
+ADDRGP4 level+32
+INDIRI4
+CVIF4 4
+ADDRLP4 20
+INDIRI4
+ADDRGP4 g_entities+408
+ADDP4
+INDIRP4
+CNSTI4 1132
+ADDP4
+INDIRF4
+SUBF4
+CNSTF4 1140457472
+LEF4 $1506
+line 3286
+;3282:			g_entities[self->client->ps.fd.forceGripEntityNum].client &&
+;3283:			g_entities[self->client->ps.fd.forceGripEntityNum].health > 0 &&
+;3284:			g_entities[self->client->ps.fd.forceGripEntityNum].inuse &&
+;3285:			(level.time - g_entities[self->client->ps.fd.forceGripEntityNum].client->ps.fd.forceGripStarted) > 500)
+;3286:		{ //if we had our throat crushed in for more than half a second, gasp for air when we're let go
+line 3287
+;3287:			if (wasActive & (1 << FP_GRIP))
+ADDRLP4 0
+INDIRI4
+CNSTI4 64
+BANDI4
+CNSTI4 0
+EQI4 $1513
+line 3288
+;3288:			{
+line 3289
+;3289:				G_EntitySound( &g_entities[self->client->ps.fd.forceGripEntityNum], CHAN_VOICE, G_SoundIndex("*gasp.wav") );
+ADDRGP4 $1515
+ARGP4
+ADDRLP4 28
+ADDRGP4 G_SoundIndex
+CALLI4
+ASGNI4
+CNSTI4 852
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1108
+ADDP4
+INDIRI4
+MULI4
+ADDRGP4 g_entities
+ADDP4
+ARGP4
+CNSTI4 3
+ARGI4
+ADDRLP4 28
+INDIRI4
+ARGI4
+ADDRGP4 G_EntitySound
+CALLV
+pop
+line 3290
+;3290:			}
+LABELV $1513
+line 3291
+;3291:		}
+LABELV $1506
+line 3293
+;3292:
+;3293:		if (g_entities[self->client->ps.fd.forceGripEntityNum].client &&
+ADDRLP4 28
+CNSTI4 852
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1108
+ADDP4
+INDIRI4
+MULI4
+ASGNI4
+ADDRLP4 28
+INDIRI4
+ADDRGP4 g_entities+408
+ADDP4
+INDIRP4
+CVPU4 4
+CNSTU4 0
+EQU4 $1516
+ADDRLP4 28
+INDIRI4
+ADDRGP4 g_entities+412
+ADDP4
+INDIRI4
+CNSTI4 0
+EQI4 $1516
+line 3295
+;3294:			g_entities[self->client->ps.fd.forceGripEntityNum].inuse)
+;3295:		{
+line 3297
+;3296:			
+;3297:			g_entities[self->client->ps.fd.forceGripEntityNum].client->ps.forceGripChangeMovetype = PM_NORMAL;
+CNSTI4 852
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1108
+ADDP4
+INDIRI4
+MULI4
+ADDRGP4 g_entities+408
+ADDP4
+INDIRP4
+CNSTI4 1288
+ADDP4
+CNSTI4 0
+ASGNI4
+line 3298
+;3298:		}
+LABELV $1516
+line 3300
+;3299:
+;3300:		if (self->client->ps.forceHandExtend == HANDEXTEND_FORCEGRIP)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1248
+ADDP4
+INDIRI4
+CNSTI4 3
+NEI4 $1521
+line 3301
+;3301:		{
+line 3302
+;3302:			self->client->ps.forceHandExtendTime = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1252
+ADDP4
+CNSTI4 0
+ASGNI4
+line 3303
+;3303:		}
+LABELV $1521
+line 3305
+;3304:
+;3305:		self->client->ps.fd.forceGripEntityNum = ENTITYNUM_NONE;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1108
+ADDP4
+CNSTI4 1023
+ASGNI4
+line 3307
+;3306:
+;3307:		self->client->ps.powerups[PW_DISINT_4] = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 380
+ADDP4
+CNSTI4 0
+ASGNI4
+line 3308
+;3308:		break;
+ADDRGP4 $1488
+JUMPV
+LABELV $1523
+line 3310
+;3309:	case FP_LIGHTNING:
+;3310:		if ( self->client->ps.fd.forcePowerLevel[FP_LIGHTNING] < FORCE_LEVEL_2 )
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 972
+ADDP4
+INDIRI4
+CNSTI4 2
+GEI4 $1524
+line 3311
+;3311:		{//don't do it again for 3 seconds, minimum... FIXME: this should be automatic once regeneration is slower (normal)
+line 3312
+;3312:			self->client->ps.fd.forcePowerDebounce[FP_LIGHTNING] = level.time + 3000;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 800
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 3000
+ADDI4
+ASGNI4
+line 3313
+;3313:		}
+ADDRGP4 $1525
+JUMPV
+LABELV $1524
+line 3315
+;3314:		else
+;3315:		{
+line 3316
+;3316:			self->client->ps.fd.forcePowerDebounce[FP_LIGHTNING] = level.time + 1500;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 800
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 1500
+ADDI4
+ASGNI4
+line 3317
+;3317:		}
+LABELV $1525
+line 3318
+;3318:		if (self->client->ps.forceHandExtend == HANDEXTEND_FORCEGRIP)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1248
+ADDP4
+INDIRI4
+CNSTI4 3
+NEI4 $1528
+line 3319
+;3319:		{
+line 3320
+;3320:			self->client->ps.forceHandExtendTime = 0; //reset hand position
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1252
+ADDP4
+CNSTI4 0
+ASGNI4
+line 3321
+;3321:		}
+LABELV $1528
+line 3323
+;3322:
+;3323:		self->client->ps.activeForcePass = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 636
+ADDP4
+CNSTI4 0
+ASGNI4
+line 3324
+;3324:		break;
+ADDRGP4 $1488
+JUMPV
+LABELV $1530
+line 3326
+;3325:	case FP_RAGE:
+;3326:		self->client->ps.fd.forceRageRecoveryTime = level.time + 10000;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1172
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 10000
+ADDI4
+ASGNI4
+line 3327
+;3327:		if (wasActive & (1 << FP_RAGE))
+ADDRLP4 0
+INDIRI4
+CNSTI4 256
+BANDI4
+CNSTI4 0
+EQI4 $1488
+line 3328
+;3328:		{
+line 3329
+;3329:			G_MuteSound(self->client->ps.fd.killSoundEntIndex[TRACK_CHANNEL_3-50], CHAN_VOICE);
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1212
+ADDP4
+INDIRI4
+ARGI4
+CNSTI4 3
+ARGI4
+ADDRGP4 G_MuteSound
+CALLV
+pop
+line 3330
+;3330:		}
+line 3331
+;3331:		break;
+ADDRGP4 $1488
+JUMPV
+LABELV $1534
+line 3333
+;3332:	case FP_ABSORB:
+;3333:		if (wasActive & (1 << FP_ABSORB))
+ADDRLP4 0
+INDIRI4
+CNSTI4 1024
+BANDI4
+CNSTI4 0
+EQI4 $1488
+line 3334
+;3334:		{
+line 3335
+;3335:			G_MuteSound(self->client->ps.fd.killSoundEntIndex[TRACK_CHANNEL_3-50], CHAN_VOICE);
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1212
+ADDP4
+INDIRI4
+ARGI4
+CNSTI4 3
+ARGI4
+ADDRGP4 G_MuteSound
+CALLV
+pop
+line 3336
+;3336:		}
+line 3337
+;3337:		break;
+ADDRGP4 $1488
+JUMPV
+LABELV $1537
+line 3339
+;3338:	case FP_PROTECT:
+;3339:		if (wasActive & (1 << FP_PROTECT))
+ADDRLP4 0
+INDIRI4
+CNSTI4 512
+BANDI4
+CNSTI4 0
+EQI4 $1488
+line 3340
+;3340:		{
+line 3341
+;3341:			G_MuteSound(self->client->ps.fd.killSoundEntIndex[TRACK_CHANNEL_3-50], CHAN_VOICE);
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1212
+ADDP4
+INDIRI4
+ARGI4
+CNSTI4 3
+ARGI4
+ADDRGP4 G_MuteSound
+CALLV
+pop
+line 3342
+;3342:		}
+line 3343
+;3343:		break;
+ADDRGP4 $1488
+JUMPV
+LABELV $1540
+line 3345
+;3344:	case FP_DRAIN:
+;3345:		if ( self->client->ps.fd.forcePowerLevel[FP_DRAIN] < FORCE_LEVEL_2 )
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 996
+ADDP4
+INDIRI4
+CNSTI4 2
+GEI4 $1541
+line 3346
+;3346:		{//don't do it again for 3 seconds, minimum...
+line 3347
+;3347:			self->client->ps.fd.forcePowerDebounce[FP_DRAIN] = level.time + 3000;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 824
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 3000
+ADDI4
+ASGNI4
+line 3348
+;3348:		}
+ADDRGP4 $1542
+JUMPV
+LABELV $1541
+line 3350
+;3349:		else
+;3350:		{
+line 3351
+;3351:			self->client->ps.fd.forcePowerDebounce[FP_DRAIN] = level.time + 1500;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 824
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 1500
+ADDI4
+ASGNI4
+line 3352
+;3352:		}
+LABELV $1542
+line 3354
+;3353:
+;3354:		if (self->client->ps.forceHandExtend == HANDEXTEND_FORCEGRIP)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1248
+ADDP4
+INDIRI4
+CNSTI4 3
+NEI4 $1545
+line 3355
+;3355:		{
+line 3356
+;3356:			self->client->ps.forceHandExtendTime = 0; //reset hand position
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1252
+ADDP4
+CNSTI4 0
+ASGNI4
+line 3357
+;3357:		}
+LABELV $1545
+line 3359
+;3358:
+;3359:		self->client->ps.activeForcePass = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 636
+ADDP4
+CNSTI4 0
+ASGNI4
+line 3361
+;3360:	default:
+;3361:		break;
+LABELV $1488
+line 3363
+;3362:	}
+;3363:}
+LABELV $1486
+endproc WP_ForcePowerStop 32 12
+export DoGripAction
+proc DoGripAction 1272 32
+line 3366
+;3364:
+;3365:void DoGripAction(gentity_t *self, forcePowers_t forcePower)
+;3366:{
+line 3368
+;3367:	gentity_t *gripEnt;
+;3368:	int gripLevel = 0;
+ADDRLP4 4
+CNSTI4 0
+ASGNI4
+line 3373
+;3369:	trace_t tr;
+;3370:	vec3_t a;
+;3371:	vec3_t fwd, fwd_o, start_o, nvel;
+;3372:
+;3373:	self->client->dangerTime = level.time;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 2948
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+ASGNI4
+line 3374
+;3374:	self->client->ps.eFlags &= ~EF_INVULNERABLE;
+ADDRLP4 1148
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 108
+ADDP4
+ASGNP4
+ADDRLP4 1148
+INDIRP4
+ADDRLP4 1148
+INDIRP4
+INDIRI4
+CNSTI4 -67108865
+BANDI4
+ASGNI4
+line 3375
+;3375:	self->client->invulnerableTimer = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1700
+ADDP4
+CNSTI4 0
+ASGNI4
+line 3377
+;3376:
+;3377:	gripEnt = &g_entities[self->client->ps.fd.forceGripEntityNum];
+ADDRLP4 0
+CNSTI4 852
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1108
+ADDP4
+INDIRI4
+MULI4
+ADDRGP4 g_entities
+ADDP4
+ASGNP4
+line 3379
+;3378:
+;3379:	if (!gripEnt || !gripEnt->client || !gripEnt->inuse || gripEnt->health < 1 || !ForcePowerUsableOn(self, gripEnt, FP_GRIP))
+ADDRLP4 1156
+CNSTU4 0
+ASGNU4
+ADDRLP4 0
+INDIRP4
+CVPU4 4
+ADDRLP4 1156
+INDIRU4
+EQU4 $1555
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CVPU4 4
+ADDRLP4 1156
+INDIRU4
+EQU4 $1555
+ADDRLP4 0
+INDIRP4
+CNSTI4 412
+ADDP4
+INDIRI4
+CNSTI4 0
+EQI4 $1555
+ADDRLP4 0
+INDIRP4
+CNSTI4 676
+ADDP4
+INDIRI4
+CNSTI4 1
+LTI4 $1555
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRLP4 0
+INDIRP4
+ARGP4
+CNSTI4 6
+ARGI4
+ADDRLP4 1160
+ADDRGP4 ForcePowerUsableOn
+CALLI4
+ASGNI4
+ADDRLP4 1160
+INDIRI4
+CNSTI4 0
+NEI4 $1550
+LABELV $1555
+line 3380
+;3380:	{
+line 3381
+;3381:		WP_ForcePowerStop(self, forcePower);
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRFP4 4
+INDIRI4
+ARGI4
+ADDRGP4 WP_ForcePowerStop
+CALLV
+pop
+line 3382
+;3382:		self->client->ps.fd.forceGripEntityNum = ENTITYNUM_NONE;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1108
+ADDP4
+CNSTI4 1023
+ASGNI4
+line 3384
+;3383:
+;3384:		if (gripEnt && gripEnt->client && gripEnt->inuse)
+ADDRLP4 1168
+CNSTU4 0
+ASGNU4
+ADDRLP4 0
+INDIRP4
+CVPU4 4
+ADDRLP4 1168
+INDIRU4
+EQU4 $1548
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CVPU4 4
+ADDRLP4 1168
+INDIRU4
+EQU4 $1548
+ADDRLP4 0
+INDIRP4
+CNSTI4 412
+ADDP4
+INDIRI4
+CNSTI4 0
+EQI4 $1548
+line 3385
+;3385:		{
+line 3386
+;3386:			gripEnt->client->ps.forceGripChangeMovetype = PM_NORMAL;
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1288
+ADDP4
+CNSTI4 0
+ASGNI4
+line 3387
+;3387:		}
+line 3388
+;3388:		return;
+ADDRGP4 $1548
+JUMPV
+LABELV $1550
+line 3391
+;3389:	}
+;3390:
+;3391:	VectorSubtract(gripEnt->client->ps.origin, self->client->ps.origin, a);
+ADDRLP4 1164
+CNSTI4 408
+ASGNI4
+ADDRLP4 1168
+ADDRLP4 0
+INDIRP4
+ADDRLP4 1164
+INDIRI4
+ADDP4
+ASGNP4
+ADDRLP4 1172
+CNSTI4 20
+ASGNI4
+ADDRLP4 1176
+ADDRFP4 0
+INDIRP4
+ADDRLP4 1164
+INDIRI4
+ADDP4
+ASGNP4
+ADDRLP4 8
+ADDRLP4 1168
+INDIRP4
+INDIRP4
+ADDRLP4 1172
+INDIRI4
+ADDP4
+INDIRF4
+ADDRLP4 1176
+INDIRP4
+INDIRP4
+ADDRLP4 1172
+INDIRI4
+ADDP4
+INDIRF4
+SUBF4
+ASGNF4
+ADDRLP4 1180
+CNSTI4 24
+ASGNI4
+ADDRLP4 8+4
+ADDRLP4 1168
+INDIRP4
+INDIRP4
+ADDRLP4 1180
+INDIRI4
+ADDP4
+INDIRF4
+ADDRLP4 1176
+INDIRP4
+INDIRP4
+ADDRLP4 1180
+INDIRI4
+ADDP4
+INDIRF4
+SUBF4
+ASGNF4
+ADDRLP4 1184
+CNSTI4 408
+ASGNI4
+ADDRLP4 1188
+CNSTI4 28
+ASGNI4
+ADDRLP4 8+8
+ADDRLP4 0
+INDIRP4
+ADDRLP4 1184
+INDIRI4
+ADDP4
+INDIRP4
+ADDRLP4 1188
+INDIRI4
+ADDP4
+INDIRF4
+ADDRFP4 0
+INDIRP4
+ADDRLP4 1184
+INDIRI4
+ADDP4
+INDIRP4
+ADDRLP4 1188
+INDIRI4
+ADDP4
+INDIRF4
+SUBF4
+ASGNF4
+line 3393
+;3392:	
+;3393:	trap_Trace(&tr, self->client->ps.origin, NULL, NULL, gripEnt->client->ps.origin, self->s.number, MASK_PLAYERSOLID);
+ADDRLP4 20
+ARGP4
+ADDRLP4 1192
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 1196
+CNSTI4 408
+ASGNI4
+ADDRLP4 1200
+CNSTI4 20
+ASGNI4
+ADDRLP4 1192
+INDIRP4
+ADDRLP4 1196
+INDIRI4
+ADDP4
+INDIRP4
+ADDRLP4 1200
+INDIRI4
+ADDP4
+ARGP4
+ADDRLP4 1204
+CNSTP4 0
+ASGNP4
+ADDRLP4 1204
+INDIRP4
+ARGP4
+ADDRLP4 1204
+INDIRP4
+ARGP4
+ADDRLP4 0
+INDIRP4
+ADDRLP4 1196
+INDIRI4
+ADDP4
+INDIRP4
+ADDRLP4 1200
+INDIRI4
+ADDP4
+ARGP4
+ADDRLP4 1192
+INDIRP4
+INDIRI4
+ARGI4
+CNSTI4 273
+ARGI4
+ADDRGP4 trap_Trace
+CALLV
+pop
+line 3395
+;3394:
+;3395:	gripLevel = WP_AbsorbConversion(gripEnt, gripEnt->client->ps.fd.forcePowerLevel[FP_ABSORB], self, FP_GRIP, self->client->ps.fd.forcePowerLevel[FP_GRIP], forcePowerNeeded[self->client->ps.fd.forcePowerLevel[FP_GRIP]][FP_GRIP]);
+ADDRLP4 0
+INDIRP4
+ARGP4
+ADDRLP4 1212
+CNSTI4 408
+ASGNI4
+ADDRLP4 0
+INDIRP4
+ADDRLP4 1212
+INDIRI4
+ADDP4
+INDIRP4
+CNSTI4 984
+ADDP4
+INDIRI4
+ARGI4
+ADDRLP4 1216
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 1216
+INDIRP4
+ARGP4
+CNSTI4 6
+ARGI4
+ADDRLP4 1220
+ADDRLP4 1216
+INDIRP4
+ADDRLP4 1212
+INDIRI4
+ADDP4
+INDIRP4
+CNSTI4 968
+ADDP4
+INDIRI4
+ASGNI4
+ADDRLP4 1220
+INDIRI4
+ARGI4
+CNSTI4 72
+ADDRLP4 1220
+INDIRI4
+MULI4
+ADDRGP4 forcePowerNeeded+24
+ADDP4
+INDIRI4
+ARGI4
+ADDRLP4 1224
+ADDRGP4 WP_AbsorbConversion
+CALLI4
+ASGNI4
+ADDRLP4 4
+ADDRLP4 1224
+INDIRI4
+ASGNI4
+line 3397
+;3396:
+;3397:	if (gripLevel == -1)
+ADDRLP4 4
+INDIRI4
+CNSTI4 -1
+NEI4 $1561
+line 3398
+;3398:	{
+line 3399
+;3399:		gripLevel = self->client->ps.fd.forcePowerLevel[FP_GRIP];
+ADDRLP4 4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 968
+ADDP4
+INDIRI4
+ASGNI4
+line 3400
+;3400:	}
+LABELV $1561
+line 3402
+;3401:
+;3402:	if (!gripLevel)
+ADDRLP4 4
+INDIRI4
+CNSTI4 0
+NEI4 $1563
+line 3403
+;3403:	{
+line 3404
+;3404:		WP_ForcePowerStop(self, forcePower);
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRFP4 4
+INDIRI4
+ARGI4
+ADDRGP4 WP_ForcePowerStop
+CALLV
+pop
+line 3405
+;3405:		return;
+ADDRGP4 $1548
+JUMPV
+LABELV $1563
+line 3408
+;3406:	}
+;3407:
+;3408:	if (VectorLength(a) > MAX_GRIP_DISTANCE)
+ADDRLP4 8
+ARGP4
+ADDRLP4 1228
+ADDRGP4 VectorLength
+CALLF4
+ASGNF4
+ADDRLP4 1228
+INDIRF4
+CNSTF4 1132462080
+LEF4 $1565
+line 3409
+;3409:	{
+line 3410
+;3410:		WP_ForcePowerStop(self, forcePower);
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRFP4 4
+INDIRI4
+ARGI4
+ADDRGP4 WP_ForcePowerStop
+CALLV
+pop
+line 3411
+;3411:		return;
+ADDRGP4 $1548
+JUMPV
+LABELV $1565
+line 3414
+;3412:	}
+;3413:
+;3414:	if ( !InFront( gripEnt->client->ps.origin, self->client->ps.origin, self->client->ps.viewangles, 0.9f ) &&
+ADDRLP4 1232
+CNSTI4 408
+ASGNI4
+ADDRLP4 1236
+CNSTI4 20
+ASGNI4
+ADDRLP4 0
+INDIRP4
+ADDRLP4 1232
+INDIRI4
+ADDP4
+INDIRP4
+ADDRLP4 1236
+INDIRI4
+ADDP4
+ARGP4
+ADDRLP4 1240
+ADDRFP4 0
+INDIRP4
+ADDRLP4 1232
+INDIRI4
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 1240
+INDIRP4
+ADDRLP4 1236
+INDIRI4
+ADDP4
+ARGP4
+ADDRLP4 1240
+INDIRP4
+CNSTI4 156
+ADDP4
+ARGP4
+CNSTF4 1063675494
+ARGF4
+ADDRLP4 1244
+ADDRGP4 InFront
+CALLI4
+ASGNI4
+ADDRLP4 1244
+INDIRI4
+CNSTI4 0
+NEI4 $1567
+ADDRLP4 4
+INDIRI4
+CNSTI4 3
+GEI4 $1567
+line 3416
+;3415:		gripLevel < FORCE_LEVEL_3)
+;3416:	{
+line 3417
+;3417:		WP_ForcePowerStop(self, forcePower);
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRFP4 4
+INDIRI4
+ARGI4
+ADDRGP4 WP_ForcePowerStop
+CALLV
+pop
+line 3418
+;3418:		return;
+ADDRGP4 $1548
+JUMPV
+LABELV $1567
+line 3421
+;3419:	}
+;3420:
+;3421:	if (tr.fraction != 1 &&
+ADDRLP4 20+8
+INDIRF4
+CNSTF4 1065353216
+EQF4 $1569
+ADDRLP4 20+52
+INDIRI4
+ADDRLP4 0
+INDIRP4
+INDIRI4
+EQI4 $1569
+ADDRLP4 4
+INDIRI4
+CNSTI4 3
+GEI4 $1569
+line 3424
+;3422:		tr.entityNum != gripEnt->s.number &&
+;3423:		gripLevel < FORCE_LEVEL_3)
+;3424:	{
+line 3425
+;3425:		WP_ForcePowerStop(self, forcePower);
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRFP4 4
+INDIRI4
+ARGI4
+ADDRGP4 WP_ForcePowerStop
+CALLV
+pop
+line 3426
+;3426:		return;
+ADDRGP4 $1548
+JUMPV
+LABELV $1569
+line 3429
+;3427:	}
+;3428:
+;3429:	if (self->client->ps.fd.forcePowerDebounce[FP_GRIP] < level.time)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 796
+ADDP4
+INDIRI4
+ADDRGP4 level+32
+INDIRI4
+GEI4 $1573
+line 3430
+;3430:	{ //2 damage per second while choking, resulting in 10 damage total (not including The Squeeze<tm>)
+line 3431
+;3431:		self->client->ps.fd.forcePowerDebounce[FP_GRIP] = level.time + 1000;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 796
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 1000
+ADDI4
+ASGNI4
+line 3432
+;3432:		G_Damage(gripEnt, self, self, NULL, NULL, 2, DAMAGE_NO_ARMOR, MOD_FORCE_DARK);
+ADDRLP4 0
+INDIRP4
+ARGP4
+ADDRLP4 1248
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 1248
+INDIRP4
+ARGP4
+ADDRLP4 1248
+INDIRP4
+ARGP4
+ADDRLP4 1252
+CNSTP4 0
+ASGNP4
+ADDRLP4 1252
+INDIRP4
+ARGP4
+ADDRLP4 1252
+INDIRP4
+ARGP4
+ADDRLP4 1256
+CNSTI4 2
+ASGNI4
+ADDRLP4 1256
+INDIRI4
+ARGI4
+ADDRLP4 1256
+INDIRI4
+ARGI4
+CNSTI4 27
+ARGI4
+ADDRGP4 G_Damage
+CALLV
+pop
+line 3433
+;3433:	}
+LABELV $1573
+line 3435
+;3434:
+;3435:	if (gripLevel == FORCE_LEVEL_1)
+ADDRLP4 4
+INDIRI4
+CNSTI4 1
+NEI4 $1577
+line 3436
+;3436:	{
+line 3437
+;3437:		gripEnt->client->ps.fd.forceGripBeingGripped = level.time + 1000;
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1116
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 1000
+ADDI4
+CVIF4 4
+ASGNF4
+line 3439
+;3438:		
+;3439:		if ((level.time - gripEnt->client->ps.fd.forceGripStarted) > 5000)
+ADDRGP4 level+32
+INDIRI4
+CVIF4 4
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1132
+ADDP4
+INDIRF4
+SUBF4
+CNSTF4 1167867904
+LEF4 $1548
+line 3440
+;3440:		{
+line 3441
+;3441:			WP_ForcePowerStop(self, forcePower);
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRFP4 4
+INDIRI4
+ARGI4
+ADDRGP4 WP_ForcePowerStop
+CALLV
+pop
+line 3442
+;3442:		}
+line 3443
+;3443:		return;
+ADDRGP4 $1548
+JUMPV
+LABELV $1577
+line 3446
+;3444:	}
+;3445:
+;3446:	if (gripLevel == FORCE_LEVEL_2)
+ADDRLP4 4
+INDIRI4
+CNSTI4 2
+NEI4 $1583
+line 3447
+;3447:	{
+line 3448
+;3448:		gripEnt->client->ps.fd.forceGripBeingGripped = level.time + 1000;
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1116
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 1000
+ADDI4
+CVIF4 4
+ASGNF4
+line 3450
+;3449:
+;3450:		if (gripEnt->client->ps.forceGripMoveInterval < level.time)
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1284
+ADDP4
+INDIRI4
+ADDRGP4 level+32
+INDIRI4
+GEI4 $1586
+line 3451
+;3451:		{
+line 3452
+;3452:			gripEnt->client->ps.velocity[2] = 30;
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 40
+ADDP4
+CNSTF4 1106247680
+ASGNF4
+line 3454
+;3453:
+;3454:			gripEnt->client->ps.forceGripMoveInterval = level.time + 300; //only update velocity every 300ms, so as to avoid heavy bandwidth usage
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1284
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 300
+ADDI4
+ASGNI4
+line 3455
+;3455:		}
+LABELV $1586
+line 3457
+;3456:
+;3457:		gripEnt->client->ps.otherKiller = self->s.number;
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 760
+ADDP4
+ADDRFP4 0
+INDIRP4
+INDIRI4
+ASGNI4
+line 3458
+;3458:		gripEnt->client->ps.otherKillerTime = level.time + 5000;
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 764
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 5000
+ADDI4
+ASGNI4
+line 3459
+;3459:		gripEnt->client->ps.otherKillerDebounceTime = level.time + 100;
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 768
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 100
+ADDI4
+ASGNI4
+line 3461
+;3460:
+;3461:		gripEnt->client->ps.forceGripChangeMovetype = PM_FLOAT;
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1288
+ADDP4
+CNSTI4 1
+ASGNI4
+line 3463
+;3462:
+;3463:		if ((level.time - gripEnt->client->ps.fd.forceGripStarted) > 3000 && !self->client->ps.fd.forceGripDamageDebounceTime)
+ADDRLP4 1248
+CNSTI4 408
+ASGNI4
+ADDRGP4 level+32
+INDIRI4
+CVIF4 4
+ADDRLP4 0
+INDIRP4
+ADDRLP4 1248
+INDIRI4
+ADDP4
+INDIRP4
+CNSTI4 1132
+ADDP4
+INDIRF4
+SUBF4
+CNSTF4 1161527296
+LEF4 $1592
+ADDRFP4 0
+INDIRP4
+ADDRLP4 1248
+INDIRI4
+ADDP4
+INDIRP4
+CNSTI4 1112
+ADDP4
+INDIRI4
+CNSTI4 0
+NEI4 $1592
+line 3464
+;3464:		{ //if we managed to lift him into the air for 2 seconds, give him a crack
+line 3465
+;3465:			self->client->ps.fd.forceGripDamageDebounceTime = 1;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1112
+ADDP4
+CNSTI4 1
+ASGNI4
+line 3466
+;3466:			G_Damage(gripEnt, self, self, NULL, NULL, 20, DAMAGE_NO_ARMOR, MOD_FORCE_DARK);
+ADDRLP4 0
+INDIRP4
+ARGP4
+ADDRLP4 1252
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 1252
+INDIRP4
+ARGP4
+ADDRLP4 1252
+INDIRP4
+ARGP4
+ADDRLP4 1256
+CNSTP4 0
+ASGNP4
+ADDRLP4 1256
+INDIRP4
+ARGP4
+ADDRLP4 1256
+INDIRP4
+ARGP4
+CNSTI4 20
+ARGI4
+CNSTI4 2
+ARGI4
+CNSTI4 27
+ARGI4
+ADDRGP4 G_Damage
+CALLV
+pop
+line 3469
+;3467:
+;3468:			//Must play custom sounds on the actual entity. Don't use G_Sound (it creates a temp entity for the sound)
+;3469:			G_EntitySound( gripEnt, CHAN_VOICE, G_SoundIndex(va( "*choke%d.wav", Q_irand( 1, 3 ) )) );
+CNSTI4 1
+ARGI4
+CNSTI4 3
+ARGI4
+ADDRLP4 1260
+ADDRGP4 Q_irand
+CALLI4
+ASGNI4
+ADDRGP4 $1595
+ARGP4
+ADDRLP4 1260
+INDIRI4
+ARGI4
+ADDRLP4 1264
+ADDRGP4 va
+CALLP4
+ASGNP4
+ADDRLP4 1264
+INDIRP4
+ARGP4
+ADDRLP4 1268
+ADDRGP4 G_SoundIndex
+CALLI4
+ASGNI4
+ADDRLP4 0
+INDIRP4
+ARGP4
+CNSTI4 3
+ARGI4
+ADDRLP4 1268
+INDIRI4
+ARGI4
+ADDRGP4 G_EntitySound
+CALLV
+pop
+line 3471
+;3470:
+;3471:			gripEnt->client->ps.forceHandExtend = HANDEXTEND_CHOKE;
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1248
+ADDP4
+CNSTI4 5
+ASGNI4
+line 3472
+;3472:			gripEnt->client->ps.forceHandExtendTime = level.time + 2000;
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1252
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 2000
+ADDI4
+ASGNI4
+line 3474
+;3473:
+;3474:			if (gripEnt->client->ps.fd.forcePowersActive & (1 << FP_GRIP))
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 848
+ADDP4
+INDIRI4
+CNSTI4 64
+BANDI4
+CNSTI4 0
+EQI4 $1548
+line 3475
+;3475:			{ //choking, so don't let him keep gripping himself
+line 3476
+;3476:				WP_ForcePowerStop(gripEnt, FP_GRIP);
+ADDRLP4 0
+INDIRP4
+ARGP4
+CNSTI4 6
+ARGI4
+ADDRGP4 WP_ForcePowerStop
+CALLV
+pop
+line 3477
+;3477:			}
+line 3478
+;3478:		}
+ADDRGP4 $1548
+JUMPV
+LABELV $1592
+line 3479
+;3479:		else if ((level.time - gripEnt->client->ps.fd.forceGripStarted) > 4000)
+ADDRGP4 level+32
+INDIRI4
+CVIF4 4
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1132
+ADDP4
+INDIRF4
+SUBF4
+CNSTF4 1165623296
+LEF4 $1548
+line 3480
+;3480:		{
+line 3481
+;3481:			WP_ForcePowerStop(self, forcePower);
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRFP4 4
+INDIRI4
+ARGI4
+ADDRGP4 WP_ForcePowerStop
+CALLV
+pop
+line 3482
+;3482:		}
+line 3483
+;3483:		return;
+ADDRGP4 $1548
+JUMPV
+LABELV $1583
+line 3486
+;3484:	}
+;3485:
+;3486:	if (gripLevel == FORCE_LEVEL_3)
+ADDRLP4 4
+INDIRI4
+CNSTI4 3
+NEI4 $1602
+line 3487
+;3487:	{
+line 3488
+;3488:		gripEnt->client->ps.fd.forceGripBeingGripped = level.time + 1000;
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1116
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 1000
+ADDI4
+CVIF4 4
+ASGNF4
+line 3490
+;3489:
+;3490:		gripEnt->client->ps.otherKiller = self->s.number;
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 760
+ADDP4
+ADDRFP4 0
+INDIRP4
+INDIRI4
+ASGNI4
+line 3491
+;3491:		gripEnt->client->ps.otherKillerTime = level.time + 5000;
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 764
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 5000
+ADDI4
+ASGNI4
+line 3492
+;3492:		gripEnt->client->ps.otherKillerDebounceTime = level.time + 100;
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 768
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 100
+ADDI4
+ASGNI4
+line 3494
+;3493:
+;3494:		gripEnt->client->ps.forceGripChangeMovetype = PM_FLOAT;
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1288
+ADDP4
+CNSTI4 1
+ASGNI4
+line 3496
+;3495:
+;3496:		if (gripEnt->client->ps.forceGripMoveInterval < level.time)
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1284
+ADDP4
+INDIRI4
+ADDRGP4 level+32
+INDIRI4
+GEI4 $1607
+line 3497
+;3497:		{
+line 3498
+;3498:			float nvLen = 0;
+ADDRLP4 1248
+CNSTF4 0
+ASGNF4
+line 3500
+;3499:
+;3500:			VectorCopy(gripEnt->client->ps.origin, start_o);
+ADDRLP4 1136
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 20
+ADDP4
+INDIRB
+ASGNB 12
+line 3501
+;3501:			AngleVectors(self->client->ps.viewangles, fwd, NULL, NULL);
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 156
+ADDP4
+ARGP4
+ADDRLP4 1124
+ARGP4
+ADDRLP4 1252
+CNSTP4 0
+ASGNP4
+ADDRLP4 1252
+INDIRP4
+ARGP4
+ADDRLP4 1252
+INDIRP4
+ARGP4
+ADDRGP4 AngleVectors
+CALLV
+pop
+line 3502
+;3502:			fwd_o[0] = self->client->ps.origin[0] + fwd[0]*128;
+ADDRLP4 1112
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 20
+ADDP4
+INDIRF4
+CNSTF4 1124073472
+ADDRLP4 1124
+INDIRF4
+MULF4
+ADDF4
+ASGNF4
+line 3503
+;3503:			fwd_o[1] = self->client->ps.origin[1] + fwd[1]*128;
+ADDRLP4 1112+4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 24
+ADDP4
+INDIRF4
+CNSTF4 1124073472
+ADDRLP4 1124+4
+INDIRF4
+MULF4
+ADDF4
+ASGNF4
+line 3504
+;3504:			fwd_o[2] = self->client->ps.origin[2] + fwd[2]*128;
+ADDRLP4 1112+8
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 28
+ADDP4
+INDIRF4
+CNSTF4 1124073472
+ADDRLP4 1124+8
+INDIRF4
+MULF4
+ADDF4
+ASGNF4
+line 3505
+;3505:			fwd_o[2] += 16;
+ADDRLP4 1112+8
+ADDRLP4 1112+8
+INDIRF4
+CNSTF4 1098907648
+ADDF4
+ASGNF4
+line 3506
+;3506:			VectorSubtract(fwd_o, start_o, nvel);
+ADDRLP4 1100
+ADDRLP4 1112
+INDIRF4
+ADDRLP4 1136
+INDIRF4
+SUBF4
+ASGNF4
+ADDRLP4 1100+4
+ADDRLP4 1112+4
+INDIRF4
+ADDRLP4 1136+4
+INDIRF4
+SUBF4
+ASGNF4
+ADDRLP4 1100+8
+ADDRLP4 1112+8
+INDIRF4
+ADDRLP4 1136+8
+INDIRF4
+SUBF4
+ASGNF4
+line 3508
+;3507:
+;3508:			nvLen = VectorLength(nvel);
+ADDRLP4 1100
+ARGP4
+ADDRLP4 1256
+ADDRGP4 VectorLength
+CALLF4
+ASGNF4
+ADDRLP4 1248
+ADDRLP4 1256
+INDIRF4
+ASGNF4
+line 3510
+;3509:
+;3510:			if (nvLen < 16)
+ADDRLP4 1248
+INDIRF4
+CNSTF4 1098907648
+GEF4 $1621
+line 3511
+;3511:			{ //within x units of desired spot
+line 3512
+;3512:				VectorNormalize(nvel);
+ADDRLP4 1100
+ARGP4
+ADDRGP4 VectorNormalize
+CALLF4
+pop
+line 3513
+;3513:				gripEnt->client->ps.velocity[0] = nvel[0]*8;
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 32
+ADDP4
+CNSTF4 1090519040
+ADDRLP4 1100
+INDIRF4
+MULF4
+ASGNF4
+line 3514
+;3514:				gripEnt->client->ps.velocity[1] = nvel[1]*8;
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 36
+ADDP4
+CNSTF4 1090519040
+ADDRLP4 1100+4
+INDIRF4
+MULF4
+ASGNF4
+line 3515
+;3515:				gripEnt->client->ps.velocity[2] = nvel[2]*8;
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 40
+ADDP4
+CNSTF4 1090519040
+ADDRLP4 1100+8
+INDIRF4
+MULF4
+ASGNF4
+line 3516
+;3516:			}
+ADDRGP4 $1622
+JUMPV
+LABELV $1621
+line 3517
+;3517:			else if (nvLen < 64)
+ADDRLP4 1248
+INDIRF4
+CNSTF4 1115684864
+GEF4 $1625
+line 3518
+;3518:			{
+line 3519
+;3519:				VectorNormalize(nvel);
+ADDRLP4 1100
+ARGP4
+ADDRGP4 VectorNormalize
+CALLF4
+pop
+line 3520
+;3520:				gripEnt->client->ps.velocity[0] = nvel[0]*128;
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 32
+ADDP4
+CNSTF4 1124073472
+ADDRLP4 1100
+INDIRF4
+MULF4
+ASGNF4
+line 3521
+;3521:				gripEnt->client->ps.velocity[1] = nvel[1]*128;
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 36
+ADDP4
+CNSTF4 1124073472
+ADDRLP4 1100+4
+INDIRF4
+MULF4
+ASGNF4
+line 3522
+;3522:				gripEnt->client->ps.velocity[2] = nvel[2]*128;
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 40
+ADDP4
+CNSTF4 1124073472
+ADDRLP4 1100+8
+INDIRF4
+MULF4
+ASGNF4
+line 3523
+;3523:			}
+ADDRGP4 $1626
+JUMPV
+LABELV $1625
+line 3524
+;3524:			else if (nvLen < 128)
+ADDRLP4 1248
+INDIRF4
+CNSTF4 1124073472
+GEF4 $1629
+line 3525
+;3525:			{
+line 3526
+;3526:				VectorNormalize(nvel);
+ADDRLP4 1100
+ARGP4
+ADDRGP4 VectorNormalize
+CALLF4
+pop
+line 3527
+;3527:				gripEnt->client->ps.velocity[0] = nvel[0]*256;
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 32
+ADDP4
+CNSTF4 1132462080
+ADDRLP4 1100
+INDIRF4
+MULF4
+ASGNF4
+line 3528
+;3528:				gripEnt->client->ps.velocity[1] = nvel[1]*256;
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 36
+ADDP4
+CNSTF4 1132462080
+ADDRLP4 1100+4
+INDIRF4
+MULF4
+ASGNF4
+line 3529
+;3529:				gripEnt->client->ps.velocity[2] = nvel[2]*256;
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 40
+ADDP4
+CNSTF4 1132462080
+ADDRLP4 1100+8
+INDIRF4
+MULF4
+ASGNF4
+line 3530
+;3530:			}
+ADDRGP4 $1630
+JUMPV
+LABELV $1629
+line 3531
+;3531:			else if (nvLen < 200)
+ADDRLP4 1248
+INDIRF4
+CNSTF4 1128792064
+GEF4 $1633
+line 3532
+;3532:			{
+line 3533
+;3533:				VectorNormalize(nvel);
+ADDRLP4 1100
+ARGP4
+ADDRGP4 VectorNormalize
+CALLF4
+pop
+line 3534
+;3534:				gripEnt->client->ps.velocity[0] = nvel[0]*512;
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 32
+ADDP4
+CNSTF4 1140850688
+ADDRLP4 1100
+INDIRF4
+MULF4
+ASGNF4
+line 3535
+;3535:				gripEnt->client->ps.velocity[1] = nvel[1]*512;
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 36
+ADDP4
+CNSTF4 1140850688
+ADDRLP4 1100+4
+INDIRF4
+MULF4
+ASGNF4
+line 3536
+;3536:				gripEnt->client->ps.velocity[2] = nvel[2]*512;
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 40
+ADDP4
+CNSTF4 1140850688
+ADDRLP4 1100+8
+INDIRF4
+MULF4
+ASGNF4
+line 3537
+;3537:			}
+ADDRGP4 $1634
+JUMPV
+LABELV $1633
+line 3539
+;3538:			else
+;3539:			{
+line 3540
+;3540:				VectorNormalize(nvel);
+ADDRLP4 1100
+ARGP4
+ADDRGP4 VectorNormalize
+CALLF4
+pop
+line 3541
+;3541:				gripEnt->client->ps.velocity[0] = nvel[0]*700;
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 32
+ADDP4
+CNSTF4 1143930880
+ADDRLP4 1100
+INDIRF4
+MULF4
+ASGNF4
+line 3542
+;3542:				gripEnt->client->ps.velocity[1] = nvel[1]*700;
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 36
+ADDP4
+CNSTF4 1143930880
+ADDRLP4 1100+4
+INDIRF4
+MULF4
+ASGNF4
+line 3543
+;3543:				gripEnt->client->ps.velocity[2] = nvel[2]*700;
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 40
+ADDP4
+CNSTF4 1143930880
+ADDRLP4 1100+8
+INDIRF4
+MULF4
+ASGNF4
+line 3544
+;3544:			}
+LABELV $1634
+LABELV $1630
+LABELV $1626
+LABELV $1622
+line 3546
+;3545:
+;3546:			gripEnt->client->ps.forceGripMoveInterval = level.time + 300; //only update velocity every 300ms, so as to avoid heavy bandwidth usage
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1284
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 300
+ADDI4
+ASGNI4
+line 3547
+;3547:		}
+LABELV $1607
+line 3549
+;3548:
+;3549:		if ((level.time - gripEnt->client->ps.fd.forceGripStarted) > 3000 && !self->client->ps.fd.forceGripDamageDebounceTime)
+ADDRLP4 1248
+CNSTI4 408
+ASGNI4
+ADDRGP4 level+32
+INDIRI4
+CVIF4 4
+ADDRLP4 0
+INDIRP4
+ADDRLP4 1248
+INDIRI4
+ADDP4
+INDIRP4
+CNSTI4 1132
+ADDP4
+INDIRF4
+SUBF4
+CNSTF4 1161527296
+LEF4 $1640
+ADDRFP4 0
+INDIRP4
+ADDRLP4 1248
+INDIRI4
+ADDP4
+INDIRP4
+CNSTI4 1112
+ADDP4
+INDIRI4
+CNSTI4 0
+NEI4 $1640
+line 3550
+;3550:		{ //if we managed to lift him into the air for 2 seconds, give him a crack
+line 3551
+;3551:			self->client->ps.fd.forceGripDamageDebounceTime = 1;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1112
+ADDP4
+CNSTI4 1
+ASGNI4
+line 3552
+;3552:			G_Damage(gripEnt, self, self, NULL, NULL, 40, DAMAGE_NO_ARMOR, MOD_FORCE_DARK);
+ADDRLP4 0
+INDIRP4
+ARGP4
+ADDRLP4 1252
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 1252
+INDIRP4
+ARGP4
+ADDRLP4 1252
+INDIRP4
+ARGP4
+ADDRLP4 1256
+CNSTP4 0
+ASGNP4
+ADDRLP4 1256
+INDIRP4
+ARGP4
+ADDRLP4 1256
+INDIRP4
+ARGP4
+CNSTI4 40
+ARGI4
+CNSTI4 2
+ARGI4
+CNSTI4 27
+ARGI4
+ADDRGP4 G_Damage
+CALLV
+pop
+line 3555
+;3553:
+;3554:			//Must play custom sounds on the actual entity. Don't use G_Sound (it creates a temp entity for the sound)
+;3555:			G_EntitySound( gripEnt, CHAN_VOICE, G_SoundIndex(va( "*choke%d.wav", Q_irand( 1, 3 ) )) );
+CNSTI4 1
+ARGI4
+CNSTI4 3
+ARGI4
+ADDRLP4 1260
+ADDRGP4 Q_irand
+CALLI4
+ASGNI4
+ADDRGP4 $1595
+ARGP4
+ADDRLP4 1260
+INDIRI4
+ARGI4
+ADDRLP4 1264
+ADDRGP4 va
+CALLP4
+ASGNP4
+ADDRLP4 1264
+INDIRP4
+ARGP4
+ADDRLP4 1268
+ADDRGP4 G_SoundIndex
+CALLI4
+ASGNI4
+ADDRLP4 0
+INDIRP4
+ARGP4
+CNSTI4 3
+ARGI4
+ADDRLP4 1268
+INDIRI4
+ARGI4
+ADDRGP4 G_EntitySound
+CALLV
+pop
+line 3557
+;3556:
+;3557:			gripEnt->client->ps.forceHandExtend = HANDEXTEND_CHOKE;
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1248
+ADDP4
+CNSTI4 5
+ASGNI4
+line 3558
+;3558:			gripEnt->client->ps.forceHandExtendTime = level.time + 2000;
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1252
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 2000
+ADDI4
+ASGNI4
+line 3560
+;3559:
+;3560:			if (gripEnt->client->ps.fd.forcePowersActive & (1 << FP_GRIP))
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 848
+ADDP4
+INDIRI4
+CNSTI4 64
+BANDI4
+CNSTI4 0
+EQI4 $1548
+line 3561
+;3561:			{ //choking, so don't let him keep gripping himself
+line 3562
+;3562:				WP_ForcePowerStop(gripEnt, FP_GRIP);
+ADDRLP4 0
+INDIRP4
+ARGP4
+CNSTI4 6
+ARGI4
+ADDRGP4 WP_ForcePowerStop
+CALLV
+pop
+line 3563
+;3563:			}
+line 3564
+;3564:		}
+ADDRGP4 $1548
+JUMPV
+LABELV $1640
+line 3565
+;3565:		else if ((level.time - gripEnt->client->ps.fd.forceGripStarted) > 4000)
+ADDRGP4 level+32
+INDIRI4
+CVIF4 4
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1132
+ADDP4
+INDIRF4
+SUBF4
+CNSTF4 1165623296
+LEF4 $1548
+line 3566
+;3566:		{
+line 3567
+;3567:			WP_ForcePowerStop(self, forcePower);
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRFP4 4
+INDIRI4
+ARGI4
+ADDRGP4 WP_ForcePowerStop
+CALLV
+pop
+line 3568
+;3568:		}
+line 3569
+;3569:		return;
+LABELV $1602
+line 3571
+;3570:	}
+;3571:}
+LABELV $1548
+endproc DoGripAction 1272 32
+export G_IsMindTricked
+proc G_IsMindTricked 24 0
+line 3574
+;3572:
+;3573:qboolean G_IsMindTricked(forcedata_t *fd, int client)
+;3574:{
+line 3577
+;3575:	int checkIn;
+;3576:	int trickIndex1, trickIndex2, trickIndex3, trickIndex4;
+;3577:	int sub = 0;
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+line 3579
+;3578:
+;3579:	if (!fd)
+ADDRFP4 0
+INDIRP4
+CVPU4 4
+CNSTU4 0
+NEU4 $1650
+line 3580
+;3580:	{
+line 3581
+;3581:		return qfalse;
+CNSTI4 0
+RETI4
+ADDRGP4 $1649
+JUMPV
+LABELV $1650
+line 3584
+;3582:	}
+;3583:
+;3584:	trickIndex1 = fd->forceMindtrickTargetIndex;
+ADDRLP4 16
+ADDRFP4 0
+INDIRP4
+CNSTI4 384
+ADDP4
+INDIRI4
+ASGNI4
+line 3585
+;3585:	trickIndex2 = fd->forceMindtrickTargetIndex2;
+ADDRLP4 20
+ADDRFP4 0
+INDIRP4
+CNSTI4 388
+ADDP4
+INDIRI4
+ASGNI4
+line 3586
+;3586:	trickIndex3 = fd->forceMindtrickTargetIndex3;
+ADDRLP4 12
+ADDRFP4 0
+INDIRP4
+CNSTI4 392
+ADDP4
+INDIRI4
+ASGNI4
+line 3587
+;3587:	trickIndex4 = fd->forceMindtrickTargetIndex4;
+ADDRLP4 8
+ADDRFP4 0
+INDIRP4
+CNSTI4 396
+ADDP4
+INDIRI4
+ASGNI4
+line 3589
+;3588:
+;3589:	if (client > 47)
+ADDRFP4 4
+INDIRI4
+CNSTI4 47
+LEI4 $1652
+line 3590
+;3590:	{
+line 3591
+;3591:		checkIn = trickIndex4;
+ADDRLP4 4
+ADDRLP4 8
+INDIRI4
+ASGNI4
+line 3592
+;3592:		sub = 48;
+ADDRLP4 0
+CNSTI4 48
+ASGNI4
+line 3593
+;3593:	}
+ADDRGP4 $1653
+JUMPV
+LABELV $1652
+line 3594
+;3594:	else if (client > 31)
+ADDRFP4 4
+INDIRI4
+CNSTI4 31
+LEI4 $1654
+line 3595
+;3595:	{
+line 3596
+;3596:		checkIn = trickIndex3;
+ADDRLP4 4
+ADDRLP4 12
+INDIRI4
+ASGNI4
+line 3597
+;3597:		sub = 32;
+ADDRLP4 0
+CNSTI4 32
+ASGNI4
+line 3598
+;3598:	}
+ADDRGP4 $1655
+JUMPV
+LABELV $1654
+line 3599
+;3599:	else if (client > 15)
+ADDRFP4 4
+INDIRI4
+CNSTI4 15
+LEI4 $1656
+line 3600
+;3600:	{
+line 3601
+;3601:		checkIn = trickIndex2;
+ADDRLP4 4
+ADDRLP4 20
+INDIRI4
+ASGNI4
+line 3602
+;3602:		sub = 16;
+ADDRLP4 0
+CNSTI4 16
+ASGNI4
+line 3603
+;3603:	}
+ADDRGP4 $1657
+JUMPV
+LABELV $1656
+line 3605
+;3604:	else
+;3605:	{
+line 3606
+;3606:		checkIn = trickIndex1;
+ADDRLP4 4
+ADDRLP4 16
+INDIRI4
+ASGNI4
+line 3607
+;3607:	}
+LABELV $1657
+LABELV $1655
+LABELV $1653
+line 3609
+;3608:
+;3609:	if (checkIn & (1 << (client-sub)))
+ADDRLP4 4
+INDIRI4
+CNSTI4 1
+ADDRFP4 4
+INDIRI4
+ADDRLP4 0
+INDIRI4
+SUBI4
+LSHI4
+BANDI4
+CNSTI4 0
+EQI4 $1658
+line 3610
+;3610:	{
+line 3611
+;3611:		return qtrue;
+CNSTI4 1
+RETI4
+ADDRGP4 $1649
+JUMPV
+LABELV $1658
+line 3614
+;3612:	}
+;3613:	
+;3614:	return qfalse;
+CNSTI4 0
+RETI4
+LABELV $1649
+endproc G_IsMindTricked 24 0
+proc RemoveTrickedEnt 4 0
+line 3618
+;3615:}
+;3616:
+;3617:static void RemoveTrickedEnt(forcedata_t *fd, int client)
+;3618:{
+line 3619
+;3619:	if (!fd)
+ADDRFP4 0
+INDIRP4
+CVPU4 4
+CNSTU4 0
+NEU4 $1661
+line 3620
+;3620:	{
+line 3621
+;3621:		return;
+ADDRGP4 $1660
+JUMPV
+LABELV $1661
+line 3624
+;3622:	}
+;3623:
+;3624:	if (client > 47)
+ADDRFP4 4
+INDIRI4
+CNSTI4 47
+LEI4 $1663
+line 3625
+;3625:	{
+line 3626
+;3626:		fd->forceMindtrickTargetIndex4 &= ~(1 << (client-48));
+ADDRLP4 0
+ADDRFP4 0
+INDIRP4
+CNSTI4 396
+ADDP4
+ASGNP4
+ADDRLP4 0
+INDIRP4
+ADDRLP4 0
+INDIRP4
+INDIRI4
+CNSTI4 1
+ADDRFP4 4
+INDIRI4
+CNSTI4 48
+SUBI4
+LSHI4
+BCOMI4
+BANDI4
+ASGNI4
+line 3627
+;3627:	}
+ADDRGP4 $1664
+JUMPV
+LABELV $1663
+line 3628
+;3628:	else if (client > 31)
+ADDRFP4 4
+INDIRI4
+CNSTI4 31
+LEI4 $1665
+line 3629
+;3629:	{
+line 3630
+;3630:		fd->forceMindtrickTargetIndex3 &= ~(1 << (client-32));
+ADDRLP4 0
+ADDRFP4 0
+INDIRP4
+CNSTI4 392
+ADDP4
+ASGNP4
+ADDRLP4 0
+INDIRP4
+ADDRLP4 0
+INDIRP4
+INDIRI4
+CNSTI4 1
+ADDRFP4 4
+INDIRI4
+CNSTI4 32
+SUBI4
+LSHI4
+BCOMI4
+BANDI4
+ASGNI4
+line 3631
+;3631:	}
+ADDRGP4 $1666
+JUMPV
+LABELV $1665
+line 3632
+;3632:	else if (client > 15)
+ADDRFP4 4
+INDIRI4
+CNSTI4 15
+LEI4 $1667
+line 3633
+;3633:	{
+line 3634
+;3634:		fd->forceMindtrickTargetIndex2 &= ~(1 << (client-16));
+ADDRLP4 0
+ADDRFP4 0
+INDIRP4
+CNSTI4 388
+ADDP4
+ASGNP4
+ADDRLP4 0
+INDIRP4
+ADDRLP4 0
+INDIRP4
+INDIRI4
+CNSTI4 1
+ADDRFP4 4
+INDIRI4
+CNSTI4 16
+SUBI4
+LSHI4
+BCOMI4
+BANDI4
+ASGNI4
+line 3635
+;3635:	}
+ADDRGP4 $1668
+JUMPV
+LABELV $1667
+line 3637
+;3636:	else
+;3637:	{
+line 3638
+;3638:		fd->forceMindtrickTargetIndex &= ~(1 << client);
+ADDRLP4 0
+ADDRFP4 0
+INDIRP4
+CNSTI4 384
+ADDP4
+ASGNP4
+ADDRLP4 0
+INDIRP4
+ADDRLP4 0
+INDIRP4
+INDIRI4
+CNSTI4 1
+ADDRFP4 4
+INDIRI4
+LSHI4
+BCOMI4
+BANDI4
+ASGNI4
+line 3639
+;3639:	}
+LABELV $1668
+LABELV $1666
+LABELV $1664
+line 3640
+;3640:}
+LABELV $1660
+endproc RemoveTrickedEnt 4 0
+proc WP_UpdateMindtrickEnts 56 12
+line 3646
+;3641:
+;3642:extern int g_LastFrameTime;
+;3643:extern int g_TimeSinceLastFrame;
+;3644:
+;3645:static void WP_UpdateMindtrickEnts(gentity_t *self)
+;3646:{
+line 3647
+;3647:	int i = 0;
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+ADDRGP4 $1671
+JUMPV
+LABELV $1670
+line 3650
+;3648:
+;3649:	while (i < MAX_CLIENTS)
+;3650:	{
+line 3651
+;3651:		if (G_IsMindTricked(&self->client->ps.fd, i))
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 772
+ADDP4
+ARGP4
+ADDRLP4 0
+INDIRI4
+ARGI4
+ADDRLP4 4
+ADDRGP4 G_IsMindTricked
+CALLI4
+ASGNI4
+ADDRLP4 4
+INDIRI4
+CNSTI4 0
+EQI4 $1673
+line 3652
+;3652:		{
+line 3653
+;3653:			gentity_t *ent = &g_entities[i];
+ADDRLP4 8
+CNSTI4 852
+ADDRLP4 0
+INDIRI4
+MULI4
+ADDRGP4 g_entities
+ADDP4
+ASGNP4
+line 3655
+;3654:
+;3655:			if ( !ent || !ent->client || !ent->inuse || ent->health < 1 ||
+ADDRLP4 16
+CNSTU4 0
+ASGNU4
+ADDRLP4 8
+INDIRP4
+CVPU4 4
+ADDRLP4 16
+INDIRU4
+EQU4 $1680
+ADDRLP4 20
+ADDRLP4 8
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 20
+INDIRP4
+CVPU4 4
+ADDRLP4 16
+INDIRU4
+EQU4 $1680
+ADDRLP4 24
+CNSTI4 0
+ASGNI4
+ADDRLP4 8
+INDIRP4
+CNSTI4 412
+ADDP4
+INDIRI4
+ADDRLP4 24
+INDIRI4
+EQI4 $1680
+ADDRLP4 8
+INDIRP4
+CNSTI4 676
+ADDP4
+INDIRI4
+CNSTI4 1
+LTI4 $1680
+ADDRLP4 20
+INDIRP4
+CNSTI4 848
+ADDP4
+INDIRI4
+CNSTI4 16384
+BANDI4
+ADDRLP4 24
+INDIRI4
+EQI4 $1675
+LABELV $1680
+line 3657
+;3656:				(ent->client->ps.fd.forcePowersActive & (1 << FP_SEE)) )
+;3657:			{
+line 3658
+;3658:				RemoveTrickedEnt(&self->client->ps.fd, i);
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 772
+ADDP4
+ARGP4
+ADDRLP4 0
+INDIRI4
+ARGI4
+ADDRGP4 RemoveTrickedEnt
+CALLV
+pop
+line 3659
+;3659:			}
+ADDRGP4 $1676
+JUMPV
+LABELV $1675
+line 3660
+;3660:			else if ((level.time - self->client->dangerTime) < g_TimeSinceLastFrame*4)
+ADDRGP4 level+32
+INDIRI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 2948
+ADDP4
+INDIRI4
+SUBI4
+ADDRGP4 g_TimeSinceLastFrame
+INDIRI4
+CNSTI4 2
+LSHI4
+GEI4 $1681
+line 3661
+;3661:			{ //Untrick this entity if the tricker (self) fires while in his fov
+line 3662
+;3662:				if (trap_InPVS(ent->client->ps.origin, self->client->ps.origin) &&
+ADDRLP4 28
+CNSTI4 408
+ASGNI4
+ADDRLP4 32
+CNSTI4 20
+ASGNI4
+ADDRLP4 8
+INDIRP4
+ADDRLP4 28
+INDIRI4
+ADDP4
+INDIRP4
+ADDRLP4 32
+INDIRI4
+ADDP4
+ARGP4
+ADDRFP4 0
+INDIRP4
+ADDRLP4 28
+INDIRI4
+ADDP4
+INDIRP4
+ADDRLP4 32
+INDIRI4
+ADDP4
+ARGP4
+ADDRLP4 36
+ADDRGP4 trap_InPVS
+CALLI4
+ASGNI4
+ADDRLP4 36
+INDIRI4
+CNSTI4 0
+EQI4 $1682
+ADDRLP4 44
+CNSTI4 408
+ASGNI4
+ADDRLP4 48
+CNSTI4 20
+ASGNI4
+ADDRLP4 8
+INDIRP4
+ADDRLP4 44
+INDIRI4
+ADDP4
+INDIRP4
+ADDRLP4 48
+INDIRI4
+ADDP4
+ARGP4
+ADDRFP4 0
+INDIRP4
+ADDRLP4 44
+INDIRI4
+ADDP4
+INDIRP4
+ADDRLP4 48
+INDIRI4
+ADDP4
+ARGP4
+ADDRLP4 8
+INDIRP4
+INDIRI4
+ARGI4
+ADDRLP4 52
+ADDRGP4 OrgVisible
+CALLI4
+ASGNI4
+ADDRLP4 52
+INDIRI4
+CNSTI4 0
+EQI4 $1682
+line 3664
+;3663:					OrgVisible(ent->client->ps.origin, self->client->ps.origin, ent->s.number))
+;3664:				{
+line 3665
+;3665:					RemoveTrickedEnt(&self->client->ps.fd, i);
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 772
+ADDP4
+ARGP4
+ADDRLP4 0
+INDIRI4
+ARGI4
+ADDRGP4 RemoveTrickedEnt
+CALLV
+pop
+line 3666
+;3666:				}
+line 3667
+;3667:			}
+ADDRGP4 $1682
+JUMPV
+LABELV $1681
+line 3668
+;3668:			else if (BG_HasYsalamiri(g_gametype.integer, &ent->client->ps))
+ADDRGP4 g_gametype+12
+INDIRI4
+ARGI4
+ADDRLP4 8
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ARGP4
+ADDRLP4 28
+ADDRGP4 BG_HasYsalamiri
+CALLI4
+ASGNI4
+ADDRLP4 28
+INDIRI4
+CNSTI4 0
+EQI4 $1686
+line 3669
+;3669:			{
+line 3670
+;3670:				RemoveTrickedEnt(&self->client->ps.fd, i);
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 772
+ADDP4
+ARGP4
+ADDRLP4 0
+INDIRI4
+ARGI4
+ADDRGP4 RemoveTrickedEnt
+CALLV
+pop
+line 3671
+;3671:			}
+LABELV $1686
+LABELV $1682
+LABELV $1676
+line 3672
+;3672:		}
+LABELV $1673
+line 3674
+;3673:
+;3674:		i++;
+ADDRLP4 0
+ADDRLP4 0
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 3675
+;3675:	}
+LABELV $1671
+line 3649
+ADDRLP4 0
+INDIRI4
+CNSTI4 32
+LTI4 $1670
+line 3677
+;3676:
+;3677:	if (!self->client->ps.fd.forceMindtrickTargetIndex &&
+ADDRLP4 4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 8
+CNSTI4 0
+ASGNI4
+ADDRLP4 4
+INDIRP4
+CNSTI4 1156
+ADDP4
+INDIRI4
+ADDRLP4 8
+INDIRI4
+NEI4 $1689
+ADDRLP4 4
+INDIRP4
+CNSTI4 1160
+ADDP4
+INDIRI4
+ADDRLP4 8
+INDIRI4
+NEI4 $1689
+ADDRLP4 4
+INDIRP4
+CNSTI4 1164
+ADDP4
+INDIRI4
+ADDRLP4 8
+INDIRI4
+NEI4 $1689
+ADDRLP4 4
+INDIRP4
+CNSTI4 1168
+ADDP4
+INDIRI4
+ADDRLP4 8
+INDIRI4
+NEI4 $1689
+line 3681
+;3678:		!self->client->ps.fd.forceMindtrickTargetIndex2 &&
+;3679:		!self->client->ps.fd.forceMindtrickTargetIndex3 &&
+;3680:		!self->client->ps.fd.forceMindtrickTargetIndex4)
+;3681:	{ //everyone who we had tricked is no longer tricked, so stop the power
+line 3682
+;3682:		WP_ForcePowerStop(self, FP_TELEPATHY);
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 5
+ARGI4
+ADDRGP4 WP_ForcePowerStop
+CALLV
+pop
+line 3683
+;3683:	}
+ADDRGP4 $1690
+JUMPV
+LABELV $1689
+line 3684
+;3684:	else if (self->client->ps.powerups[PW_REDFLAG] ||
+ADDRLP4 12
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 16
+CNSTI4 0
+ASGNI4
+ADDRLP4 12
+INDIRP4
+CNSTI4 360
+ADDP4
+INDIRI4
+ADDRLP4 16
+INDIRI4
+NEI4 $1693
+ADDRLP4 12
+INDIRP4
+CNSTI4 364
+ADDP4
+INDIRI4
+ADDRLP4 16
+INDIRI4
+EQI4 $1691
+LABELV $1693
+line 3686
+;3685:		self->client->ps.powerups[PW_BLUEFLAG])
+;3686:	{
+line 3687
+;3687:		WP_ForcePowerStop(self, FP_TELEPATHY);
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 5
+ARGI4
+ADDRGP4 WP_ForcePowerStop
+CALLV
+pop
+line 3688
+;3688:	}
+LABELV $1691
+LABELV $1690
+line 3689
+;3689:}
+LABELV $1669
+endproc WP_UpdateMindtrickEnts 56 12
+proc WP_ForcePowerRun 64 12
+line 3692
+;3690:
+;3691:static void WP_ForcePowerRun( gentity_t *self, forcePowers_t forcePower, usercmd_t *cmd )
+;3692:{
+line 3695
+;3693:	extern usercmd_t	ucmd;
+;3694:
+;3695:	switch( (int)forcePower )
+ADDRLP4 0
+ADDRFP4 4
+INDIRI4
+ASGNI4
+ADDRLP4 0
+INDIRI4
+CNSTI4 0
+LTI4 $1696
+ADDRLP4 0
+INDIRI4
+CNSTI4 17
+GTI4 $1696
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRGP4 $1794
+ADDP4
+INDIRP4
+JUMPV
+lit
+align 4
+LABELV $1794
+address $1698
+address $1730
+address $1696
+address $1696
+address $1696
+address $1776
+address $1721
+address $1762
+address $1733
+address $1780
+address $1787
+address $1696
+address $1696
+address $1748
+address $1696
+address $1696
+address $1696
+address $1696
+code
+line 3696
+;3696:	{
+LABELV $1698
+line 3698
+;3697:	case FP_HEAL:
+;3698:		if (self->client->ps.fd.forcePowerLevel[FP_HEAL] == FORCE_LEVEL_1)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 944
+ADDP4
+INDIRI4
+CNSTI4 1
+NEI4 $1699
+line 3699
+;3699:		{
+line 3700
+;3700:			if (self->client->ps.velocity[0] || self->client->ps.velocity[1] || self->client->ps.velocity[2])
+ADDRLP4 8
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 12
+CNSTF4 0
+ASGNF4
+ADDRLP4 8
+INDIRP4
+CNSTI4 32
+ADDP4
+INDIRF4
+ADDRLP4 12
+INDIRF4
+NEF4 $1704
+ADDRLP4 8
+INDIRP4
+CNSTI4 36
+ADDP4
+INDIRF4
+ADDRLP4 12
+INDIRF4
+NEF4 $1704
+ADDRLP4 8
+INDIRP4
+CNSTI4 40
+ADDP4
+INDIRF4
+ADDRLP4 12
+INDIRF4
+EQF4 $1701
+LABELV $1704
+line 3701
+;3701:			{
+line 3702
+;3702:				WP_ForcePowerStop( self, forcePower );
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRFP4 4
+INDIRI4
+ARGI4
+ADDRGP4 WP_ForcePowerStop
+CALLV
+pop
+line 3703
+;3703:				break;
+ADDRGP4 $1696
+JUMPV
+LABELV $1701
+line 3705
+;3704:			}
+;3705:		}
+LABELV $1699
+line 3707
+;3706:
+;3707:		if (self->health < 1 || self->client->ps.stats[STAT_HEALTH] < 1)
+ADDRLP4 8
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 12
+CNSTI4 1
+ASGNI4
+ADDRLP4 8
+INDIRP4
+CNSTI4 676
+ADDP4
+INDIRI4
+ADDRLP4 12
+INDIRI4
+LTI4 $1707
+ADDRLP4 8
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 216
+ADDP4
+INDIRI4
+ADDRLP4 12
+INDIRI4
+GEI4 $1705
+LABELV $1707
+line 3708
+;3708:		{
+line 3709
+;3709:			WP_ForcePowerStop( self, forcePower );
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRFP4 4
+INDIRI4
+ARGI4
+ADDRGP4 WP_ForcePowerStop
+CALLV
+pop
+line 3710
+;3710:			break;
+ADDRGP4 $1696
+JUMPV
+LABELV $1705
+line 3713
+;3711:		}
+;3712:
+;3713:		if (self->client->ps.fd.forceHealTime > level.time)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1148
+ADDP4
+INDIRI4
+ADDRGP4 level+32
+INDIRI4
+LEI4 $1708
+line 3714
+;3714:		{
+line 3715
+;3715:			break;
+ADDRGP4 $1696
+JUMPV
+LABELV $1708
+line 3717
+;3716:		}
+;3717:		if ( self->health > self->client->ps.stats[STAT_MAX_HEALTH])
+ADDRLP4 16
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 16
+INDIRP4
+CNSTI4 676
+ADDP4
+INDIRI4
+ADDRLP4 16
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 248
+ADDP4
+INDIRI4
+LEI4 $1711
+line 3718
+;3718:		{ //rww - we might start out over max_health and we don't want force heal taking us down to 100 or whatever max_health is
+line 3719
+;3719:			WP_ForcePowerStop( self, forcePower );
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRFP4 4
+INDIRI4
+ARGI4
+ADDRGP4 WP_ForcePowerStop
+CALLV
+pop
+line 3720
+;3720:			break;
+ADDRGP4 $1696
+JUMPV
+LABELV $1711
+line 3722
+;3721:		}
+;3722:		self->client->ps.fd.forceHealTime = level.time + 1000;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1148
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 1000
+ADDI4
+ASGNI4
+line 3723
+;3723:		self->health++;
+ADDRLP4 20
+ADDRFP4 0
+INDIRP4
+CNSTI4 676
+ADDP4
+ASGNP4
+ADDRLP4 20
+INDIRP4
+ADDRLP4 20
+INDIRP4
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 3724
+;3724:		self->client->ps.fd.forceHealAmount++;
+ADDRLP4 24
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1152
+ADDP4
+ASGNP4
+ADDRLP4 24
+INDIRP4
+ADDRLP4 24
+INDIRP4
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 3726
+;3725:
+;3726:		if ( self->health > self->client->ps.stats[STAT_MAX_HEALTH])	// Past max health
+ADDRLP4 28
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 28
+INDIRP4
+CNSTI4 676
+ADDP4
+INDIRI4
+ADDRLP4 28
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 248
+ADDP4
+INDIRI4
+LEI4 $1714
+line 3727
+;3727:		{
+line 3728
+;3728:			self->health = self->client->ps.stats[STAT_MAX_HEALTH];
+ADDRLP4 32
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 32
+INDIRP4
+CNSTI4 676
+ADDP4
+ADDRLP4 32
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 248
+ADDP4
+INDIRI4
+ASGNI4
+line 3729
+;3729:			WP_ForcePowerStop( self, forcePower );
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRFP4 4
+INDIRI4
+ARGI4
+ADDRGP4 WP_ForcePowerStop
+CALLV
+pop
+line 3730
+;3730:		}
+LABELV $1714
+line 3732
+;3731:
+;3732:		if ( (self->client->ps.fd.forcePowerLevel[FP_HEAL] == FORCE_LEVEL_1 && self->client->ps.fd.forceHealAmount >= 25) ||
+ADDRLP4 32
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 32
+INDIRP4
+CNSTI4 944
+ADDP4
+INDIRI4
+CNSTI4 1
+NEI4 $1719
+ADDRLP4 32
+INDIRP4
+CNSTI4 1152
+ADDP4
+INDIRI4
+CNSTI4 25
+GEI4 $1718
+LABELV $1719
+ADDRLP4 36
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 36
+INDIRP4
+CNSTI4 944
+ADDP4
+INDIRI4
+CNSTI4 2
+NEI4 $1696
+ADDRLP4 36
+INDIRP4
+CNSTI4 1152
+ADDP4
+INDIRI4
+CNSTI4 33
+LTI4 $1696
+LABELV $1718
+line 3734
+;3733:			(self->client->ps.fd.forcePowerLevel[FP_HEAL] == FORCE_LEVEL_2 && self->client->ps.fd.forceHealAmount >= 33))
+;3734:		{
+line 3735
+;3735:			WP_ForcePowerStop( self, forcePower );
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRFP4 4
+INDIRI4
+ARGI4
+ADDRGP4 WP_ForcePowerStop
+CALLV
+pop
+line 3736
+;3736:		}
+line 3737
+;3737:		break;
+ADDRGP4 $1696
+JUMPV
+line 3740
+;3738:	case FP_SPEED:
+;3739:		//This is handled in PM_WalkMove and PM_StepSlideMove
+;3740:		break;
+LABELV $1721
+line 3742
+;3741:	case FP_GRIP:
+;3742:		if (self->client->ps.forceHandExtend != HANDEXTEND_FORCEGRIP)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1248
+ADDP4
+INDIRI4
+CNSTI4 3
+EQI4 $1722
+line 3743
+;3743:		{
+line 3744
+;3744:			WP_ForcePowerStop(self, FP_GRIP);
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 6
+ARGI4
+ADDRGP4 WP_ForcePowerStop
+CALLV
+pop
+line 3745
+;3745:			break;
+ADDRGP4 $1696
+JUMPV
+LABELV $1722
+line 3748
+;3746:		}
+;3747:
+;3748:		if (self->client->ps.fd.forcePowerDebounce[FP_PULL] < level.time)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 788
+ADDP4
+INDIRI4
+ADDRGP4 level+32
+INDIRI4
+GEI4 $1724
+line 3749
+;3749:		{ //This is sort of not ideal. Using the debounce value reserved for pull for this because pull doesn't need it.
+line 3750
+;3750:			BG_ForcePowerDrain( &self->client->ps, forcePower, 1 );
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ARGP4
+ADDRFP4 4
+INDIRI4
+ARGI4
+CNSTI4 1
+ARGI4
+ADDRGP4 BG_ForcePowerDrain
+CALLV
+pop
+line 3751
+;3751:			self->client->ps.fd.forcePowerDebounce[FP_PULL] = level.time + 100;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 788
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 100
+ADDI4
+ASGNI4
+line 3752
+;3752:		}
+LABELV $1724
+line 3754
+;3753:
+;3754:		if (self->client->ps.fd.forcePower < 1)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 932
+ADDP4
+INDIRI4
+CNSTI4 1
+GEI4 $1728
+line 3755
+;3755:		{
+line 3756
+;3756:			WP_ForcePowerStop(self, FP_GRIP);
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 6
+ARGI4
+ADDRGP4 WP_ForcePowerStop
+CALLV
+pop
+line 3757
+;3757:			break;
+ADDRGP4 $1696
+JUMPV
+LABELV $1728
+line 3760
+;3758:		}
+;3759:
+;3760:		DoGripAction(self, forcePower);
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRFP4 4
+INDIRI4
+ARGI4
+ADDRGP4 DoGripAction
+CALLV
+pop
+line 3761
+;3761:		break;
+ADDRGP4 $1696
+JUMPV
+LABELV $1730
+line 3763
+;3762:	case FP_LEVITATION:
+;3763:		if ( self->client->ps.groundEntityNum != ENTITYNUM_NONE && !self->client->ps.fd.forceJumpZStart )
+ADDRLP4 40
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 40
+INDIRP4
+CNSTI4 84
+ADDP4
+INDIRI4
+CNSTI4 1023
+EQI4 $1696
+ADDRLP4 40
+INDIRP4
+CNSTI4 1092
+ADDP4
+INDIRF4
+CNSTF4 0
+NEF4 $1696
+line 3764
+;3764:		{//done with jump
+line 3765
+;3765:			WP_ForcePowerStop( self, forcePower );
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRFP4 4
+INDIRI4
+ARGI4
+ADDRGP4 WP_ForcePowerStop
+CALLV
+pop
+line 3766
+;3766:		}
+line 3767
+;3767:		break;
+ADDRGP4 $1696
+JUMPV
+LABELV $1733
+line 3769
+;3768:	case FP_RAGE:
+;3769:		if (self->health < 1)
+ADDRFP4 0
+INDIRP4
+CNSTI4 676
+ADDP4
+INDIRI4
+CNSTI4 1
+GEI4 $1734
+line 3770
+;3770:		{
+line 3771
+;3771:			WP_ForcePowerStop(self, forcePower);
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRFP4 4
+INDIRI4
+ARGI4
+ADDRGP4 WP_ForcePowerStop
+CALLV
+pop
+line 3772
+;3772:			break;
+ADDRGP4 $1696
+JUMPV
+LABELV $1734
+line 3774
+;3773:		}
+;3774:		if (self->client->ps.forceRageDrainTime < level.time)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1256
+ADDP4
+INDIRI4
+ADDRGP4 level+32
+INDIRI4
+GEI4 $1736
+line 3775
+;3775:		{
+line 3776
+;3776:			int addTime = 400;
+ADDRLP4 44
+CNSTI4 400
+ASGNI4
+line 3778
+;3777:
+;3778:			self->health -= 2;
+ADDRLP4 48
+ADDRFP4 0
+INDIRP4
+CNSTI4 676
+ADDP4
+ASGNP4
+ADDRLP4 48
+INDIRP4
+ADDRLP4 48
+INDIRP4
+INDIRI4
+CNSTI4 2
+SUBI4
+ASGNI4
+line 3780
+;3779:
+;3780:			if (self->client->ps.fd.forcePowerLevel[FP_RAGE] == FORCE_LEVEL_1)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 976
+ADDP4
+INDIRI4
+CNSTI4 1
+NEI4 $1739
+line 3781
+;3781:			{
+line 3782
+;3782:				addTime = 150;
+ADDRLP4 44
+CNSTI4 150
+ASGNI4
+line 3783
+;3783:			}
+ADDRGP4 $1740
+JUMPV
+LABELV $1739
+line 3784
+;3784:			else if (self->client->ps.fd.forcePowerLevel[FP_RAGE] == FORCE_LEVEL_2)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 976
+ADDP4
+INDIRI4
+CNSTI4 2
+NEI4 $1741
+line 3785
+;3785:			{
+line 3786
+;3786:				addTime = 300;
+ADDRLP4 44
+CNSTI4 300
+ASGNI4
+line 3787
+;3787:			}
+ADDRGP4 $1742
+JUMPV
+LABELV $1741
+line 3788
+;3788:			else if (self->client->ps.fd.forcePowerLevel[FP_RAGE] == FORCE_LEVEL_3)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 976
+ADDP4
+INDIRI4
+CNSTI4 3
+NEI4 $1743
+line 3789
+;3789:			{
+line 3790
+;3790:				addTime = 450;
+ADDRLP4 44
+CNSTI4 450
+ASGNI4
+line 3791
+;3791:			}
+LABELV $1743
+LABELV $1742
+LABELV $1740
+line 3792
+;3792:			self->client->ps.forceRageDrainTime = level.time + addTime;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1256
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+ADDRLP4 44
+INDIRI4
+ADDI4
+ASGNI4
+line 3793
+;3793:		}
+LABELV $1736
+line 3795
+;3794:
+;3795:		if (self->health < 1)
+ADDRFP4 0
+INDIRP4
+CNSTI4 676
+ADDP4
+INDIRI4
+CNSTI4 1
+GEI4 $1746
+line 3796
+;3796:		{
+line 3797
+;3797:			self->health = 1;
+ADDRFP4 0
+INDIRP4
+CNSTI4 676
+ADDP4
+CNSTI4 1
+ASGNI4
+line 3798
+;3798:			WP_ForcePowerStop(self, forcePower);
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRFP4 4
+INDIRI4
+ARGI4
+ADDRGP4 WP_ForcePowerStop
+CALLV
+pop
+line 3799
+;3799:		}
+LABELV $1746
+line 3801
+;3800:
+;3801:		self->client->ps.stats[STAT_HEALTH] = self->health;
+ADDRLP4 44
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 44
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 216
+ADDP4
+ADDRLP4 44
+INDIRP4
+CNSTI4 676
+ADDP4
+INDIRI4
+ASGNI4
+line 3802
+;3802:		break;
+ADDRGP4 $1696
+JUMPV
+LABELV $1748
+line 3804
+;3803:	case FP_DRAIN:
+;3804:		if (self->client->ps.forceHandExtend != HANDEXTEND_FORCEGRIP)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1248
+ADDP4
+INDIRI4
+CNSTI4 3
+EQI4 $1749
+line 3805
+;3805:		{
+line 3806
+;3806:			WP_ForcePowerStop(self, forcePower);
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRFP4 4
+INDIRI4
+ARGI4
+ADDRGP4 WP_ForcePowerStop
+CALLV
+pop
+line 3807
+;3807:			break;
+ADDRGP4 $1696
+JUMPV
+LABELV $1749
+line 3810
+;3808:		}
+;3809:
+;3810:		if ( self->client->ps.fd.forcePowerLevel[FP_DRAIN] > FORCE_LEVEL_1 )
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 996
+ADDP4
+INDIRI4
+CNSTI4 1
+LEI4 $1751
+line 3811
+;3811:		{//higher than level 1
+line 3812
+;3812:			if ( (cmd->buttons & BUTTON_FORCE_DRAIN) || ((cmd->buttons & BUTTON_FORCEPOWER) && self->client->ps.fd.forcePowerSelected == FP_DRAIN) )
+ADDRLP4 48
+ADDRFP4 8
+INDIRP4
+CNSTI4 16
+ADDP4
+INDIRI4
+ASGNI4
+ADDRLP4 52
+CNSTI4 0
+ASGNI4
+ADDRLP4 48
+INDIRI4
+CNSTI4 2048
+BANDI4
+ADDRLP4 52
+INDIRI4
+NEI4 $1755
+ADDRLP4 48
+INDIRI4
+CNSTI4 512
+BANDI4
+ADDRLP4 52
+INDIRI4
+EQI4 $1753
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 852
+ADDP4
+INDIRI4
+CNSTI4 13
+NEI4 $1753
+LABELV $1755
+line 3813
+;3813:			{//holding it keeps it going
+line 3814
+;3814:				self->client->ps.fd.forcePowerDuration[FP_DRAIN] = level.time + 500;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 912
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 500
+ADDI4
+ASGNI4
+line 3815
+;3815:			}
+LABELV $1753
+line 3816
+;3816:		}
+LABELV $1751
+line 3817
+;3817:		if ( !WP_ForcePowerAvailable( self, forcePower ) || self->client->ps.fd.forcePowerDuration[FP_DRAIN] < level.time ||
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRFP4 4
+INDIRI4
+ARGI4
+ADDRLP4 48
+ADDRGP4 WP_ForcePowerAvailable
+CALLI4
+ASGNI4
+ADDRLP4 48
+INDIRI4
+CNSTI4 0
+EQI4 $1761
+ADDRLP4 52
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 52
+INDIRP4
+CNSTI4 912
+ADDP4
+INDIRI4
+ADDRGP4 level+32
+INDIRI4
+LTI4 $1761
+ADDRLP4 52
+INDIRP4
+CNSTI4 932
+ADDP4
+INDIRI4
+CNSTI4 25
+GEI4 $1757
+LABELV $1761
+line 3819
+;3818:			self->client->ps.fd.forcePower < 25)
+;3819:		{
+line 3820
+;3820:			WP_ForcePowerStop( self, forcePower );
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRFP4 4
+INDIRI4
+ARGI4
+ADDRGP4 WP_ForcePowerStop
+CALLV
+pop
+line 3821
+;3821:		}
+ADDRGP4 $1696
+JUMPV
+LABELV $1757
+line 3823
+;3822:		else
+;3823:		{
+line 3824
+;3824:			ForceShootDrain( self );
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRGP4 ForceShootDrain
+CALLI4
+pop
+line 3825
+;3825:		}
+line 3826
+;3826:		break;
+ADDRGP4 $1696
+JUMPV
+LABELV $1762
+line 3828
+;3827:	case FP_LIGHTNING:
+;3828:		if (self->client->ps.forceHandExtend != HANDEXTEND_FORCEGRIP)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1248
+ADDP4
+INDIRI4
+CNSTI4 3
+EQI4 $1763
+line 3829
+;3829:		{ //Animation for hand extend doesn't end with hand out, so we have to limit lightning intervals by animation intervals (once hand starts to go in in animation, lightning should stop)
+line 3830
+;3830:			WP_ForcePowerStop(self, forcePower);
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRFP4 4
+INDIRI4
+ARGI4
+ADDRGP4 WP_ForcePowerStop
+CALLV
+pop
+line 3831
+;3831:			break;
+ADDRGP4 $1696
+JUMPV
+LABELV $1763
+line 3834
+;3832:		}
+;3833:
+;3834:		if ( self->client->ps.fd.forcePowerLevel[FP_LIGHTNING] > FORCE_LEVEL_1 )
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 972
+ADDP4
+INDIRI4
+CNSTI4 1
+LEI4 $1765
+line 3835
+;3835:		{//higher than level 1
+line 3836
+;3836:			if ( (cmd->buttons & BUTTON_FORCE_LIGHTNING) || ((cmd->buttons & BUTTON_FORCEPOWER) && self->client->ps.fd.forcePowerSelected == FP_LIGHTNING) )
+ADDRLP4 56
+ADDRFP4 8
+INDIRP4
+CNSTI4 16
+ADDP4
+INDIRI4
+ASGNI4
+ADDRLP4 60
+CNSTI4 0
+ASGNI4
+ADDRLP4 56
+INDIRI4
+CNSTI4 1024
+BANDI4
+ADDRLP4 60
+INDIRI4
+NEI4 $1769
+ADDRLP4 56
+INDIRI4
+CNSTI4 512
+BANDI4
+ADDRLP4 60
+INDIRI4
+EQI4 $1767
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 852
+ADDP4
+INDIRI4
+CNSTI4 7
+NEI4 $1767
+LABELV $1769
+line 3837
+;3837:			{//holding it keeps it going
+line 3838
+;3838:				self->client->ps.fd.forcePowerDuration[FP_LIGHTNING] = level.time + 500;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 888
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 500
+ADDI4
+ASGNI4
+line 3839
+;3839:			}
+LABELV $1767
+line 3840
+;3840:		}
+LABELV $1765
+line 3841
+;3841:		if ( !WP_ForcePowerAvailable( self, forcePower ) || self->client->ps.fd.forcePowerDuration[FP_LIGHTNING] < level.time ||
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRFP4 4
+INDIRI4
+ARGI4
+ADDRLP4 56
+ADDRGP4 WP_ForcePowerAvailable
+CALLI4
+ASGNI4
+ADDRLP4 56
+INDIRI4
+CNSTI4 0
+EQI4 $1775
+ADDRLP4 60
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 60
+INDIRP4
+CNSTI4 888
+ADDP4
+INDIRI4
+ADDRGP4 level+32
+INDIRI4
+LTI4 $1775
+ADDRLP4 60
+INDIRP4
+CNSTI4 932
+ADDP4
+INDIRI4
+CNSTI4 25
+GEI4 $1771
+LABELV $1775
+line 3843
+;3842:			self->client->ps.fd.forcePower < 25)
+;3843:		{
+line 3844
+;3844:			WP_ForcePowerStop( self, forcePower );
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRFP4 4
+INDIRI4
+ARGI4
+ADDRGP4 WP_ForcePowerStop
+CALLV
+pop
+line 3845
+;3845:		}
+ADDRGP4 $1696
+JUMPV
+LABELV $1771
+line 3847
+;3846:		else
+;3847:		{
+line 3848
+;3848:			ForceShootLightning( self );
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRGP4 ForceShootLightning
+CALLV
+pop
+line 3849
+;3849:			BG_ForcePowerDrain( &self->client->ps, forcePower, 0 );
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ARGP4
+ADDRFP4 4
+INDIRI4
+ARGI4
+CNSTI4 0
+ARGI4
+ADDRGP4 BG_ForcePowerDrain
+CALLV
+pop
+line 3850
+;3850:		}
+line 3851
+;3851:		break;
+ADDRGP4 $1696
+JUMPV
+LABELV $1776
+line 3853
+;3852:	case FP_TELEPATHY:
+;3853:		WP_UpdateMindtrickEnts(self);
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRGP4 WP_UpdateMindtrickEnts
+CALLV
+pop
+line 3854
+;3854:		break;
+ADDRGP4 $1696
+JUMPV
+line 3856
+;3855:	case FP_SABERATTACK:
+;3856:		break;
+line 3858
+;3857:	case FP_SABERDEFEND:
+;3858:		break;
+line 3860
+;3859:	case FP_SABERTHROW:
+;3860:		break;
+LABELV $1780
+line 3862
+;3861:	case FP_PROTECT:
+;3862:		if (self->client->ps.fd.forcePowerDebounce[forcePower] < level.time)
+ADDRFP4 4
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 772
+ADDP4
+ADDP4
+INDIRI4
+ADDRGP4 level+32
+INDIRI4
+GEI4 $1696
+line 3863
+;3863:		{
+line 3864
+;3864:			BG_ForcePowerDrain( &self->client->ps, forcePower, 1 );
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ARGP4
+ADDRFP4 4
+INDIRI4
+ARGI4
+CNSTI4 1
+ARGI4
+ADDRGP4 BG_ForcePowerDrain
+CALLV
+pop
+line 3865
+;3865:			if (self->client->ps.fd.forcePower < 1)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 932
+ADDP4
+INDIRI4
+CNSTI4 1
+GEI4 $1784
+line 3866
+;3866:			{
+line 3867
+;3867:				WP_ForcePowerStop(self, forcePower);
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRFP4 4
+INDIRI4
+ARGI4
+ADDRGP4 WP_ForcePowerStop
+CALLV
+pop
+line 3868
+;3868:			}
+LABELV $1784
+line 3870
+;3869:
+;3870:			self->client->ps.fd.forcePowerDebounce[forcePower] = level.time + 300;
+ADDRFP4 4
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 772
+ADDP4
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 300
+ADDI4
+ASGNI4
+line 3871
+;3871:		}
+line 3872
+;3872:		break;
+ADDRGP4 $1696
+JUMPV
+LABELV $1787
+line 3874
+;3873:	case FP_ABSORB:
+;3874:		if (self->client->ps.fd.forcePowerDebounce[forcePower] < level.time)
+ADDRFP4 4
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 772
+ADDP4
+ADDP4
+INDIRI4
+ADDRGP4 level+32
+INDIRI4
+GEI4 $1696
+line 3875
+;3875:		{
+line 3876
+;3876:			BG_ForcePowerDrain( &self->client->ps, forcePower, 1 );
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ARGP4
+ADDRFP4 4
+INDIRI4
+ARGI4
+CNSTI4 1
+ARGI4
+ADDRGP4 BG_ForcePowerDrain
+CALLV
+pop
+line 3877
+;3877:			if (self->client->ps.fd.forcePower < 1)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 932
+ADDP4
+INDIRI4
+CNSTI4 1
+GEI4 $1791
+line 3878
+;3878:			{
+line 3879
+;3879:				WP_ForcePowerStop(self, forcePower);
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRFP4 4
+INDIRI4
+ARGI4
+ADDRGP4 WP_ForcePowerStop
+CALLV
+pop
+line 3880
+;3880:			}
+LABELV $1791
+line 3882
+;3881:
+;3882:			self->client->ps.fd.forcePowerDebounce[forcePower] = level.time + 600;
+ADDRFP4 4
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 772
+ADDP4
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 600
+ADDI4
+ASGNI4
+line 3883
+;3883:		}
+line 3884
+;3884:		break;
+line 3886
+;3885:	default:
+;3886:		break;
+LABELV $1696
+line 3888
+;3887:	}
+;3888:}
+LABELV $1694
+endproc WP_ForcePowerRun 64 12
+export WP_DoSpecificPower
+proc WP_DoSpecificPower 16 12
+line 3891
+;3889:
+;3890:int WP_DoSpecificPower( gentity_t *self, usercmd_t *ucmd, forcePowers_t forcepower)
+;3891:{
+line 3894
+;3892:	int powerSucceeded;
+;3893:
+;3894:	powerSucceeded = 1;
+ADDRLP4 0
+CNSTI4 1
+ASGNI4
+line 3896
+;3895:
+;3896:	if ( !WP_ForcePowerAvailable( self, forcepower ) )
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRFP4 8
+INDIRI4
+ARGI4
+ADDRLP4 4
+ADDRGP4 WP_ForcePowerAvailable
+CALLI4
+ASGNI4
+ADDRLP4 4
+INDIRI4
+CNSTI4 0
+NEI4 $1796
+line 3897
+;3897:	{
+line 3898
+;3898:		return 0;
+CNSTI4 0
+RETI4
+ADDRGP4 $1795
+JUMPV
+LABELV $1796
+line 3901
+;3899:	}
+;3900:
+;3901:	switch(forcepower)
+ADDRLP4 8
+ADDRFP4 8
+INDIRI4
+ASGNI4
+ADDRLP4 8
+INDIRI4
+CNSTI4 0
+LTI4 $1799
+ADDRLP4 8
+INDIRI4
+CNSTI4 17
+GTI4 $1799
+ADDRLP4 8
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRGP4 $1849
+ADDP4
+INDIRP4
+JUMPV
+lit
+align 4
+LABELV $1849
+address $1801
+address $1804
+address $1807
+address $1818
+address $1821
+address $1824
+address $1810
+address $1817
+address $1827
+address $1830
+address $1833
+address $1836
+address $1839
+address $1842
+address $1843
+address $1799
+address $1799
+address $1799
+code
+line 3902
+;3902:	{
+LABELV $1801
+line 3904
+;3903:	case FP_HEAL:
+;3904:		powerSucceeded = 0; //always 0 for nonhold powers
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+line 3905
+;3905:		if (self->client->ps.fd.forceButtonNeedRelease)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 856
+ADDP4
+INDIRI4
+CNSTI4 0
+EQI4 $1802
+line 3906
+;3906:		{ //need to release before we can use nonhold powers again
+line 3907
+;3907:			break;
+ADDRGP4 $1799
+JUMPV
+LABELV $1802
+line 3909
+;3908:		}
+;3909:		ForceHeal(self);
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRGP4 ForceHeal
+CALLV
+pop
+line 3910
+;3910:		self->client->ps.fd.forceButtonNeedRelease = 1;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 856
+ADDP4
+CNSTI4 1
+ASGNI4
+line 3911
+;3911:		break;
+ADDRGP4 $1799
+JUMPV
+LABELV $1804
+line 3915
+;3912:	case FP_LEVITATION:
+;3913:		//if leave the ground by some other means, cancel the force jump so we don't suddenly jump when we land.
+;3914:		
+;3915:		if ( self->client->ps.groundEntityNum == ENTITYNUM_NONE )
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 84
+ADDP4
+INDIRI4
+CNSTI4 1023
+NEI4 $1805
+line 3916
+;3916:		{
+line 3917
+;3917:			self->client->ps.fd.forceJumpCharge = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1096
+ADDP4
+CNSTF4 0
+ASGNF4
+line 3918
+;3918:			G_MuteSound( self->client->ps.fd.killSoundEntIndex[TRACK_CHANNEL_1-50], CHAN_VOICE );
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1204
+ADDP4
+INDIRI4
+ARGI4
+CNSTI4 3
+ARGI4
+ADDRGP4 G_MuteSound
+CALLV
+pop
+line 3920
+;3919:			//This only happens if the groundEntityNum == ENTITYNUM_NONE when the button is actually released
+;3920:		}
+ADDRGP4 $1799
+JUMPV
+LABELV $1805
+line 3922
+;3921:		else
+;3922:		{//still on ground, so jump
+line 3923
+;3923:			ForceJump( self, ucmd );
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRFP4 4
+INDIRP4
+ARGP4
+ADDRGP4 ForceJump
+CALLV
+pop
+line 3924
+;3924:		}
+line 3925
+;3925:		break;
+ADDRGP4 $1799
+JUMPV
+LABELV $1807
+line 3927
+;3926:	case FP_SPEED:
+;3927:		powerSucceeded = 0; //always 0 for nonhold powers
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+line 3928
+;3928:		if (self->client->ps.fd.forceButtonNeedRelease)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 856
+ADDP4
+INDIRI4
+CNSTI4 0
+EQI4 $1808
+line 3929
+;3929:		{ //need to release before we can use nonhold powers again
+line 3930
+;3930:			break;
+ADDRGP4 $1799
+JUMPV
+LABELV $1808
+line 3932
+;3931:		}
+;3932:		ForceSpeed(self, 0);
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 0
+ARGI4
+ADDRGP4 ForceSpeed
+CALLV
+pop
+line 3933
+;3933:		self->client->ps.fd.forceButtonNeedRelease = 1;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 856
+ADDP4
+CNSTI4 1
+ASGNI4
+line 3934
+;3934:		break;
+ADDRGP4 $1799
+JUMPV
+LABELV $1810
+line 3936
+;3935:	case FP_GRIP:
+;3936:		if (self->client->ps.fd.forceGripEntityNum == ENTITYNUM_NONE)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1108
+ADDP4
+INDIRI4
+CNSTI4 1023
+NEI4 $1811
+line 3937
+;3937:		{
+line 3938
+;3938:			ForceGrip( self );
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRGP4 ForceGrip
+CALLV
+pop
+line 3939
+;3939:		}
+LABELV $1811
+line 3941
+;3940:
+;3941:		if (self->client->ps.fd.forceGripEntityNum != ENTITYNUM_NONE)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1108
+ADDP4
+INDIRI4
+CNSTI4 1023
+EQI4 $1813
+line 3942
+;3942:		{
+line 3943
+;3943:			if (!(self->client->ps.fd.forcePowersActive & (1 << FP_GRIP)))
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 848
+ADDP4
+INDIRI4
+CNSTI4 64
+BANDI4
+CNSTI4 0
+NEI4 $1799
+line 3944
+;3944:			{
+line 3945
+;3945:				WP_ForcePowerStart( self, FP_GRIP, 0 );
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 6
+ARGI4
+CNSTI4 0
+ARGI4
+ADDRGP4 WP_ForcePowerStart
+CALLV
+pop
+line 3946
+;3946:				BG_ForcePowerDrain( &self->client->ps, FP_GRIP, GRIP_DRAIN_AMOUNT );
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ARGP4
+CNSTI4 6
+ARGI4
+CNSTI4 30
+ARGI4
+ADDRGP4 BG_ForcePowerDrain
+CALLV
+pop
+line 3947
+;3947:			}
+line 3948
+;3948:		}
+ADDRGP4 $1799
+JUMPV
+LABELV $1813
+line 3950
+;3949:		else
+;3950:		{
+line 3951
+;3951:			powerSucceeded = 0;
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+line 3952
+;3952:		}
+line 3953
+;3953:		break;
+ADDRGP4 $1799
+JUMPV
+LABELV $1817
+line 3955
+;3954:	case FP_LIGHTNING:
+;3955:		ForceLightning(self);
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRGP4 ForceLightning
+CALLV
+pop
+line 3956
+;3956:		break;
+ADDRGP4 $1799
+JUMPV
+LABELV $1818
+line 3958
+;3957:	case FP_PUSH:
+;3958:		powerSucceeded = 0; //always 0 for nonhold powers
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+line 3959
+;3959:		if (self->client->ps.fd.forceButtonNeedRelease)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 856
+ADDP4
+INDIRI4
+CNSTI4 0
+EQI4 $1819
+line 3960
+;3960:		{ //need to release before we can use nonhold powers again
+line 3961
+;3961:			break;
+ADDRGP4 $1799
+JUMPV
+LABELV $1819
+line 3963
+;3962:		}
+;3963:		ForceThrow(self, qfalse);
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 0
+ARGI4
+ADDRGP4 ForceThrow
+CALLV
+pop
+line 3964
+;3964:		self->client->ps.fd.forceButtonNeedRelease = 1;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 856
+ADDP4
+CNSTI4 1
+ASGNI4
+line 3965
+;3965:		break;
+ADDRGP4 $1799
+JUMPV
+LABELV $1821
+line 3967
+;3966:	case FP_PULL:
+;3967:		powerSucceeded = 0; //always 0 for nonhold powers
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+line 3968
+;3968:		if (self->client->ps.fd.forceButtonNeedRelease)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 856
+ADDP4
+INDIRI4
+CNSTI4 0
+EQI4 $1822
+line 3969
+;3969:		{ //need to release before we can use nonhold powers again
+line 3970
+;3970:			break;
+ADDRGP4 $1799
+JUMPV
+LABELV $1822
+line 3972
+;3971:		}
+;3972:		ForceThrow(self, qtrue);
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 1
+ARGI4
+ADDRGP4 ForceThrow
+CALLV
+pop
+line 3973
+;3973:		self->client->ps.fd.forceButtonNeedRelease = 1;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 856
+ADDP4
+CNSTI4 1
+ASGNI4
+line 3974
+;3974:		break;
+ADDRGP4 $1799
+JUMPV
+LABELV $1824
+line 3976
+;3975:	case FP_TELEPATHY:
+;3976:		powerSucceeded = 0; //always 0 for nonhold powers
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+line 3977
+;3977:		if (self->client->ps.fd.forceButtonNeedRelease)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 856
+ADDP4
+INDIRI4
+CNSTI4 0
+EQI4 $1825
+line 3978
+;3978:		{ //need to release before we can use nonhold powers again
+line 3979
+;3979:			break;
+ADDRGP4 $1799
+JUMPV
+LABELV $1825
+line 3981
+;3980:		}
+;3981:		ForceTelepathy(self);
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRGP4 ForceTelepathy
+CALLV
+pop
+line 3982
+;3982:		self->client->ps.fd.forceButtonNeedRelease = 1;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 856
+ADDP4
+CNSTI4 1
+ASGNI4
+line 3983
+;3983:		break;
+ADDRGP4 $1799
+JUMPV
+LABELV $1827
+line 3985
+;3984:	case FP_RAGE:
+;3985:		powerSucceeded = 0; //always 0 for nonhold powers
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+line 3986
+;3986:		if (self->client->ps.fd.forceButtonNeedRelease)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 856
+ADDP4
+INDIRI4
+CNSTI4 0
+EQI4 $1828
+line 3987
+;3987:		{ //need to release before we can use nonhold powers again
+line 3988
+;3988:			break;
+ADDRGP4 $1799
+JUMPV
+LABELV $1828
+line 3990
+;3989:		}
+;3990:		ForceRage(self);
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRGP4 ForceRage
+CALLV
+pop
+line 3991
+;3991:		self->client->ps.fd.forceButtonNeedRelease = 1;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 856
+ADDP4
+CNSTI4 1
+ASGNI4
+line 3992
+;3992:		break;
+ADDRGP4 $1799
+JUMPV
+LABELV $1830
+line 3994
+;3993:	case FP_PROTECT:
+;3994:		powerSucceeded = 0; //always 0 for nonhold powers
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+line 3995
+;3995:		if (self->client->ps.fd.forceButtonNeedRelease)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 856
+ADDP4
+INDIRI4
+CNSTI4 0
+EQI4 $1831
+line 3996
+;3996:		{ //need to release before we can use nonhold powers again
+line 3997
+;3997:			break;
+ADDRGP4 $1799
+JUMPV
+LABELV $1831
+line 3999
+;3998:		}
+;3999:		ForceProtect(self);
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRGP4 ForceProtect
+CALLV
+pop
+line 4000
+;4000:		self->client->ps.fd.forceButtonNeedRelease = 1;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 856
+ADDP4
+CNSTI4 1
+ASGNI4
+line 4001
+;4001:		break;
+ADDRGP4 $1799
+JUMPV
+LABELV $1833
+line 4003
+;4002:	case FP_ABSORB:
+;4003:		powerSucceeded = 0; //always 0 for nonhold powers
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+line 4004
+;4004:		if (self->client->ps.fd.forceButtonNeedRelease)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 856
+ADDP4
+INDIRI4
+CNSTI4 0
+EQI4 $1834
+line 4005
+;4005:		{ //need to release before we can use nonhold powers again
+line 4006
+;4006:			break;
+ADDRGP4 $1799
+JUMPV
+LABELV $1834
+line 4008
+;4007:		}
+;4008:		ForceAbsorb(self);
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRGP4 ForceAbsorb
+CALLV
+pop
+line 4009
+;4009:		self->client->ps.fd.forceButtonNeedRelease = 1;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 856
+ADDP4
+CNSTI4 1
+ASGNI4
+line 4010
+;4010:		break;
+ADDRGP4 $1799
+JUMPV
+LABELV $1836
+line 4012
+;4011:	case FP_TEAM_HEAL:
+;4012:		powerSucceeded = 0; //always 0 for nonhold powers
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+line 4013
+;4013:		if (self->client->ps.fd.forceButtonNeedRelease)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 856
+ADDP4
+INDIRI4
+CNSTI4 0
+EQI4 $1837
+line 4014
+;4014:		{ //need to release before we can use nonhold powers again
+line 4015
+;4015:			break;
+ADDRGP4 $1799
+JUMPV
+LABELV $1837
+line 4017
+;4016:		}
+;4017:		ForceTeamHeal(self);
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRGP4 ForceTeamHeal
+CALLV
+pop
+line 4018
+;4018:		self->client->ps.fd.forceButtonNeedRelease = 1;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 856
+ADDP4
+CNSTI4 1
+ASGNI4
+line 4019
+;4019:		break;
+ADDRGP4 $1799
+JUMPV
+LABELV $1839
+line 4021
+;4020:	case FP_TEAM_FORCE:
+;4021:		powerSucceeded = 0; //always 0 for nonhold powers
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+line 4022
+;4022:		if (self->client->ps.fd.forceButtonNeedRelease)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 856
+ADDP4
+INDIRI4
+CNSTI4 0
+EQI4 $1840
+line 4023
+;4023:		{ //need to release before we can use nonhold powers again
+line 4024
+;4024:			break;
+ADDRGP4 $1799
+JUMPV
+LABELV $1840
+line 4026
+;4025:		}
+;4026:		ForceTeamForceReplenish(self);
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRGP4 ForceTeamForceReplenish
+CALLV
+pop
+line 4027
+;4027:		self->client->ps.fd.forceButtonNeedRelease = 1;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 856
+ADDP4
+CNSTI4 1
+ASGNI4
+line 4028
+;4028:		break;
+ADDRGP4 $1799
+JUMPV
+LABELV $1842
+line 4030
+;4029:	case FP_DRAIN:
+;4030:		ForceDrain(self);
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRGP4 ForceDrain
+CALLV
+pop
+line 4031
+;4031:		break;
+ADDRGP4 $1799
+JUMPV
+LABELV $1843
+line 4033
+;4032:	case FP_SEE:
+;4033:		powerSucceeded = 0; //always 0 for nonhold powers
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+line 4034
+;4034:		if (self->client->ps.fd.forceButtonNeedRelease)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 856
+ADDP4
+INDIRI4
+CNSTI4 0
+EQI4 $1844
+line 4035
+;4035:		{ //need to release before we can use nonhold powers again
+line 4036
+;4036:			break;
+ADDRGP4 $1799
+JUMPV
+LABELV $1844
+line 4038
+;4037:		}
+;4038:		ForceSeeing(self);
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRGP4 ForceSeeing
+CALLV
+pop
+line 4039
+;4039:		self->client->ps.fd.forceButtonNeedRelease = 1;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 856
+ADDP4
+CNSTI4 1
+ASGNI4
+line 4040
+;4040:		break;
+line 4042
+;4041:	case FP_SABERATTACK:
+;4042:		break;
+line 4044
+;4043:	case FP_SABERDEFEND:
+;4044:		break;
+line 4046
+;4045:	case FP_SABERTHROW:
+;4046:		break;
+line 4048
+;4047:	default:
+;4048:		break;
+LABELV $1799
+line 4051
+;4049:	}
+;4050:
+;4051:	return powerSucceeded;
+ADDRLP4 0
+INDIRI4
+RETI4
+LABELV $1795
+endproc WP_DoSpecificPower 16 12
+export FindGenericEnemyIndex
+proc FindGenericEnemyIndex 116 16
+line 4055
+;4052:}
+;4053:
+;4054:void FindGenericEnemyIndex(gentity_t *self)
+;4055:{ //Find another client that would be considered a threat.
+line 4056
+;4056:	int i = 0;
+ADDRLP4 4
+CNSTI4 0
+ASGNI4
+line 4059
+;4057:	float tlen;
+;4058:	gentity_t *ent;
+;4059:	gentity_t *besten = NULL;
+ADDRLP4 28
+CNSTP4 0
+ASGNP4
+line 4060
+;4060:	float blen = 99999999;
+ADDRLP4 24
+CNSTF4 1287568416
+ASGNF4
+ADDRGP4 $1852
+JUMPV
+LABELV $1851
+line 4064
+;4061:	vec3_t a;
+;4062:
+;4063:	while (i < MAX_CLIENTS)
+;4064:	{
+line 4065
+;4065:		ent = &g_entities[i];
+ADDRLP4 0
+CNSTI4 852
+ADDRLP4 4
+INDIRI4
+MULI4
+ADDRGP4 g_entities
+ADDP4
+ASGNP4
+line 4067
+;4066:
+;4067:		if (ent && ent->client && ent->s.number != self->s.number && ent->health > 0 && !OnSameTeam(self, ent) && ent->client->ps.pm_type != PM_INTERMISSION && ent->client->ps.pm_type != PM_SPECTATOR)
+ADDRLP4 36
+CNSTU4 0
+ASGNU4
+ADDRLP4 0
+INDIRP4
+CVPU4 4
+ADDRLP4 36
+INDIRU4
+EQU4 $1854
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CVPU4 4
+ADDRLP4 36
+INDIRU4
+EQU4 $1854
+ADDRLP4 40
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 0
+INDIRP4
+INDIRI4
+ADDRLP4 40
+INDIRP4
+INDIRI4
+EQI4 $1854
+ADDRLP4 0
+INDIRP4
+CNSTI4 676
+ADDP4
+INDIRI4
+CNSTI4 0
+LEI4 $1854
+ADDRLP4 40
+INDIRP4
+ARGP4
+ADDRLP4 0
+INDIRP4
+ARGP4
+ADDRLP4 44
+ADDRGP4 OnSameTeam
+CALLI4
+ASGNI4
+ADDRLP4 44
+INDIRI4
+CNSTI4 0
+NEI4 $1854
+ADDRLP4 48
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 4
+ADDP4
+INDIRI4
+ASGNI4
+ADDRLP4 48
+INDIRI4
+CNSTI4 6
+EQI4 $1854
+ADDRLP4 48
+INDIRI4
+CNSTI4 3
+EQI4 $1854
+line 4068
+;4068:		{
+line 4069
+;4069:			VectorSubtract(ent->client->ps.origin, self->client->ps.origin, a);
+ADDRLP4 52
+CNSTI4 408
+ASGNI4
+ADDRLP4 56
+ADDRLP4 0
+INDIRP4
+ADDRLP4 52
+INDIRI4
+ADDP4
+ASGNP4
+ADDRLP4 60
+CNSTI4 20
+ASGNI4
+ADDRLP4 64
+ADDRFP4 0
+INDIRP4
+ADDRLP4 52
+INDIRI4
+ADDP4
+ASGNP4
+ADDRLP4 8
+ADDRLP4 56
+INDIRP4
+INDIRP4
+ADDRLP4 60
+INDIRI4
+ADDP4
+INDIRF4
+ADDRLP4 64
+INDIRP4
+INDIRP4
+ADDRLP4 60
+INDIRI4
+ADDP4
+INDIRF4
+SUBF4
+ASGNF4
+ADDRLP4 68
+CNSTI4 24
+ASGNI4
+ADDRLP4 8+4
+ADDRLP4 56
+INDIRP4
+INDIRP4
+ADDRLP4 68
+INDIRI4
+ADDP4
+INDIRF4
+ADDRLP4 64
+INDIRP4
+INDIRP4
+ADDRLP4 68
+INDIRI4
+ADDP4
+INDIRF4
+SUBF4
+ASGNF4
+ADDRLP4 72
+CNSTI4 408
+ASGNI4
+ADDRLP4 76
+CNSTI4 28
+ASGNI4
+ADDRLP4 8+8
+ADDRLP4 0
+INDIRP4
+ADDRLP4 72
+INDIRI4
+ADDP4
+INDIRP4
+ADDRLP4 76
+INDIRI4
+ADDP4
+INDIRF4
+ADDRFP4 0
+INDIRP4
+ADDRLP4 72
+INDIRI4
+ADDP4
+INDIRP4
+ADDRLP4 76
+INDIRI4
+ADDP4
+INDIRF4
+SUBF4
+ASGNF4
+line 4070
+;4070:			tlen = VectorLength(a);
+ADDRLP4 8
+ARGP4
+ADDRLP4 80
+ADDRGP4 VectorLength
+CALLF4
+ASGNF4
+ADDRLP4 20
+ADDRLP4 80
+INDIRF4
+ASGNF4
+line 4072
+;4071:
+;4072:			if (tlen < blen &&
+ADDRLP4 20
+INDIRF4
+ADDRLP4 24
+INDIRF4
+GEF4 $1858
+ADDRLP4 84
+CNSTI4 408
+ASGNI4
+ADDRLP4 88
+CNSTI4 20
+ASGNI4
+ADDRLP4 0
+INDIRP4
+ADDRLP4 84
+INDIRI4
+ADDP4
+INDIRP4
+ADDRLP4 88
+INDIRI4
+ADDP4
+ARGP4
+ADDRLP4 92
+ADDRFP4 0
+INDIRP4
+ADDRLP4 84
+INDIRI4
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 92
+INDIRP4
+ADDRLP4 88
+INDIRI4
+ADDP4
+ARGP4
+ADDRLP4 92
+INDIRP4
+CNSTI4 156
+ADDP4
+ARGP4
+CNSTF4 1061997773
+ARGF4
+ADDRLP4 96
+ADDRGP4 InFront
+CALLI4
+ASGNI4
+ADDRLP4 96
+INDIRI4
+CNSTI4 0
+EQI4 $1858
+ADDRLP4 100
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 104
+CNSTI4 408
+ASGNI4
+ADDRLP4 108
+CNSTI4 20
+ASGNI4
+ADDRLP4 100
+INDIRP4
+ADDRLP4 104
+INDIRI4
+ADDP4
+INDIRP4
+ADDRLP4 108
+INDIRI4
+ADDP4
+ARGP4
+ADDRLP4 0
+INDIRP4
+ADDRLP4 104
+INDIRI4
+ADDP4
+INDIRP4
+ADDRLP4 108
+INDIRI4
+ADDP4
+ARGP4
+ADDRLP4 100
+INDIRP4
+INDIRI4
+ARGI4
+ADDRLP4 112
+ADDRGP4 OrgVisible
+CALLI4
+ASGNI4
+ADDRLP4 112
+INDIRI4
+CNSTI4 0
+EQI4 $1858
+line 4075
+;4073:				InFront(ent->client->ps.origin, self->client->ps.origin, self->client->ps.viewangles, 0.8f ) &&
+;4074:				OrgVisible(self->client->ps.origin, ent->client->ps.origin, self->s.number))
+;4075:			{
+line 4076
+;4076:				blen = tlen;
+ADDRLP4 24
+ADDRLP4 20
+INDIRF4
+ASGNF4
+line 4077
+;4077:				besten = ent;
+ADDRLP4 28
+ADDRLP4 0
+INDIRP4
+ASGNP4
+line 4078
+;4078:			}
+LABELV $1858
+line 4079
+;4079:		}
+LABELV $1854
+line 4081
+;4080:
+;4081:		i++;
+ADDRLP4 4
+ADDRLP4 4
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 4082
+;4082:	}
+LABELV $1852
+line 4063
+ADDRLP4 4
+INDIRI4
+CNSTI4 32
+LTI4 $1851
+line 4084
+;4083:
+;4084:	if (!besten)
+ADDRLP4 28
+INDIRP4
+CVPU4 4
+CNSTU4 0
+NEU4 $1860
+line 4085
+;4085:	{
+line 4086
+;4086:		return;
+ADDRGP4 $1850
+JUMPV
+LABELV $1860
+line 4089
+;4087:	}
+;4088:
+;4089:	self->client->ps.genericEnemyIndex = besten->s.number;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 624
+ADDP4
+ADDRLP4 28
+INDIRP4
+INDIRI4
+ASGNI4
+line 4090
+;4090:}
+LABELV $1850
+endproc FindGenericEnemyIndex 116 16
+export SeekerDroneUpdate
+proc SeekerDroneUpdate 1204 28
+line 4093
+;4091:
+;4092:void SeekerDroneUpdate(gentity_t *self)
+;4093:{
+line 4097
+;4094:	vec3_t org, elevated, dir, a, endir;
+;4095:	gentity_t *en;
+;4096:	float angle;
+;4097:	float prefig = 0;
+ADDRLP4 56
+CNSTF4 0
+ASGNF4
+line 4100
+;4098:	trace_t tr;
+;4099:
+;4100:	if (!(self->client->ps.eFlags & EF_SEEKERDRONE))
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 108
+ADDP4
+INDIRI4
+CNSTI4 1048576
+BANDI4
+CNSTI4 0
+NEI4 $1863
+line 4101
+;4101:	{
+line 4102
+;4102:		self->client->ps.genericEnemyIndex = -1;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 624
+ADDP4
+CNSTI4 -1
+ASGNI4
+line 4103
+;4103:		return;
+ADDRGP4 $1862
+JUMPV
+LABELV $1863
+line 4106
+;4104:	}
+;4105:
+;4106:	if (self->health < 1)
+ADDRFP4 0
+INDIRP4
+CNSTI4 676
+ADDP4
+INDIRI4
+CNSTI4 1
+GEI4 $1865
+line 4107
+;4107:	{
+line 4108
+;4108:		VectorCopy(self->client->ps.origin, elevated);
+ADDRLP4 12
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 20
+ADDP4
+INDIRB
+ASGNB 12
+line 4109
+;4109:		elevated[2] += 40;
+ADDRLP4 12+8
+ADDRLP4 12+8
+INDIRF4
+CNSTF4 1109393408
+ADDF4
+ASGNF4
+line 4111
+;4110:
+;4111:		angle = ((level.time / 12) & 255) * (M_PI * 2) / 255; //magical numbers make magic happen
+ADDRLP4 36
+CNSTF4 1086918619
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 12
+DIVI4
+CNSTI4 255
+BANDI4
+CVIF4 4
+MULF4
+CNSTF4 1132396544
+DIVF4
+ASGNF4
+line 4112
+;4112:		dir[0] = cos(angle) * 20;
+ADDRLP4 36
+INDIRF4
+ARGF4
+ADDRLP4 1152
+ADDRGP4 cos
+CALLF4
+ASGNF4
+ADDRLP4 0
+CNSTF4 1101004800
+ADDRLP4 1152
+INDIRF4
+MULF4
+ASGNF4
+line 4113
+;4113:		dir[1] = sin(angle) * 20;
+ADDRLP4 36
+INDIRF4
+ARGF4
+ADDRLP4 1156
+ADDRGP4 sin
+CALLF4
+ASGNF4
+ADDRLP4 0+4
+CNSTF4 1101004800
+ADDRLP4 1156
+INDIRF4
+MULF4
+ASGNF4
+line 4114
+;4114:		dir[2] = cos(angle) * 5;
+ADDRLP4 36
+INDIRF4
+ARGF4
+ADDRLP4 1160
+ADDRGP4 cos
+CALLF4
+ASGNF4
+ADDRLP4 0+8
+CNSTF4 1084227584
+ADDRLP4 1160
+INDIRF4
+MULF4
+ASGNF4
+line 4115
+;4115:		VectorAdd(elevated, dir, org);
+ADDRLP4 24
+ADDRLP4 12
+INDIRF4
+ADDRLP4 0
+INDIRF4
+ADDF4
+ASGNF4
+ADDRLP4 24+4
+ADDRLP4 12+4
+INDIRF4
+ADDRLP4 0+4
+INDIRF4
+ADDF4
+ASGNF4
+ADDRLP4 24+8
+ADDRLP4 12+8
+INDIRF4
+ADDRLP4 0+8
+INDIRF4
+ADDF4
+ASGNF4
+line 4117
+;4116:
+;4117:		a[ROLL] = 0;
+ADDRLP4 44+8
+CNSTF4 0
+ASGNF4
+line 4118
+;4118:		a[YAW] = 0;
+ADDRLP4 44+4
+CNSTF4 0
+ASGNF4
+line 4119
+;4119:		a[PITCH] = 1;
+ADDRLP4 44
+CNSTF4 1065353216
+ASGNF4
+line 4121
+;4120:
+;4121:		G_PlayEffect(EFFECT_SPARK_EXPLOSION, org, a);
+CNSTI4 4
+ARGI4
+ADDRLP4 24
+ARGP4
+ADDRLP4 44
+ARGP4
+ADDRGP4 G_PlayEffect
+CALLP4
+pop
+line 4123
+;4122:
+;4123:		self->client->ps.eFlags -= EF_SEEKERDRONE;
+ADDRLP4 1164
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 108
+ADDP4
+ASGNP4
+ADDRLP4 1164
+INDIRP4
+ADDRLP4 1164
+INDIRP4
+INDIRI4
+CNSTI4 1048576
+SUBI4
+ASGNI4
+line 4124
+;4124:		self->client->ps.genericEnemyIndex = -1;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 624
+ADDP4
+CNSTI4 -1
+ASGNI4
+line 4126
+;4125:
+;4126:		return;
+ADDRGP4 $1862
+JUMPV
+LABELV $1865
+line 4129
+;4127:	}
+;4128:
+;4129:	if (self->client->ps.droneExistTime >= level.time && 
+ADDRLP4 1152
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 632
+ADDP4
+INDIRF4
+ASGNF4
+ADDRLP4 1152
+INDIRF4
+ADDRGP4 level+32
+INDIRI4
+CVIF4 4
+LTF4 $1879
+ADDRLP4 1152
+INDIRF4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 5000
+ADDI4
+CVIF4 4
+GEF4 $1879
+line 4131
+;4130:		self->client->ps.droneExistTime < (level.time+5000))
+;4131:	{
+line 4132
+;4132:		self->client->ps.genericEnemyIndex = 1024+self->client->ps.droneExistTime;
+ADDRLP4 1156
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 1156
+INDIRP4
+CNSTI4 624
+ADDP4
+ADDRLP4 1156
+INDIRP4
+CNSTI4 632
+ADDP4
+INDIRF4
+CNSTF4 1149239296
+ADDF4
+CVFI4 4
+ASGNI4
+line 4133
+;4133:		if (self->client->ps.droneFireTime < level.time)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 628
+ADDP4
+INDIRF4
+ADDRGP4 level+32
+INDIRI4
+CVIF4 4
+GEF4 $1862
+line 4134
+;4134:		{
+line 4135
+;4135:			G_Sound( self, CHAN_BODY, G_SoundIndex("sound/weapons/laser_trap/warning.wav") );
+ADDRGP4 $1886
+ARGP4
+ADDRLP4 1160
+ADDRGP4 G_SoundIndex
+CALLI4
+ASGNI4
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 5
+ARGI4
+ADDRLP4 1160
+INDIRI4
+ARGI4
+ADDRGP4 G_Sound
+CALLV
+pop
+line 4136
+;4136:			self->client->ps.droneFireTime = level.time + 100;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 628
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 100
+ADDI4
+CVIF4 4
+ASGNF4
+line 4137
+;4137:		}
+line 4138
+;4138:		return;
+ADDRGP4 $1862
+JUMPV
+LABELV $1879
+line 4140
+;4139:	}
+;4140:	else if (self->client->ps.droneExistTime < level.time)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 632
+ADDP4
+INDIRF4
+ADDRGP4 level+32
+INDIRI4
+CVIF4 4
+GEF4 $1888
+line 4141
+;4141:	{
+line 4142
+;4142:		VectorCopy(self->client->ps.origin, elevated);
+ADDRLP4 12
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 20
+ADDP4
+INDIRB
+ASGNB 12
+line 4143
+;4143:		elevated[2] += 40;
+ADDRLP4 12+8
+ADDRLP4 12+8
+INDIRF4
+CNSTF4 1109393408
+ADDF4
+ASGNF4
+line 4145
+;4144:
+;4145:		prefig = (self->client->ps.droneExistTime-level.time)/80;
+ADDRLP4 56
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 632
+ADDP4
+INDIRF4
+ADDRGP4 level+32
+INDIRI4
+CVIF4 4
+SUBF4
+CNSTF4 1117782016
+DIVF4
+ASGNF4
+line 4147
+;4146:
+;4147:		if (prefig > 55)
+ADDRLP4 56
+INDIRF4
+CNSTF4 1113325568
+LEF4 $1893
+line 4148
+;4148:		{
+line 4149
+;4149:			prefig = 55;
+ADDRLP4 56
+CNSTF4 1113325568
+ASGNF4
+line 4150
+;4150:		}
+ADDRGP4 $1894
+JUMPV
+LABELV $1893
+line 4151
+;4151:		else if (prefig < 1)
+ADDRLP4 56
+INDIRF4
+CNSTF4 1065353216
+GEF4 $1895
+line 4152
+;4152:		{
+line 4153
+;4153:			prefig = 1;
+ADDRLP4 56
+CNSTF4 1065353216
+ASGNF4
+line 4154
+;4154:		}
+LABELV $1895
+LABELV $1894
+line 4156
+;4155:
+;4156:		elevated[2] -= 55-prefig;
+ADDRLP4 12+8
+ADDRLP4 12+8
+INDIRF4
+CNSTF4 1113325568
+ADDRLP4 56
+INDIRF4
+SUBF4
+SUBF4
+ASGNF4
+line 4158
+;4157:
+;4158:		angle = ((level.time / 12) & 255) * (M_PI * 2) / 255; //magical numbers make magic happen
+ADDRLP4 36
+CNSTF4 1086918619
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 12
+DIVI4
+CNSTI4 255
+BANDI4
+CVIF4 4
+MULF4
+CNSTF4 1132396544
+DIVF4
+ASGNF4
+line 4159
+;4159:		dir[0] = cos(angle) * 20;
+ADDRLP4 36
+INDIRF4
+ARGF4
+ADDRLP4 1156
+ADDRGP4 cos
+CALLF4
+ASGNF4
+ADDRLP4 0
+CNSTF4 1101004800
+ADDRLP4 1156
+INDIRF4
+MULF4
+ASGNF4
+line 4160
+;4160:		dir[1] = sin(angle) * 20;
+ADDRLP4 36
+INDIRF4
+ARGF4
+ADDRLP4 1160
+ADDRGP4 sin
+CALLF4
+ASGNF4
+ADDRLP4 0+4
+CNSTF4 1101004800
+ADDRLP4 1160
+INDIRF4
+MULF4
+ASGNF4
+line 4161
+;4161:		dir[2] = cos(angle) * 5;
+ADDRLP4 36
+INDIRF4
+ARGF4
+ADDRLP4 1164
+ADDRGP4 cos
+CALLF4
+ASGNF4
+ADDRLP4 0+8
+CNSTF4 1084227584
+ADDRLP4 1164
+INDIRF4
+MULF4
+ASGNF4
+line 4162
+;4162:		VectorAdd(elevated, dir, org);
+ADDRLP4 24
+ADDRLP4 12
+INDIRF4
+ADDRLP4 0
+INDIRF4
+ADDF4
+ASGNF4
+ADDRLP4 24+4
+ADDRLP4 12+4
+INDIRF4
+ADDRLP4 0+4
+INDIRF4
+ADDF4
+ASGNF4
+ADDRLP4 24+8
+ADDRLP4 12+8
+INDIRF4
+ADDRLP4 0+8
+INDIRF4
+ADDF4
+ASGNF4
+line 4164
+;4163:
+;4164:		a[ROLL] = 0;
+ADDRLP4 44+8
+CNSTF4 0
+ASGNF4
+line 4165
+;4165:		a[YAW] = 0;
+ADDRLP4 44+4
+CNSTF4 0
+ASGNF4
+line 4166
+;4166:		a[PITCH] = 1;
+ADDRLP4 44
+CNSTF4 1065353216
+ASGNF4
+line 4168
+;4167:
+;4168:		G_PlayEffect(EFFECT_SPARK_EXPLOSION, org, a);
+CNSTI4 4
+ARGI4
+ADDRLP4 24
+ARGP4
+ADDRLP4 44
+ARGP4
+ADDRGP4 G_PlayEffect
+CALLP4
+pop
+line 4170
+;4169:
+;4170:		self->client->ps.eFlags -= EF_SEEKERDRONE;
+ADDRLP4 1168
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 108
+ADDP4
+ASGNP4
+ADDRLP4 1168
+INDIRP4
+ADDRLP4 1168
+INDIRP4
+INDIRI4
+CNSTI4 1048576
+SUBI4
+ASGNI4
+line 4171
+;4171:		self->client->ps.genericEnemyIndex = -1;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 624
+ADDP4
+CNSTI4 -1
+ASGNI4
+line 4173
+;4172:
+;4173:		return;
+ADDRGP4 $1862
+JUMPV
+LABELV $1888
+line 4176
+;4174:	}
+;4175:
+;4176:	if (self->client->ps.genericEnemyIndex == -1)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 624
+ADDP4
+INDIRI4
+CNSTI4 -1
+NEI4 $1909
+line 4177
+;4177:	{
+line 4178
+;4178:		self->client->ps.genericEnemyIndex = ENTITYNUM_NONE;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 624
+ADDP4
+CNSTI4 1023
+ASGNI4
+line 4179
+;4179:	}
+LABELV $1909
+line 4181
+;4180:
+;4181:	if (self->client->ps.genericEnemyIndex != ENTITYNUM_NONE && self->client->ps.genericEnemyIndex != -1)
+ADDRLP4 1156
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 624
+ADDP4
+INDIRI4
+ASGNI4
+ADDRLP4 1156
+INDIRI4
+CNSTI4 1023
+EQI4 $1911
+ADDRLP4 1156
+INDIRI4
+CNSTI4 -1
+EQI4 $1911
+line 4182
+;4182:	{
+line 4183
+;4183:		en = &g_entities[self->client->ps.genericEnemyIndex];
+ADDRLP4 40
+CNSTI4 852
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 624
+ADDP4
+INDIRI4
+MULI4
+ADDRGP4 g_entities
+ADDP4
+ASGNP4
+line 4185
+;4184:
+;4185:		if (!en || !en->client)
+ADDRLP4 1164
+CNSTU4 0
+ASGNU4
+ADDRLP4 40
+INDIRP4
+CVPU4 4
+ADDRLP4 1164
+INDIRU4
+EQU4 $1915
+ADDRLP4 40
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CVPU4 4
+ADDRLP4 1164
+INDIRU4
+NEU4 $1913
+LABELV $1915
+line 4186
+;4186:		{
+line 4187
+;4187:			self->client->ps.genericEnemyIndex = ENTITYNUM_NONE;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 624
+ADDP4
+CNSTI4 1023
+ASGNI4
+line 4188
+;4188:		}
+ADDRGP4 $1914
+JUMPV
+LABELV $1913
+line 4189
+;4189:		else if (en->s.number == self->s.number)
+ADDRLP4 40
+INDIRP4
+INDIRI4
+ADDRFP4 0
+INDIRP4
+INDIRI4
+NEI4 $1916
+line 4190
+;4190:		{
+line 4191
+;4191:			self->client->ps.genericEnemyIndex = ENTITYNUM_NONE;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 624
+ADDP4
+CNSTI4 1023
+ASGNI4
+line 4192
+;4192:		}
+ADDRGP4 $1917
+JUMPV
+LABELV $1916
+line 4193
+;4193:		else if (en->health < 1)
+ADDRLP4 40
+INDIRP4
+CNSTI4 676
+ADDP4
+INDIRI4
+CNSTI4 1
+GEI4 $1918
+line 4194
+;4194:		{
+line 4195
+;4195:			self->client->ps.genericEnemyIndex = ENTITYNUM_NONE;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 624
+ADDP4
+CNSTI4 1023
+ASGNI4
+line 4196
+;4196:		}
+ADDRGP4 $1919
+JUMPV
+LABELV $1918
+line 4197
+;4197:		else if (OnSameTeam(self, en))
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRLP4 40
+INDIRP4
+ARGP4
+ADDRLP4 1168
+ADDRGP4 OnSameTeam
+CALLI4
+ASGNI4
+ADDRLP4 1168
+INDIRI4
+CNSTI4 0
+EQI4 $1920
+line 4198
+;4198:		{
+line 4199
+;4199:			self->client->ps.genericEnemyIndex = ENTITYNUM_NONE;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 624
+ADDP4
+CNSTI4 1023
+ASGNI4
+line 4200
+;4200:		}
+ADDRGP4 $1921
+JUMPV
+LABELV $1920
+line 4202
+;4201:		else
+;4202:		{
+line 4203
+;4203:			if (!InFront(en->client->ps.origin, self->client->ps.origin, self->client->ps.viewangles, 0.8f ))
+ADDRLP4 1172
+CNSTI4 408
+ASGNI4
+ADDRLP4 1176
+CNSTI4 20
+ASGNI4
+ADDRLP4 40
+INDIRP4
+ADDRLP4 1172
+INDIRI4
+ADDP4
+INDIRP4
+ADDRLP4 1176
+INDIRI4
+ADDP4
+ARGP4
+ADDRLP4 1180
+ADDRFP4 0
+INDIRP4
+ADDRLP4 1172
+INDIRI4
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 1180
+INDIRP4
+ADDRLP4 1176
+INDIRI4
+ADDP4
+ARGP4
+ADDRLP4 1180
+INDIRP4
+CNSTI4 156
+ADDP4
+ARGP4
+CNSTF4 1061997773
+ARGF4
+ADDRLP4 1184
+ADDRGP4 InFront
+CALLI4
+ASGNI4
+ADDRLP4 1184
+INDIRI4
+CNSTI4 0
+NEI4 $1922
+line 4204
+;4204:			{
+line 4205
+;4205:				self->client->ps.genericEnemyIndex = ENTITYNUM_NONE;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 624
+ADDP4
+CNSTI4 1023
+ASGNI4
+line 4206
+;4206:			}
+ADDRGP4 $1923
+JUMPV
+LABELV $1922
+line 4207
+;4207:			else if (!OrgVisible(self->client->ps.origin, en->client->ps.origin, self->s.number))
+ADDRLP4 1188
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 1192
+CNSTI4 408
+ASGNI4
+ADDRLP4 1196
+CNSTI4 20
+ASGNI4
+ADDRLP4 1188
+INDIRP4
+ADDRLP4 1192
+INDIRI4
+ADDP4
+INDIRP4
+ADDRLP4 1196
+INDIRI4
+ADDP4
+ARGP4
+ADDRLP4 40
+INDIRP4
+ADDRLP4 1192
+INDIRI4
+ADDP4
+INDIRP4
+ADDRLP4 1196
+INDIRI4
+ADDP4
+ARGP4
+ADDRLP4 1188
+INDIRP4
+INDIRI4
+ARGI4
+ADDRLP4 1200
+ADDRGP4 OrgVisible
+CALLI4
+ASGNI4
+ADDRLP4 1200
+INDIRI4
+CNSTI4 0
+NEI4 $1924
+line 4208
+;4208:			{
+line 4209
+;4209:				self->client->ps.genericEnemyIndex = ENTITYNUM_NONE;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 624
+ADDP4
+CNSTI4 1023
+ASGNI4
+line 4210
+;4210:			}
+LABELV $1924
+LABELV $1923
+line 4211
+;4211:		}
+LABELV $1921
+LABELV $1919
+LABELV $1917
+LABELV $1914
+line 4212
+;4212:	}
+LABELV $1911
+line 4214
+;4213:
+;4214:	if (self->client->ps.genericEnemyIndex == ENTITYNUM_NONE || self->client->ps.genericEnemyIndex == -1)
+ADDRLP4 1160
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 624
+ADDP4
+INDIRI4
+ASGNI4
+ADDRLP4 1160
+INDIRI4
+CNSTI4 1023
+EQI4 $1928
+ADDRLP4 1160
+INDIRI4
+CNSTI4 -1
+NEI4 $1926
+LABELV $1928
+line 4215
+;4215:	{
+line 4216
+;4216:		FindGenericEnemyIndex(self);
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRGP4 FindGenericEnemyIndex
+CALLV
+pop
+line 4217
+;4217:	}
+LABELV $1926
+line 4219
+;4218:
+;4219:	if (self->client->ps.genericEnemyIndex != ENTITYNUM_NONE && self->client->ps.genericEnemyIndex != -1)
+ADDRLP4 1164
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 624
+ADDP4
+INDIRI4
+ASGNI4
+ADDRLP4 1164
+INDIRI4
+CNSTI4 1023
+EQI4 $1929
+ADDRLP4 1164
+INDIRI4
+CNSTI4 -1
+EQI4 $1929
+line 4220
+;4220:	{
+line 4221
+;4221:		en = &g_entities[self->client->ps.genericEnemyIndex];
+ADDRLP4 40
+CNSTI4 852
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 624
+ADDP4
+INDIRI4
+MULI4
+ADDRGP4 g_entities
+ADDP4
+ASGNP4
+line 4223
+;4222:
+;4223:		VectorCopy(self->client->ps.origin, elevated);
+ADDRLP4 12
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 20
+ADDP4
+INDIRB
+ASGNB 12
+line 4224
+;4224:		elevated[2] += 40;
+ADDRLP4 12+8
+ADDRLP4 12+8
+INDIRF4
+CNSTF4 1109393408
+ADDF4
+ASGNF4
+line 4226
+;4225:
+;4226:		angle = ((level.time / 12) & 255) * (M_PI * 2) / 255; //magical numbers make magic happen
+ADDRLP4 36
+CNSTF4 1086918619
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 12
+DIVI4
+CNSTI4 255
+BANDI4
+CVIF4 4
+MULF4
+CNSTF4 1132396544
+DIVF4
+ASGNF4
+line 4227
+;4227:		dir[0] = cos(angle) * 20;
+ADDRLP4 36
+INDIRF4
+ARGF4
+ADDRLP4 1168
+ADDRGP4 cos
+CALLF4
+ASGNF4
+ADDRLP4 0
+CNSTF4 1101004800
+ADDRLP4 1168
+INDIRF4
+MULF4
+ASGNF4
+line 4228
+;4228:		dir[1] = sin(angle) * 20;
+ADDRLP4 36
+INDIRF4
+ARGF4
+ADDRLP4 1172
+ADDRGP4 sin
+CALLF4
+ASGNF4
+ADDRLP4 0+4
+CNSTF4 1101004800
+ADDRLP4 1172
+INDIRF4
+MULF4
+ASGNF4
+line 4229
+;4229:		dir[2] = cos(angle) * 5;
+ADDRLP4 36
+INDIRF4
+ARGF4
+ADDRLP4 1176
+ADDRGP4 cos
+CALLF4
+ASGNF4
+ADDRLP4 0+8
+CNSTF4 1084227584
+ADDRLP4 1176
+INDIRF4
+MULF4
+ASGNF4
+line 4230
+;4230:		VectorAdd(elevated, dir, org);
+ADDRLP4 24
+ADDRLP4 12
+INDIRF4
+ADDRLP4 0
+INDIRF4
+ADDF4
+ASGNF4
+ADDRLP4 24+4
+ADDRLP4 12+4
+INDIRF4
+ADDRLP4 0+4
+INDIRF4
+ADDF4
+ASGNF4
+ADDRLP4 24+8
+ADDRLP4 12+8
+INDIRF4
+ADDRLP4 0+8
+INDIRF4
+ADDF4
+ASGNF4
+line 4233
+;4231:
+;4232:		//org is now where the thing should be client-side because it uses the same time-based offset
+;4233:		if (self->client->ps.droneFireTime < level.time)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 628
+ADDP4
+INDIRF4
+ADDRGP4 level+32
+INDIRI4
+CVIF4 4
+GEF4 $1941
+line 4234
+;4234:		{
+line 4235
+;4235:			trap_Trace(&tr, org, NULL, NULL, en->client->ps.origin, -1, MASK_SOLID);
+ADDRLP4 60
+ARGP4
+ADDRLP4 24
+ARGP4
+ADDRLP4 1180
+CNSTP4 0
+ASGNP4
+ADDRLP4 1180
+INDIRP4
+ARGP4
+ADDRLP4 1180
+INDIRP4
+ARGP4
+ADDRLP4 40
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 20
+ADDP4
+ARGP4
+CNSTI4 -1
+ARGI4
+CNSTI4 1
+ARGI4
+ADDRGP4 trap_Trace
+CALLV
+pop
+line 4237
+;4236:
+;4237:			if (tr.fraction == 1 && !tr.startsolid && !tr.allsolid)
+ADDRLP4 60+8
+INDIRF4
+CNSTF4 1065353216
+NEF4 $1944
+ADDRLP4 1184
+CNSTI4 0
+ASGNI4
+ADDRLP4 60+4
+INDIRI4
+ADDRLP4 1184
+INDIRI4
+NEI4 $1944
+ADDRLP4 60
+INDIRI4
+ADDRLP4 1184
+INDIRI4
+NEI4 $1944
+line 4238
+;4238:			{
+line 4239
+;4239:				VectorSubtract(en->client->ps.origin, org, endir);
+ADDRLP4 1188
+ADDRLP4 40
+INDIRP4
+CNSTI4 408
+ADDP4
+ASGNP4
+ADDRLP4 1140
+ADDRLP4 1188
+INDIRP4
+INDIRP4
+CNSTI4 20
+ADDP4
+INDIRF4
+ADDRLP4 24
+INDIRF4
+SUBF4
+ASGNF4
+ADDRLP4 1140+4
+ADDRLP4 1188
+INDIRP4
+INDIRP4
+CNSTI4 24
+ADDP4
+INDIRF4
+ADDRLP4 24+4
+INDIRF4
+SUBF4
+ASGNF4
+ADDRLP4 1140+8
+ADDRLP4 40
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 28
+ADDP4
+INDIRF4
+ADDRLP4 24+8
+INDIRF4
+SUBF4
+ASGNF4
+line 4240
+;4240:				VectorNormalize(endir);
+ADDRLP4 1140
+ARGP4
+ADDRGP4 VectorNormalize
+CALLF4
+pop
+line 4242
+;4241:
+;4242:				WP_FireGenericBlasterMissile(self, org, endir, 0, 15, 2000, MOD_BLASTER);
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRLP4 24
+ARGP4
+ADDRLP4 1140
+ARGP4
+CNSTI4 0
+ARGI4
+CNSTI4 15
+ARGI4
+CNSTI4 2000
+ARGI4
+CNSTI4 6
+ARGI4
+ADDRGP4 WP_FireGenericBlasterMissile
+CALLV
+pop
+line 4243
+;4243:				G_SoundAtLoc( org, CHAN_WEAPON, G_SoundIndex("sound/weapons/bryar/fire.wav") );
+ADDRGP4 $1952
+ARGP4
+ADDRLP4 1192
+ADDRGP4 G_SoundIndex
+CALLI4
+ASGNI4
+ADDRLP4 24
+ARGP4
+CNSTI4 2
+ARGI4
+ADDRLP4 1192
+INDIRI4
+ARGI4
+ADDRGP4 G_SoundAtLoc
+CALLV
+pop
+line 4245
+;4244:
+;4245:				self->client->ps.droneFireTime = level.time + Q_irand(400, 700);
+CNSTI4 400
+ARGI4
+CNSTI4 700
+ARGI4
+ADDRLP4 1196
+ADDRGP4 Q_irand
+CALLI4
+ASGNI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 628
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+ADDRLP4 1196
+INDIRI4
+ADDI4
+CVIF4 4
+ASGNF4
+line 4246
+;4246:			}
+LABELV $1944
+line 4247
+;4247:		}
+LABELV $1941
+line 4248
+;4248:	}
+LABELV $1929
+line 4249
+;4249:}
+LABELV $1862
+endproc SeekerDroneUpdate 1204 28
+export HolocronUpdate
+proc HolocronUpdate 28 8
+line 4252
+;4250:
+;4251:void HolocronUpdate(gentity_t *self)
+;4252:{ //keep holocron status updated in holocron mode
+line 4253
+;4253:	int i = 0;
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+line 4254
+;4254:	int noHRank = 0;
+ADDRLP4 4
+CNSTI4 0
+ASGNI4
+line 4256
+;4255:
+;4256:	if (noHRank < FORCE_LEVEL_0)
+ADDRLP4 4
+INDIRI4
+CNSTI4 0
+GEI4 $1955
+line 4257
+;4257:	{
+line 4258
+;4258:		noHRank = FORCE_LEVEL_0;
+ADDRLP4 4
+CNSTI4 0
+ASGNI4
+line 4259
+;4259:	}
+LABELV $1955
+line 4260
+;4260:	if (noHRank > FORCE_LEVEL_3)
+ADDRLP4 4
+INDIRI4
+CNSTI4 3
+LEI4 $1957
+line 4261
+;4261:	{
+line 4262
+;4262:		noHRank = FORCE_LEVEL_3;
+ADDRLP4 4
+CNSTI4 3
+ASGNI4
+line 4263
+;4263:	}
+LABELV $1957
+line 4265
+;4264:
+;4265:	trap_Cvar_Update(&g_MaxHolocronCarry);
+ADDRGP4 g_MaxHolocronCarry
+ARGP4
+ADDRGP4 trap_Cvar_Update
+CALLV
+pop
+ADDRGP4 $1960
+JUMPV
+LABELV $1959
+line 4268
+;4266:
+;4267:	while (i < NUM_FORCE_POWERS)
+;4268:	{
+line 4269
+;4269:		if (self->client->ps.holocronsCarried[i])
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 644
+ADDP4
+ADDP4
+INDIRF4
+CNSTF4 0
+EQF4 $1962
+line 4270
+;4270:		{ //carrying it, make sure we have the power
+line 4271
+;4271:			self->client->ps.holocronBits |= (1 << i);
+ADDRLP4 8
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 724
+ADDP4
+ASGNP4
+ADDRLP4 8
+INDIRP4
+ADDRLP4 8
+INDIRP4
+INDIRI4
+CNSTI4 1
+ADDRLP4 0
+INDIRI4
+LSHI4
+BORI4
+ASGNI4
+line 4272
+;4272:			self->client->ps.fd.forcePowersKnown |= (1 << i);
+ADDRLP4 12
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 844
+ADDP4
+ASGNP4
+ADDRLP4 12
+INDIRP4
+ADDRLP4 12
+INDIRP4
+INDIRI4
+CNSTI4 1
+ADDRLP4 0
+INDIRI4
+LSHI4
+BORI4
+ASGNI4
+line 4273
+;4273:			self->client->ps.fd.forcePowerLevel[i] = FORCE_LEVEL_3;
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 944
+ADDP4
+ADDP4
+CNSTI4 3
+ASGNI4
+line 4274
+;4274:		}
+ADDRGP4 $1963
+JUMPV
+LABELV $1962
+line 4276
+;4275:		else
+;4276:		{ //otherwise, make sure the power is cleared from us
+line 4277
+;4277:			self->client->ps.fd.forcePowerLevel[i] = 0;
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 944
+ADDP4
+ADDP4
+CNSTI4 0
+ASGNI4
+line 4278
+;4278:			if (self->client->ps.holocronBits & (1 << i))
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 724
+ADDP4
+INDIRI4
+CNSTI4 1
+ADDRLP4 0
+INDIRI4
+LSHI4
+BANDI4
+CNSTI4 0
+EQI4 $1964
+line 4279
+;4279:			{
+line 4280
+;4280:				self->client->ps.holocronBits -= (1 << i);
+ADDRLP4 8
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 724
+ADDP4
+ASGNP4
+ADDRLP4 8
+INDIRP4
+ADDRLP4 8
+INDIRP4
+INDIRI4
+CNSTI4 1
+ADDRLP4 0
+INDIRI4
+LSHI4
+SUBI4
+ASGNI4
+line 4281
+;4281:			}
+LABELV $1964
+line 4283
+;4282:
+;4283:			if ((self->client->ps.fd.forcePowersKnown & (1 << i)) && i != FP_LEVITATION && i != FP_SABERATTACK)
+ADDRLP4 8
+CNSTI4 1
+ASGNI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 844
+ADDP4
+INDIRI4
+ADDRLP4 8
+INDIRI4
+ADDRLP4 0
+INDIRI4
+LSHI4
+BANDI4
+CNSTI4 0
+EQI4 $1966
+ADDRLP4 0
+INDIRI4
+ADDRLP4 8
+INDIRI4
+EQI4 $1966
+ADDRLP4 0
+INDIRI4
+CNSTI4 15
+EQI4 $1966
+line 4284
+;4284:			{
+line 4285
+;4285:				self->client->ps.fd.forcePowersKnown -= (1 << i);
+ADDRLP4 16
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 844
+ADDP4
+ASGNP4
+ADDRLP4 16
+INDIRP4
+ADDRLP4 16
+INDIRP4
+INDIRI4
+CNSTI4 1
+ADDRLP4 0
+INDIRI4
+LSHI4
+SUBI4
+ASGNI4
+line 4286
+;4286:			}
+LABELV $1966
+line 4288
+;4287:
+;4288:			if ((self->client->ps.fd.forcePowersActive & (1 << i)) && i != FP_LEVITATION && i != FP_SABERATTACK)
+ADDRLP4 16
+CNSTI4 1
+ASGNI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 848
+ADDP4
+INDIRI4
+ADDRLP4 16
+INDIRI4
+ADDRLP4 0
+INDIRI4
+LSHI4
+BANDI4
+CNSTI4 0
+EQI4 $1968
+ADDRLP4 0
+INDIRI4
+ADDRLP4 16
+INDIRI4
+EQI4 $1968
+ADDRLP4 0
+INDIRI4
+CNSTI4 15
+EQI4 $1968
+line 4289
+;4289:			{
+line 4290
+;4290:				WP_ForcePowerStop(self, i);
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRLP4 0
+INDIRI4
+ARGI4
+ADDRGP4 WP_ForcePowerStop
+CALLV
+pop
+line 4291
+;4291:			}
+LABELV $1968
+line 4293
+;4292:
+;4293:			if (i == FP_LEVITATION)
+ADDRLP4 0
+INDIRI4
+CNSTI4 1
+NEI4 $1970
+line 4294
+;4294:			{
+line 4295
+;4295:				if (noHRank >= FORCE_LEVEL_1)
+ADDRLP4 4
+INDIRI4
+CNSTI4 1
+LTI4 $1972
+line 4296
+;4296:				{
+line 4297
+;4297:					self->client->ps.fd.forcePowerLevel[i] = noHRank;
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 944
+ADDP4
+ADDP4
+ADDRLP4 4
+INDIRI4
+ASGNI4
+line 4298
+;4298:				}
+ADDRGP4 $1971
+JUMPV
+LABELV $1972
+line 4300
+;4299:				else
+;4300:				{
+line 4301
+;4301:					self->client->ps.fd.forcePowerLevel[i] = FORCE_LEVEL_1;
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 944
+ADDP4
+ADDP4
+CNSTI4 1
+ASGNI4
+line 4302
+;4302:				}
+line 4303
+;4303:			}
+ADDRGP4 $1971
+JUMPV
+LABELV $1970
+line 4304
+;4304:			else if (i == FP_SABERATTACK)
+ADDRLP4 0
+INDIRI4
+CNSTI4 15
+NEI4 $1974
+line 4305
+;4305:			{
+line 4306
+;4306:				self->client->ps.fd.forcePowersKnown |= (1 << i);
+ADDRLP4 24
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 844
+ADDP4
+ASGNP4
+ADDRLP4 24
+INDIRP4
+ADDRLP4 24
+INDIRP4
+INDIRI4
+CNSTI4 1
+ADDRLP4 0
+INDIRI4
+LSHI4
+BORI4
+ASGNI4
+line 4308
+;4307:
+;4308:				if (noHRank >= FORCE_LEVEL_1)
+ADDRLP4 4
+INDIRI4
+CNSTI4 1
+LTI4 $1976
+line 4309
+;4309:				{
+line 4310
+;4310:					self->client->ps.fd.forcePowerLevel[i] = noHRank;
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 944
+ADDP4
+ADDP4
+ADDRLP4 4
+INDIRI4
+ASGNI4
+line 4311
+;4311:				}
+ADDRGP4 $1975
+JUMPV
+LABELV $1976
+line 4313
+;4312:				else
+;4313:				{
+line 4314
+;4314:					self->client->ps.fd.forcePowerLevel[i] = FORCE_LEVEL_1;
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 944
+ADDP4
+ADDP4
+CNSTI4 1
+ASGNI4
+line 4315
+;4315:				}
+line 4316
+;4316:			}
+ADDRGP4 $1975
+JUMPV
+LABELV $1974
+line 4318
+;4317:			else
+;4318:			{
+line 4319
+;4319:				self->client->ps.fd.forcePowerLevel[i] = FORCE_LEVEL_0;
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 944
+ADDP4
+ADDP4
+CNSTI4 0
+ASGNI4
+line 4320
+;4320:			}
+LABELV $1975
+LABELV $1971
+line 4321
+;4321:		}
+LABELV $1963
+line 4323
+;4322:
+;4323:		i++;
+ADDRLP4 0
+ADDRLP4 0
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 4324
+;4324:	}
+LABELV $1960
+line 4267
+ADDRLP4 0
+INDIRI4
+CNSTI4 18
+LTI4 $1959
+line 4326
+;4325:
+;4326:	if (HasSetSaberOnly())
+ADDRLP4 8
+ADDRGP4 HasSetSaberOnly
+CALLI4
+ASGNI4
+ADDRLP4 8
+INDIRI4
+CNSTI4 0
+EQI4 $1978
+line 4327
+;4327:	{ //if saberonly, we get these powers no matter what (still need the holocrons for level 3)
+line 4328
+;4328:		if (self->client->ps.fd.forcePowerLevel[FP_SABERATTACK] < FORCE_LEVEL_1)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1004
+ADDP4
+INDIRI4
+CNSTI4 1
+GEI4 $1980
+line 4329
+;4329:		{
+line 4330
+;4330:			self->client->ps.fd.forcePowerLevel[FP_SABERATTACK] = FORCE_LEVEL_1;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1004
+ADDP4
+CNSTI4 1
+ASGNI4
+line 4331
+;4331:		}
+LABELV $1980
+line 4332
+;4332:		if (self->client->ps.fd.forcePowerLevel[FP_SABERDEFEND] < FORCE_LEVEL_1)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1008
+ADDP4
+INDIRI4
+CNSTI4 1
+GEI4 $1982
+line 4333
+;4333:		{
+line 4334
+;4334:			self->client->ps.fd.forcePowerLevel[FP_SABERDEFEND] = FORCE_LEVEL_1;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1008
+ADDP4
+CNSTI4 1
+ASGNI4
+line 4335
+;4335:		}
+LABELV $1982
+line 4336
+;4336:	}
+LABELV $1978
+line 4337
+;4337:}
+LABELV $1954
+endproc HolocronUpdate 28 8
+export JediMasterUpdate
+proc JediMasterUpdate 20 8
+line 4340
+;4338:
+;4339:void JediMasterUpdate(gentity_t *self)
+;4340:{ //keep jedi master status updated for JM gametype
+line 4341
+;4341:	int i = 0;
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+line 4343
+;4342:
+;4343:	trap_Cvar_Update(&g_MaxHolocronCarry);
+ADDRGP4 g_MaxHolocronCarry
+ARGP4
+ADDRGP4 trap_Cvar_Update
+CALLV
+pop
+ADDRGP4 $1986
+JUMPV
+LABELV $1985
+line 4346
+;4344:
+;4345:	while (i < NUM_FORCE_POWERS)
+;4346:	{
+line 4347
+;4347:		if (self->client->ps.isJediMaster)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 604
+ADDP4
+INDIRI4
+CNSTI4 0
+EQI4 $1988
+line 4348
+;4348:		{
+line 4349
+;4349:			self->client->ps.fd.forcePowersKnown |= (1 << i);
+ADDRLP4 4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 844
+ADDP4
+ASGNP4
+ADDRLP4 4
+INDIRP4
+ADDRLP4 4
+INDIRP4
+INDIRI4
+CNSTI4 1
+ADDRLP4 0
+INDIRI4
+LSHI4
+BORI4
+ASGNI4
+line 4350
+;4350:			self->client->ps.fd.forcePowerLevel[i] = FORCE_LEVEL_3;
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 944
+ADDP4
+ADDP4
+CNSTI4 3
+ASGNI4
+line 4352
+;4351:
+;4352:			if (i == FP_TEAM_HEAL || i == FP_TEAM_FORCE ||
+ADDRLP4 0
+INDIRI4
+CNSTI4 11
+EQI4 $1994
+ADDRLP4 0
+INDIRI4
+CNSTI4 12
+EQI4 $1994
+ADDRLP4 0
+INDIRI4
+CNSTI4 13
+EQI4 $1994
+ADDRLP4 0
+INDIRI4
+CNSTI4 10
+NEI4 $1990
+LABELV $1994
+line 4354
+;4353:				i == FP_DRAIN || i == FP_ABSORB)
+;4354:			{ //team powers are useless in JM, absorb is too because no one else has powers to absorb. Drain is just
+line 4357
+;4355:			  //relatively useless in comparison, because its main intent is not to heal, but rather to cripple others
+;4356:			  //by draining their force at the same time. And no one needs force in JM except the JM himself.
+;4357:				self->client->ps.fd.forcePowersKnown &= ~(1 << i);
+ADDRLP4 12
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 844
+ADDP4
+ASGNP4
+ADDRLP4 12
+INDIRP4
+ADDRLP4 12
+INDIRP4
+INDIRI4
+CNSTI4 1
+ADDRLP4 0
+INDIRI4
+LSHI4
+BCOMI4
+BANDI4
+ASGNI4
+line 4358
+;4358:				self->client->ps.fd.forcePowerLevel[i] = 0;
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 944
+ADDP4
+ADDP4
+CNSTI4 0
+ASGNI4
+line 4359
+;4359:			}
+LABELV $1990
+line 4361
+;4360:
+;4361:			if (i == FP_TELEPATHY)
+ADDRLP4 0
+INDIRI4
+CNSTI4 5
+NEI4 $1989
+line 4362
+;4362:			{ //this decision was made because level 3 mindtrick allows the JM to just hide too much, and no one else has force
+line 4365
+;4363:			  //sight to counteract it. Since the JM himself is the focus of gameplay in this mode, having him hidden for large
+;4364:			  //durations is indeed a bad thing.
+;4365:				self->client->ps.fd.forcePowerLevel[i] = FORCE_LEVEL_2;
+ADDRLP4 12
+CNSTI4 2
+ASGNI4
+ADDRLP4 0
+INDIRI4
+ADDRLP4 12
+INDIRI4
+LSHI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 944
+ADDP4
+ADDP4
+ADDRLP4 12
+INDIRI4
+ASGNI4
+line 4366
+;4366:			}
+line 4367
+;4367:		}
+ADDRGP4 $1989
+JUMPV
+LABELV $1988
+line 4369
+;4368:		else
+;4369:		{
+line 4370
+;4370:			if ((self->client->ps.fd.forcePowersKnown & (1 << i)) && i != FP_LEVITATION)
+ADDRLP4 4
+CNSTI4 1
+ASGNI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 844
+ADDP4
+INDIRI4
+ADDRLP4 4
+INDIRI4
+ADDRLP4 0
+INDIRI4
+LSHI4
+BANDI4
+CNSTI4 0
+EQI4 $1997
+ADDRLP4 0
+INDIRI4
+ADDRLP4 4
+INDIRI4
+EQI4 $1997
+line 4371
+;4371:			{
+line 4372
+;4372:				self->client->ps.fd.forcePowersKnown -= (1 << i);
+ADDRLP4 12
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 844
+ADDP4
+ASGNP4
+ADDRLP4 12
+INDIRP4
+ADDRLP4 12
+INDIRP4
+INDIRI4
+CNSTI4 1
+ADDRLP4 0
+INDIRI4
+LSHI4
+SUBI4
+ASGNI4
+line 4373
+;4373:			}
+LABELV $1997
+line 4375
+;4374:
+;4375:			if ((self->client->ps.fd.forcePowersActive & (1 << i)) && i != FP_LEVITATION)
+ADDRLP4 12
+CNSTI4 1
+ASGNI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 848
+ADDP4
+INDIRI4
+ADDRLP4 12
+INDIRI4
+ADDRLP4 0
+INDIRI4
+LSHI4
+BANDI4
+CNSTI4 0
+EQI4 $1999
+ADDRLP4 0
+INDIRI4
+ADDRLP4 12
+INDIRI4
+EQI4 $1999
+line 4376
+;4376:			{
+line 4377
+;4377:				WP_ForcePowerStop(self, i);
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRLP4 0
+INDIRI4
+ARGI4
+ADDRGP4 WP_ForcePowerStop
+CALLV
+pop
+line 4378
+;4378:			}
+LABELV $1999
+line 4380
+;4379:
+;4380:			if (i == FP_LEVITATION)
+ADDRLP4 0
+INDIRI4
+CNSTI4 1
+NEI4 $2001
+line 4381
+;4381:			{
+line 4382
+;4382:				self->client->ps.fd.forcePowerLevel[i] = FORCE_LEVEL_1;
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 944
+ADDP4
+ADDP4
+CNSTI4 1
+ASGNI4
+line 4383
+;4383:			}
+ADDRGP4 $2002
+JUMPV
+LABELV $2001
+line 4385
+;4384:			else
+;4385:			{
+line 4386
+;4386:				self->client->ps.fd.forcePowerLevel[i] = FORCE_LEVEL_0;
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 944
+ADDP4
+ADDP4
+CNSTI4 0
+ASGNI4
+line 4387
+;4387:			}
+LABELV $2002
+line 4388
+;4388:		}
+LABELV $1989
+line 4390
+;4389:
+;4390:		i++;
+ADDRLP4 0
+ADDRLP4 0
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 4391
+;4391:	}
+LABELV $1986
+line 4345
+ADDRLP4 0
+INDIRI4
+CNSTI4 18
+LTI4 $1985
+line 4392
+;4392:}
+LABELV $1984
+endproc JediMasterUpdate 20 8
+export WP_HasForcePowers
+proc WP_HasForcePowers 4 0
+line 4395
+;4393:
+;4394:qboolean WP_HasForcePowers( const playerState_t *ps )
+;4395:{
+line 4397
+;4396:	int i;
+;4397:	if ( ps )
+ADDRFP4 0
+INDIRP4
+CVPU4 4
+CNSTU4 0
+EQU4 $2004
+line 4398
+;4398:	{
+line 4399
+;4399:		for ( i = 0; i < NUM_FORCE_POWERS; i++ )
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+LABELV $2006
+line 4400
+;4400:		{
+line 4401
+;4401:			if ( i == FP_LEVITATION )
+ADDRLP4 0
+INDIRI4
+CNSTI4 1
+NEI4 $2010
+line 4402
+;4402:			{
+line 4403
+;4403:				if ( ps->fd.forcePowerLevel[i] > FORCE_LEVEL_1 )
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 944
+ADDP4
+ADDP4
+INDIRI4
+CNSTI4 1
+LEI4 $2011
+line 4404
+;4404:				{
+line 4405
+;4405:					return qtrue;
+CNSTI4 1
+RETI4
+ADDRGP4 $2003
+JUMPV
+line 4407
+;4406:				}
+;4407:			}
+LABELV $2010
+line 4408
+;4408:			else if ( ps->fd.forcePowerLevel[i] > FORCE_LEVEL_0 )
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 944
+ADDP4
+ADDP4
+INDIRI4
+CNSTI4 0
+LEI4 $2014
+line 4409
+;4409:			{
+line 4410
+;4410:				return qtrue;
+CNSTI4 1
+RETI4
+ADDRGP4 $2003
+JUMPV
+LABELV $2014
+LABELV $2011
+line 4412
+;4411:			}
+;4412:		}
+LABELV $2007
+line 4399
+ADDRLP4 0
+ADDRLP4 0
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+ADDRLP4 0
+INDIRI4
+CNSTI4 18
+LTI4 $2006
+line 4413
+;4413:	}
+LABELV $2004
+line 4414
+;4414:	return qfalse;
+CNSTI4 0
+RETI4
+LABELV $2003
+endproc WP_HasForcePowers 4 0
+export WP_ForcePowersUpdate
+proc WP_ForcePowersUpdate 140 32
+line 4418
+;4415:}
+;4416:
+;4417:void WP_ForcePowersUpdate( gentity_t *self, usercmd_t *ucmd )
+;4418:{
+line 4419
+;4419:	qboolean	usingForce = qfalse;
+ADDRLP4 4
+CNSTI4 0
+ASGNI4
+line 4422
+;4420:	vec3_t		dmgdir;
+;4421:	int			i, holo, holoregen;
+;4422:	int			prepower = 0;
+ADDRLP4 8
+CNSTI4 0
+ASGNI4
+line 4424
+;4423:	//see if any force powers are running
+;4424:	if ( !self )
+ADDRFP4 0
+INDIRP4
+CVPU4 4
+CNSTU4 0
+NEU4 $2017
+line 4425
+;4425:	{
+line 4426
+;4426:		return;
+ADDRGP4 $2016
+JUMPV
+LABELV $2017
+line 4429
+;4427:	}
+;4428:
+;4429:	if ( !self->client )
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CVPU4 4
+CNSTU4 0
+NEU4 $2019
+line 4430
+;4430:	{
+line 4431
+;4431:		return;
+ADDRGP4 $2016
+JUMPV
+LABELV $2019
+line 4434
+;4432:	}
+;4433:
+;4434:	if (self->client->ps.pm_flags & PMF_FOLLOW)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 12
+ADDP4
+INDIRI4
+CNSTI4 4096
+BANDI4
+CNSTI4 0
+EQI4 $2021
+line 4435
+;4435:	{ //not a "real" game client, it's a spectator following someone
+line 4436
+;4436:		return;
+ADDRGP4 $2016
+JUMPV
+LABELV $2021
+line 4438
+;4437:	}
+;4438:	if (self->client->sess.sessionTeam == TEAM_SPECTATOR)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1632
+ADDP4
+INDIRI4
+CNSTI4 3
+NEI4 $2023
+line 4439
+;4439:	{
+line 4440
+;4440:		return;
+ADDRGP4 $2016
+JUMPV
+LABELV $2023
+line 4443
+;4441:	}
+;4442:
+;4443:	if (self->client->ps.fd.saberAnimLevel > self->client->ps.fd.forcePowerLevel[FP_SABERATTACK])
+ADDRLP4 32
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 32
+INDIRP4
+CNSTI4 1228
+ADDP4
+INDIRI4
+ADDRLP4 32
+INDIRP4
+CNSTI4 1004
+ADDP4
+INDIRI4
+LEI4 $2025
+line 4444
+;4444:	{
+line 4445
+;4445:		self->client->ps.fd.saberAnimLevel = self->client->ps.fd.forcePowerLevel[FP_SABERATTACK];
+ADDRLP4 36
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 36
+INDIRP4
+CNSTI4 1228
+ADDP4
+ADDRLP4 36
+INDIRP4
+CNSTI4 1004
+ADDP4
+INDIRI4
+ASGNI4
+line 4446
+;4446:	}
+ADDRGP4 $2026
+JUMPV
+LABELV $2025
+line 4447
+;4447:	else if (!self->client->ps.fd.saberAnimLevel)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1228
+ADDP4
+INDIRI4
+CNSTI4 0
+NEI4 $2027
+line 4448
+;4448:	{
+line 4449
+;4449:		self->client->ps.fd.saberAnimLevel = FORCE_LEVEL_1;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1228
+ADDP4
+CNSTI4 1
+ASGNI4
+line 4450
+;4450:	}
+LABELV $2027
+LABELV $2026
+line 4452
+;4451:
+;4452:	if (!(self->client->ps.fd.forcePowersKnown & (1 << FP_LEVITATION)))
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 844
+ADDP4
+INDIRI4
+CNSTI4 2
+BANDI4
+CNSTI4 0
+NEI4 $2029
+line 4453
+;4453:	{
+line 4454
+;4454:		self->client->ps.fd.forcePowersKnown |= (1 << FP_LEVITATION);
+ADDRLP4 36
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 844
+ADDP4
+ASGNP4
+ADDRLP4 36
+INDIRP4
+ADDRLP4 36
+INDIRP4
+INDIRI4
+CNSTI4 2
+BORI4
+ASGNI4
+line 4455
+;4455:	}
+LABELV $2029
+line 4457
+;4456:
+;4457:	if (self->client->ps.fd.forcePowerLevel[FP_LEVITATION] < FORCE_LEVEL_1)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 948
+ADDP4
+INDIRI4
+CNSTI4 1
+GEI4 $2031
+line 4458
+;4458:	{
+line 4459
+;4459:		self->client->ps.fd.forcePowerLevel[FP_LEVITATION] = FORCE_LEVEL_1;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 948
+ADDP4
+CNSTI4 1
+ASGNI4
+line 4460
+;4460:	}
+LABELV $2031
+line 4462
+;4461:
+;4462:	if (self->client->ps.fd.forcePowerSelected < 0)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 852
+ADDP4
+INDIRI4
+CNSTI4 0
+GEI4 $2033
+line 4463
+;4463:	{ //bad
+line 4464
+;4464:		self->client->ps.fd.forcePowerSelected = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 852
+ADDP4
+CNSTI4 0
+ASGNI4
+line 4465
+;4465:	}
+LABELV $2033
+line 4467
+;4466:
+;4467:	if ( ((self->client->sess.selectedFP != self->client->ps.fd.forcePowerSelected) ||
+ADDRLP4 36
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 36
+INDIRP4
+CNSTI4 1656
+ADDP4
+INDIRI4
+ADDRLP4 36
+INDIRP4
+CNSTI4 852
+ADDP4
+INDIRI4
+NEI4 $2037
+ADDRLP4 36
+INDIRP4
+CNSTI4 1660
+ADDP4
+INDIRI4
+ADDRLP4 36
+INDIRP4
+CNSTI4 1228
+ADDP4
+INDIRI4
+EQI4 $2035
+LABELV $2037
+ADDRFP4 0
+INDIRP4
+CNSTI4 304
+ADDP4
+INDIRI4
+CNSTI4 8
+BANDI4
+CNSTI4 0
+NEI4 $2035
+line 4470
+;4468:		(self->client->sess.saberLevel != self->client->ps.fd.saberAnimLevel)) &&
+;4469:		!(self->r.svFlags & SVF_BOT) )
+;4470:	{
+line 4471
+;4471:		if (self->client->sess.updateUITime < level.time)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1668
+ADDP4
+INDIRI4
+ADDRGP4 level+32
+INDIRI4
+GEI4 $2038
+line 4472
+;4472:		{ //a bit hackish, but we don't want the client to flood with userinfo updates if they rapidly cycle
+line 4475
+;4473:		  //through their force powers or saber attack levels
+;4474:
+;4475:			self->client->sess.selectedFP = self->client->ps.fd.forcePowerSelected;
+ADDRLP4 40
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 40
+INDIRP4
+CNSTI4 1656
+ADDP4
+ADDRLP4 40
+INDIRP4
+CNSTI4 852
+ADDP4
+INDIRI4
+ASGNI4
+line 4476
+;4476:			self->client->sess.saberLevel = self->client->ps.fd.saberAnimLevel;
+ADDRLP4 44
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 44
+INDIRP4
+CNSTI4 1660
+ADDP4
+ADDRLP4 44
+INDIRP4
+CNSTI4 1228
+ADDP4
+INDIRI4
+ASGNI4
+line 4477
+;4477:		}
+LABELV $2038
+line 4478
+;4478:	}
+LABELV $2035
+line 4480
+;4479:
+;4480:	if (!g_LastFrameTime)
+ADDRGP4 g_LastFrameTime
+INDIRI4
+CNSTI4 0
+NEI4 $2041
+line 4481
+;4481:	{
+line 4482
+;4482:		g_LastFrameTime = level.time;
+ADDRGP4 g_LastFrameTime
+ADDRGP4 level+32
+INDIRI4
+ASGNI4
+line 4483
+;4483:	}
+LABELV $2041
+line 4485
+;4484:
+;4485:	if (self->client->ps.forceHandExtend == HANDEXTEND_KNOCKDOWN)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1248
+ADDP4
+INDIRI4
+CNSTI4 8
+NEI4 $2044
+line 4486
+;4486:	{
+line 4487
+;4487:		self->client->ps.zoomFov = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1344
+ADDP4
+CNSTF4 0
+ASGNF4
+line 4488
+;4488:		self->client->ps.zoomMode = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1332
+ADDP4
+CNSTI4 0
+ASGNI4
+line 4489
+;4489:		self->client->ps.zoomLocked = qfalse;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1340
+ADDP4
+CNSTI4 0
+ASGNI4
+line 4490
+;4490:		self->client->ps.zoomTime = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1336
+ADDP4
+CNSTI4 0
+ASGNI4
+line 4491
+;4491:	}
+LABELV $2044
+line 4493
+;4492:
+;4493:	if (self->client->ps.forceHandExtend == HANDEXTEND_KNOCKDOWN &&
+ADDRLP4 40
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 40
+INDIRP4
+CNSTI4 1248
+ADDP4
+INDIRI4
+CNSTI4 8
+NEI4 $2046
+ADDRLP4 40
+INDIRP4
+CNSTI4 1252
+ADDP4
+INDIRI4
+ADDRGP4 level+32
+INDIRI4
+LTI4 $2046
+line 4495
+;4494:		self->client->ps.forceHandExtendTime >= level.time)
+;4495:	{
+line 4496
+;4496:		self->client->ps.saberMove = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 512
+ADDP4
+CNSTI4 0
+ASGNI4
+line 4497
+;4497:		self->client->ps.saberBlocking = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 516
+ADDP4
+CNSTI4 0
+ASGNI4
+line 4498
+;4498:		self->client->ps.saberBlocked = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 520
+ADDP4
+CNSTI4 0
+ASGNI4
+line 4499
+;4499:		self->client->ps.weaponTime = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 44
+ADDP4
+CNSTI4 0
+ASGNI4
+line 4500
+;4500:	}
+ADDRGP4 $2047
+JUMPV
+LABELV $2046
+line 4501
+;4501:	else if (self->client->ps.forceHandExtend != HANDEXTEND_NONE &&
+ADDRLP4 44
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 44
+INDIRP4
+CNSTI4 1248
+ADDP4
+INDIRI4
+CNSTI4 0
+EQI4 $2049
+ADDRLP4 44
+INDIRP4
+CNSTI4 1252
+ADDP4
+INDIRI4
+ADDRGP4 level+32
+INDIRI4
+GEI4 $2049
+line 4503
+;4502:		self->client->ps.forceHandExtendTime < level.time)
+;4503:	{
+line 4504
+;4504:		if (self->client->ps.forceHandExtend == HANDEXTEND_KNOCKDOWN &&
+ADDRLP4 48
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 48
+INDIRP4
+CNSTI4 1248
+ADDP4
+INDIRI4
+CNSTI4 8
+NEI4 $2052
+ADDRLP4 48
+INDIRP4
+CNSTI4 1260
+ADDP4
+INDIRI4
+CNSTI4 0
+NEI4 $2052
+line 4506
+;4505:			!self->client->ps.forceDodgeAnim)
+;4506:		{
+line 4507
+;4507:			if (self->health < 1 || (self->client->ps.eFlags & EF_DEAD))
+ADDRLP4 52
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 56
+CNSTI4 1
+ASGNI4
+ADDRLP4 52
+INDIRP4
+CNSTI4 676
+ADDP4
+INDIRI4
+ADDRLP4 56
+INDIRI4
+LTI4 $2056
+ADDRLP4 52
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 108
+ADDP4
+INDIRI4
+ADDRLP4 56
+INDIRI4
+BANDI4
+CNSTI4 0
+EQI4 $2054
+LABELV $2056
+line 4508
+;4508:			{
+line 4509
+;4509:				self->client->ps.forceHandExtend = HANDEXTEND_NONE;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1248
+ADDP4
+CNSTI4 0
+ASGNI4
+line 4510
+;4510:			}
+ADDRGP4 $2053
+JUMPV
+LABELV $2054
+line 4512
+;4511:			else
+;4512:			{
+line 4513
+;4513:				if (self->client->pers.cmd.upmove &&
+ADDRLP4 60
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 60
+INDIRP4
+CNSTI4 1410
+ADDP4
+INDIRI1
+CVII4 1
+CNSTI4 0
+EQI4 $2057
+ADDRLP4 60
+INDIRP4
+CNSTI4 948
+ADDP4
+INDIRI4
+CNSTI4 1
+LEI4 $2057
+line 4515
+;4514:					self->client->ps.fd.forcePowerLevel[FP_LEVITATION] > FORCE_LEVEL_1)
+;4515:				{ //force getup
+line 4516
+;4516:					G_PreDefSound(self->client->ps.origin, PDSOUND_FORCEJUMP);
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 20
+ADDP4
+ARGP4
+CNSTI4 5
+ARGI4
+ADDRGP4 G_PreDefSound
+CALLP4
+pop
+line 4517
+;4517:					self->client->ps.forceDodgeAnim = 2;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1260
+ADDP4
+CNSTI4 2
+ASGNI4
+line 4518
+;4518:					self->client->ps.forceHandExtendTime = level.time + 500;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1252
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 500
+ADDI4
+ASGNI4
+line 4520
+;4519:
+;4520:					self->client->ps.velocity[2] = 400;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 40
+ADDP4
+CNSTF4 1137180672
+ASGNF4
+line 4521
+;4521:				}
+ADDRGP4 $2053
+JUMPV
+LABELV $2057
+line 4522
+;4522:				else if (self->client->ps.quickerGetup)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1264
+ADDP4
+INDIRI4
+CNSTI4 0
+EQI4 $2060
+line 4523
+;4523:				{
+line 4524
+;4524:					self->client->ps.quickerGetup = qfalse;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1264
+ADDP4
+CNSTI4 0
+ASGNI4
+line 4525
+;4525:					G_EntitySound( self, CHAN_VOICE, G_SoundIndex("*jump1.wav") );
+ADDRGP4 $2062
+ARGP4
+ADDRLP4 64
+ADDRGP4 G_SoundIndex
+CALLI4
+ASGNI4
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 3
+ARGI4
+ADDRLP4 64
+INDIRI4
+ARGI4
+ADDRGP4 G_EntitySound
+CALLV
+pop
+line 4526
+;4526:					self->client->ps.forceDodgeAnim = 3;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1260
+ADDP4
+CNSTI4 3
+ASGNI4
+line 4527
+;4527:					self->client->ps.forceHandExtendTime = level.time + 500;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1252
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 500
+ADDI4
+ASGNI4
+line 4528
+;4528:					self->client->ps.velocity[2] = 300;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 40
+ADDP4
+CNSTF4 1133903872
+ASGNF4
+line 4529
+;4529:				}
+ADDRGP4 $2053
+JUMPV
+LABELV $2060
+line 4531
+;4530:				else
+;4531:				{
+line 4532
+;4532:					self->client->ps.forceDodgeAnim = 1;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1260
+ADDP4
+CNSTI4 1
+ASGNI4
+line 4533
+;4533:					self->client->ps.forceHandExtendTime = level.time + 1000;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1252
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 1000
+ADDI4
+ASGNI4
+line 4534
+;4534:				}
+line 4535
+;4535:			}
+line 4536
+;4536:		}
+ADDRGP4 $2053
+JUMPV
+LABELV $2052
+line 4538
+;4537:		else
+;4538:		{
+line 4539
+;4539:			self->client->ps.forceHandExtend = HANDEXTEND_WEAPONREADY;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1248
+ADDP4
+CNSTI4 6
+ASGNI4
+line 4540
+;4540:		}
+LABELV $2053
+line 4541
+;4541:	}
+LABELV $2049
+LABELV $2047
+line 4543
+;4542:
+;4543:	if (g_gametype.integer == GT_HOLOCRON)
+ADDRGP4 g_gametype+12
+INDIRI4
+CNSTI4 1
+NEI4 $2065
+line 4544
+;4544:	{
+line 4545
+;4545:		HolocronUpdate(self);
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRGP4 HolocronUpdate
+CALLV
+pop
+line 4546
+;4546:	}
+LABELV $2065
+line 4547
+;4547:	if (g_gametype.integer == GT_JEDIMASTER)
+ADDRGP4 g_gametype+12
+INDIRI4
+CNSTI4 2
+NEI4 $2068
+line 4548
+;4548:	{
+line 4549
+;4549:		JediMasterUpdate(self);
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRGP4 JediMasterUpdate
+CALLV
+pop
+line 4550
+;4550:	}
+LABELV $2068
+line 4552
+;4551:
+;4552:	SeekerDroneUpdate(self);
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRGP4 SeekerDroneUpdate
+CALLV
+pop
+line 4554
+;4553:
+;4554:	if (self->client->ps.powerups[PW_FORCE_BOON])
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 400
+ADDP4
+INDIRI4
+CNSTI4 0
+EQI4 $2071
+line 4555
+;4555:	{
+line 4556
+;4556:		prepower = self->client->ps.fd.forcePower;
+ADDRLP4 8
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 932
+ADDP4
+INDIRI4
+ASGNI4
+line 4557
+;4557:	}
+LABELV $2071
+line 4559
+;4558:
+;4559:	if (self && self->client && (BG_HasYsalamiri(g_gametype.integer, &self->client->ps) ||
+ADDRLP4 48
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 52
+CNSTU4 0
+ASGNU4
+ADDRLP4 48
+INDIRP4
+CVPU4 4
+ADDRLP4 52
+INDIRU4
+EQU4 $2073
+ADDRLP4 56
+ADDRLP4 48
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 56
+INDIRP4
+CVPU4 4
+ADDRLP4 52
+INDIRU4
+EQU4 $2073
+ADDRGP4 g_gametype+12
+INDIRI4
+ARGI4
+ADDRLP4 56
+INDIRP4
+ARGP4
+ADDRLP4 60
+ADDRGP4 BG_HasYsalamiri
+CALLI4
+ASGNI4
+ADDRLP4 64
+CNSTI4 0
+ASGNI4
+ADDRLP4 60
+INDIRI4
+ADDRLP4 64
+INDIRI4
+NEI4 $2076
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1196
+ADDP4
+INDIRI4
+ADDRLP4 64
+INDIRI4
+EQI4 $2073
+LABELV $2076
+line 4561
+;4560:		self->client->ps.fd.forceDeactivateAll))
+;4561:	{ //has ysalamiri.. or we want to forcefully stop all his active powers
+line 4562
+;4562:		i = 0;
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+ADDRGP4 $2078
+JUMPV
+LABELV $2077
+line 4565
+;4563:
+;4564:		while (i < NUM_FORCE_POWERS)
+;4565:		{
+line 4566
+;4566:			if ((self->client->ps.fd.forcePowersActive & (1 << i)) && i != FP_LEVITATION)
+ADDRLP4 68
+CNSTI4 1
+ASGNI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 848
+ADDP4
+INDIRI4
+ADDRLP4 68
+INDIRI4
+ADDRLP4 0
+INDIRI4
+LSHI4
+BANDI4
+CNSTI4 0
+EQI4 $2080
+ADDRLP4 0
+INDIRI4
+ADDRLP4 68
+INDIRI4
+EQI4 $2080
+line 4567
+;4567:			{
+line 4568
+;4568:				WP_ForcePowerStop(self, i);
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRLP4 0
+INDIRI4
+ARGI4
+ADDRGP4 WP_ForcePowerStop
+CALLV
+pop
+line 4569
+;4569:			}
+LABELV $2080
+line 4571
+;4570:
+;4571:			i++;
+ADDRLP4 0
+ADDRLP4 0
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 4572
+;4572:		}
+LABELV $2078
+line 4564
+ADDRLP4 0
+INDIRI4
+CNSTI4 18
+LTI4 $2077
+line 4574
+;4573:
+;4574:		self->client->ps.fd.forceDeactivateAll = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1196
+ADDP4
+CNSTI4 0
+ASGNI4
+line 4576
+;4575:
+;4576:		if (self->client->ps.fd.forceJumpCharge)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1096
+ADDP4
+INDIRF4
+CNSTF4 0
+EQF4 $2074
+line 4577
+;4577:		{
+line 4578
+;4578:			G_MuteSound(self->client->ps.fd.killSoundEntIndex[TRACK_CHANNEL_1-50], CHAN_VOICE);
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1204
+ADDP4
+INDIRI4
+ARGI4
+CNSTI4 3
+ARGI4
+ADDRGP4 G_MuteSound
+CALLV
+pop
+line 4579
+;4579:			self->client->ps.fd.forceJumpCharge = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1096
+ADDP4
+CNSTF4 0
+ASGNF4
+line 4580
+;4580:		}
+line 4581
+;4581:	}
+ADDRGP4 $2074
+JUMPV
+LABELV $2073
+line 4583
+;4582:	else
+;4583:	{ //otherwise just do a check through them all to see if they need to be stopped for any reason.
+line 4584
+;4584:		i = 0;
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+ADDRGP4 $2085
+JUMPV
+LABELV $2084
+line 4587
+;4585:
+;4586:		while (i < NUM_FORCE_POWERS)
+;4587:		{
+line 4588
+;4588:			if ((self->client->ps.fd.forcePowersActive & (1 << i)) && i != FP_LEVITATION &&
+ADDRLP4 68
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 72
+CNSTI4 1
+ASGNI4
+ADDRLP4 68
+INDIRP4
+CNSTI4 848
+ADDP4
+INDIRI4
+ADDRLP4 72
+INDIRI4
+ADDRLP4 0
+INDIRI4
+LSHI4
+BANDI4
+CNSTI4 0
+EQI4 $2087
+ADDRLP4 0
+INDIRI4
+ADDRLP4 72
+INDIRI4
+EQI4 $2087
+ADDRGP4 g_gametype+12
+INDIRI4
+ARGI4
+ADDRLP4 68
+INDIRP4
+ARGP4
+ADDRGP4 level+32
+INDIRI4
+ARGI4
+ADDRLP4 0
+INDIRI4
+ARGI4
+ADDRLP4 80
+ADDRGP4 BG_CanUseFPNow
+CALLI4
+ASGNI4
+ADDRLP4 80
+INDIRI4
+CNSTI4 0
+NEI4 $2087
+line 4590
+;4589:				!BG_CanUseFPNow(g_gametype.integer, &self->client->ps, level.time, i))
+;4590:			{
+line 4591
+;4591:				WP_ForcePowerStop(self, i);
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRLP4 0
+INDIRI4
+ARGI4
+ADDRGP4 WP_ForcePowerStop
+CALLV
+pop
+line 4592
+;4592:			}
+LABELV $2087
+line 4594
+;4593:
+;4594:			i++;
+ADDRLP4 0
+ADDRLP4 0
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 4595
+;4595:		}
+LABELV $2085
+line 4586
+ADDRLP4 0
+INDIRI4
+CNSTI4 18
+LTI4 $2084
+line 4596
+;4596:	}
+LABELV $2074
+line 4598
+;4597:
+;4598:	i = 0;
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+line 4600
+;4599:
+;4600:	if (self->client->ps.powerups[PW_FORCE_ENLIGHTENED_LIGHT] || self->client->ps.powerups[PW_FORCE_ENLIGHTENED_DARK])
+ADDRLP4 68
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 72
+CNSTI4 0
+ASGNI4
+ADDRLP4 68
+INDIRP4
+CNSTI4 392
+ADDP4
+INDIRI4
+ADDRLP4 72
+INDIRI4
+NEI4 $2093
+ADDRLP4 68
+INDIRP4
+CNSTI4 396
+ADDP4
+INDIRI4
+ADDRLP4 72
+INDIRI4
+EQI4 $2091
+LABELV $2093
+line 4601
+;4601:	{ //enlightenment
+line 4602
+;4602:		if (!self->client->ps.fd.forceUsingAdded)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1088
+ADDP4
+INDIRI4
+CNSTI4 0
+NEI4 $2092
+line 4603
+;4603:		{
+line 4604
+;4604:			i = 0;
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+ADDRGP4 $2097
+JUMPV
+LABELV $2096
+line 4607
+;4605:
+;4606:			while (i < NUM_FORCE_POWERS)
+;4607:			{
+line 4608
+;4608:				self->client->ps.fd.forcePowerBaseLevel[i] = self->client->ps.fd.forcePowerLevel[i];
+ADDRLP4 76
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+ASGNI4
+ADDRLP4 80
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 76
+INDIRI4
+ADDRLP4 80
+INDIRP4
+CNSTI4 1016
+ADDP4
+ADDP4
+ADDRLP4 76
+INDIRI4
+ADDRLP4 80
+INDIRP4
+CNSTI4 944
+ADDP4
+ADDP4
+INDIRI4
+ASGNI4
+line 4610
+;4609:
+;4610:				if (!forcePowerDarkLight[i] ||
+ADDRLP4 84
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRGP4 forcePowerDarkLight
+ADDP4
+INDIRI4
+ASGNI4
+ADDRLP4 84
+INDIRI4
+CNSTI4 0
+EQI4 $2101
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1188
+ADDP4
+INDIRI4
+ADDRLP4 84
+INDIRI4
+NEI4 $2099
+LABELV $2101
+line 4612
+;4611:					self->client->ps.fd.forceSide == forcePowerDarkLight[i])
+;4612:				{
+line 4613
+;4613:					self->client->ps.fd.forcePowerLevel[i] = FORCE_LEVEL_3;
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 944
+ADDP4
+ADDP4
+CNSTI4 3
+ASGNI4
+line 4614
+;4614:					self->client->ps.fd.forcePowersKnown |= (1 << i);
+ADDRLP4 88
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 844
+ADDP4
+ASGNP4
+ADDRLP4 88
+INDIRP4
+ADDRLP4 88
+INDIRP4
+INDIRI4
+CNSTI4 1
+ADDRLP4 0
+INDIRI4
+LSHI4
+BORI4
+ASGNI4
+line 4615
+;4615:				}
+LABELV $2099
+line 4617
+;4616:
+;4617:				i++;
+ADDRLP4 0
+ADDRLP4 0
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 4618
+;4618:			}
+LABELV $2097
+line 4606
+ADDRLP4 0
+INDIRI4
+CNSTI4 18
+LTI4 $2096
+line 4620
+;4619:
+;4620:			self->client->ps.fd.forceUsingAdded = 1;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1088
+ADDP4
+CNSTI4 1
+ASGNI4
+line 4621
+;4621:		}
+line 4622
+;4622:	}
+ADDRGP4 $2092
+JUMPV
+LABELV $2091
+line 4623
+;4623:	else if (self->client->ps.fd.forceUsingAdded)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1088
+ADDP4
+INDIRI4
+CNSTI4 0
+EQI4 $2102
+line 4624
+;4624:	{ //we don't have enlightenment but we're still using enlightened powers, so clear them back to how they should be.
+line 4625
+;4625:		i = 0;
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+ADDRGP4 $2105
+JUMPV
+LABELV $2104
+line 4628
+;4626:
+;4627:		while (i < NUM_FORCE_POWERS)
+;4628:		{
+line 4629
+;4629:			self->client->ps.fd.forcePowerLevel[i] = self->client->ps.fd.forcePowerBaseLevel[i];
+ADDRLP4 76
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+ASGNI4
+ADDRLP4 80
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 76
+INDIRI4
+ADDRLP4 80
+INDIRP4
+CNSTI4 944
+ADDP4
+ADDP4
+ADDRLP4 76
+INDIRI4
+ADDRLP4 80
+INDIRP4
+CNSTI4 1016
+ADDP4
+ADDP4
+INDIRI4
+ASGNI4
+line 4630
+;4630:			if (!self->client->ps.fd.forcePowerLevel[i])
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 944
+ADDP4
+ADDP4
+INDIRI4
+CNSTI4 0
+NEI4 $2107
+line 4631
+;4631:			{
+line 4632
+;4632:				if (self->client->ps.fd.forcePowersActive & (1 << i))
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 848
+ADDP4
+INDIRI4
+CNSTI4 1
+ADDRLP4 0
+INDIRI4
+LSHI4
+BANDI4
+CNSTI4 0
+EQI4 $2109
+line 4633
+;4633:				{
+line 4634
+;4634:					WP_ForcePowerStop(self, i);
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRLP4 0
+INDIRI4
+ARGI4
+ADDRGP4 WP_ForcePowerStop
+CALLV
+pop
+line 4635
+;4635:				}
+LABELV $2109
+line 4636
+;4636:				self->client->ps.fd.forcePowersKnown &= ~(1 << i);
+ADDRLP4 84
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 844
+ADDP4
+ASGNP4
+ADDRLP4 84
+INDIRP4
+ADDRLP4 84
+INDIRP4
+INDIRI4
+CNSTI4 1
+ADDRLP4 0
+INDIRI4
+LSHI4
+BCOMI4
+BANDI4
+ASGNI4
+line 4637
+;4637:			}
+LABELV $2107
+line 4639
+;4638:
+;4639:			i++;
+ADDRLP4 0
+ADDRLP4 0
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 4640
+;4640:		}
+LABELV $2105
+line 4627
+ADDRLP4 0
+INDIRI4
+CNSTI4 18
+LTI4 $2104
+line 4642
+;4641:
+;4642:		self->client->ps.fd.forceUsingAdded = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1088
+ADDP4
+CNSTI4 0
+ASGNI4
+line 4643
+;4643:	}
+LABELV $2102
+LABELV $2092
+line 4645
+;4644:
+;4645:	i = 0;
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+line 4647
+;4646:
+;4647:	if (!(self->client->ps.fd.forcePowersActive & (1 << FP_TELEPATHY)))
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 848
+ADDP4
+INDIRI4
+CNSTI4 32
+BANDI4
+CNSTI4 0
+NEI4 $2111
+line 4648
+;4648:	{ //clear the mindtrick index values
+line 4649
+;4649:		self->client->ps.fd.forceMindtrickTargetIndex = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1156
+ADDP4
+CNSTI4 0
+ASGNI4
+line 4650
+;4650:		self->client->ps.fd.forceMindtrickTargetIndex2 = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1160
+ADDP4
+CNSTI4 0
+ASGNI4
+line 4651
+;4651:		self->client->ps.fd.forceMindtrickTargetIndex3 = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1164
+ADDP4
+CNSTI4 0
+ASGNI4
+line 4652
+;4652:		self->client->ps.fd.forceMindtrickTargetIndex4 = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1168
+ADDP4
+CNSTI4 0
+ASGNI4
+line 4653
+;4653:	}
+LABELV $2111
+line 4655
+;4654:	
+;4655:	if (self->health < 1)
+ADDRFP4 0
+INDIRP4
+CNSTI4 676
+ADDP4
+INDIRI4
+CNSTI4 1
+GEI4 $2113
+line 4656
+;4656:	{
+line 4657
+;4657:		self->client->ps.fd.forceGripBeingGripped = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1116
+ADDP4
+CNSTF4 0
+ASGNF4
+line 4658
+;4658:	}
+LABELV $2113
+line 4660
+;4659:
+;4660:	if ((self->client->pers.ampunish == qtrue) || (self->client->ps.fd.forceGripBeingGripped > level.time))
+ADDRLP4 76
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 76
+INDIRP4
+CNSTI4 1544
+ADDP4
+INDIRI4
+CNSTI4 1
+EQI4 $2118
+ADDRLP4 76
+INDIRP4
+CNSTI4 1116
+ADDP4
+INDIRF4
+ADDRGP4 level+32
+INDIRI4
+CVIF4 4
+LEF4 $2115
+LABELV $2118
+line 4661
+;4661:	{
+line 4662
+;4662:		self->client->ps.fd.forceGripCripple = 1;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1120
+ADDP4
+CNSTI4 1
+ASGNI4
+line 4663
+;4663:	}
+ADDRGP4 $2116
+JUMPV
+LABELV $2115
+line 4665
+;4664:	else
+;4665:	{
+line 4666
+;4666:		self->client->ps.fd.forceGripCripple = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1120
+ADDP4
+CNSTI4 0
+ASGNI4
+line 4667
+;4667:	}
+LABELV $2116
+line 4669
+;4668:
+;4669:	if (self->client->ps.fd.forceJumpSound)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1100
+ADDP4
+INDIRI4
+CNSTI4 0
+EQI4 $2119
+line 4670
+;4670:	{
+line 4671
+;4671:		G_PreDefSound(self->client->ps.origin, PDSOUND_FORCEJUMP);
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 20
+ADDP4
+ARGP4
+CNSTI4 5
+ARGI4
+ADDRGP4 G_PreDefSound
+CALLP4
+pop
+line 4672
+;4672:		self->client->ps.fd.forceJumpSound = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1100
+ADDP4
+CNSTI4 0
+ASGNI4
+line 4673
+;4673:	}
+LABELV $2119
+line 4675
+;4674:
+;4675:	if (self->client->ps.fd.forceGripCripple)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1120
+ADDP4
+INDIRI4
+CNSTI4 0
+EQI4 $2121
+line 4676
+;4676:	{
+line 4677
+;4677:		if (self->client->ps.fd.forceGripSoundTime < level.time)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1128
+ADDP4
+INDIRF4
+ADDRGP4 level+32
+INDIRI4
+CVIF4 4
+GEF4 $2123
+line 4678
+;4678:		{
+line 4679
+;4679:			G_PreDefSound(self->client->ps.origin, PDSOUND_FORCEGRIP);
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 20
+ADDP4
+ARGP4
+CNSTI4 6
+ARGI4
+ADDRGP4 G_PreDefSound
+CALLP4
+pop
+line 4680
+;4680:			self->client->ps.fd.forceGripSoundTime = level.time + 1000;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1128
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 1000
+ADDI4
+CVIF4 4
+ASGNF4
+line 4681
+;4681:		}
+LABELV $2123
+line 4682
+;4682:	}
+LABELV $2121
+line 4684
+;4683:
+;4684:	if (self->client->ps.fd.forcePowersActive & (1 << FP_SPEED))
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 848
+ADDP4
+INDIRI4
+CNSTI4 4
+BANDI4
+CNSTI4 0
+EQI4 $2127
+line 4685
+;4685:	{
+line 4686
+;4686:		self->client->ps.powerups[PW_SPEED] = level.time + 100;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 384
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 100
+ADDI4
+ASGNI4
+line 4687
+;4687:	}
+LABELV $2127
+line 4689
+;4688:
+;4689:	if (self->client->ps.fd.forceSpeedDoDamage && FORCE_VELOCITY_DAMAGE) //You used to be able to run into walls and crack your face on them (like JK1)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1140
+ADDP4
+INDIRF4
+CNSTF4 0
+EQF4 $2130
+ADDRGP4 $2130
+JUMPV
+line 4690
+;4690:	{ //we set the flag somewhere to do damage for some reason, so do it
+line 4691
+;4691:		G_Damage (self, NULL, NULL, NULL, NULL, self->client->ps.fd.forceSpeedDoDamage, DAMAGE_NO_ARMOR, MOD_FALLING);
+ADDRLP4 80
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 80
+INDIRP4
+ARGP4
+ADDRLP4 84
+CNSTP4 0
+ASGNP4
+ADDRLP4 84
+INDIRP4
+ARGP4
+ADDRLP4 84
+INDIRP4
+ARGP4
+ADDRLP4 88
+CNSTP4 0
+ASGNP4
+ADDRLP4 88
+INDIRP4
+ARGP4
+ADDRLP4 88
+INDIRP4
+ARGP4
+ADDRLP4 80
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1140
+ADDP4
+INDIRF4
+CVFI4 4
+ARGI4
+CNSTI4 2
+ARGI4
+CNSTI4 34
+ARGI4
+ADDRGP4 G_Damage
+CALLV
+pop
+line 4693
+;4692:
+;4693:		if (self->client->ps.fd.forceSpeedHitIndex != ENTITYNUM_NONE &&
+ADDRLP4 92
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1144
+ADDP4
+INDIRI4
+ASGNI4
+ADDRLP4 92
+INDIRI4
+CNSTI4 1023
+EQI4 $2132
+CNSTI4 852
+ADDRLP4 92
+INDIRI4
+MULI4
+ADDRGP4 g_entities+408
+ADDP4
+INDIRP4
+CVPU4 4
+CNSTU4 0
+EQU4 $2132
+line 4695
+;4694:			g_entities[self->client->ps.fd.forceSpeedHitIndex].client)
+;4695:		{
+line 4696
+;4696:			VectorSubtract(g_entities[self->client->ps.fd.forceSpeedHitIndex].client->ps.origin, self->client->ps.origin, dmgdir);
+ADDRLP4 96
+CNSTI4 852
+ASGNI4
+ADDRLP4 100
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+ASGNP4
+ADDRLP4 104
+ADDRLP4 100
+INDIRP4
+INDIRP4
+ASGNP4
+ADDRLP4 108
+CNSTI4 1144
+ASGNI4
+ADDRLP4 112
+CNSTI4 20
+ASGNI4
+ADDRLP4 16
+ADDRLP4 96
+INDIRI4
+ADDRLP4 104
+INDIRP4
+ADDRLP4 108
+INDIRI4
+ADDP4
+INDIRI4
+MULI4
+ADDRGP4 g_entities+408
+ADDP4
+INDIRP4
+ADDRLP4 112
+INDIRI4
+ADDP4
+INDIRF4
+ADDRLP4 104
+INDIRP4
+ADDRLP4 112
+INDIRI4
+ADDP4
+INDIRF4
+SUBF4
+ASGNF4
+ADDRLP4 116
+ADDRLP4 100
+INDIRP4
+INDIRP4
+ASGNP4
+ADDRLP4 120
+CNSTI4 24
+ASGNI4
+ADDRLP4 16+4
+ADDRLP4 96
+INDIRI4
+ADDRLP4 116
+INDIRP4
+ADDRLP4 108
+INDIRI4
+ADDP4
+INDIRI4
+MULI4
+ADDRGP4 g_entities+408
+ADDP4
+INDIRP4
+ADDRLP4 120
+INDIRI4
+ADDP4
+INDIRF4
+ADDRLP4 116
+INDIRP4
+ADDRLP4 120
+INDIRI4
+ADDP4
+INDIRF4
+SUBF4
+ASGNF4
+ADDRLP4 124
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 128
+CNSTI4 28
+ASGNI4
+ADDRLP4 16+8
+CNSTI4 852
+ADDRLP4 124
+INDIRP4
+CNSTI4 1144
+ADDP4
+INDIRI4
+MULI4
+ADDRGP4 g_entities+408
+ADDP4
+INDIRP4
+ADDRLP4 128
+INDIRI4
+ADDP4
+INDIRF4
+ADDRLP4 124
+INDIRP4
+ADDRLP4 128
+INDIRI4
+ADDP4
+INDIRF4
+SUBF4
+ASGNF4
+line 4698
+;4697:
+;4698:			G_Damage (&g_entities[self->client->ps.fd.forceSpeedHitIndex], self, self, dmgdir, NULL, self->client->ps.fd.forceSpeedDoDamage, DAMAGE_NO_ARMOR, MOD_CRUSH);
+ADDRLP4 132
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 136
+ADDRLP4 132
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+CNSTI4 852
+ADDRLP4 136
+INDIRP4
+CNSTI4 1144
+ADDP4
+INDIRI4
+MULI4
+ADDRGP4 g_entities
+ADDP4
+ARGP4
+ADDRLP4 132
+INDIRP4
+ARGP4
+ADDRLP4 132
+INDIRP4
+ARGP4
+ADDRLP4 16
+ARGP4
+CNSTP4 0
+ARGP4
+ADDRLP4 136
+INDIRP4
+CNSTI4 1140
+ADDP4
+INDIRF4
+CVFI4 4
+ARGI4
+CNSTI4 2
+ARGI4
+CNSTI4 32
+ARGI4
+ADDRGP4 G_Damage
+CALLV
+pop
+line 4699
+;4699:			self->client->ps.fd.forceSpeedHitIndex = ENTITYNUM_NONE;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1144
+ADDP4
+CNSTI4 1023
+ASGNI4
+line 4700
+;4700:		}
+LABELV $2132
+line 4702
+;4701:
+;4702:		self->client->ps.fd.forceSpeedDoDamage = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1140
+ADDP4
+CNSTF4 0
+ASGNF4
+line 4703
+;4703:	}
+LABELV $2130
+line 4705
+;4704:
+;4705:	if ( self->health <= 0 )
+ADDRFP4 0
+INDIRP4
+CNSTI4 676
+ADDP4
+INDIRI4
+CNSTI4 0
+GTI4 $2140
+line 4706
+;4706:	{//if dead, deactivate any active force powers
+line 4707
+;4707:		for ( i = 0; i < NUM_FORCE_POWERS; i++ )
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+LABELV $2142
+line 4708
+;4708:		{
+line 4709
+;4709:			if ( self->client->ps.fd.forcePowerDuration[i] || (self->client->ps.fd.forcePowersActive&( 1 << i )) )
+ADDRLP4 84
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 88
+CNSTI4 0
+ASGNI4
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 84
+INDIRP4
+CNSTI4 860
+ADDP4
+ADDP4
+INDIRI4
+ADDRLP4 88
+INDIRI4
+NEI4 $2148
+ADDRLP4 84
+INDIRP4
+CNSTI4 848
+ADDP4
+INDIRI4
+CNSTI4 1
+ADDRLP4 0
+INDIRI4
+LSHI4
+BANDI4
+ADDRLP4 88
+INDIRI4
+EQI4 $2146
+LABELV $2148
+line 4710
+;4710:			{
+line 4711
+;4711:				WP_ForcePowerStop( self, (forcePowers_t)i );
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRLP4 0
+INDIRI4
+ARGI4
+ADDRGP4 WP_ForcePowerStop
+CALLV
+pop
+line 4712
+;4712:				self->client->ps.fd.forcePowerDuration[i] = 0;
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 860
+ADDP4
+ADDP4
+CNSTI4 0
+ASGNI4
+line 4713
+;4713:			}
+LABELV $2146
+line 4714
+;4714:		}
+LABELV $2143
+line 4707
+ADDRLP4 0
+ADDRLP4 0
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+ADDRLP4 0
+INDIRI4
+CNSTI4 18
+LTI4 $2142
+line 4715
+;4715:		goto powersetcheck;
+ADDRGP4 $2149
+JUMPV
+LABELV $2140
+line 4718
+;4716:	}
+;4717:
+;4718:	if (self->client->ps.groundEntityNum != ENTITYNUM_NONE)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 84
+ADDP4
+INDIRI4
+CNSTI4 1023
+EQI4 $2150
+line 4719
+;4719:	{
+line 4720
+;4720:		self->client->fjDidJump = qfalse;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 2956
+ADDP4
+CNSTI4 0
+ASGNI4
+line 4721
+;4721:	}
+LABELV $2150
+line 4723
+;4722:
+;4723:	if (self->client->ps.fd.forceJumpCharge && self->client->ps.groundEntityNum == ENTITYNUM_NONE && self->client->fjDidJump)
+ADDRLP4 80
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 80
+INDIRP4
+CNSTI4 1096
+ADDP4
+INDIRF4
+CNSTF4 0
+EQF4 $2152
+ADDRLP4 80
+INDIRP4
+CNSTI4 84
+ADDP4
+INDIRI4
+CNSTI4 1023
+NEI4 $2152
+ADDRLP4 80
+INDIRP4
+CNSTI4 2956
+ADDP4
+INDIRI4
+CNSTI4 0
+EQI4 $2152
+line 4724
+;4724:	{ //this was for the "charge" jump method... I guess
+line 4725
+;4725:		if (ucmd->upmove < 10 && (!(ucmd->buttons & BUTTON_FORCEPOWER) || self->client->ps.fd.forcePowerSelected != FP_LEVITATION))
+ADDRLP4 84
+ADDRFP4 4
+INDIRP4
+ASGNP4
+ADDRLP4 84
+INDIRP4
+CNSTI4 26
+ADDP4
+INDIRI1
+CVII4 1
+CNSTI4 10
+GEI4 $2154
+ADDRLP4 84
+INDIRP4
+CNSTI4 16
+ADDP4
+INDIRI4
+CNSTI4 512
+BANDI4
+CNSTI4 0
+EQI4 $2156
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 852
+ADDP4
+INDIRI4
+CNSTI4 1
+EQI4 $2154
+LABELV $2156
+line 4726
+;4726:		{
+line 4727
+;4727:			G_MuteSound(self->client->ps.fd.killSoundEntIndex[TRACK_CHANNEL_1-50], CHAN_VOICE);
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1204
+ADDP4
+INDIRI4
+ARGI4
+CNSTI4 3
+ARGI4
+ADDRGP4 G_MuteSound
+CALLV
+pop
+line 4728
+;4728:			self->client->ps.fd.forceJumpCharge = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1096
+ADDP4
+CNSTF4 0
+ASGNF4
+line 4729
+;4729:		}
+LABELV $2154
+line 4730
+;4730:	}
+LABELV $2152
+line 4744
+;4731:
+;4732:#ifndef METROID_JUMP
+;4733:	else if ( (ucmd->upmove > 10) && (self->client->ps.pm_flags & PMF_JUMP_HELD) && self->client->ps.groundTime && (level.time - self->client->ps.groundTime) > 150 && !BG_HasYsalamiri(g_gametype.integer, &self->client->ps) && BG_CanUseFPNow(g_gametype.integer, &self->client->ps, level.time, FP_LEVITATION) )
+;4734:	{//just charging up
+;4735:		ForceJumpCharge( self, ucmd );
+;4736:		usingForce = qtrue;
+;4737:	}
+;4738:	else if (ucmd->upmove < 10 && self->client->ps.groundEntityNum == ENTITYNUM_NONE && self->client->ps.fd.forceJumpCharge)
+;4739:	{
+;4740:		self->client->ps.pm_flags &= ~(PMF_JUMP_HELD);
+;4741:	}
+;4742:#endif
+;4743:
+;4744:	if (!(self->client->ps.pm_flags & PMF_JUMP_HELD) && self->client->ps.fd.forceJumpCharge)
+ADDRLP4 84
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 84
+INDIRP4
+CNSTI4 12
+ADDP4
+INDIRI4
+CNSTI4 2
+BANDI4
+CNSTI4 0
+NEI4 $2157
+ADDRLP4 84
+INDIRP4
+CNSTI4 1096
+ADDP4
+INDIRF4
+CNSTF4 0
+EQF4 $2157
+line 4745
+;4745:	{
+line 4746
+;4746:		if (!(ucmd->buttons & BUTTON_FORCEPOWER) ||
+ADDRFP4 4
+INDIRP4
+CNSTI4 16
+ADDP4
+INDIRI4
+CNSTI4 512
+BANDI4
+CNSTI4 0
+EQI4 $2161
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 852
+ADDP4
+INDIRI4
+CNSTI4 1
+EQI4 $2159
+LABELV $2161
+line 4748
+;4747:			self->client->ps.fd.forcePowerSelected != FP_LEVITATION)
+;4748:		{
+line 4749
+;4749:			if (WP_DoSpecificPower( self, ucmd, FP_LEVITATION ))
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRFP4 4
+INDIRP4
+ARGP4
+CNSTI4 1
+ARGI4
+ADDRLP4 88
+ADDRGP4 WP_DoSpecificPower
+CALLI4
+ASGNI4
+ADDRLP4 88
+INDIRI4
+CNSTI4 0
+EQI4 $2162
+line 4750
+;4750:			{
+line 4751
+;4751:				usingForce = qtrue;
+ADDRLP4 4
+CNSTI4 1
+ASGNI4
+line 4752
+;4752:			}
+LABELV $2162
+line 4753
+;4753:		}
+LABELV $2159
+line 4754
+;4754:	}
+LABELV $2157
+line 4756
+;4755:
+;4756:	if ( ucmd->buttons & BUTTON_FORCEGRIP )
+ADDRFP4 4
+INDIRP4
+CNSTI4 16
+ADDP4
+INDIRI4
+CNSTI4 64
+BANDI4
+CNSTI4 0
+EQI4 $2164
+line 4757
+;4757:	{ //grip is one of the powers with its own button.. if it's held, call the specific grip power function.
+line 4758
+;4758:		if (WP_DoSpecificPower( self, ucmd, FP_GRIP ))
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRFP4 4
+INDIRP4
+ARGP4
+CNSTI4 6
+ARGI4
+ADDRLP4 88
+ADDRGP4 WP_DoSpecificPower
+CALLI4
+ASGNI4
+ADDRLP4 88
+INDIRI4
+CNSTI4 0
+EQI4 $2166
+line 4759
+;4759:		{
+line 4760
+;4760:			usingForce = qtrue;
+ADDRLP4 4
+CNSTI4 1
+ASGNI4
+line 4761
+;4761:		}
+ADDRGP4 $2165
+JUMPV
+LABELV $2166
+line 4763
+;4762:		else
+;4763:		{ //don't let recharge even if the grip misses if the player still has the button down
+line 4764
+;4764:			usingForce = qtrue;
+ADDRLP4 4
+CNSTI4 1
+ASGNI4
+line 4765
+;4765:		}
+line 4766
+;4766:	}
+ADDRGP4 $2165
+JUMPV
+LABELV $2164
+line 4768
+;4767:	else
+;4768:	{ //see if we're using it generically.. if not, stop.
+line 4769
+;4769:		if (self->client->ps.fd.forcePowersActive & (1 << FP_GRIP))
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 848
+ADDP4
+INDIRI4
+CNSTI4 64
+BANDI4
+CNSTI4 0
+EQI4 $2168
+line 4770
+;4770:		{
+line 4771
+;4771:			if (!(ucmd->buttons & BUTTON_FORCEPOWER) || self->client->ps.fd.forcePowerSelected != FP_GRIP)
+ADDRFP4 4
+INDIRP4
+CNSTI4 16
+ADDP4
+INDIRI4
+CNSTI4 512
+BANDI4
+CNSTI4 0
+EQI4 $2172
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 852
+ADDP4
+INDIRI4
+CNSTI4 6
+EQI4 $2170
+LABELV $2172
+line 4772
+;4772:			{
+line 4773
+;4773:				WP_ForcePowerStop(self, FP_GRIP);
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 6
+ARGI4
+ADDRGP4 WP_ForcePowerStop
+CALLV
+pop
+line 4774
+;4774:			}
+LABELV $2170
+line 4775
+;4775:		}
+LABELV $2168
+line 4776
+;4776:	}
+LABELV $2165
+line 4778
+;4777:
+;4778:	if ( ucmd->buttons & BUTTON_FORCE_LIGHTNING )
+ADDRFP4 4
+INDIRP4
+CNSTI4 16
+ADDP4
+INDIRI4
+CNSTI4 1024
+BANDI4
+CNSTI4 0
+EQI4 $2173
+line 4779
+;4779:	{ //lightning
+line 4780
+;4780:		WP_DoSpecificPower(self, ucmd, FP_LIGHTNING);
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRFP4 4
+INDIRP4
+ARGP4
+CNSTI4 7
+ARGI4
+ADDRGP4 WP_DoSpecificPower
+CALLI4
+pop
+line 4781
+;4781:		usingForce = qtrue;
+ADDRLP4 4
+CNSTI4 1
+ASGNI4
+line 4782
+;4782:	}
+ADDRGP4 $2174
+JUMPV
+LABELV $2173
+line 4784
+;4783:	else
+;4784:	{ //see if we're using it generically.. if not, stop.
+line 4785
+;4785:		if (self->client->ps.fd.forcePowersActive & (1 << FP_LIGHTNING))
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 848
+ADDP4
+INDIRI4
+CNSTI4 128
+BANDI4
+CNSTI4 0
+EQI4 $2175
+line 4786
+;4786:		{
+line 4787
+;4787:			if (!(ucmd->buttons & BUTTON_FORCEPOWER) || self->client->ps.fd.forcePowerSelected != FP_LIGHTNING)
+ADDRFP4 4
+INDIRP4
+CNSTI4 16
+ADDP4
+INDIRI4
+CNSTI4 512
+BANDI4
+CNSTI4 0
+EQI4 $2179
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 852
+ADDP4
+INDIRI4
+CNSTI4 7
+EQI4 $2177
+LABELV $2179
+line 4788
+;4788:			{
+line 4789
+;4789:				WP_ForcePowerStop(self, FP_LIGHTNING);
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 7
+ARGI4
+ADDRGP4 WP_ForcePowerStop
+CALLV
+pop
+line 4790
+;4790:			}
+LABELV $2177
+line 4791
+;4791:		}
+LABELV $2175
+line 4792
+;4792:	}
+LABELV $2174
+line 4794
+;4793:
+;4794:	if ( ucmd->buttons & BUTTON_FORCE_DRAIN )
+ADDRFP4 4
+INDIRP4
+CNSTI4 16
+ADDP4
+INDIRI4
+CNSTI4 2048
+BANDI4
+CNSTI4 0
+EQI4 $2180
+line 4795
+;4795:	{ //drain
+line 4796
+;4796:		WP_DoSpecificPower(self, ucmd, FP_DRAIN);
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRFP4 4
+INDIRP4
+ARGP4
+CNSTI4 13
+ARGI4
+ADDRGP4 WP_DoSpecificPower
+CALLI4
+pop
+line 4797
+;4797:		usingForce = qtrue;
+ADDRLP4 4
+CNSTI4 1
+ASGNI4
+line 4798
+;4798:	}
+ADDRGP4 $2181
+JUMPV
+LABELV $2180
+line 4800
+;4799:	else
+;4800:	{ //see if we're using it generically.. if not, stop.
+line 4801
+;4801:		if (self->client->ps.fd.forcePowersActive & (1 << FP_DRAIN))
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 848
+ADDP4
+INDIRI4
+CNSTI4 8192
+BANDI4
+CNSTI4 0
+EQI4 $2182
+line 4802
+;4802:		{
+line 4803
+;4803:			if (!(ucmd->buttons & BUTTON_FORCEPOWER) || self->client->ps.fd.forcePowerSelected != FP_DRAIN)
+ADDRFP4 4
+INDIRP4
+CNSTI4 16
+ADDP4
+INDIRI4
+CNSTI4 512
+BANDI4
+CNSTI4 0
+EQI4 $2186
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 852
+ADDP4
+INDIRI4
+CNSTI4 13
+EQI4 $2184
+LABELV $2186
+line 4804
+;4804:			{
+line 4805
+;4805:				WP_ForcePowerStop(self, FP_DRAIN);
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 13
+ARGI4
+ADDRGP4 WP_ForcePowerStop
+CALLV
+pop
+line 4806
+;4806:			}
+LABELV $2184
+line 4807
+;4807:		}
+LABELV $2182
+line 4808
+;4808:	}
+LABELV $2181
+line 4810
+;4809:
+;4810:	if ( (ucmd->buttons & BUTTON_FORCEPOWER) &&
+ADDRFP4 4
+INDIRP4
+CNSTI4 16
+ADDP4
+INDIRI4
+CNSTI4 512
+BANDI4
+CNSTI4 0
+EQI4 $2187
+ADDRGP4 g_gametype+12
+INDIRI4
+ARGI4
+ADDRLP4 88
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 88
+INDIRP4
+ARGP4
+ADDRGP4 level+32
+INDIRI4
+ARGI4
+ADDRLP4 88
+INDIRP4
+CNSTI4 852
+ADDP4
+INDIRI4
+ARGI4
+ADDRLP4 92
+ADDRGP4 BG_CanUseFPNow
+CALLI4
+ASGNI4
+ADDRLP4 92
+INDIRI4
+CNSTI4 0
+EQI4 $2187
+line 4812
+;4811:		BG_CanUseFPNow(g_gametype.integer, &self->client->ps, level.time, self->client->ps.fd.forcePowerSelected))
+;4812:	{
+line 4813
+;4813:		if (self->client->ps.fd.forcePowerSelected == FP_LEVITATION)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 852
+ADDP4
+INDIRI4
+CNSTI4 1
+NEI4 $2191
+line 4814
+;4814:		{
+line 4815
+;4815:			ForceJumpCharge( self, ucmd );
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRFP4 4
+INDIRP4
+ARGP4
+ADDRGP4 ForceJumpCharge
+CALLV
+pop
+line 4816
+;4816:			usingForce = qtrue;
+ADDRLP4 4
+CNSTI4 1
+ASGNI4
+line 4817
+;4817:		}
+ADDRGP4 $2188
+JUMPV
+LABELV $2191
+line 4818
+;4818:		else if (WP_DoSpecificPower( self, ucmd, self->client->ps.fd.forcePowerSelected ))
+ADDRLP4 96
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 96
+INDIRP4
+ARGP4
+ADDRFP4 4
+INDIRP4
+ARGP4
+ADDRLP4 96
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 852
+ADDP4
+INDIRI4
+ARGI4
+ADDRLP4 100
+ADDRGP4 WP_DoSpecificPower
+CALLI4
+ASGNI4
+ADDRLP4 100
+INDIRI4
+CNSTI4 0
+EQI4 $2193
+line 4819
+;4819:		{
+line 4820
+;4820:			usingForce = qtrue;
+ADDRLP4 4
+CNSTI4 1
+ASGNI4
+line 4821
+;4821:		}
+ADDRGP4 $2188
+JUMPV
+LABELV $2193
+line 4822
+;4822:		else if (self->client->ps.fd.forcePowerSelected == FP_GRIP)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 852
+ADDP4
+INDIRI4
+CNSTI4 6
+NEI4 $2188
+line 4823
+;4823:		{
+line 4824
+;4824:			usingForce = qtrue;
+ADDRLP4 4
+CNSTI4 1
+ASGNI4
+line 4825
+;4825:		}
+line 4826
+;4826:	}
+ADDRGP4 $2188
+JUMPV
+LABELV $2187
+line 4828
+;4827:	else
+;4828:	{
+line 4829
+;4829:		self->client->ps.fd.forceButtonNeedRelease = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 856
+ADDP4
+CNSTI4 0
+ASGNI4
+line 4830
+;4830:	}
+LABELV $2188
+line 4832
+;4831:
+;4832:	for ( i = 0; i < NUM_FORCE_POWERS; i++ )
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+LABELV $2197
+line 4833
+;4833:	{
+line 4834
+;4834:		if ( self->client->ps.fd.forcePowerDuration[i] )
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 860
+ADDP4
+ADDP4
+INDIRI4
+CNSTI4 0
+EQI4 $2201
+line 4835
+;4835:		{
+line 4836
+;4836:			if ( self->client->ps.fd.forcePowerDuration[i] < level.time )
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 860
+ADDP4
+ADDP4
+INDIRI4
+ADDRGP4 level+32
+INDIRI4
+GEI4 $2203
+line 4837
+;4837:			{
+line 4838
+;4838:				if ( (self->client->ps.fd.forcePowersActive&( 1 << i )) )
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 848
+ADDP4
+INDIRI4
+CNSTI4 1
+ADDRLP4 0
+INDIRI4
+LSHI4
+BANDI4
+CNSTI4 0
+EQI4 $2206
+line 4839
+;4839:				{//turn it off
+line 4840
+;4840:					WP_ForcePowerStop( self, (forcePowers_t)i );
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRLP4 0
+INDIRI4
+ARGI4
+ADDRGP4 WP_ForcePowerStop
+CALLV
+pop
+line 4841
+;4841:				}
+LABELV $2206
+line 4842
+;4842:				self->client->ps.fd.forcePowerDuration[i] = 0;
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 860
+ADDP4
+ADDP4
+CNSTI4 0
+ASGNI4
+line 4843
+;4843:			}
+LABELV $2203
+line 4844
+;4844:		}
+LABELV $2201
+line 4845
+;4845:		if ( (self->client->ps.fd.forcePowersActive&( 1 << i )) )
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 848
+ADDP4
+INDIRI4
+CNSTI4 1
+ADDRLP4 0
+INDIRI4
+LSHI4
+BANDI4
+CNSTI4 0
+EQI4 $2208
+line 4846
+;4846:		{
+line 4847
+;4847:			usingForce = qtrue;
+ADDRLP4 4
+CNSTI4 1
+ASGNI4
+line 4848
+;4848:			WP_ForcePowerRun( self, (forcePowers_t)i, ucmd );
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRLP4 0
+INDIRI4
+ARGI4
+ADDRFP4 4
+INDIRP4
+ARGP4
+ADDRGP4 WP_ForcePowerRun
+CALLV
+pop
+line 4849
+;4849:		}
+LABELV $2208
+line 4850
+;4850:	}
+LABELV $2198
+line 4832
+ADDRLP4 0
+ADDRLP4 0
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+ADDRLP4 0
+INDIRI4
+CNSTI4 18
+LTI4 $2197
+line 4851
+;4851:	if ( self->client->ps.saberInFlight )
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 504
+ADDP4
+INDIRI4
+CNSTI4 0
+EQI4 $2210
+line 4852
+;4852:	{//don't regen force power while throwing saber
+line 4853
+;4853:		if ( self->client->ps.saberEntityNum < ENTITYNUM_NONE && self->client->ps.saberEntityNum > 0 )//player is 0
+ADDRLP4 96
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 544
+ADDP4
+INDIRI4
+ASGNI4
+ADDRLP4 96
+INDIRI4
+CNSTI4 1023
+GEI4 $2212
+ADDRLP4 96
+INDIRI4
+CNSTI4 0
+LEI4 $2212
+line 4854
+;4854:		{//
+line 4855
+;4855:			if ( &g_entities[self->client->ps.saberEntityNum] != NULL && g_entities[self->client->ps.saberEntityNum].s.pos.trType == TR_LINEAR )
+ADDRLP4 100
+CNSTI4 852
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 544
+ADDP4
+INDIRI4
+MULI4
+ASGNI4
+ADDRLP4 100
+INDIRI4
+ADDRGP4 g_entities
+ADDP4
+CVPU4 4
+CNSTU4 0
+EQU4 $2214
+ADDRLP4 100
+INDIRI4
+ADDRGP4 g_entities+12
+ADDP4
+INDIRI4
+CNSTI4 2
+NEI4 $2214
+line 4856
+;4856:			{//fell to the ground and we're trying to pull it back
+line 4857
+;4857:				usingForce = qtrue;
+ADDRLP4 4
+CNSTI4 1
+ASGNI4
+line 4858
+;4858:			}
+LABELV $2214
+line 4859
+;4859:		}
+LABELV $2212
+line 4860
+;4860:	}
+LABELV $2210
+line 4861
+;4861:	if ( !self->client->ps.fd.forcePowersActive || self->client->ps.fd.forcePowersActive == (1 << FP_DRAIN) )
+ADDRLP4 96
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 848
+ADDP4
+INDIRI4
+ASGNI4
+ADDRLP4 96
+INDIRI4
+CNSTI4 0
+EQI4 $2219
+ADDRLP4 96
+INDIRI4
+CNSTI4 8192
+NEI4 $2217
+LABELV $2219
+line 4862
+;4862:	{//when not using the force, regenerate at 1 point per half second
+line 4863
+;4863:		if ( !self->client->ps.saberInFlight && self->client->ps.fd.forcePowerRegenDebounceTime < level.time )
+ADDRLP4 100
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 100
+INDIRP4
+CNSTI4 504
+ADDP4
+INDIRI4
+CNSTI4 0
+NEI4 $2220
+ADDRLP4 100
+INDIRP4
+CNSTI4 940
+ADDP4
+INDIRI4
+ADDRGP4 level+32
+INDIRI4
+GEI4 $2220
+line 4864
+;4864:		{
+line 4865
+;4865:			if (g_gametype.integer != GT_HOLOCRON || g_MaxHolocronCarry.value)
+ADDRGP4 g_gametype+12
+INDIRI4
+CNSTI4 1
+NEI4 $2227
+ADDRGP4 g_MaxHolocronCarry+8
+INDIRF4
+CNSTF4 0
+EQF4 $2223
+LABELV $2227
+line 4866
+;4866:			{
+line 4869
+;4867:				//if (!g_trueJedi.integer || self->client->ps.weapon == WP_SABER)
+;4868:				//let non-jedi force regen since we're doing a more strict jedi/non-jedi thing... this gives dark jedi something to drain
+;4869:				{
+line 4870
+;4870:					if (self->client->ps.powerups[PW_FORCE_BOON])
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 400
+ADDP4
+INDIRI4
+CNSTI4 0
+EQI4 $2228
+line 4871
+;4871:					{
+line 4872
+;4872:						WP_ForcePowerRegenerate( self, 6 );
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 6
+ARGI4
+ADDRGP4 WP_ForcePowerRegenerate
+CALLV
+pop
+line 4873
+;4873:					}
+ADDRGP4 $2224
+JUMPV
+LABELV $2228
+line 4874
+;4874:					else if (self->client->ps.isJediMaster && g_gametype.integer == GT_JEDIMASTER)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 604
+ADDP4
+INDIRI4
+CNSTI4 0
+EQI4 $2230
+ADDRGP4 g_gametype+12
+INDIRI4
+CNSTI4 2
+NEI4 $2230
+line 4875
+;4875:					{
+line 4876
+;4876:						WP_ForcePowerRegenerate( self, 4 ); //jedi master regenerates 4 times as fast
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 4
+ARGI4
+ADDRGP4 WP_ForcePowerRegenerate
+CALLV
+pop
+line 4877
+;4877:					}
+ADDRGP4 $2224
+JUMPV
+LABELV $2230
+line 4879
+;4878:					else
+;4879:					{
+line 4880
+;4880:						WP_ForcePowerRegenerate( self, 0 );
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 0
+ARGI4
+ADDRGP4 WP_ForcePowerRegenerate
+CALLV
+pop
+line 4881
+;4881:					}
+line 4882
+;4882:				}
+line 4889
+;4883:				/*
+;4884:				else if (g_trueJedi.integer && self->client->ps.weapon != WP_SABER)
+;4885:				{
+;4886:					self->client->ps.fd.forcePower = 0;
+;4887:				}
+;4888:				*/
+;4889:			}
+ADDRGP4 $2224
+JUMPV
+LABELV $2223
+line 4891
+;4890:			else
+;4891:			{ //regenerate based on the number of holocrons carried
+line 4892
+;4892:				holoregen = 0;
+ADDRLP4 28
+CNSTI4 0
+ASGNI4
+line 4893
+;4893:				holo = 0;
+ADDRLP4 12
+CNSTI4 0
+ASGNI4
+ADDRGP4 $2234
+JUMPV
+LABELV $2233
+line 4895
+;4894:				while (holo < NUM_FORCE_POWERS)
+;4895:				{
+line 4896
+;4896:					if (self->client->ps.holocronsCarried[holo])
+ADDRLP4 12
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 644
+ADDP4
+ADDP4
+INDIRF4
+CNSTF4 0
+EQF4 $2236
+line 4897
+;4897:					{
+line 4898
+;4898:						holoregen++;
+ADDRLP4 28
+ADDRLP4 28
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 4899
+;4899:					}
+LABELV $2236
+line 4900
+;4900:					holo++;
+ADDRLP4 12
+ADDRLP4 12
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 4901
+;4901:				}
+LABELV $2234
+line 4894
+ADDRLP4 12
+INDIRI4
+CNSTI4 18
+LTI4 $2233
+line 4903
+;4902:
+;4903:				WP_ForcePowerRegenerate(self, holoregen);
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRLP4 28
+INDIRI4
+ARGI4
+ADDRGP4 WP_ForcePowerRegenerate
+CALLV
+pop
+line 4904
+;4904:			}
+LABELV $2224
+line 4906
+;4905:
+;4906:			self->client->ps.fd.forcePowerRegenDebounceTime = level.time + g_forceRegenTime.integer;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 940
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+ADDRGP4 g_forceRegenTime+12
+INDIRI4
+ADDI4
+ASGNI4
+line 4907
+;4907:		}
+LABELV $2220
+line 4908
+;4908:	}
+LABELV $2217
+LABELV $2149
+line 4912
+;4909:
+;4910:powersetcheck:
+;4911:
+;4912:	if (prepower && self->client->ps.fd.forcePower < prepower)
+ADDRLP4 8
+INDIRI4
+CNSTI4 0
+EQI4 $2240
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 932
+ADDP4
+INDIRI4
+ADDRLP4 8
+INDIRI4
+GEI4 $2240
+line 4913
+;4913:	{
+line 4914
+;4914:		int dif = ((prepower - self->client->ps.fd.forcePower)/2);
+ADDRLP4 104
+ADDRLP4 8
+INDIRI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 932
+ADDP4
+INDIRI4
+SUBI4
+CNSTI4 2
+DIVI4
+ASGNI4
+line 4915
+;4915:		if (dif < 1)
+ADDRLP4 104
+INDIRI4
+CNSTI4 1
+GEI4 $2242
+line 4916
+;4916:		{
+line 4917
+;4917:			dif = 1;
+ADDRLP4 104
+CNSTI4 1
+ASGNI4
+line 4918
+;4918:		}
+LABELV $2242
+line 4920
+;4919:
+;4920:		self->client->ps.fd.forcePower = (prepower-dif);
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 932
+ADDP4
+ADDRLP4 8
+INDIRI4
+ADDRLP4 104
+INDIRI4
+SUBI4
+ASGNI4
+line 4921
+;4921:	}
+LABELV $2240
+line 4922
+;4922:}
+LABELV $2016
+endproc WP_ForcePowersUpdate 140 32
+export Jedi_DodgeEvasion
+proc Jedi_DodgeEvasion 28 12
+line 4925
+;4923:
+;4924:qboolean Jedi_DodgeEvasion( gentity_t *self, gentity_t *shooter, trace_t *tr, int hitLoc )
+;4925:{
+line 4926
+;4926:	int	dodgeAnim = -1;
+ADDRLP4 0
+CNSTI4 -1
+ASGNI4
+line 4928
+;4927:
+;4928:	if ( !self || !self->client || self->health <= 0 )
+ADDRLP4 4
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 8
+CNSTU4 0
+ASGNU4
+ADDRLP4 4
+INDIRP4
+CVPU4 4
+ADDRLP4 8
+INDIRU4
+EQU4 $2248
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CVPU4 4
+ADDRLP4 8
+INDIRU4
+EQU4 $2248
+ADDRLP4 4
+INDIRP4
+CNSTI4 676
+ADDP4
+INDIRI4
+CNSTI4 0
+GTI4 $2245
+LABELV $2248
+line 4929
+;4929:	{
+line 4930
+;4930:		return qfalse;
+CNSTI4 0
+RETI4
+ADDRGP4 $2244
+JUMPV
+LABELV $2245
+line 4933
+;4931:	}
+;4932:
+;4933:	if (!g_forceDodge.integer)
+ADDRGP4 g_forceDodge+12
+INDIRI4
+CNSTI4 0
+NEI4 $2249
+line 4934
+;4934:	{
+line 4935
+;4935:		return qfalse;
+CNSTI4 0
+RETI4
+ADDRGP4 $2244
+JUMPV
+LABELV $2249
+line 4938
+;4936:	}
+;4937:
+;4938:	if (g_forceDodge.integer != 2)
+ADDRGP4 g_forceDodge+12
+INDIRI4
+CNSTI4 2
+EQI4 $2252
+line 4939
+;4939:	{
+line 4940
+;4940:		if (!(self->client->ps.fd.forcePowersActive & (1 << FP_SEE)))
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 848
+ADDP4
+INDIRI4
+CNSTI4 16384
+BANDI4
+CNSTI4 0
+NEI4 $2255
+line 4941
+;4941:		{
+line 4942
+;4942:			return qfalse;
+CNSTI4 0
+RETI4
+ADDRGP4 $2244
+JUMPV
+LABELV $2255
+line 4944
+;4943:		}
+;4944:	}
+LABELV $2252
+line 4946
+;4945:
+;4946:	if (self->client->ps.usingATST)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1316
+ADDP4
+INDIRI4
+CNSTI4 0
+EQI4 $2257
+line 4947
+;4947:	{
+line 4948
+;4948:		return qfalse;
+CNSTI4 0
+RETI4
+ADDRGP4 $2244
+JUMPV
+LABELV $2257
+line 4951
+;4949:	}
+;4950:
+;4951:	if ( self->client->ps.groundEntityNum == ENTITYNUM_NONE )
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 84
+ADDP4
+INDIRI4
+CNSTI4 1023
+NEI4 $2259
+line 4952
+;4952:	{//can't dodge in mid-air
+line 4953
+;4953:		return qfalse;
+CNSTI4 0
+RETI4
+ADDRGP4 $2244
+JUMPV
+LABELV $2259
+line 4956
+;4954:	}
+;4955:
+;4956:	if ( self->client->ps.weaponTime > 0 || self->client->ps.forceHandExtend != HANDEXTEND_NONE )
+ADDRLP4 12
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 16
+CNSTI4 0
+ASGNI4
+ADDRLP4 12
+INDIRP4
+CNSTI4 44
+ADDP4
+INDIRI4
+ADDRLP4 16
+INDIRI4
+GTI4 $2263
+ADDRLP4 12
+INDIRP4
+CNSTI4 1248
+ADDP4
+INDIRI4
+ADDRLP4 16
+INDIRI4
+EQI4 $2261
+LABELV $2263
+line 4957
+;4957:	{//in some effect that stops me from moving on my own
+line 4958
+;4958:		return qfalse;
+CNSTI4 0
+RETI4
+ADDRGP4 $2244
+JUMPV
+LABELV $2261
+line 4961
+;4959:	}
+;4960:
+;4961:	if (g_forceDodge.integer == 2)
+ADDRGP4 g_forceDodge+12
+INDIRI4
+CNSTI4 2
+NEI4 $2264
+line 4962
+;4962:	{
+line 4963
+;4963:		if (self->client->ps.fd.forcePowersActive)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 848
+ADDP4
+INDIRI4
+CNSTI4 0
+EQI4 $2267
+line 4964
+;4964:		{ //for now just don't let us dodge if we're using a force power at all
+line 4965
+;4965:			return qfalse;
+CNSTI4 0
+RETI4
+ADDRGP4 $2244
+JUMPV
+LABELV $2267
+line 4967
+;4966:		}
+;4967:	}
+LABELV $2264
+line 4969
+;4968:
+;4969:	if (g_forceDodge.integer == 2)
+ADDRGP4 g_forceDodge+12
+INDIRI4
+CNSTI4 2
+NEI4 $2269
+line 4970
+;4970:	{
+line 4971
+;4971:		if ( !WP_ForcePowerUsable( self, FP_SPEED ) )
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 2
+ARGI4
+ADDRLP4 20
+ADDRGP4 WP_ForcePowerUsable
+CALLI4
+ASGNI4
+ADDRLP4 20
+INDIRI4
+CNSTI4 0
+NEI4 $2272
+line 4972
+;4972:		{//make sure we have it and have enough force power
+line 4973
+;4973:			return qfalse;
+CNSTI4 0
+RETI4
+ADDRGP4 $2244
+JUMPV
+LABELV $2272
+line 4975
+;4974:		}
+;4975:	}
+LABELV $2269
+line 4977
+;4976:
+;4977:	if (g_forceDodge.integer == 2)
+ADDRGP4 g_forceDodge+12
+INDIRI4
+CNSTI4 2
+NEI4 $2274
+line 4978
+;4978:	{
+line 4979
+;4979:		if ( Q_irand( 1, 7 ) > self->client->ps.fd.forcePowerLevel[FP_SPEED] )
+CNSTI4 1
+ARGI4
+CNSTI4 7
+ARGI4
+ADDRLP4 20
+ADDRGP4 Q_irand
+CALLI4
+ASGNI4
+ADDRLP4 20
+INDIRI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 952
+ADDP4
+INDIRI4
+LEI4 $2275
+line 4980
+;4980:		{//more likely to fail on lower force speed level
+line 4981
+;4981:			return qfalse;
+CNSTI4 0
+RETI4
+ADDRGP4 $2244
+JUMPV
+line 4983
+;4982:		}
+;4983:	}
+LABELV $2274
+line 4985
+;4984:	else
+;4985:	{
+line 4987
+;4986:		//We now dodge all the time, but only on level 3
+;4987:		if (self->client->ps.fd.forcePowerLevel[FP_SEE] < FORCE_LEVEL_3)
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1000
+ADDP4
+INDIRI4
+CNSTI4 3
+GEI4 $2279
+line 4988
+;4988:		{//more likely to fail on lower force sight level
+line 4989
+;4989:			return qfalse;
+CNSTI4 0
+RETI4
+ADDRGP4 $2244
+JUMPV
+LABELV $2279
+line 4991
+;4990:		}
+;4991:	}
+LABELV $2275
+line 4993
+;4992:
+;4993:	switch( hitLoc )
+ADDRLP4 20
+ADDRFP4 12
+INDIRI4
+ASGNI4
+ADDRLP4 20
+INDIRI4
+CNSTI4 0
+LTI4 $2281
+ADDRLP4 20
+INDIRI4
+CNSTI4 16
+GTI4 $2281
+ADDRLP4 20
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRGP4 $2293
+ADDP4
+INDIRP4
+JUMPV
+lit
+align 4
+LABELV $2293
+address $2283
+address $2284
+address $2284
+address $2284
+address $2284
+address $2289
+address $2285
+address $2287
+address $2289
+address $2286
+address $2288
+address $2289
+address $2290
+address $2291
+address $2290
+address $2291
+address $2292
+code
+line 4994
+;4994:	{
+LABELV $2283
+line 4996
+;4995:	case HL_NONE:
+;4996:		return qfalse;
+CNSTI4 0
+RETI4
+ADDRGP4 $2244
+JUMPV
+line 4997
+;4997:		break;
+LABELV $2284
+line 5003
+;4998:
+;4999:	case HL_FOOT_RT:
+;5000:	case HL_FOOT_LT:
+;5001:	case HL_LEG_RT:
+;5002:	case HL_LEG_LT:
+;5003:		return qfalse;
+CNSTI4 0
+RETI4
+ADDRGP4 $2244
+JUMPV
+LABELV $2285
+line 5006
+;5004:
+;5005:	case HL_BACK_RT:
+;5006:		dodgeAnim = BOTH_DODGE_FL;
+ADDRLP4 0
+CNSTI4 897
+ASGNI4
+line 5007
+;5007:		break;
+ADDRGP4 $2282
+JUMPV
+LABELV $2286
+line 5009
+;5008:	case HL_CHEST_RT:
+;5009:		dodgeAnim = BOTH_DODGE_FR;
+ADDRLP4 0
+CNSTI4 898
+ASGNI4
+line 5010
+;5010:		break;
+ADDRGP4 $2282
+JUMPV
+LABELV $2287
+line 5012
+;5011:	case HL_BACK_LT:
+;5012:		dodgeAnim = BOTH_DODGE_FR;
+ADDRLP4 0
+CNSTI4 898
+ASGNI4
+line 5013
+;5013:		break;
+ADDRGP4 $2282
+JUMPV
+LABELV $2288
+line 5015
+;5014:	case HL_CHEST_LT:
+;5015:		dodgeAnim = BOTH_DODGE_FR;
+ADDRLP4 0
+CNSTI4 898
+ASGNI4
+line 5016
+;5016:		break;
+ADDRGP4 $2282
+JUMPV
+LABELV $2289
+line 5020
+;5017:	case HL_BACK:
+;5018:	case HL_CHEST:
+;5019:	case HL_WAIST:
+;5020:		dodgeAnim = BOTH_DODGE_FL;
+ADDRLP4 0
+CNSTI4 897
+ASGNI4
+line 5021
+;5021:		break;
+ADDRGP4 $2282
+JUMPV
+LABELV $2290
+line 5024
+;5022:	case HL_ARM_RT:
+;5023:	case HL_HAND_RT:
+;5024:		dodgeAnim = BOTH_DODGE_L;
+ADDRLP4 0
+CNSTI4 901
+ASGNI4
+line 5025
+;5025:		break;
+ADDRGP4 $2282
+JUMPV
+LABELV $2291
+line 5028
+;5026:	case HL_ARM_LT:
+;5027:	case HL_HAND_LT:
+;5028:		dodgeAnim = BOTH_DODGE_R;
+ADDRLP4 0
+CNSTI4 902
+ASGNI4
+line 5029
+;5029:		break;
+ADDRGP4 $2282
+JUMPV
+LABELV $2292
+line 5031
+;5030:	case HL_HEAD:
+;5031:		dodgeAnim = BOTH_DODGE_FL;
+ADDRLP4 0
+CNSTI4 897
+ASGNI4
+line 5032
+;5032:		break;
+ADDRGP4 $2282
+JUMPV
+LABELV $2281
+line 5034
+;5033:	default:
+;5034:		return qfalse;
+CNSTI4 0
+RETI4
+ADDRGP4 $2244
+JUMPV
+LABELV $2282
+line 5037
+;5035:	}
+;5036:
+;5037:	if ( dodgeAnim != -1 )
+ADDRLP4 0
+INDIRI4
+CNSTI4 -1
+EQI4 $2294
+line 5038
+;5038:	{
+line 5040
+;5039:		//Our own happy way of forcing an anim:
+;5040:		self->client->ps.forceHandExtend = HANDEXTEND_DODGE;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1248
+ADDP4
+CNSTI4 7
+ASGNI4
+line 5041
+;5041:		self->client->ps.forceDodgeAnim = dodgeAnim;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1260
+ADDP4
+ADDRLP4 0
+INDIRI4
+ASGNI4
+line 5042
+;5042:		self->client->ps.forceHandExtendTime = level.time + 300;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1252
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 300
+ADDI4
+ASGNI4
+line 5044
+;5043:
+;5044:		self->client->ps.powerups[PW_SPEEDBURST] = level.time + 100;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 376
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 100
+ADDI4
+ASGNI4
+line 5046
+;5045:
+;5046:		if (g_forceDodge.integer == 2)
+ADDRGP4 g_forceDodge+12
+INDIRI4
+CNSTI4 2
+NEI4 $2298
+line 5047
+;5047:		{
+line 5048
+;5048:			ForceSpeed( self, 500 );
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 500
+ARGI4
+ADDRGP4 ForceSpeed
+CALLV
+pop
+line 5049
+;5049:		}
+ADDRGP4 $2299
+JUMPV
+LABELV $2298
+line 5051
+;5050:		else
+;5051:		{
+line 5052
+;5052:			G_Sound( self, CHAN_BODY, G_SoundIndex("sound/weapons/force/speed.wav") );
+ADDRGP4 $570
+ARGP4
+ADDRLP4 24
+ADDRGP4 G_SoundIndex
+CALLI4
+ASGNI4
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 5
+ARGI4
+ADDRLP4 24
+INDIRI4
+ARGI4
+ADDRGP4 G_Sound
+CALLV
+pop
+line 5053
+;5053:		}
+LABELV $2299
+line 5054
+;5054:		return qtrue;
+CNSTI4 1
+RETI4
+ADDRGP4 $2244
+JUMPV
+LABELV $2294
+line 5056
+;5055:	}
+;5056:	return qfalse;
+CNSTI4 0
+RETI4
+LABELV $2244
+endproc Jedi_DodgeEvasion 28 12
+import ucmd
+import g_TimeSinceLastFrame
+import g_LastFrameTime
+import Touch_Button
+import botstates
+import floattime
+import gLevelFlags
+import nodenum
+import nodetable
+import gLastPrintedIndex
+import gWPNum
+import gWPArray
+import gWPRenderedFrame
+import gBotEdit
+import gDeactivated
+import gWPRenderTime
+import gBotChatBuffer
+import eFlagBlue
+import eFlagRed
+import oFlagBlue
+import flagBlue
+import oFlagRed
+import flagRed
+import bot_wp_visconnect
+import bot_wp_distconnect
+import bot_wp_clearweight
+import bot_wp_edit
+import bot_wp_info
+import bot_camp
+import bot_attachments
+import bot_honorableduelacceptance
+import bot_forgimmick
+import bot_forcepowers
+import ConcatArgs
+import GetBestIdleGoal
+import GetNearestVisibleWP
+import BotIsAChickenWuss
+import OrgVisibleBox
+import BotWaypointRender
+import StandardBotAI
+import BotDoChat
+import BotUtilizePersonality
+import NumBots
+import BotResetState
+import B_Free
+import B_Alloc
+import B_TempFree
+import B_TempAlloc
+import forceJumpStrength
+import forceJumpHeight
+import forcePowerNeeded
+import g_MaxHolocronCarry
+import trap_ROFF_Purge_Ent
+import trap_ROFF_Play
+import trap_ROFF_Cache
+import trap_ROFF_UpdateEntities
+import trap_ROFF_Clean
+import trap_SP_GetStringTextString
+import trap_SP_Register
+import trap_SP_RegisterServer
+import trap_SnapVector
+import trap_GeneticParentsAndChildSelection
+import trap_BotResetWeaponState
+import trap_BotFreeWeaponState
+import trap_BotAllocWeaponState
+import trap_BotLoadWeaponWeights
+import trap_BotGetWeaponInfo
+import trap_BotChooseBestFightWeapon
+import trap_BotAddAvoidSpot
+import trap_BotInitMoveState
+import trap_BotFreeMoveState
+import trap_BotAllocMoveState
+import trap_BotPredictVisiblePosition
+import trap_BotMovementViewTarget
+import trap_BotReachabilityArea
+import trap_BotResetLastAvoidReach
+import trap_BotResetAvoidReach
+import trap_BotMoveInDirection
+import trap_BotMoveToGoal
+import trap_BotResetMoveState
+import trap_BotFreeGoalState
+import trap_BotAllocGoalState
+import trap_BotMutateGoalFuzzyLogic
+import trap_BotSaveGoalFuzzyLogic
+import trap_BotInterbreedGoalFuzzyLogic
+import trap_BotFreeItemWeights
+import trap_BotLoadItemWeights
+import trap_BotUpdateEntityItems
+import trap_BotInitLevelItems
+import trap_BotSetAvoidGoalTime
+import trap_BotAvoidGoalTime
+import trap_BotGetLevelItemGoal
+import trap_BotGetMapLocationGoal
+import trap_BotGetNextCampSpotGoal
+import trap_BotItemGoalInVisButNotVisible
+import trap_BotTouchingGoal
+import trap_BotChooseNBGItem
+import trap_BotChooseLTGItem
+import trap_BotGetSecondGoal
+import trap_BotGetTopGoal
+import trap_BotGoalName
+import trap_BotDumpGoalStack
+import trap_BotDumpAvoidGoals
+import trap_BotEmptyGoalStack
+import trap_BotPopGoal
+import trap_BotPushGoal
+import trap_BotResetAvoidGoals
+import trap_BotRemoveFromAvoidGoals
+import trap_BotResetGoalState
+import trap_BotSetChatName
+import trap_BotSetChatGender
+import trap_BotLoadChatFile
+import trap_BotReplaceSynonyms
+import trap_UnifyWhiteSpaces
+import trap_BotMatchVariable
+import trap_BotFindMatch
+import trap_StringContains
+import trap_BotGetChatMessage
+import trap_BotEnterChat
+import trap_BotChatLength
+import trap_BotReplyChat
+import trap_BotNumInitialChats
+import trap_BotInitialChat
+import trap_BotNumConsoleMessages
+import trap_BotNextConsoleMessage
+import trap_BotRemoveConsoleMessage
+import trap_BotQueueConsoleMessage
+import trap_BotFreeChatState
+import trap_BotAllocChatState
+import trap_Characteristic_String
+import trap_Characteristic_BInteger
+import trap_Characteristic_Integer
+import trap_Characteristic_BFloat
+import trap_Characteristic_Float
+import trap_BotFreeCharacter
+import trap_BotLoadCharacter
+import trap_EA_ResetInput
+import trap_EA_GetInput
+import trap_EA_EndRegular
+import trap_EA_ForcePower
+import trap_EA_Alt_Attack
+import trap_EA_View
+import trap_EA_Move
+import trap_EA_DelayedJump
+import trap_EA_Jump
+import trap_EA_SelectWeapon
+import trap_EA_MoveRight
+import trap_EA_MoveLeft
+import trap_EA_MoveBack
+import trap_EA_MoveForward
+import trap_EA_MoveDown
+import trap_EA_MoveUp
+import trap_EA_Crouch
+import trap_EA_Respawn
+import trap_EA_Use
+import trap_EA_Attack
+import trap_EA_Talk
+import trap_EA_Gesture
+import trap_EA_Action
+import trap_EA_Command
+import trap_EA_SayTeam
+import trap_EA_Say
+import trap_AAS_PredictClientMovement
+import trap_AAS_Swimming
+import trap_AAS_AlternativeRouteGoals
+import trap_AAS_PredictRoute
+import trap_AAS_EnableRoutingArea
+import trap_AAS_AreaTravelTimeToGoalArea
+import trap_AAS_AreaReachability
+import trap_AAS_IntForBSPEpairKey
+import trap_AAS_FloatForBSPEpairKey
+import trap_AAS_VectorForBSPEpairKey
+import trap_AAS_ValueForBSPEpairKey
+import trap_AAS_NextBSPEntity
+import trap_AAS_PointContents
+import trap_AAS_TraceAreas
+import trap_AAS_PointReachabilityAreaIndex
+import trap_AAS_PointAreaNum
+import trap_AAS_Time
+import trap_AAS_PresenceTypeBoundingBox
+import trap_AAS_Initialized
+import trap_AAS_EntityInfo
+import trap_AAS_AreaInfo
+import trap_AAS_BBoxAreas
+import trap_BotUserCommand
+import trap_BotGetServerCommand
+import trap_BotGetSnapshotEntity
+import trap_BotLibTest
+import trap_BotLibUpdateEntity
+import trap_BotLibLoadMap
+import trap_BotLibStartFrame
+import trap_BotLibDefine
+import trap_BotLibVarGet
+import trap_BotLibVarSet
+import trap_BotLibShutdown
+import trap_BotLibSetup
+import trap_DebugPolygonDelete
+import trap_DebugPolygonCreate
+import trap_GetEntityToken
+import trap_GetUsercmd
+import trap_BotFreeClient
+import trap_BotAllocateClient
+import trap_EntityContact
+import trap_EntitiesInBox
+import trap_UnlinkEntity
+import trap_LinkEntity
+import trap_AreasConnected
+import trap_AdjustAreaPortalState
+import trap_InPVSIgnorePortals
+import trap_InPVS
+import trap_PointContents
+import trap_Trace
+import trap_SetBrushModel
+import trap_GetServerinfo
+import trap_SetUserinfo
+import trap_GetUserinfo
+import trap_GetConfigstring
+import trap_SetConfigstring
+import trap_SendServerCommand
+import trap_DropClient
+import trap_LocateGameData
+import trap_Cvar_VariableStringBuffer
+import trap_Cvar_VariableValue
+import trap_Cvar_VariableIntegerValue
+import trap_Cvar_Set
+import trap_Cvar_Update
+import trap_Cvar_Register
+import trap_SendConsoleCommand
+import trap_FS_GetFileList
+import trap_FS_FCloseFile
+import trap_FS_Write
+import trap_FS_Read
+import trap_FS_FOpenFile
+import trap_Args
+import trap_Argv
+import trap_Argc
+import trap_Milliseconds
+import trap_Error
+import trap_Printf
+import jd_CloseServer
+import jd_FakePlayerDetection
+import jd_antiForceCrash
+import jd_antiNameCrash
+import jd_antiFlood
+import cm_clanLogout_saying
+import cm_clanLogin_saying
+import cm_teleport_saying
+import cm_slay_saying
+import cm_sleep_off_saying
+import cm_sleep_on_saying
+import cm_punish_off_saying
+import cm_punish_on_saying
+import cm_slap_saying
+import cm_silence_off_saying
+import cm_silence_on_saying
+import cm_protect_off_saying
+import cm_protect_on_saying
+import cm_terminator_off_saying
+import cm_terminator_on_saying
+import cm_empower_off_saying
+import cm_empower_on_saying
+import cm_AdminLogout3_saying
+import cm_AdminLogout2_saying
+import cm_AdminLogout1_saying
+import cm_AdminLogin3_saying
+import cm_AdminLogin2_saying
+import cm_AdminLogin1_saying
+import cm_adminPassword3
+import cm_adminPassword2
+import cm_adminPassword1
+import cm_clanPassword
+import cm_voteControl
+import cm_emoteControl
+import cm_adminControl3
+import cm_adminControl2
+import cm_adminControl1
+import cm_adminLevel3
+import cm_adminLevel2
+import cm_adminLevel1
+import cm_report
+import cm_clanTag
+import cm_badwords
+import sv_maxConnections
+import cm_autoprotecttime
+import cm_knockmedown
+import cm_blacknames
+import cm_duelshield
+import cm_duelhealth
+import cm_duelradius
+import cm_duelstatus
+import mod_pushall
+import cm_samenames
+import cm_duelbeginsaberoff
+import cm_multiduels
+import cm_dualblade
+import cm_motd_time
+import cm_motd
+import cm_console_motd
+import g_austrian
+import g_saberDebugPrint
+import g_saberDmgDelay_Wound
+import g_saberDmgDelay_Idle
+import g_saberDmgVelocityScale
+import g_timeouttospec
+import g_forceDodge
+import g_dismember
+import g_singlePlayer
+import g_enableBreath
+import g_enableDust
+import g_rankings
+import pmove_msec
+import pmove_fixed
+import g_smoothClients
+import g_blueteam
+import g_redteam
+import g_debugUp
+import g_debugRight
+import g_debugForward
+import g_filterBan
+import g_banIPs
+import g_teamForceBalance
+import g_teamAutoJoin
+import g_allowVote
+import g_blood
+import g_doWarmup
+import g_warmup
+import g_motd
+import g_synchronousClients
+import g_adaptRespawn
+import g_weaponTeamRespawn
+import g_weaponRespawn
+import g_debugDamage
+import g_debugAlloc
+import g_debugMove
+import g_inactivity
+import g_forcerespawn
+import g_quadfactor
+import g_knockback
+import g_speed
+import g_gravity
+import g_needpass
+import g_password
+import g_friendlySaber
+import g_friendlyFire
+import g_saberInterpolate
+import g_capturelimit
+import g_timelimit
+import g_duel_fraglimit
+import g_fraglimit
+import g_duelWeaponDisable
+import g_fraglimitVoteCorrection
+import g_allowDuelSuicide
+import g_weaponDisable
+import g_forcePowerDisable
+import g_spawnInvulnerability
+import g_forceRegenTime
+import g_saberDamageScale
+import g_slowmoDuelEnd
+import g_logClientInfo
+import g_saberBoxTraceSize
+import g_saberAlwaysBoxTrace
+import g_saberGhoul2Collision
+import g_saberTraceSaberFirst
+import g_saberLockFactor
+import g_saberLocking
+import g_privateDuel
+import g_forceBasedTeams
+import g_maxForceRank
+import g_dmflags
+import g_autoMapCycle
+import g_trueJedi
+import g_restarted
+import g_maxGameClients
+import g_maxclients
+import g_cheats
+import g_dedicated
+import g_gametype
+import g_entities
+import level
+import Pickup_Team
+import CheckTeamStatus
+import TeamplayInfoMessage
+import Team_GetLocationMsg
+import Team_GetLocation
+import SelectSagaSpawnPoint
+import SelectCTFSpawnPoint
+import Team_FreeEntity
+import Team_ReturnFlag
+import Team_InitGame
+import Team_CheckHurtCarrier
+import Team_FragBonuses
+import Team_DroppedFlagThink
+import AddTeamScore
+import TeamColorString
+import OtherTeamName
+import TeamName
+import OtherTeam
+import BotAIStartFrame
+import BotAIShutdownClient
+import BotAISetupClient
+import BotAILoadMap
+import BotAIShutdown
+import BotAISetup
+import B_CleanupAlloc
+import B_InitAlloc
+import InFieldOfVision
+import BotOrder
+import OrgVisible
+import InitSagaMode
+import G_ClearClientLog
+import G_LogExit
+import G_LogWeaponOutput
+import G_LogWeaponInit
+import G_LogWeaponItem
+import G_LogWeaponPowerup
+import G_LogWeaponFrag
+import G_LogWeaponDeath
+import G_LogWeaponKill
+import G_LogWeaponDamage
+import G_LogWeaponFire
+import G_LogWeaponPickup
+import WP_SaberInitBladeData
+import WP_SaberCanBlock
+import WP_SaberPositionUpdate
+import HasSetSaberOnly
+import G_RefreshNextMap
+import G_DoesMapSupportGametype
+import BotInterbreedEndMatch
+import Svcmd_BotList_f
+import Svcmd_AddBot_f
+import G_BotConnect
+import G_RemoveQueuedBotBegin
+import G_CheckBotSpawn
+import G_GetBotInfoByName
+import G_GetBotInfoByNumber
+import G_InitBots
+import UpdateTournamentInfo
+import G_WriteSessionData
+import G_InitWorldSession
+import G_InitSessionData
+import G_ReadSessionData
+import Svcmd_GameMem_f
+import G_InitMemory
+import G_Alloc
+import Team_CheckDroppedItem
+import OnSameTeam
+import G_RunClient
+import ClientEndFrame
+import ClientThink
+import G_CheckClientTimeouts
+import ClientCommand
+import ClientBegin
+import ClientDisconnect
+import ClientUserinfoChanged
+import ClientConnect
+import G_GetStripEdString
+import G_Error
+import G_Printf
+import SendScoreboardMessageToAllClients
+import G_LogPrintf
+import G_RunThink
+import CheckTeamLeader
+import SetLeader
+import FindIntermissionPoint
+import gSlowMoDuelTime
+import gDoSlowMoDuel
+import g_ff_objectives
+import DeathmatchScoreboardMessage
+import G_SetStats
+import MoveClientToIntermission
+import BlowDetpacks
+import FireWeapon
+import G_FilterPacket
+import G_ProcessIPBans
+import ConsoleCommand
+import gJMSaberEnt
+import SpotWouldTelefrag
+import CalculateRanks
+import AddScore
+import player_die
+import ClientSpawn
+import InitBodyQue
+import BeginIntermission
+import respawn
+import CopyToBodyQue
+import SelectSpawnPoint
+import SetClientViewAngle
+import PickTeam
+import TeamLeader
+import TeamCount
+import CheckGauntletAttack
+import SnapVectorTowards
+import CalcMuzzlePoint
+import LogAccuracyHit
+import WP_FireGenericBlasterMissile
+import WP_FireTurretMissile
+import G_CreateExampleAnimEnt
+import G_PlayerBecomeATST
+import ATST_ManageDamageBoxes
+import TeleportPlayer
+import trigger_teleporter_touch
+import Touch_DoorTrigger
+import G_RunMover
+import WP_FireBlasterMissile
+import G_ExplodeMissile
+import G_BounceProjectile
+import CreateMissile
+import G_RunMissile
+import G_ReflectMissile
+import gGAvoidDismember
+import G_CheckForDismemberment
+import ExplodeDeath
+import TossClientCubes
+import TossClientItems
+import TossClientWeapon
+import body_die
+import G_RadiusDamage
+import G_Damage
+import CanDamage
+import trap_G2API_SetBoneAnim
+import trap_G2API_GetGLAName
+import trap_G2API_SetBoneAngles
+import trap_G2API_CollisionDetect
+import trap_G2API_CleanGhoul2Models
+import trap_G2API_RemoveGhoul2Model
+import trap_G2API_HasGhoul2ModelOnIndex
+import trap_G2API_DuplicateGhoul2Instance
+import trap_G2API_CopySpecificGhoul2Model
+import trap_G2API_CopyGhoul2Instance
+import trap_G2API_SetBoltInfo
+import trap_G2API_AddBolt
+import trap_G2API_InitGhoul2Model
+import trap_G2API_GetBoltMatrix_NoRecNoRot
+import trap_G2API_GetBoltMatrix_NoReconstruct
+import trap_G2API_GetBoltMatrix
+import trap_G2_HaveWeGhoul2Models
+import trap_G2_SetGhoul2ModelIndexes
+import trap_G2_ListModelBones
+import trap_G2_ListModelSurfaces
+import G_SkinIndex
+import BuildShaderStateConfig
+import AddRemap
+import G_SetOrigin
+import G_AddEvent
+import G_AddPredictableEvent
+import vtos
+import tv
+import G_RunObject
+import G_TouchSolids
+import G_TouchTriggers
+import G_EntitiesFree
+import G_FreeEntity
+import G_KillG2Queue
+import G_SendG2KillQueue
+import TryUse
+import G_EntitySound
+import G_SoundAtLoc
+import G_Sound
+import G_MuteSound
+import G_ScreenShake
+import G_PlayEffect
+import G_TempEntity
+import G_Spawn
+import G_InitGentity
+import G_SetAngles
+import G_SetMovedir
+import G_UseTargets
+import G_PickTarget
+import G_RadiusList
+import G_Find
+import G_KillBox
+import G_TeamCommand
+import G_EffectIndex
+import G_SoundIndex
+import G_ModelIndex
+import SaveRegisteredItems
+import RegisterItem
+import ClearRegisteredItems
+import Touch_Item
+import Add_Ammo
+import ArmorIndex
+import Think_Weapon
+import FinishSpawningItem
+import G_SpawnItem
+import SetRespawn
+import LaunchItem
+import Drop_Item
+import PrecacheItem
+import UseHoldableItem
+import ResetItem
+import RespawnItem
+import G_RunItem
+import G_CheckTeamItems
+import ItemUse_MedPack
+import ItemUse_Seeker
+import ItemUse_Sentry
+import ItemUse_Shield
+import ItemUse_Binoculars
+import G_GetDuelWinner
+import Cmd_EngageDuel_f
+import Cmd_ToggleSaber_f
+import G_ItemUsable
+import Cmd_SaberAttackCycle_f
+import Cmd_FollowCycle_f
+import SetTeam
+import BroadcastTeamChange
+import StopFollowing
+import Cmd_Score_f
+import G_NewString
+import G_SpawnEntitiesFromString
+import G_SpawnVector
+import G_SpawnInt
+import G_SpawnFloat
+import G_SpawnString
+import gEscapeTime
+import gEscaping
+import g2SaberInstance
+import precachedKyle
+import forcePowerDarkLight
+import WeaponAttackAnim
+import WeaponReadyAnim
+import BG_OutOfMemory
+import BG_StringAlloc
+import BG_TempFree
+import BG_TempAlloc
+import BG_AllocUnaligned
+import BG_Alloc
+import BG_CanUseFPNow
+import BG_HasYsalamiri
+import BG_GetItemIndexByTag
+import BG_ParseAnimationFile
+import BG_PlayerTouchesItem
+import BG_PlayerStateToEntityStateExtraPolate
+import BG_PlayerStateToEntityState
+import BG_TouchJumpPad
+import BG_AddPredictableEventToPlayerstate
+import BG_EvaluateTrajectoryDelta
+import BG_EvaluateTrajectory
+import BG_ForcePowerDrain
+import BG_SaberStartTransAnim
+import BG_InDeathAnim
+import BG_InRoll
+import BG_KnockawayForParry
+import BG_BrokenParryForParry
+import BG_BrokenParryForAttack
+import BG_SaberInSpecialAttack
+import BG_SpinningSaberAnim
+import BG_FlippingAnim
+import BG_SaberInIdle
+import BG_SaberInSpecial
+import BG_SaberInAttack
+import BG_DirectFlippingAnim
+import BG_InSaberStandAnim
+import BG_InSpecialJump
+import BG_LegalizedForcePowers
+import saberMoveData
+import BG_CanItemBeGrabbed
+import BG_FindItemForHoldable
+import BG_FindItemForPowerup
+import BG_FindItemForWeapon
+import BG_FindItem
+import vectoyaw
+import bg_numItems
+import bg_itemlist
+import Pmove
+import PM_UpdateViewAngles
+import pm
+import bgForcePowerCost
+import forceMasteryPoints
+import forceMasteryLevels
+import bgGlobalAnimations
+import BGPAFtextLoaded
+import forcePowerSorted
+import WP_MuzzlePoint
+import ammoData
+import weaponData
+import GetStringForID
+import GetIDForString
+import Q_irand
+import irand
+import flrand
+import Rand_Init
+import Com_Printf
+import Com_Error
+import Info_NextPair
+import Info_Validate
+import Info_SetValueForKey_Big
+import Info_SetValueForKey
+import Info_RemoveKey_big
+import Info_RemoveKey
+import Info_ValueForKey
+import va
+import Q_CleanStr
+import Q_PrintStrlen
+import Q_strcat
+import Q_strncpyz
+import Q_strrchr
+import Q_strupr
+import Q_strlwr
+import Q_stricmpn
+import Q_strncmp
+import Q_stricmp
+import Q_isalpha
+import Q_isupper
+import Q_islower
+import Q_isprint
+import Com_sprintf
+import Parse3DMatrix
+import Parse2DMatrix
+import Parse1DMatrix
+import SkipRestOfLine
+import SkipBracedSection
+import COM_MatchToken
+import COM_ParseVec4
+import COM_ParseFloat
+import COM_ParseInt
+import COM_ParseString
+import COM_ParseWarning
+import COM_ParseError
+import COM_Compress
+import COM_ParseExt
+import COM_Parse
+import SkipWhitespace
+import COM_GetCurrentParseLine
+import COM_BeginParseSession
+import COM_DefaultExtension
+import COM_StripExtension
+import COM_SkipPath
+import Com_Clamp
+import PerpendicularVector
+import AngleVectors
+import MatrixMultiply
+import MakeNormalVectors
+import RotateAroundDirection
+import RotatePointAroundVector
+import ProjectPointOnPlane
+import PlaneFromPoints
+import AngleDelta
+import AngleNormalize180
+import AngleNormalize360
+import AnglesSubtract
+import AngleSubtract
+import LerpAngle
+import AngleMod
+import BoxOnPlaneSide
+import SetPlaneSignbits
+import AxisCopy
+import AxisClear
+import AnglesToAxis
+import vectoangles
+import Q_crandom
+import Q_random
+import Q_rand
+import Q_acos
+import Q_log2
+import VectorRotate
+import Vector4Scale
+import VectorNormalize2
+import VectorNormalize
+import CrossProduct
+import VectorInverse
+import VectorNormalizeFast
+import DistanceSquared
+import Distance
+import VectorLengthSquared
+import VectorLength
+import VectorCompare
+import AddPointToBounds
+import ClearBounds
+import RadiusFromBounds
+import NormalizeColor
+import ColorBytes4
+import ColorBytes3
+import _VectorMA
+import _VectorScale
+import _VectorCopy
+import _VectorAdd
+import _VectorSubtract
+import _DotProduct
+import ByteToDir
+import DirToByte
+import powf
+import ClampShort
+import ClampChar
+import Q_rsqrt
+import Q_fabs
+import axisDefault
+import vec3_origin
+import g_color_table
+import colorDkBlue
+import colorLtBlue
+import colorDkGrey
+import colorMdGrey
+import colorLtGrey
+import colorWhite
+import colorCyan
+import colorMagenta
+import colorYellow
+import colorBlue
+import colorGreen
+import colorRed
+import colorBlack
+import colorTable
+import bytedirs
+import Com_Memcpy
+import Com_Memset
+import Hunk_Alloc
+import forceSpeedLevels
+import FloatSwap
+import LongSwap
+import ShortSwap
+import acos
+import fabs
+import abs
+import tan
+import atan2
+import cos
+import sin
+import sqrt
+import floor
+import ceil
+import memcpy
+import memset
+import memmove
+import sscanf
+import vsprintf
+import _atoi
+import atoi
+import _atof
+import atof
+import toupper
+import tolower
+import strncpy
+import strstr
+import strchr
+import strcmp
+import strcpy
+import strcat
+import strlen
+import rand
+import srand
+import qsort
+lit
+align 1
+LABELV $2062
+char 1 42
+char 1 106
+char 1 117
+char 1 109
+char 1 112
+char 1 49
+char 1 46
+char 1 119
+char 1 97
+char 1 118
+char 1 0
+align 1
+LABELV $1952
+char 1 115
+char 1 111
+char 1 117
+char 1 110
+char 1 100
+char 1 47
+char 1 119
+char 1 101
+char 1 97
+char 1 112
+char 1 111
+char 1 110
+char 1 115
+char 1 47
+char 1 98
+char 1 114
+char 1 121
+char 1 97
+char 1 114
+char 1 47
+char 1 102
+char 1 105
+char 1 114
+char 1 101
+char 1 46
+char 1 119
+char 1 97
+char 1 118
+char 1 0
+align 1
+LABELV $1886
+char 1 115
+char 1 111
+char 1 117
+char 1 110
+char 1 100
+char 1 47
+char 1 119
+char 1 101
+char 1 97
+char 1 112
+char 1 111
+char 1 110
+char 1 115
+char 1 47
+char 1 108
+char 1 97
+char 1 115
+char 1 101
+char 1 114
+char 1 95
+char 1 116
+char 1 114
+char 1 97
+char 1 112
+char 1 47
+char 1 119
+char 1 97
+char 1 114
+char 1 110
+char 1 105
+char 1 110
+char 1 103
+char 1 46
+char 1 119
+char 1 97
+char 1 118
+char 1 0
+align 1
+LABELV $1595
+char 1 42
+char 1 99
+char 1 104
+char 1 111
+char 1 107
+char 1 101
+char 1 37
+char 1 100
+char 1 46
+char 1 119
+char 1 97
+char 1 118
+char 1 0
+align 1
+LABELV $1515
+char 1 42
+char 1 103
+char 1 97
+char 1 115
+char 1 112
+char 1 46
+char 1 119
+char 1 97
+char 1 118
+char 1 0
+align 1
+LABELV $1500
+char 1 115
+char 1 111
+char 1 117
+char 1 110
+char 1 100
+char 1 47
+char 1 119
+char 1 101
+char 1 97
+char 1 112
+char 1 111
+char 1 110
+char 1 115
+char 1 47
+char 1 102
+char 1 111
+char 1 114
+char 1 99
+char 1 101
+char 1 47
+char 1 100
+char 1 105
+char 1 115
+char 1 116
+char 1 114
+char 1 97
+char 1 99
+char 1 116
+char 1 115
+char 1 116
+char 1 111
+char 1 112
+char 1 46
+char 1 119
+char 1 97
+char 1 118
+char 1 0
+align 1
+LABELV $1275
+char 1 108
+char 1 105
+char 1 109
+char 1 98
+char 1 0
+align 1
+LABELV $1271
+char 1 102
+char 1 117
+char 1 110
+char 1 99
+char 1 95
+char 1 100
+char 1 111
+char 1 111
+char 1 114
+char 1 0
+align 1
+LABELV $1268
+char 1 108
+char 1 105
+char 1 103
+char 1 104
+char 1 116
+char 1 115
+char 1 97
+char 1 98
+char 1 101
+char 1 114
+char 1 0
+align 1
+LABELV $1255
+char 1 102
+char 1 117
+char 1 110
+char 1 99
+char 1 95
+char 1 98
+char 1 117
+char 1 116
+char 1 116
+char 1 111
+char 1 110
+char 1 0
+align 1
+LABELV $1149
+char 1 115
+char 1 111
+char 1 117
+char 1 110
+char 1 100
+char 1 47
+char 1 119
+char 1 101
+char 1 97
+char 1 112
+char 1 111
+char 1 110
+char 1 115
+char 1 47
+char 1 102
+char 1 111
+char 1 114
+char 1 99
+char 1 101
+char 1 47
+char 1 112
+char 1 117
+char 1 108
+char 1 108
+char 1 46
+char 1 119
+char 1 97
+char 1 118
+char 1 0
+align 1
+LABELV $1145
+char 1 115
+char 1 111
+char 1 117
+char 1 110
+char 1 100
+char 1 47
+char 1 119
+char 1 101
+char 1 97
+char 1 112
+char 1 111
+char 1 110
+char 1 115
+char 1 47
+char 1 102
+char 1 111
+char 1 114
+char 1 99
+char 1 101
+char 1 47
+char 1 112
+char 1 117
+char 1 115
+char 1 104
+char 1 46
+char 1 119
+char 1 97
+char 1 118
+char 1 0
+align 1
+LABELV $1031
+char 1 115
+char 1 111
+char 1 117
+char 1 110
+char 1 100
+char 1 47
+char 1 119
+char 1 101
+char 1 97
+char 1 112
+char 1 111
+char 1 110
+char 1 115
+char 1 47
+char 1 102
+char 1 111
+char 1 114
+char 1 99
+char 1 101
+char 1 47
+char 1 100
+char 1 105
+char 1 115
+char 1 116
+char 1 114
+char 1 97
+char 1 99
+char 1 116
+char 1 46
+char 1 119
+char 1 97
+char 1 118
+char 1 0
+align 1
+LABELV $922
+char 1 115
+char 1 111
+char 1 117
+char 1 110
+char 1 100
+char 1 47
+char 1 119
+char 1 101
+char 1 97
+char 1 112
+char 1 111
+char 1 110
+char 1 115
+char 1 47
+char 1 102
+char 1 111
+char 1 114
+char 1 99
+char 1 101
+char 1 47
+char 1 106
+char 1 117
+char 1 109
+char 1 112
+char 1 98
+char 1 117
+char 1 105
+char 1 108
+char 1 100
+char 1 46
+char 1 119
+char 1 97
+char 1 118
+char 1 0
+align 1
+LABELV $769
+char 1 115
+char 1 111
+char 1 117
+char 1 110
+char 1 100
+char 1 47
+char 1 119
+char 1 101
+char 1 97
+char 1 112
+char 1 111
+char 1 110
+char 1 115
+char 1 47
+char 1 102
+char 1 111
+char 1 114
+char 1 99
+char 1 101
+char 1 47
+char 1 100
+char 1 114
+char 1 97
+char 1 105
+char 1 110
+char 1 46
+char 1 119
+char 1 97
+char 1 118
+char 1 0
+align 1
+LABELV $671
+char 1 115
+char 1 111
+char 1 117
+char 1 110
+char 1 100
+char 1 47
+char 1 119
+char 1 101
+char 1 97
+char 1 112
+char 1 111
+char 1 110
+char 1 115
+char 1 47
+char 1 102
+char 1 111
+char 1 114
+char 1 99
+char 1 101
+char 1 47
+char 1 108
+char 1 105
+char 1 103
+char 1 104
+char 1 116
+char 1 110
+char 1 105
+char 1 110
+char 1 103
+char 1 104
+char 1 105
+char 1 116
+char 1 46
+char 1 119
+char 1 97
+char 1 118
+char 1 0
+align 1
+LABELV $640
+char 1 115
+char 1 111
+char 1 117
+char 1 110
+char 1 100
+char 1 47
+char 1 119
+char 1 101
+char 1 97
+char 1 112
+char 1 111
+char 1 110
+char 1 115
+char 1 47
+char 1 102
+char 1 111
+char 1 114
+char 1 99
+char 1 101
+char 1 47
+char 1 108
+char 1 105
+char 1 103
+char 1 104
+char 1 116
+char 1 110
+char 1 105
+char 1 110
+char 1 103
+char 1 46
+char 1 119
+char 1 97
+char 1 118
+char 1 0
+align 1
+LABELV $625
+char 1 115
+char 1 111
+char 1 117
+char 1 110
+char 1 100
+char 1 47
+char 1 119
+char 1 101
+char 1 97
+char 1 112
+char 1 111
+char 1 110
+char 1 115
+char 1 47
+char 1 102
+char 1 111
+char 1 114
+char 1 99
+char 1 101
+char 1 47
+char 1 114
+char 1 97
+char 1 103
+char 1 101
+char 1 46
+char 1 119
+char 1 97
+char 1 118
+char 1 0
+align 1
+LABELV $580
+char 1 115
+char 1 111
+char 1 117
+char 1 110
+char 1 100
+char 1 47
+char 1 119
+char 1 101
+char 1 97
+char 1 112
+char 1 111
+char 1 110
+char 1 115
+char 1 47
+char 1 102
+char 1 111
+char 1 114
+char 1 99
+char 1 101
+char 1 47
+char 1 115
+char 1 101
+char 1 101
+char 1 46
+char 1 119
+char 1 97
+char 1 118
+char 1 0
+align 1
+LABELV $570
+char 1 115
+char 1 111
+char 1 117
+char 1 110
+char 1 100
+char 1 47
+char 1 119
+char 1 101
+char 1 97
+char 1 112
+char 1 111
+char 1 110
+char 1 115
+char 1 47
+char 1 102
+char 1 111
+char 1 114
+char 1 99
+char 1 101
+char 1 47
+char 1 115
+char 1 112
+char 1 101
+char 1 101
+char 1 100
+char 1 46
+char 1 119
+char 1 97
+char 1 118
+char 1 0
+align 1
+LABELV $434
+char 1 115
+char 1 111
+char 1 117
+char 1 110
+char 1 100
+char 1 47
+char 1 119
+char 1 101
+char 1 97
+char 1 112
+char 1 111
+char 1 110
+char 1 115
+char 1 47
+char 1 102
+char 1 111
+char 1 114
+char 1 99
+char 1 101
+char 1 47
+char 1 104
+char 1 101
+char 1 97
+char 1 108
+char 1 46
+char 1 119
+char 1 97
+char 1 118
+char 1 0
+align 1
+LABELV $229
+char 1 110
+char 1 102
+char 1 114
+char 1 32
+char 1 37
+char 1 105
+char 1 32
+char 1 37
+char 1 105
+char 1 32
+char 1 37
+char 1 105
+char 1 0
+align 1
+LABELV $162
+char 1 37
+char 1 115
+char 1 0
+char 1 0
+align 1
+LABELV $154
+char 1 102
+char 1 111
+char 1 114
+char 1 99
+char 1 101
+char 1 112
+char 1 111
+char 1 119
+char 1 101
+char 1 114
+char 1 115
+char 1 0
+align 1
+LABELV $150
+char 1 115
+char 1 111
+char 1 117
+char 1 110
+char 1 100
+char 1 47
+char 1 112
+char 1 108
+char 1 97
+char 1 121
+char 1 101
+char 1 114
+char 1 47
+char 1 110
+char 1 117
+char 1 108
+char 1 108
+char 1 105
+char 1 102
+char 1 121
+char 1 108
+char 1 111
+char 1 111
+char 1 112
+char 1 46
+char 1 119
+char 1 97
+char 1 118
+char 1 0
+align 1
+LABELV $147
+char 1 115
+char 1 111
+char 1 117
+char 1 110
+char 1 100
+char 1 47
+char 1 119
+char 1 101
+char 1 97
+char 1 112
+char 1 111
+char 1 110
+char 1 115
+char 1 47
+char 1 102
+char 1 111
+char 1 114
+char 1 99
+char 1 101
+char 1 47
+char 1 115
+char 1 101
+char 1 101
+char 1 108
+char 1 111
+char 1 111
+char 1 112
+char 1 46
+char 1 119
+char 1 97
+char 1 118
+char 1 0
+align 1
+LABELV $144
+char 1 115
+char 1 111
+char 1 117
+char 1 110
+char 1 100
+char 1 47
+char 1 119
+char 1 101
+char 1 97
+char 1 112
+char 1 111
+char 1 110
+char 1 115
+char 1 47
+char 1 102
+char 1 111
+char 1 114
+char 1 99
+char 1 101
+char 1 47
+char 1 112
+char 1 114
+char 1 111
+char 1 116
+char 1 101
+char 1 99
+char 1 116
+char 1 108
+char 1 111
+char 1 111
+char 1 112
+char 1 46
+char 1 119
+char 1 97
+char 1 118
+char 1 0
+align 1
+LABELV $141
+char 1 115
+char 1 111
+char 1 117
+char 1 110
+char 1 100
+char 1 47
+char 1 119
+char 1 101
+char 1 97
+char 1 112
+char 1 111
+char 1 110
+char 1 115
+char 1 47
+char 1 102
+char 1 111
+char 1 114
+char 1 99
+char 1 101
+char 1 47
+char 1 97
+char 1 98
+char 1 115
+char 1 111
+char 1 114
+char 1 98
+char 1 108
+char 1 111
+char 1 111
+char 1 112
+char 1 46
+char 1 119
+char 1 97
+char 1 118
+char 1 0
+align 1
+LABELV $138
+char 1 115
+char 1 111
+char 1 117
+char 1 110
+char 1 100
+char 1 47
+char 1 119
+char 1 101
+char 1 97
+char 1 112
+char 1 111
+char 1 110
+char 1 115
+char 1 47
+char 1 102
+char 1 111
+char 1 114
+char 1 99
+char 1 101
+char 1 47
+char 1 114
+char 1 97
+char 1 103
+char 1 101
+char 1 108
+char 1 111
+char 1 111
+char 1 112
+char 1 46
+char 1 119
+char 1 97
+char 1 118
+char 1 0
+align 1
+LABELV $135
+char 1 115
+char 1 111
+char 1 117
+char 1 110
+char 1 100
+char 1 47
+char 1 119
+char 1 101
+char 1 97
+char 1 112
+char 1 111
+char 1 110
+char 1 115
+char 1 47
+char 1 102
+char 1 111
+char 1 114
+char 1 99
+char 1 101
+char 1 47
+char 1 115
+char 1 112
+char 1 101
+char 1 101
+char 1 100
+char 1 108
+char 1 111
+char 1 111
+char 1 112
+char 1 46
+char 1 119
+char 1 97
+char 1 118
+char 1 0
+align 1
+LABELV $96
+char 1 45
+char 1 50
+char 1 45
+char 1 51
+char 1 51
+char 1 51
+char 1 51
+char 1 51
+char 1 51
+char 1 51
+char 1 51
+char 1 51
+char 1 51
+char 1 51
+char 1 51
+char 1 51
+char 1 51
+char 1 51
+char 1 51
+char 1 51
+char 1 51
+char 1 0
+align 1
+LABELV $95
+char 1 45
+char 1 49
+char 1 45
+char 1 48
+char 1 48
+char 1 48
+char 1 48
+char 1 48
+char 1 48
+char 1 48
+char 1 48
+char 1 48
+char 1 48
+char 1 48
+char 1 48
+char 1 48
+char 1 48
+char 1 48
+char 1 48
+char 1 48
+char 1 48
+char 1 0
+align 1
+LABELV $94
+char 1 55
+char 1 45
+char 1 49
+char 1 45
+char 1 48
+char 1 51
+char 1 51
+char 1 51
+char 1 51
+char 1 48
+char 1 48
+char 1 48
+char 1 48
+char 1 48
+char 1 48
+char 1 48
+char 1 48
+char 1 48
+char 1 48
+char 1 51
+char 1 51
+char 1 51
+char 1 0

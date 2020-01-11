@@ -1,0 +1,93 @@
+Clan Mod v2.04  to  JediDog's Clan Mod For JK2 1.03
+
+Beta v3:
+-Fixed Anti Flood
+-Fixed ClientNum Server Crash
+-Fixed Server msg next line bug
+-Fixed backwards roll speed
+-Fixed push/pull while knocked down
+-Fixed sleep bug - client wouldn't stay knocked down
+-Enhanced Anti MSGBoom
+-Enhanced Anti Fake Players
+-Enabled saber throw in duels
+-Added Fix for Duel Challenge Get-up Bug
+-Added a New Enhanced version of Anti Name Crash
+-Removed old Anti Name Crash
+-Removed cm_antiNameCrash cmd
+-Removed Anti Name Crash, Anti Force Crash, and Anti MSGBoom Messages & Logs
+
+
+JK2 1.04 CONFIGURATION RESTORED TO JK2 1.03'S CONFIGURATION:
+BG_PMOVE.C
+-LINE 4460 - 4472: enabled pivoting for backslashes and backstab
+-LINE 4164: changed walking backwards to 1.03's settings, .75 to 1
+
+BG_MISC.C
+-LINE 1305: enabled saber throw in duels to be 1.03's settings
+
+BG_SABER.C
+-LINE 1234-1242: enabled float lunge back to 1.03
+
+W_FORCE.C
+-LINE 3062: removed otherPushPower to fix Push and Pull in 1.03
+-LINE 3067: changed "qtrue" to "qfalse" for the getting up time
+
+W_SABER.C
+-LINE 1565 - 1657: Fixed damage ramping back to 1.03's settings
+
+
+
+EXTRAS ADDED FROM JEDIDOG MOD & EXTRAS:
+
+G_CLIENT.C: CLIENTCONNECT:
+-LINE 1438 - 1446: Included declarations
+-LINE 1453: Added log of when a client connects before anything else.
+-LINE 1459: Added log of when a client is connecting but they're banned.
+-LINE 1485: Added log of when a client is connecting but with an invalid password.
+-LINEs 1489 - 1529:
+	1490 - 1499: Added closed server stuff
+	1500 - 1506: Gamall's Fake players core
+	1507 - 1515: fake player detection (base of it is gamall's but 75% is my doings)
+	1516 - 1528: Anti name crash
+
+G_CMDS.C:
+- Added (if (client_id < 0 || client_id >= MAX_CLIENTS) for each admin command (and the ignore command) that uses client number to fix the crash.
+-LINE 2615 - Added duel bug fix
+
+G_SVCMDS.C:
+-LINES 1565 - 1579: 
+	Added a rcon command "csay" to talk in center of screen
+	Made /rcon say or rcon <anything> look better
+	added /n at the end of the Server talk because it never went to the next line
+- Added (if (client_id < 0 || client_id >= MAX_CLIENTS) for each rcon command that uses client number to fix the crash.
+
+G_MAIN.C
+-LINES 361 - 383: Changed sayings to prefered colors
+
+
+
+1.04 updates that still need to be converted to 1.03 & Bugs:
+* Corrected issue causing damage not to ramp up and down
+properly when using the backstab move in light saber stance.
+* Fixed bug allowing inventory items to be used in FFA saber
+challenges.
+* Damage is still off
+* Anti flood causes crash with bot
+* Fast-get-up height is too high
+* Yellow DFA pushes people back sometimes
+
+
+cm_motd "^2Bug reports? ^5Report to: jedidog.freeforums.org\n^2Newest things that are fixed:\n^5New Anti Name Crash\n^5Knockdown push/pull bug\n^5Saber throw in duel is now enabled again\n^5Backwards roll speed\n^5Push/Pull knockdown time\n"
+
+1.03 update that need to be converted to 1.02:
+* Corrected an exploit that allowed players to have force
+powers outside of what the server rules allow.
+* Backflip now requires that you double tap the jump button.
+* Lightsaber usage in multiplayer has been modified to work
+similarly to the way it works in single player levels. This
+will enable better saber battles up close with your opponent.
+* Lightsabers will do less damage at the very start and very
+end of a swing. This should prevent kills from just touching
+an opponent with the tip of your lightsaber.
+* Force Heal and Force Drain have been adjusted to require more
+force energy to use them.

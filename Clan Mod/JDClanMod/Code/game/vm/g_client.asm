@@ -1,0 +1,16265 @@
+data
+align 4
+LABELV playerMins
+byte 4 3245342720
+byte 4 3245342720
+byte 4 3250585600
+align 4
+LABELV playerMaxs
+byte 4 1097859072
+byte 4 1097859072
+byte 4 1109393408
+export SP_info_player_deathmatch
+code
+proc SP_info_player_deathmatch 8 12
+file "../g_client.c"
+line 22
+;1:// Copyright (C) 1999-2000 Id Software, Inc.
+;2://
+;3:#include "g_local.h"
+;4:#include "..\ghoul2\g2.h"
+;5:
+;6:// g_client.c -- client functions that don't happen every frame
+;7:
+;8:static vec3_t	playerMins = {-15, -15, DEFAULT_MINS_2};
+;9:static vec3_t	playerMaxs = {15, 15, DEFAULT_MAXS_2};
+;10:
+;11:extern qboolean G_CheckMaxConnections( char *from );
+;12:
+;13:forcedata_t Client_Force[MAX_CLIENTS];
+;14:
+;15:/*QUAKED info_player_deathmatch (1 0 1) (-16 -16 -24) (16 16 32) initial
+;16:potential spawning position for deathmatch games.
+;17:The first time a player enters the game, they will be at an 'initial' spot.
+;18:Targets will be fired when someone spawns in on them.
+;19:"nobots" will prevent bots from using this spot.
+;20:"nohumans" will prevent non-bots from using this spot.
+;21:*/
+;22:void SP_info_player_deathmatch( gentity_t *ent ) {
+line 25
+;23:	int		i;
+;24:
+;25:	G_SpawnInt( "nobots", "0", &i);
+ADDRGP4 $79
+ARGP4
+ADDRGP4 $80
+ARGP4
+ADDRLP4 0
+ARGP4
+ADDRGP4 G_SpawnInt
+CALLI4
+pop
+line 26
+;26:	if ( i ) {
+ADDRLP4 0
+INDIRI4
+CNSTI4 0
+EQI4 $81
+line 27
+;27:		ent->flags |= FL_NO_BOTS;
+ADDRLP4 4
+ADDRFP4 0
+INDIRP4
+CNSTI4 472
+ADDP4
+ASGNP4
+ADDRLP4 4
+INDIRP4
+ADDRLP4 4
+INDIRP4
+INDIRI4
+CNSTI4 8192
+BORI4
+ASGNI4
+line 28
+;28:	}
+LABELV $81
+line 29
+;29:	G_SpawnInt( "nohumans", "0", &i );
+ADDRGP4 $83
+ARGP4
+ADDRGP4 $80
+ARGP4
+ADDRLP4 0
+ARGP4
+ADDRGP4 G_SpawnInt
+CALLI4
+pop
+line 30
+;30:	if ( i ) {
+ADDRLP4 0
+INDIRI4
+CNSTI4 0
+EQI4 $84
+line 31
+;31:		ent->flags |= FL_NO_HUMANS;
+ADDRLP4 4
+ADDRFP4 0
+INDIRP4
+CNSTI4 472
+ADDP4
+ASGNP4
+ADDRLP4 4
+INDIRP4
+ADDRLP4 4
+INDIRP4
+INDIRI4
+CNSTI4 16384
+BORI4
+ASGNI4
+line 32
+;32:	}
+LABELV $84
+line 33
+;33:}
+LABELV $78
+endproc SP_info_player_deathmatch 8 12
+export SP_info_player_start
+proc SP_info_player_start 0 4
+line 38
+;34:
+;35:/*QUAKED info_player_start (1 0 0) (-16 -16 -24) (16 16 32)
+;36:equivelant to info_player_deathmatch
+;37:*/
+;38:void SP_info_player_start(gentity_t *ent) {
+line 39
+;39:	ent->classname = "info_player_deathmatch";
+ADDRFP4 0
+INDIRP4
+CNSTI4 416
+ADDP4
+ADDRGP4 $87
+ASGNP4
+line 40
+;40:	SP_info_player_deathmatch( ent );
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRGP4 SP_info_player_deathmatch
+CALLV
+pop
+line 41
+;41:}
+LABELV $86
+endproc SP_info_player_start 0 4
+export SP_info_player_imperial
+proc SP_info_player_imperial 0 4
+line 46
+;42:
+;43:/*QUAKED info_player_imperial (1 0 0) (-16 -16 -24) (16 16 32)
+;44:saga start point - imperial
+;45:*/
+;46:void SP_info_player_imperial(gentity_t *ent) {
+line 47
+;47:	if (g_gametype.integer != GT_SAGA)
+ADDRGP4 g_gametype+12
+INDIRI4
+CNSTI4 6
+EQI4 $89
+line 48
+;48:	{ //turn into a DM spawn if not in saga game mode
+line 49
+;49:		ent->classname = "info_player_deathmatch";
+ADDRFP4 0
+INDIRP4
+CNSTI4 416
+ADDP4
+ADDRGP4 $87
+ASGNP4
+line 50
+;50:		SP_info_player_deathmatch( ent );
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRGP4 SP_info_player_deathmatch
+CALLV
+pop
+line 51
+;51:	}
+LABELV $89
+line 52
+;52:}
+LABELV $88
+endproc SP_info_player_imperial 0 4
+export SP_info_player_rebel
+proc SP_info_player_rebel 0 4
+line 57
+;53:
+;54:/*QUAKED info_player_rebel (1 0 0) (-16 -16 -24) (16 16 32)
+;55:saga start point - rebel
+;56:*/
+;57:void SP_info_player_rebel(gentity_t *ent) {
+line 58
+;58:	if (g_gametype.integer != GT_SAGA)
+ADDRGP4 g_gametype+12
+INDIRI4
+CNSTI4 6
+EQI4 $93
+line 59
+;59:	{ //turn into a DM spawn if not in saga game mode
+line 60
+;60:		ent->classname = "info_player_deathmatch";
+ADDRFP4 0
+INDIRP4
+CNSTI4 416
+ADDP4
+ADDRGP4 $87
+ASGNP4
+line 61
+;61:		SP_info_player_deathmatch( ent );
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRGP4 SP_info_player_deathmatch
+CALLV
+pop
+line 62
+;62:	}
+LABELV $93
+line 63
+;63:}
+LABELV $92
+endproc SP_info_player_rebel 0 4
+export SP_info_player_intermission
+proc SP_info_player_intermission 0 0
+line 68
+;64:
+;65:/*QUAKED info_player_intermission (1 0 1) (-16 -16 -24) (16 16 32)
+;66:The intermission will be viewed from this point.  Target an info_notnull for the view direction.
+;67:*/
+;68:void SP_info_player_intermission( gentity_t *ent ) {
+line 70
+;69:
+;70:}
+LABELV $96
+endproc SP_info_player_intermission 0 0
+export ThrowSaberToAttacker
+proc ThrowSaberToAttacker 68 8
+line 75
+;71:
+;72:#define JMSABER_RESPAWN_TIME 20000 //in case it gets stuck somewhere no one can reach
+;73:
+;74:void ThrowSaberToAttacker(gentity_t *self, gentity_t *attacker)
+;75:{
+line 76
+;76:	gentity_t *ent = &g_entities[self->client->ps.saberIndex];
+ADDRLP4 0
+CNSTI4 852
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 620
+ADDP4
+INDIRI4
+MULI4
+ADDRGP4 g_entities
+ADDP4
+ASGNP4
+line 78
+;77:	vec3_t a;
+;78:	int altVelocity = 0;
+ADDRLP4 16
+CNSTI4 0
+ASGNI4
+line 80
+;79:
+;80:	if (!ent || ent->enemy != self)
+ADDRLP4 0
+INDIRP4
+CVPU4 4
+CNSTU4 0
+EQU4 $100
+ADDRLP4 0
+INDIRP4
+CNSTI4 728
+ADDP4
+INDIRP4
+CVPU4 4
+ADDRFP4 0
+INDIRP4
+CVPU4 4
+EQU4 $98
+LABELV $100
+line 81
+;81:	{ //something has gone very wrong (this should never happen)
+line 86
+;82:		//but in case it does.. find the saber manually
+;83:#ifdef _DEBUG
+;84:		Com_Printf("Lost the saber! Attempting to use global pointer..\n");
+;85:#endif
+;86:		ent = gJMSaberEnt;
+ADDRLP4 0
+ADDRGP4 gJMSaberEnt
+INDIRP4
+ASGNP4
+line 88
+;87:
+;88:		if (!ent)
+ADDRLP4 0
+INDIRP4
+CVPU4 4
+CNSTU4 0
+NEU4 $101
+line 89
+;89:		{
+line 93
+;90:#ifdef _DEBUG
+;91:			Com_Printf("The global pointer was NULL. This is a bad thing.\n");
+;92:#endif
+;93:			return;
+ADDRGP4 $97
+JUMPV
+LABELV $101
+line 100
+;94:		}
+;95:
+;96:#ifdef _DEBUG
+;97:		Com_Printf("Got it (%i). Setting enemy to client %i.\n", ent->s.number, self->s.number);
+;98:#endif
+;99:
+;100:		ent->enemy = self;
+ADDRLP4 0
+INDIRP4
+CNSTI4 728
+ADDP4
+ADDRFP4 0
+INDIRP4
+ASGNP4
+line 101
+;101:		self->client->ps.saberIndex = ent->s.number;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 620
+ADDP4
+ADDRLP4 0
+INDIRP4
+INDIRI4
+ASGNI4
+line 102
+;102:	}
+LABELV $98
+line 104
+;103:
+;104:	trap_SetConfigstring ( CS_CLIENT_JEDIMASTER, "-1" );
+CNSTI4 28
+ARGI4
+ADDRGP4 $103
+ARGP4
+ADDRGP4 trap_SetConfigstring
+CALLV
+pop
+line 106
+;105:
+;106:	if (attacker && attacker->client && self->client->ps.saberInFlight)
+ADDRLP4 24
+ADDRFP4 4
+INDIRP4
+ASGNP4
+ADDRLP4 28
+CNSTU4 0
+ASGNU4
+ADDRLP4 24
+INDIRP4
+CVPU4 4
+ADDRLP4 28
+INDIRU4
+EQU4 $104
+ADDRLP4 32
+CNSTI4 408
+ASGNI4
+ADDRLP4 24
+INDIRP4
+ADDRLP4 32
+INDIRI4
+ADDP4
+INDIRP4
+CVPU4 4
+ADDRLP4 28
+INDIRU4
+EQU4 $104
+ADDRFP4 0
+INDIRP4
+ADDRLP4 32
+INDIRI4
+ADDP4
+INDIRP4
+CNSTI4 504
+ADDP4
+INDIRI4
+CNSTI4 0
+EQI4 $104
+line 107
+;107:	{ //someone killed us and we had the saber thrown, so actually move this saber to the saber location
+line 110
+;108:	  //if we killed ourselves with saber thrown, however, same suicide rules of respawning at spawn spot still
+;109:	  //apply.
+;110:		gentity_t *flyingsaber = &g_entities[self->client->ps.saberEntityNum];
+ADDRLP4 36
+CNSTI4 852
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 544
+ADDP4
+INDIRI4
+MULI4
+ADDRGP4 g_entities
+ADDP4
+ASGNP4
+line 112
+;111:
+;112:		if (flyingsaber && flyingsaber->inuse)
+ADDRLP4 36
+INDIRP4
+CVPU4 4
+CNSTU4 0
+EQU4 $106
+ADDRLP4 36
+INDIRP4
+CNSTI4 412
+ADDP4
+INDIRI4
+CNSTI4 0
+EQI4 $106
+line 113
+;113:		{
+line 114
+;114:			VectorCopy(flyingsaber->s.pos.trBase, ent->s.pos.trBase);
+ADDRLP4 44
+CNSTI4 24
+ASGNI4
+ADDRLP4 0
+INDIRP4
+ADDRLP4 44
+INDIRI4
+ADDP4
+ADDRLP4 36
+INDIRP4
+ADDRLP4 44
+INDIRI4
+ADDP4
+INDIRB
+ASGNB 12
+line 115
+;115:			VectorCopy(flyingsaber->s.pos.trDelta, ent->s.pos.trDelta);
+ADDRLP4 48
+CNSTI4 36
+ASGNI4
+ADDRLP4 0
+INDIRP4
+ADDRLP4 48
+INDIRI4
+ADDP4
+ADDRLP4 36
+INDIRP4
+ADDRLP4 48
+INDIRI4
+ADDP4
+INDIRB
+ASGNB 12
+line 116
+;116:			VectorCopy(flyingsaber->s.apos.trBase, ent->s.apos.trBase);
+ADDRLP4 52
+CNSTI4 60
+ASGNI4
+ADDRLP4 0
+INDIRP4
+ADDRLP4 52
+INDIRI4
+ADDP4
+ADDRLP4 36
+INDIRP4
+ADDRLP4 52
+INDIRI4
+ADDP4
+INDIRB
+ASGNB 12
+line 117
+;117:			VectorCopy(flyingsaber->s.apos.trDelta, ent->s.apos.trDelta);
+ADDRLP4 56
+CNSTI4 72
+ASGNI4
+ADDRLP4 0
+INDIRP4
+ADDRLP4 56
+INDIRI4
+ADDP4
+ADDRLP4 36
+INDIRP4
+ADDRLP4 56
+INDIRI4
+ADDP4
+INDIRB
+ASGNB 12
+line 119
+;118:
+;119:			VectorCopy(flyingsaber->r.currentOrigin, ent->r.currentOrigin);
+ADDRLP4 60
+CNSTI4 368
+ASGNI4
+ADDRLP4 0
+INDIRP4
+ADDRLP4 60
+INDIRI4
+ADDP4
+ADDRLP4 36
+INDIRP4
+ADDRLP4 60
+INDIRI4
+ADDP4
+INDIRB
+ASGNB 12
+line 120
+;120:			VectorCopy(flyingsaber->r.currentAngles, ent->r.currentAngles);
+ADDRLP4 64
+CNSTI4 380
+ASGNI4
+ADDRLP4 0
+INDIRP4
+ADDRLP4 64
+INDIRI4
+ADDP4
+ADDRLP4 36
+INDIRP4
+ADDRLP4 64
+INDIRI4
+ADDP4
+INDIRB
+ASGNB 12
+line 121
+;121:			altVelocity = 1;
+ADDRLP4 16
+CNSTI4 1
+ASGNI4
+line 122
+;122:		}
+LABELV $106
+line 123
+;123:	}
+LABELV $104
+line 125
+;124:
+;125:	self->client->ps.saberInFlight = qtrue; //say he threw it anyway in order to properly remove from dead body
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 504
+ADDP4
+CNSTI4 1
+ASGNI4
+line 127
+;126:
+;127:	ent->s.modelindex = G_ModelIndex("models/weapons2/saber/saber_w.glm");
+ADDRGP4 $108
+ARGP4
+ADDRLP4 36
+ADDRGP4 G_ModelIndex
+CALLI4
+ASGNI4
+ADDRLP4 0
+INDIRP4
+CNSTI4 212
+ADDP4
+ADDRLP4 36
+INDIRI4
+ASGNI4
+line 128
+;128:	ent->s.eFlags &= ~(EF_NODRAW);
+ADDRLP4 40
+ADDRLP4 0
+INDIRP4
+CNSTI4 8
+ADDP4
+ASGNP4
+ADDRLP4 40
+INDIRP4
+ADDRLP4 40
+INDIRP4
+INDIRI4
+CNSTI4 -129
+BANDI4
+ASGNI4
+line 129
+;129:	ent->s.modelGhoul2 = 1;
+ADDRLP4 0
+INDIRP4
+CNSTI4 204
+ADDP4
+CNSTI4 1
+ASGNI4
+line 130
+;130:	ent->s.eType = ET_MISSILE;
+ADDRLP4 0
+INDIRP4
+CNSTI4 4
+ADDP4
+CNSTI4 3
+ASGNI4
+line 131
+;131:	ent->enemy = NULL;
+ADDRLP4 0
+INDIRP4
+CNSTI4 728
+ADDP4
+CNSTP4 0
+ASGNP4
+line 133
+;132:
+;133:	if (!attacker || !attacker->client)
+ADDRLP4 44
+ADDRFP4 4
+INDIRP4
+ASGNP4
+ADDRLP4 48
+CNSTU4 0
+ASGNU4
+ADDRLP4 44
+INDIRP4
+CVPU4 4
+ADDRLP4 48
+INDIRU4
+EQU4 $111
+ADDRLP4 44
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CVPU4 4
+ADDRLP4 48
+INDIRU4
+NEU4 $109
+LABELV $111
+line 134
+;134:	{
+line 135
+;135:		VectorCopy(ent->s.origin2, ent->s.pos.trBase);
+ADDRLP4 0
+INDIRP4
+CNSTI4 24
+ADDP4
+ADDRLP4 0
+INDIRP4
+CNSTI4 104
+ADDP4
+INDIRB
+ASGNB 12
+line 136
+;136:		VectorCopy(ent->s.origin2, ent->s.origin);
+ADDRLP4 0
+INDIRP4
+CNSTI4 92
+ADDP4
+ADDRLP4 0
+INDIRP4
+CNSTI4 104
+ADDP4
+INDIRB
+ASGNB 12
+line 137
+;137:		VectorCopy(ent->s.origin2, ent->r.currentOrigin);
+ADDRLP4 0
+INDIRP4
+CNSTI4 368
+ADDP4
+ADDRLP4 0
+INDIRP4
+CNSTI4 104
+ADDP4
+INDIRB
+ASGNB 12
+line 138
+;138:		ent->pos2[0] = 0;
+ADDRLP4 0
+INDIRP4
+CNSTI4 560
+ADDP4
+CNSTF4 0
+ASGNF4
+line 139
+;139:		trap_LinkEntity(ent);
+ADDRLP4 0
+INDIRP4
+ARGP4
+ADDRGP4 trap_LinkEntity
+CALLV
+pop
+line 140
+;140:		return;
+ADDRGP4 $97
+JUMPV
+LABELV $109
+line 143
+;141:	}
+;142:
+;143:	if (!altVelocity)
+ADDRLP4 16
+INDIRI4
+CNSTI4 0
+NEI4 $112
+line 144
+;144:	{
+line 145
+;145:		VectorCopy(self->s.pos.trBase, ent->s.pos.trBase);
+ADDRLP4 52
+CNSTI4 24
+ASGNI4
+ADDRLP4 0
+INDIRP4
+ADDRLP4 52
+INDIRI4
+ADDP4
+ADDRFP4 0
+INDIRP4
+ADDRLP4 52
+INDIRI4
+ADDP4
+INDIRB
+ASGNB 12
+line 146
+;146:		VectorCopy(self->s.pos.trBase, ent->s.origin);
+ADDRLP4 0
+INDIRP4
+CNSTI4 92
+ADDP4
+ADDRFP4 0
+INDIRP4
+CNSTI4 24
+ADDP4
+INDIRB
+ASGNB 12
+line 147
+;147:		VectorCopy(self->s.pos.trBase, ent->r.currentOrigin);
+ADDRLP4 0
+INDIRP4
+CNSTI4 368
+ADDP4
+ADDRFP4 0
+INDIRP4
+CNSTI4 24
+ADDP4
+INDIRB
+ASGNB 12
+line 149
+;148:
+;149:		VectorSubtract(attacker->client->ps.origin, ent->s.pos.trBase, a);
+ADDRLP4 56
+ADDRFP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+ASGNP4
+ADDRLP4 64
+CNSTI4 24
+ASGNI4
+ADDRLP4 4
+ADDRLP4 56
+INDIRP4
+INDIRP4
+CNSTI4 20
+ADDP4
+INDIRF4
+ADDRLP4 0
+INDIRP4
+ADDRLP4 64
+INDIRI4
+ADDP4
+INDIRF4
+SUBF4
+ASGNF4
+ADDRLP4 4+4
+ADDRLP4 56
+INDIRP4
+INDIRP4
+ADDRLP4 64
+INDIRI4
+ADDP4
+INDIRF4
+ADDRLP4 0
+INDIRP4
+CNSTI4 28
+ADDP4
+INDIRF4
+SUBF4
+ASGNF4
+ADDRLP4 4+8
+ADDRFP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 28
+ADDP4
+INDIRF4
+ADDRLP4 0
+INDIRP4
+CNSTI4 32
+ADDP4
+INDIRF4
+SUBF4
+ASGNF4
+line 151
+;150:
+;151:		VectorNormalize(a);
+ADDRLP4 4
+ARGP4
+ADDRGP4 VectorNormalize
+CALLF4
+pop
+line 153
+;152:
+;153:		ent->s.pos.trDelta[0] = a[0]*256;
+ADDRLP4 0
+INDIRP4
+CNSTI4 36
+ADDP4
+CNSTF4 1132462080
+ADDRLP4 4
+INDIRF4
+MULF4
+ASGNF4
+line 154
+;154:		ent->s.pos.trDelta[1] = a[1]*256;
+ADDRLP4 0
+INDIRP4
+CNSTI4 40
+ADDP4
+CNSTF4 1132462080
+ADDRLP4 4+4
+INDIRF4
+MULF4
+ASGNF4
+line 155
+;155:		ent->s.pos.trDelta[2] = 256;
+ADDRLP4 0
+INDIRP4
+CNSTI4 44
+ADDP4
+CNSTF4 1132462080
+ASGNF4
+line 156
+;156:	}
+LABELV $112
+line 158
+;157:
+;158:	trap_LinkEntity(ent);
+ADDRLP4 0
+INDIRP4
+ARGP4
+ADDRGP4 trap_LinkEntity
+CALLV
+pop
+line 159
+;159:}
+LABELV $97
+endproc ThrowSaberToAttacker 68 8
+export JMSaberThink
+proc JMSaberThink 28 4
+line 162
+;160:
+;161:void JMSaberThink(gentity_t *ent)
+;162:{
+line 163
+;163:	gJMSaberEnt = ent;
+ADDRGP4 gJMSaberEnt
+ADDRFP4 0
+INDIRP4
+ASGNP4
+line 165
+;164:
+;165:	if (ent->enemy)
+ADDRFP4 0
+INDIRP4
+CNSTI4 728
+ADDP4
+INDIRP4
+CVPU4 4
+CNSTU4 0
+EQU4 $118
+line 166
+;166:	{
+line 167
+;167:		if (!ent->enemy->client || !ent->enemy->inuse)
+ADDRLP4 0
+ADDRFP4 0
+INDIRP4
+CNSTI4 728
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CVPU4 4
+CNSTU4 0
+EQU4 $122
+ADDRLP4 0
+INDIRP4
+CNSTI4 412
+ADDP4
+INDIRI4
+CNSTI4 0
+NEI4 $120
+LABELV $122
+line 168
+;168:		{ //disconnected?
+line 169
+;169:			VectorCopy(ent->enemy->s.pos.trBase, ent->s.pos.trBase);
+ADDRLP4 4
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 8
+CNSTI4 24
+ASGNI4
+ADDRLP4 4
+INDIRP4
+ADDRLP4 8
+INDIRI4
+ADDP4
+ADDRLP4 4
+INDIRP4
+CNSTI4 728
+ADDP4
+INDIRP4
+ADDRLP4 8
+INDIRI4
+ADDP4
+INDIRB
+ASGNB 12
+line 170
+;170:			VectorCopy(ent->enemy->s.pos.trBase, ent->s.origin);
+ADDRLP4 12
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 12
+INDIRP4
+CNSTI4 92
+ADDP4
+ADDRLP4 12
+INDIRP4
+CNSTI4 728
+ADDP4
+INDIRP4
+CNSTI4 24
+ADDP4
+INDIRB
+ASGNB 12
+line 171
+;171:			VectorCopy(ent->enemy->s.pos.trBase, ent->r.currentOrigin);
+ADDRLP4 16
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 16
+INDIRP4
+CNSTI4 368
+ADDP4
+ADDRLP4 16
+INDIRP4
+CNSTI4 728
+ADDP4
+INDIRP4
+CNSTI4 24
+ADDP4
+INDIRB
+ASGNB 12
+line 172
+;172:			ent->s.modelindex = G_ModelIndex("models/weapons2/saber/saber_w.glm");
+ADDRGP4 $108
+ARGP4
+ADDRLP4 20
+ADDRGP4 G_ModelIndex
+CALLI4
+ASGNI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 212
+ADDP4
+ADDRLP4 20
+INDIRI4
+ASGNI4
+line 173
+;173:			ent->s.eFlags &= ~(EF_NODRAW);
+ADDRLP4 24
+ADDRFP4 0
+INDIRP4
+CNSTI4 8
+ADDP4
+ASGNP4
+ADDRLP4 24
+INDIRP4
+ADDRLP4 24
+INDIRP4
+INDIRI4
+CNSTI4 -129
+BANDI4
+ASGNI4
+line 174
+;174:			ent->s.modelGhoul2 = 1;
+ADDRFP4 0
+INDIRP4
+CNSTI4 204
+ADDP4
+CNSTI4 1
+ASGNI4
+line 175
+;175:			ent->s.eType = ET_MISSILE;
+ADDRFP4 0
+INDIRP4
+CNSTI4 4
+ADDP4
+CNSTI4 3
+ASGNI4
+line 176
+;176:			ent->enemy = NULL;
+ADDRFP4 0
+INDIRP4
+CNSTI4 728
+ADDP4
+CNSTP4 0
+ASGNP4
+line 178
+;177:
+;178:			ent->pos2[0] = 1;
+ADDRFP4 0
+INDIRP4
+CNSTI4 560
+ADDP4
+CNSTF4 1065353216
+ASGNF4
+line 179
+;179:			ent->pos2[1] = 0; //respawn next think
+ADDRFP4 0
+INDIRP4
+CNSTI4 564
+ADDP4
+CNSTF4 0
+ASGNF4
+line 180
+;180:			trap_LinkEntity(ent);
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRGP4 trap_LinkEntity
+CALLV
+pop
+line 181
+;181:		}
+ADDRGP4 $119
+JUMPV
+LABELV $120
+line 183
+;182:		else
+;183:		{
+line 184
+;184:			ent->pos2[1] = level.time + JMSABER_RESPAWN_TIME;
+ADDRFP4 0
+INDIRP4
+CNSTI4 564
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 20000
+ADDI4
+CVIF4 4
+ASGNF4
+line 185
+;185:		}
+line 186
+;186:	}
+ADDRGP4 $119
+JUMPV
+LABELV $118
+line 187
+;187:	else if (ent->pos2[0] && ent->pos2[1] < level.time)
+ADDRLP4 0
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 0
+INDIRP4
+CNSTI4 560
+ADDP4
+INDIRF4
+CNSTF4 0
+EQF4 $124
+ADDRLP4 0
+INDIRP4
+CNSTI4 564
+ADDP4
+INDIRF4
+ADDRGP4 level+32
+INDIRI4
+CVIF4 4
+GEF4 $124
+line 188
+;188:	{
+line 189
+;189:		VectorCopy(ent->s.origin2, ent->s.pos.trBase);
+ADDRLP4 4
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 4
+INDIRP4
+CNSTI4 24
+ADDP4
+ADDRLP4 4
+INDIRP4
+CNSTI4 104
+ADDP4
+INDIRB
+ASGNB 12
+line 190
+;190:		VectorCopy(ent->s.origin2, ent->s.origin);
+ADDRLP4 8
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 8
+INDIRP4
+CNSTI4 92
+ADDP4
+ADDRLP4 8
+INDIRP4
+CNSTI4 104
+ADDP4
+INDIRB
+ASGNB 12
+line 191
+;191:		VectorCopy(ent->s.origin2, ent->r.currentOrigin);
+ADDRLP4 12
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 12
+INDIRP4
+CNSTI4 368
+ADDP4
+ADDRLP4 12
+INDIRP4
+CNSTI4 104
+ADDP4
+INDIRB
+ASGNB 12
+line 192
+;192:		ent->pos2[0] = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 560
+ADDP4
+CNSTF4 0
+ASGNF4
+line 193
+;193:		trap_LinkEntity(ent);
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRGP4 trap_LinkEntity
+CALLV
+pop
+line 194
+;194:	}
+LABELV $124
+LABELV $119
+line 196
+;195:
+;196:	ent->nextthink = level.time + 50;
+ADDRFP4 0
+INDIRP4
+CNSTI4 632
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 50
+ADDI4
+ASGNI4
+line 197
+;197:	G_RunObject(ent);
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRGP4 G_RunObject
+CALLV
+pop
+line 198
+;198:}
+LABELV $117
+endproc JMSaberThink 28 4
+export JMSaberTouch
+proc JMSaberTouch 36 12
+line 201
+;199:
+;200:void JMSaberTouch(gentity_t *self, gentity_t *other, trace_t *trace)
+;201:{
+line 202
+;202:	int i = 0;
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+line 205
+;203://	gentity_t *te;
+;204:
+;205:	if (!other || !other->client || other->health < 1)
+ADDRLP4 4
+ADDRFP4 4
+INDIRP4
+ASGNP4
+ADDRLP4 8
+CNSTU4 0
+ASGNU4
+ADDRLP4 4
+INDIRP4
+CVPU4 4
+ADDRLP4 8
+INDIRU4
+EQU4 $132
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CVPU4 4
+ADDRLP4 8
+INDIRU4
+EQU4 $132
+ADDRLP4 4
+INDIRP4
+CNSTI4 676
+ADDP4
+INDIRI4
+CNSTI4 1
+GEI4 $129
+LABELV $132
+line 206
+;206:	{
+line 207
+;207:		return;
+ADDRGP4 $128
+JUMPV
+LABELV $129
+line 210
+;208:	}
+;209:
+;210:	if (self->enemy)
+ADDRFP4 0
+INDIRP4
+CNSTI4 728
+ADDP4
+INDIRP4
+CVPU4 4
+CNSTU4 0
+EQU4 $133
+line 211
+;211:	{
+line 212
+;212:		return;
+ADDRGP4 $128
+JUMPV
+LABELV $133
+line 215
+;213:	}
+;214:
+;215:	if (!self->s.modelindex)
+ADDRFP4 0
+INDIRP4
+CNSTI4 212
+ADDP4
+INDIRI4
+CNSTI4 0
+NEI4 $135
+line 216
+;216:	{
+line 217
+;217:		return;
+ADDRGP4 $128
+JUMPV
+LABELV $135
+line 220
+;218:	}
+;219:
+;220:	if (other->client->ps.stats[STAT_WEAPONS] & (1 << WP_SABER))
+ADDRFP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 232
+ADDP4
+INDIRI4
+CNSTI4 4
+BANDI4
+CNSTI4 0
+EQI4 $137
+line 221
+;221:	{
+line 222
+;222:		return;
+ADDRGP4 $128
+JUMPV
+LABELV $137
+line 225
+;223:	}
+;224:
+;225:	if (other->client->ps.isJediMaster)
+ADDRFP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 604
+ADDP4
+INDIRI4
+CNSTI4 0
+EQI4 $139
+line 226
+;226:	{
+line 227
+;227:		return;
+ADDRGP4 $128
+JUMPV
+LABELV $139
+line 230
+;228:	}
+;229:
+;230:	self->enemy = other;
+ADDRFP4 0
+INDIRP4
+CNSTI4 728
+ADDP4
+ADDRFP4 4
+INDIRP4
+ASGNP4
+line 231
+;231:	other->client->ps.stats[STAT_WEAPONS] = (1 << WP_SABER);
+ADDRFP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 232
+ADDP4
+CNSTI4 4
+ASGNI4
+line 232
+;232:	other->client->ps.weapon = WP_SABER;
+ADDRFP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 148
+ADDP4
+CNSTI4 2
+ASGNI4
+line 233
+;233:	other->s.weapon = WP_SABER;
+ADDRFP4 4
+INDIRP4
+CNSTI4 276
+ADDP4
+CNSTI4 2
+ASGNI4
+line 234
+;234:	G_AddEvent(other, EV_BECOME_JEDIMASTER, 0);
+ADDRFP4 4
+INDIRP4
+ARGP4
+CNSTI4 30
+ARGI4
+CNSTI4 0
+ARGI4
+ADDRGP4 G_AddEvent
+CALLV
+pop
+line 237
+;235:
+;236:	// Track the jedi master 
+;237:	trap_SetConfigstring ( CS_CLIENT_JEDIMASTER, va("%i", other->s.number ) );
+ADDRGP4 $141
+ARGP4
+ADDRFP4 4
+INDIRP4
+INDIRI4
+ARGI4
+ADDRLP4 12
+ADDRGP4 va
+CALLP4
+ASGNP4
+CNSTI4 28
+ARGI4
+ADDRLP4 12
+INDIRP4
+ARGP4
+ADDRGP4 trap_SetConfigstring
+CALLV
+pop
+line 239
+;238:
+;239:	if (g_spawnInvulnerability.integer)
+ADDRGP4 g_spawnInvulnerability+12
+INDIRI4
+CNSTI4 0
+EQI4 $142
+line 240
+;240:	{
+line 241
+;241:		other->client->ps.eFlags |= EF_INVULNERABLE;
+ADDRLP4 16
+ADDRFP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 108
+ADDP4
+ASGNP4
+ADDRLP4 16
+INDIRP4
+ADDRLP4 16
+INDIRP4
+INDIRI4
+CNSTI4 67108864
+BORI4
+ASGNI4
+line 242
+;242:		other->client->invulnerableTimer = level.time + g_spawnInvulnerability.integer;
+ADDRFP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1700
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+ADDRGP4 g_spawnInvulnerability+12
+INDIRI4
+ADDI4
+ASGNI4
+line 243
+;243:	}
+LABELV $142
+line 245
+;244:
+;245:	trap_SendServerCommand( -1, va("cp \"%s %s\n\"", other->client->pers.netname, G_GetStripEdString("SVINGAME", "BECOMEJM")) );
+ADDRGP4 $148
+ARGP4
+ADDRGP4 $149
+ARGP4
+ADDRLP4 16
+ADDRGP4 G_GetStripEdString
+CALLP4
+ASGNP4
+ADDRGP4 $147
+ARGP4
+ADDRFP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1428
+ADDP4
+ARGP4
+ADDRLP4 16
+INDIRP4
+ARGP4
+ADDRLP4 20
+ADDRGP4 va
+CALLP4
+ASGNP4
+CNSTI4 -1
+ARGI4
+ADDRLP4 20
+INDIRP4
+ARGP4
+ADDRGP4 trap_SendServerCommand
+CALLV
+pop
+line 247
+;246:
+;247:	other->client->ps.isJediMaster = qtrue;
+ADDRFP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 604
+ADDP4
+CNSTI4 1
+ASGNI4
+line 248
+;248:	other->client->ps.saberIndex = self->s.number;
+ADDRFP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 620
+ADDP4
+ADDRFP4 0
+INDIRP4
+INDIRI4
+ASGNI4
+line 250
+;249:
+;250:	if (other->health < 200 && other->health > 0)
+ADDRLP4 24
+ADDRFP4 4
+INDIRP4
+CNSTI4 676
+ADDP4
+INDIRI4
+ASGNI4
+ADDRLP4 24
+INDIRI4
+CNSTI4 200
+GEI4 $150
+ADDRLP4 24
+INDIRI4
+CNSTI4 0
+LEI4 $150
+line 251
+;251:	{ //full health when you become the Jedi Master
+line 252
+;252:		other->client->ps.stats[STAT_HEALTH] = other->health = 200;
+ADDRLP4 28
+ADDRFP4 4
+INDIRP4
+ASGNP4
+ADDRLP4 32
+CNSTI4 200
+ASGNI4
+ADDRLP4 28
+INDIRP4
+CNSTI4 676
+ADDP4
+ADDRLP4 32
+INDIRI4
+ASGNI4
+ADDRLP4 28
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 216
+ADDP4
+ADDRLP4 32
+INDIRI4
+ASGNI4
+line 253
+;253:	}
+LABELV $150
+line 255
+;254:
+;255:	if (other->client->ps.fd.forcePower < 100)
+ADDRFP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 932
+ADDP4
+INDIRI4
+CNSTI4 100
+GEI4 $155
+line 256
+;256:	{
+line 257
+;257:		other->client->ps.fd.forcePower = 100;
+ADDRFP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 932
+ADDP4
+CNSTI4 100
+ASGNI4
+line 258
+;258:	}
+ADDRGP4 $155
+JUMPV
+LABELV $154
+line 261
+;259:
+;260:	while (i < NUM_FORCE_POWERS)
+;261:	{
+line 262
+;262:		other->client->ps.fd.forcePowersKnown |= (1 << i);
+ADDRLP4 28
+ADDRFP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 844
+ADDP4
+ASGNP4
+ADDRLP4 28
+INDIRP4
+ADDRLP4 28
+INDIRP4
+INDIRI4
+CNSTI4 1
+ADDRLP4 0
+INDIRI4
+LSHI4
+BORI4
+ASGNI4
+line 263
+;263:		other->client->ps.fd.forcePowerLevel[i] = FORCE_LEVEL_3;
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRFP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 944
+ADDP4
+ADDP4
+CNSTI4 3
+ASGNI4
+line 265
+;264:
+;265:		i++;
+ADDRLP4 0
+ADDRLP4 0
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 266
+;266:	}
+LABELV $155
+line 260
+ADDRLP4 0
+INDIRI4
+CNSTI4 18
+LTI4 $154
+line 268
+;267:
+;268:	self->pos2[0] = 1;
+ADDRFP4 0
+INDIRP4
+CNSTI4 560
+ADDP4
+CNSTF4 1065353216
+ASGNF4
+line 269
+;269:	self->pos2[1] = level.time + JMSABER_RESPAWN_TIME;
+ADDRFP4 0
+INDIRP4
+CNSTI4 564
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 20000
+ADDI4
+CVIF4 4
+ASGNF4
+line 271
+;270:
+;271:	self->s.modelindex = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 212
+ADDP4
+CNSTI4 0
+ASGNI4
+line 272
+;272:	self->s.eFlags |= EF_NODRAW;
+ADDRLP4 28
+ADDRFP4 0
+INDIRP4
+CNSTI4 8
+ADDP4
+ASGNP4
+ADDRLP4 28
+INDIRP4
+ADDRLP4 28
+INDIRP4
+INDIRI4
+CNSTI4 128
+BORI4
+ASGNI4
+line 273
+;273:	self->s.modelGhoul2 = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 204
+ADDP4
+CNSTI4 0
+ASGNI4
+line 274
+;274:	self->s.eType = ET_GENERAL;
+ADDRFP4 0
+INDIRP4
+CNSTI4 4
+ADDP4
+CNSTI4 0
+ASGNI4
+line 281
+;275:
+;276:	/*
+;277:	te = G_TempEntity( vec3_origin, EV_DESTROY_GHOUL2_INSTANCE );
+;278:	te->r.svFlags |= SVF_BROADCAST;
+;279:	te->s.eventParm = self->s.number;
+;280:	*/
+;281:	G_KillG2Queue(self->s.number);
+ADDRFP4 0
+INDIRP4
+INDIRI4
+ARGI4
+ADDRGP4 G_KillG2Queue
+CALLV
+pop
+line 283
+;282:
+;283:	return;
+LABELV $128
+endproc JMSaberTouch 36 12
+data
+export gJMSaberEnt
+align 4
+LABELV gJMSaberEnt
+byte 4 0
+export SP_info_jedimaster_start
+code
+proc SP_info_jedimaster_start 8 4
+line 292
+;284:}
+;285:
+;286:gentity_t *gJMSaberEnt = NULL;
+;287:
+;288:/*QUAKED info_jedimaster_start (1 0 0) (-16 -16 -24) (16 16 32)
+;289:"jedi master" saber spawn point
+;290:*/
+;291:void SP_info_jedimaster_start(gentity_t *ent)
+;292:{
+line 293
+;293:	if (g_gametype.integer != GT_JEDIMASTER)
+ADDRGP4 g_gametype+12
+INDIRI4
+CNSTI4 2
+EQI4 $159
+line 294
+;294:	{
+line 295
+;295:		gJMSaberEnt = NULL;
+ADDRGP4 gJMSaberEnt
+CNSTP4 0
+ASGNP4
+line 296
+;296:		G_FreeEntity(ent);
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRGP4 G_FreeEntity
+CALLV
+pop
+line 297
+;297:		return;
+ADDRGP4 $158
+JUMPV
+LABELV $159
+line 300
+;298:	}
+;299:
+;300:	ent->enemy = NULL;
+ADDRFP4 0
+INDIRP4
+CNSTI4 728
+ADDP4
+CNSTP4 0
+ASGNP4
+line 302
+;301:
+;302:	ent->s.eFlags = EF_BOUNCE_HALF;
+ADDRFP4 0
+INDIRP4
+CNSTI4 8
+ADDP4
+CNSTI4 32
+ASGNI4
+line 304
+;303:
+;304:	ent->s.modelindex = G_ModelIndex("models/weapons2/saber/saber_w.glm");
+ADDRGP4 $108
+ARGP4
+ADDRLP4 0
+ADDRGP4 G_ModelIndex
+CALLI4
+ASGNI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 212
+ADDP4
+ADDRLP4 0
+INDIRI4
+ASGNI4
+line 305
+;305:	ent->s.modelGhoul2 = 1;
+ADDRFP4 0
+INDIRP4
+CNSTI4 204
+ADDP4
+CNSTI4 1
+ASGNI4
+line 306
+;306:	ent->s.g2radius = 20;
+ADDRFP4 0
+INDIRP4
+CNSTI4 208
+ADDP4
+CNSTI4 20
+ASGNI4
+line 308
+;307:	//ent->s.eType = ET_GENERAL;
+;308:	ent->s.eType = ET_MISSILE;
+ADDRFP4 0
+INDIRP4
+CNSTI4 4
+ADDP4
+CNSTI4 3
+ASGNI4
+line 309
+;309:	ent->s.weapon = WP_SABER;
+ADDRFP4 0
+INDIRP4
+CNSTI4 276
+ADDP4
+CNSTI4 2
+ASGNI4
+line 310
+;310:	ent->s.pos.trType = TR_GRAVITY;
+ADDRFP4 0
+INDIRP4
+CNSTI4 12
+ADDP4
+CNSTI4 5
+ASGNI4
+line 311
+;311:	ent->s.pos.trTime = level.time;
+ADDRFP4 0
+INDIRP4
+CNSTI4 16
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+ASGNI4
+line 312
+;312:	VectorSet( ent->r.maxs, 3, 3, 3 );
+ADDRFP4 0
+INDIRP4
+CNSTI4 328
+ADDP4
+CNSTF4 1077936128
+ASGNF4
+ADDRFP4 0
+INDIRP4
+CNSTI4 332
+ADDP4
+CNSTF4 1077936128
+ASGNF4
+ADDRFP4 0
+INDIRP4
+CNSTI4 336
+ADDP4
+CNSTF4 1077936128
+ASGNF4
+line 313
+;313:	VectorSet( ent->r.mins, -3, -3, -3 );
+ADDRFP4 0
+INDIRP4
+CNSTI4 316
+ADDP4
+CNSTF4 3225419776
+ASGNF4
+ADDRFP4 0
+INDIRP4
+CNSTI4 320
+ADDP4
+CNSTF4 3225419776
+ASGNF4
+ADDRFP4 0
+INDIRP4
+CNSTI4 324
+ADDP4
+CNSTF4 3225419776
+ASGNF4
+line 314
+;314:	ent->r.contents = CONTENTS_TRIGGER;
+ADDRFP4 0
+INDIRP4
+CNSTI4 340
+ADDP4
+CNSTI4 1024
+ASGNI4
+line 315
+;315:	ent->clipmask = MASK_SOLID;
+ADDRFP4 0
+INDIRP4
+CNSTI4 508
+ADDP4
+CNSTI4 1
+ASGNI4
+line 317
+;316:
+;317:	ent->isSaberEntity = qtrue;
+ADDRFP4 0
+INDIRP4
+CNSTI4 812
+ADDP4
+CNSTI4 1
+ASGNI4
+line 319
+;318:
+;319:	ent->bounceCount = -5;
+ADDRFP4 0
+INDIRP4
+CNSTI4 716
+ADDP4
+CNSTI4 -5
+ASGNI4
+line 321
+;320:
+;321:	ent->physicsObject = qtrue;
+ADDRFP4 0
+INDIRP4
+CNSTI4 500
+ADDP4
+CNSTI4 1
+ASGNI4
+line 323
+;322:
+;323:	VectorCopy(ent->s.pos.trBase, ent->s.origin2); //remember the spawn spot
+ADDRLP4 4
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 4
+INDIRP4
+CNSTI4 104
+ADDP4
+ADDRLP4 4
+INDIRP4
+CNSTI4 24
+ADDP4
+INDIRB
+ASGNB 12
+line 325
+;324:
+;325:	ent->touch = JMSaberTouch;
+ADDRFP4 0
+INDIRP4
+CNSTI4 648
+ADDP4
+ADDRGP4 JMSaberTouch
+ASGNP4
+line 327
+;326:
+;327:	trap_LinkEntity(ent);
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRGP4 trap_LinkEntity
+CALLV
+pop
+line 329
+;328:
+;329:	ent->think = JMSaberThink;
+ADDRFP4 0
+INDIRP4
+CNSTI4 636
+ADDP4
+ADDRGP4 JMSaberThink
+ASGNP4
+line 330
+;330:	ent->nextthink = level.time + 50;
+ADDRFP4 0
+INDIRP4
+CNSTI4 632
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 50
+ADDI4
+ASGNI4
+line 331
+;331:}
+LABELV $158
+endproc SP_info_jedimaster_start 8 4
+export SpotWouldTelefrag
+proc SpotWouldTelefrag 4144 16
+line 347
+;332:
+;333:/*
+;334:=======================================================================
+;335:
+;336:  SelectSpawnPoint
+;337:
+;338:=======================================================================
+;339:*/
+;340:
+;341:/*
+;342:================
+;343:SpotWouldTelefrag
+;344:
+;345:================
+;346:*/
+;347:qboolean SpotWouldTelefrag( gentity_t *spot ) {
+line 353
+;348:	int			i, num;
+;349:	int			touch[MAX_GENTITIES];
+;350:	gentity_t	*hit;
+;351:	vec3_t		mins, maxs;
+;352:
+;353:	VectorAdd( spot->s.origin, playerMins, mins );
+ADDRLP4 4132
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 4108
+ADDRLP4 4132
+INDIRP4
+CNSTI4 92
+ADDP4
+INDIRF4
+ADDRGP4 playerMins
+INDIRF4
+ADDF4
+ASGNF4
+ADDRLP4 4108+4
+ADDRLP4 4132
+INDIRP4
+CNSTI4 96
+ADDP4
+INDIRF4
+ADDRGP4 playerMins+4
+INDIRF4
+ADDF4
+ASGNF4
+ADDRLP4 4108+8
+ADDRFP4 0
+INDIRP4
+CNSTI4 100
+ADDP4
+INDIRF4
+ADDRGP4 playerMins+8
+INDIRF4
+ADDF4
+ASGNF4
+line 354
+;354:	VectorAdd( spot->s.origin, playerMaxs, maxs );
+ADDRLP4 4136
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 4120
+ADDRLP4 4136
+INDIRP4
+CNSTI4 92
+ADDP4
+INDIRF4
+ADDRGP4 playerMaxs
+INDIRF4
+ADDF4
+ASGNF4
+ADDRLP4 4120+4
+ADDRLP4 4136
+INDIRP4
+CNSTI4 96
+ADDP4
+INDIRF4
+ADDRGP4 playerMaxs+4
+INDIRF4
+ADDF4
+ASGNF4
+ADDRLP4 4120+8
+ADDRFP4 0
+INDIRP4
+CNSTI4 100
+ADDP4
+INDIRF4
+ADDRGP4 playerMaxs+8
+INDIRF4
+ADDF4
+ASGNF4
+line 355
+;355:	num = trap_EntitiesInBox( mins, maxs, touch, MAX_GENTITIES );
+ADDRLP4 4108
+ARGP4
+ADDRLP4 4120
+ARGP4
+ADDRLP4 12
+ARGP4
+CNSTI4 1024
+ARGI4
+ADDRLP4 4140
+ADDRGP4 trap_EntitiesInBox
+CALLI4
+ASGNI4
+ADDRLP4 8
+ADDRLP4 4140
+INDIRI4
+ASGNI4
+line 357
+;356:
+;357:	for (i=0 ; i<num ; i++) {
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+ADDRGP4 $176
+JUMPV
+LABELV $173
+line 358
+;358:		hit = &g_entities[touch[i]];
+ADDRLP4 4
+CNSTI4 852
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 12
+ADDP4
+INDIRI4
+MULI4
+ADDRGP4 g_entities
+ADDP4
+ASGNP4
+line 360
+;359:		//if ( hit->client && hit->client->ps.stats[STAT_HEALTH] > 0 ) {
+;360:		if ( hit->client) {
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CVPU4 4
+CNSTU4 0
+EQU4 $177
+line 361
+;361:			return qtrue;
+CNSTI4 1
+RETI4
+ADDRGP4 $164
+JUMPV
+LABELV $177
+line 364
+;362:		}
+;363:
+;364:	}
+LABELV $174
+line 357
+ADDRLP4 0
+ADDRLP4 0
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+LABELV $176
+ADDRLP4 0
+INDIRI4
+ADDRLP4 8
+INDIRI4
+LTI4 $173
+line 366
+;365:
+;366:	return qfalse;
+CNSTI4 0
+RETI4
+LABELV $164
+endproc SpotWouldTelefrag 4144 16
+export SelectNearestDeathmatchSpawnPoint
+proc SelectNearestDeathmatchSpawnPoint 40 12
+line 377
+;367:}
+;368:
+;369:/*
+;370:================
+;371:SelectNearestDeathmatchSpawnPoint
+;372:
+;373:Find the spot that we DON'T want to use
+;374:================
+;375:*/
+;376:#define	MAX_SPAWN_POINTS	128
+;377:gentity_t *SelectNearestDeathmatchSpawnPoint( vec3_t from ) {
+line 383
+;378:	gentity_t	*spot;
+;379:	vec3_t		delta;
+;380:	float		dist, nearestDist;
+;381:	gentity_t	*nearestSpot;
+;382:
+;383:	nearestDist = 999999;
+ADDRLP4 20
+CNSTF4 1232348144
+ASGNF4
+line 384
+;384:	nearestSpot = NULL;
+ADDRLP4 24
+CNSTP4 0
+ASGNP4
+line 385
+;385:	spot = NULL;
+ADDRLP4 0
+CNSTP4 0
+ASGNP4
+ADDRGP4 $181
+JUMPV
+LABELV $180
+line 387
+;386:
+;387:	while ((spot = G_Find (spot, FOFS(classname), "info_player_deathmatch")) != NULL) {
+line 389
+;388:
+;389:		VectorSubtract( spot->s.origin, from, delta );
+ADDRLP4 32
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 4
+ADDRLP4 0
+INDIRP4
+CNSTI4 92
+ADDP4
+INDIRF4
+ADDRLP4 32
+INDIRP4
+INDIRF4
+SUBF4
+ASGNF4
+ADDRLP4 4+4
+ADDRLP4 0
+INDIRP4
+CNSTI4 96
+ADDP4
+INDIRF4
+ADDRLP4 32
+INDIRP4
+CNSTI4 4
+ADDP4
+INDIRF4
+SUBF4
+ASGNF4
+ADDRLP4 4+8
+ADDRLP4 0
+INDIRP4
+CNSTI4 100
+ADDP4
+INDIRF4
+ADDRFP4 0
+INDIRP4
+CNSTI4 8
+ADDP4
+INDIRF4
+SUBF4
+ASGNF4
+line 390
+;390:		dist = VectorLength( delta );
+ADDRLP4 4
+ARGP4
+ADDRLP4 36
+ADDRGP4 VectorLength
+CALLF4
+ASGNF4
+ADDRLP4 16
+ADDRLP4 36
+INDIRF4
+ASGNF4
+line 391
+;391:		if ( dist < nearestDist ) {
+ADDRLP4 16
+INDIRF4
+ADDRLP4 20
+INDIRF4
+GEF4 $185
+line 392
+;392:			nearestDist = dist;
+ADDRLP4 20
+ADDRLP4 16
+INDIRF4
+ASGNF4
+line 393
+;393:			nearestSpot = spot;
+ADDRLP4 24
+ADDRLP4 0
+INDIRP4
+ASGNP4
+line 394
+;394:		}
+LABELV $185
+line 395
+;395:	}
+LABELV $181
+line 387
+ADDRLP4 0
+INDIRP4
+ARGP4
+CNSTI4 416
+ARGI4
+ADDRGP4 $87
+ARGP4
+ADDRLP4 28
+ADDRGP4 G_Find
+CALLP4
+ASGNP4
+ADDRLP4 0
+ADDRLP4 28
+INDIRP4
+ASGNP4
+ADDRLP4 28
+INDIRP4
+CVPU4 4
+CNSTU4 0
+NEU4 $180
+line 397
+;396:
+;397:	return nearestSpot;
+ADDRLP4 24
+INDIRP4
+RETP4
+LABELV $179
+endproc SelectNearestDeathmatchSpawnPoint 40 12
+export SelectRandomDeathmatchSpawnPoint
+proc SelectRandomDeathmatchSpawnPoint 532 12
+line 409
+;398:}
+;399:
+;400:
+;401:/*
+;402:================
+;403:SelectRandomDeathmatchSpawnPoint
+;404:
+;405:go to a random point that doesn't telefrag
+;406:================
+;407:*/
+;408:#define	MAX_SPAWN_POINTS	128
+;409:gentity_t *SelectRandomDeathmatchSpawnPoint( void ) {
+line 415
+;410:	gentity_t	*spot;
+;411:	int			count;
+;412:	int			selection;
+;413:	gentity_t	*spots[MAX_SPAWN_POINTS];
+;414:
+;415:	count = 0;
+ADDRLP4 4
+CNSTI4 0
+ASGNI4
+line 416
+;416:	spot = NULL;
+ADDRLP4 0
+CNSTP4 0
+ASGNP4
+ADDRGP4 $189
+JUMPV
+LABELV $188
+line 418
+;417:
+;418:	while ((spot = G_Find (spot, FOFS(classname), "info_player_deathmatch")) != NULL) {
+line 419
+;419:		if ( SpotWouldTelefrag( spot ) ) {
+ADDRLP4 0
+INDIRP4
+ARGP4
+ADDRLP4 524
+ADDRGP4 SpotWouldTelefrag
+CALLI4
+ASGNI4
+ADDRLP4 524
+INDIRI4
+CNSTI4 0
+EQI4 $191
+line 420
+;420:			continue;
+ADDRGP4 $189
+JUMPV
+LABELV $191
+line 422
+;421:		}
+;422:		spots[ count ] = spot;
+ADDRLP4 4
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 8
+ADDP4
+ADDRLP4 0
+INDIRP4
+ASGNP4
+line 423
+;423:		count++;
+ADDRLP4 4
+ADDRLP4 4
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 424
+;424:	}
+LABELV $189
+line 418
+ADDRLP4 0
+INDIRP4
+ARGP4
+CNSTI4 416
+ARGI4
+ADDRGP4 $87
+ARGP4
+ADDRLP4 524
+ADDRGP4 G_Find
+CALLP4
+ASGNP4
+ADDRLP4 0
+ADDRLP4 524
+INDIRP4
+ASGNP4
+ADDRLP4 524
+INDIRP4
+CVPU4 4
+CNSTU4 0
+NEU4 $188
+line 426
+;425:
+;426:	if ( !count ) {	// no spots that won't telefrag
+ADDRLP4 4
+INDIRI4
+CNSTI4 0
+NEI4 $193
+line 427
+;427:		return G_Find( NULL, FOFS(classname), "info_player_deathmatch");
+CNSTP4 0
+ARGP4
+CNSTI4 416
+ARGI4
+ADDRGP4 $87
+ARGP4
+ADDRLP4 528
+ADDRGP4 G_Find
+CALLP4
+ASGNP4
+ADDRLP4 528
+INDIRP4
+RETP4
+ADDRGP4 $187
+JUMPV
+LABELV $193
+line 430
+;428:	}
+;429:
+;430:	selection = rand() % count;
+ADDRLP4 528
+ADDRGP4 rand
+CALLI4
+ASGNI4
+ADDRLP4 520
+ADDRLP4 528
+INDIRI4
+ADDRLP4 4
+INDIRI4
+MODI4
+ASGNI4
+line 431
+;431:	return spots[ selection ];
+ADDRLP4 520
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 8
+ADDP4
+INDIRP4
+RETP4
+LABELV $187
+endproc SelectRandomDeathmatchSpawnPoint 532 12
+export SelectRandomFurthestSpawnPoint
+proc SelectRandomFurthestSpawnPoint 572 12
+line 441
+;432:}
+;433:
+;434:/*
+;435:===========
+;436:SelectRandomFurthestSpawnPoint
+;437:
+;438:Chooses a player start, deathmatch start, etc
+;439:============
+;440:*/
+;441:gentity_t *SelectRandomFurthestSpawnPoint ( vec3_t avoidPoint, vec3_t origin, vec3_t angles ) {
+line 449
+;442:	gentity_t	*spot;
+;443:	vec3_t		delta;
+;444:	float		dist;
+;445:	float		list_dist[64];
+;446:	gentity_t	*list_spot[64];
+;447:	int			numSpots, rnd, i, j;
+;448:
+;449:	numSpots = 0;
+ADDRLP4 520
+CNSTI4 0
+ASGNI4
+line 450
+;450:	spot = NULL;
+ADDRLP4 528
+CNSTP4 0
+ASGNP4
+ADDRGP4 $197
+JUMPV
+LABELV $196
+line 452
+;451:
+;452:	while ((spot = G_Find (spot, FOFS(classname), "info_player_deathmatch")) != NULL) {
+line 453
+;453:		if ( SpotWouldTelefrag( spot ) ) {
+ADDRLP4 528
+INDIRP4
+ARGP4
+ADDRLP4 548
+ADDRGP4 SpotWouldTelefrag
+CALLI4
+ASGNI4
+ADDRLP4 548
+INDIRI4
+CNSTI4 0
+EQI4 $199
+line 454
+;454:			continue;
+ADDRGP4 $197
+JUMPV
+LABELV $199
+line 456
+;455:		}
+;456:		VectorSubtract( spot->s.origin, avoidPoint, delta );
+ADDRLP4 556
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 532
+ADDRLP4 528
+INDIRP4
+CNSTI4 92
+ADDP4
+INDIRF4
+ADDRLP4 556
+INDIRP4
+INDIRF4
+SUBF4
+ASGNF4
+ADDRLP4 532+4
+ADDRLP4 528
+INDIRP4
+CNSTI4 96
+ADDP4
+INDIRF4
+ADDRLP4 556
+INDIRP4
+CNSTI4 4
+ADDP4
+INDIRF4
+SUBF4
+ASGNF4
+ADDRLP4 532+8
+ADDRLP4 528
+INDIRP4
+CNSTI4 100
+ADDP4
+INDIRF4
+ADDRFP4 0
+INDIRP4
+CNSTI4 8
+ADDP4
+INDIRF4
+SUBF4
+ASGNF4
+line 457
+;457:		dist = VectorLength( delta );
+ADDRLP4 532
+ARGP4
+ADDRLP4 560
+ADDRGP4 VectorLength
+CALLF4
+ASGNF4
+ADDRLP4 524
+ADDRLP4 560
+INDIRF4
+ASGNF4
+line 458
+;458:		for (i = 0; i < numSpots; i++) {
+ADDRLP4 516
+CNSTI4 0
+ASGNI4
+ADDRGP4 $206
+JUMPV
+LABELV $203
+line 459
+;459:			if ( dist > list_dist[i] ) {
+ADDRLP4 524
+INDIRF4
+ADDRLP4 516
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 4
+ADDP4
+INDIRF4
+LEF4 $207
+line 460
+;460:				if ( numSpots >= 64 )
+ADDRLP4 520
+INDIRI4
+CNSTI4 64
+LTI4 $209
+line 461
+;461:					numSpots = 64-1;
+ADDRLP4 520
+CNSTI4 63
+ASGNI4
+LABELV $209
+line 462
+;462:				for (j = numSpots; j > i; j--) {
+ADDRLP4 0
+ADDRLP4 520
+INDIRI4
+ASGNI4
+ADDRGP4 $214
+JUMPV
+LABELV $211
+line 463
+;463:					list_dist[j] = list_dist[j-1];
+ADDRLP4 564
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+ASGNI4
+ADDRLP4 564
+INDIRI4
+ADDRLP4 4
+ADDP4
+ADDRLP4 564
+INDIRI4
+ADDRLP4 4-4
+ADDP4
+INDIRF4
+ASGNF4
+line 464
+;464:					list_spot[j] = list_spot[j-1];
+ADDRLP4 568
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+ASGNI4
+ADDRLP4 568
+INDIRI4
+ADDRLP4 260
+ADDP4
+ADDRLP4 568
+INDIRI4
+ADDRLP4 260-4
+ADDP4
+INDIRP4
+ASGNP4
+line 465
+;465:				}
+LABELV $212
+line 462
+ADDRLP4 0
+ADDRLP4 0
+INDIRI4
+CNSTI4 1
+SUBI4
+ASGNI4
+LABELV $214
+ADDRLP4 0
+INDIRI4
+ADDRLP4 516
+INDIRI4
+GTI4 $211
+line 466
+;466:				list_dist[i] = dist;
+ADDRLP4 516
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 4
+ADDP4
+ADDRLP4 524
+INDIRF4
+ASGNF4
+line 467
+;467:				list_spot[i] = spot;
+ADDRLP4 516
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 260
+ADDP4
+ADDRLP4 528
+INDIRP4
+ASGNP4
+line 468
+;468:				numSpots++;
+ADDRLP4 520
+ADDRLP4 520
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 469
+;469:				if (numSpots > 64)
+ADDRLP4 520
+INDIRI4
+CNSTI4 64
+LEI4 $205
+line 470
+;470:					numSpots = 64;
+ADDRLP4 520
+CNSTI4 64
+ASGNI4
+line 471
+;471:				break;
+ADDRGP4 $205
+JUMPV
+LABELV $207
+line 473
+;472:			}
+;473:		}
+LABELV $204
+line 458
+ADDRLP4 516
+ADDRLP4 516
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+LABELV $206
+ADDRLP4 516
+INDIRI4
+ADDRLP4 520
+INDIRI4
+LTI4 $203
+LABELV $205
+line 474
+;474:		if (i >= numSpots && numSpots < 64) {
+ADDRLP4 516
+INDIRI4
+ADDRLP4 520
+INDIRI4
+LTI4 $219
+ADDRLP4 520
+INDIRI4
+CNSTI4 64
+GEI4 $219
+line 475
+;475:			list_dist[numSpots] = dist;
+ADDRLP4 520
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 4
+ADDP4
+ADDRLP4 524
+INDIRF4
+ASGNF4
+line 476
+;476:			list_spot[numSpots] = spot;
+ADDRLP4 520
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 260
+ADDP4
+ADDRLP4 528
+INDIRP4
+ASGNP4
+line 477
+;477:			numSpots++;
+ADDRLP4 520
+ADDRLP4 520
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 478
+;478:		}
+LABELV $219
+line 479
+;479:	}
+LABELV $197
+line 452
+ADDRLP4 528
+INDIRP4
+ARGP4
+CNSTI4 416
+ARGI4
+ADDRGP4 $87
+ARGP4
+ADDRLP4 548
+ADDRGP4 G_Find
+CALLP4
+ASGNP4
+ADDRLP4 528
+ADDRLP4 548
+INDIRP4
+ASGNP4
+ADDRLP4 548
+INDIRP4
+CVPU4 4
+CNSTU4 0
+NEU4 $196
+line 480
+;480:	if (!numSpots) {
+ADDRLP4 520
+INDIRI4
+CNSTI4 0
+NEI4 $221
+line 481
+;481:		spot = G_Find( NULL, FOFS(classname), "info_player_deathmatch");
+CNSTP4 0
+ARGP4
+CNSTI4 416
+ARGI4
+ADDRGP4 $87
+ARGP4
+ADDRLP4 552
+ADDRGP4 G_Find
+CALLP4
+ASGNP4
+ADDRLP4 528
+ADDRLP4 552
+INDIRP4
+ASGNP4
+line 482
+;482:		if (!spot)
+ADDRLP4 528
+INDIRP4
+CVPU4 4
+CNSTU4 0
+NEU4 $223
+line 483
+;483:			G_Error( "Couldn't find a spawn point" );
+ADDRGP4 $225
+ARGP4
+ADDRGP4 G_Error
+CALLV
+pop
+LABELV $223
+line 484
+;484:		VectorCopy (spot->s.origin, origin);
+ADDRFP4 4
+INDIRP4
+ADDRLP4 528
+INDIRP4
+CNSTI4 92
+ADDP4
+INDIRB
+ASGNB 12
+line 485
+;485:		origin[2] += 9;
+ADDRLP4 556
+ADDRFP4 4
+INDIRP4
+CNSTI4 8
+ADDP4
+ASGNP4
+ADDRLP4 556
+INDIRP4
+ADDRLP4 556
+INDIRP4
+INDIRF4
+CNSTF4 1091567616
+ADDF4
+ASGNF4
+line 486
+;486:		VectorCopy (spot->s.angles, angles);
+ADDRFP4 8
+INDIRP4
+ADDRLP4 528
+INDIRP4
+CNSTI4 116
+ADDP4
+INDIRB
+ASGNB 12
+line 487
+;487:		return spot;
+ADDRLP4 528
+INDIRP4
+RETP4
+ADDRGP4 $195
+JUMPV
+LABELV $221
+line 491
+;488:	}
+;489:
+;490:	// select a random spot from the spawn points furthest away
+;491:	rnd = random() * (numSpots / 2);
+ADDRLP4 552
+ADDRGP4 rand
+CALLI4
+ASGNI4
+ADDRLP4 544
+ADDRLP4 552
+INDIRI4
+CNSTI4 32767
+BANDI4
+CVIF4 4
+CNSTF4 1191181824
+DIVF4
+ADDRLP4 520
+INDIRI4
+CNSTI4 2
+DIVI4
+CVIF4 4
+MULF4
+CVFI4 4
+ASGNI4
+line 493
+;492:
+;493:	VectorCopy (list_spot[rnd]->s.origin, origin);
+ADDRFP4 4
+INDIRP4
+ADDRLP4 544
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 260
+ADDP4
+INDIRP4
+CNSTI4 92
+ADDP4
+INDIRB
+ASGNB 12
+line 494
+;494:	origin[2] += 9;
+ADDRLP4 556
+ADDRFP4 4
+INDIRP4
+CNSTI4 8
+ADDP4
+ASGNP4
+ADDRLP4 556
+INDIRP4
+ADDRLP4 556
+INDIRP4
+INDIRF4
+CNSTF4 1091567616
+ADDF4
+ASGNF4
+line 495
+;495:	VectorCopy (list_spot[rnd]->s.angles, angles);
+ADDRFP4 8
+INDIRP4
+ADDRLP4 544
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 260
+ADDP4
+INDIRP4
+CNSTI4 116
+ADDP4
+INDIRB
+ASGNB 12
+line 497
+;496:
+;497:	return list_spot[rnd];
+ADDRLP4 544
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRLP4 260
+ADDP4
+INDIRP4
+RETP4
+LABELV $195
+endproc SelectRandomFurthestSpawnPoint 572 12
+export G_FindClientByName
+proc G_FindClientByName 12 8
+line 508
+;498:}
+;499:
+;500:/*
+;501:===========
+;502:
+;503:G_FindClientByName - MJN
+;504:
+;505:============
+;506:*/
+;507:gclient_t *G_FindClientByName ( const char* name, int ignoreNum )
+;508:{
+line 511
+;509:	int		i;
+;510:	
+;511:	for ( i = 0; i < level.numConnectedClients; i ++ )
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+ADDRGP4 $230
+JUMPV
+LABELV $227
+line 512
+;512:	{
+line 513
+;513:		gentity_t* ent = &g_entities[level.sortedClients[i]];
+ADDRLP4 4
+CNSTI4 852
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRGP4 level+84
+ADDP4
+INDIRI4
+MULI4
+ADDRGP4 g_entities
+ADDP4
+ASGNP4
+line 515
+;514:
+;515:		if ( level.sortedClients[i] == ignoreNum )
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRGP4 level+84
+ADDP4
+INDIRI4
+ADDRFP4 4
+INDIRI4
+NEI4 $233
+line 516
+;516:		{
+line 517
+;517:			continue;
+ADDRGP4 $228
+JUMPV
+LABELV $233
+line 520
+;518:		}
+;519:		
+;520:		if ( Q_stricmp ( name, ent->client->pers.netname ) == 0 )
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1428
+ADDP4
+ARGP4
+ADDRLP4 8
+ADDRGP4 Q_stricmp
+CALLI4
+ASGNI4
+ADDRLP4 8
+INDIRI4
+CNSTI4 0
+NEI4 $236
+line 521
+;521:		{
+line 522
+;522:			return ent->client;
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+RETP4
+ADDRGP4 $226
+JUMPV
+LABELV $236
+line 524
+;523:		}
+;524:	}
+LABELV $228
+line 511
+ADDRLP4 0
+ADDRLP4 0
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+LABELV $230
+ADDRLP4 0
+INDIRI4
+ADDRGP4 level+72
+INDIRI4
+LTI4 $227
+line 526
+;525:
+;526:	return NULL;
+CNSTP4 0
+RETP4
+LABELV $226
+endproc G_FindClientByName 12 8
+export SelectSpawnPoint
+proc SelectSpawnPoint 4 12
+line 536
+;527:}
+;528:
+;529:/*
+;530:===========
+;531:SelectSpawnPoint
+;532:
+;533:Chooses a player start, deathmatch start, etc
+;534:============
+;535:*/
+;536:gentity_t *SelectSpawnPoint ( vec3_t avoidPoint, vec3_t origin, vec3_t angles ) {
+line 537
+;537:	return SelectRandomFurthestSpawnPoint( avoidPoint, origin, angles );
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRFP4 4
+INDIRP4
+ARGP4
+ADDRFP4 8
+INDIRP4
+ARGP4
+ADDRLP4 0
+ADDRGP4 SelectRandomFurthestSpawnPoint
+CALLP4
+ASGNP4
+ADDRLP4 0
+INDIRP4
+RETP4
+LABELV $238
+endproc SelectSpawnPoint 4 12
+export SelectInitialSpawnPoint
+proc SelectInitialSpawnPoint 20 12
+line 576
+;538:
+;539:	/*
+;540:	gentity_t	*spot;
+;541:	gentity_t	*nearestSpot;
+;542:
+;543:	nearestSpot = SelectNearestDeathmatchSpawnPoint( avoidPoint );
+;544:
+;545:	spot = SelectRandomDeathmatchSpawnPoint ( );
+;546:	if ( spot == nearestSpot ) {
+;547:		// roll again if it would be real close to point of death
+;548:		spot = SelectRandomDeathmatchSpawnPoint ( );
+;549:		if ( spot == nearestSpot ) {
+;550:			// last try
+;551:			spot = SelectRandomDeathmatchSpawnPoint ( );
+;552:		}		
+;553:	}
+;554:
+;555:	// find a single player start spot
+;556:	if (!spot) {
+;557:		G_Error( "Couldn't find a spawn point" );
+;558:	}
+;559:
+;560:	VectorCopy (spot->s.origin, origin);
+;561:	origin[2] += 9;
+;562:	VectorCopy (spot->s.angles, angles);
+;563:
+;564:	return spot;
+;565:	*/
+;566:}
+;567:
+;568:/*
+;569:===========
+;570:SelectInitialSpawnPoint
+;571:
+;572:Try to find a spawn point marked 'initial', otherwise
+;573:use normal spawn selection.
+;574:============
+;575:*/
+;576:gentity_t *SelectInitialSpawnPoint( vec3_t origin, vec3_t angles ) {
+line 579
+;577:	gentity_t	*spot;
+;578:
+;579:	spot = NULL;
+ADDRLP4 0
+CNSTP4 0
+ASGNP4
+ADDRGP4 $241
+JUMPV
+LABELV $240
+line 580
+;580:	while ((spot = G_Find (spot, FOFS(classname), "info_player_deathmatch")) != NULL) {
+line 581
+;581:		if ( spot->spawnflags & 1 ) {
+ADDRLP4 0
+INDIRP4
+CNSTI4 420
+ADDP4
+INDIRI4
+CNSTI4 1
+BANDI4
+CNSTI4 0
+EQI4 $243
+line 582
+;582:			break;
+ADDRGP4 $242
+JUMPV
+LABELV $243
+line 584
+;583:		}
+;584:	}
+LABELV $241
+line 580
+ADDRLP4 0
+INDIRP4
+ARGP4
+CNSTI4 416
+ARGI4
+ADDRGP4 $87
+ARGP4
+ADDRLP4 4
+ADDRGP4 G_Find
+CALLP4
+ASGNP4
+ADDRLP4 0
+ADDRLP4 4
+INDIRP4
+ASGNP4
+ADDRLP4 4
+INDIRP4
+CVPU4 4
+CNSTU4 0
+NEU4 $240
+LABELV $242
+line 586
+;585:
+;586:	if ( !spot || SpotWouldTelefrag( spot ) ) {
+ADDRLP4 0
+INDIRP4
+CVPU4 4
+CNSTU4 0
+EQU4 $247
+ADDRLP4 0
+INDIRP4
+ARGP4
+ADDRLP4 12
+ADDRGP4 SpotWouldTelefrag
+CALLI4
+ASGNI4
+ADDRLP4 12
+INDIRI4
+CNSTI4 0
+EQI4 $245
+LABELV $247
+line 587
+;587:		return SelectSpawnPoint( vec3_origin, origin, angles );
+ADDRGP4 vec3_origin
+ARGP4
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRFP4 4
+INDIRP4
+ARGP4
+ADDRLP4 16
+ADDRGP4 SelectSpawnPoint
+CALLP4
+ASGNP4
+ADDRLP4 16
+INDIRP4
+RETP4
+ADDRGP4 $239
+JUMPV
+LABELV $245
+line 590
+;588:	}
+;589:
+;590:	VectorCopy (spot->s.origin, origin);
+ADDRFP4 0
+INDIRP4
+ADDRLP4 0
+INDIRP4
+CNSTI4 92
+ADDP4
+INDIRB
+ASGNB 12
+line 591
+;591:	origin[2] += 9;
+ADDRLP4 16
+ADDRFP4 0
+INDIRP4
+CNSTI4 8
+ADDP4
+ASGNP4
+ADDRLP4 16
+INDIRP4
+ADDRLP4 16
+INDIRP4
+INDIRF4
+CNSTF4 1091567616
+ADDF4
+ASGNF4
+line 592
+;592:	VectorCopy (spot->s.angles, angles);
+ADDRFP4 4
+INDIRP4
+ADDRLP4 0
+INDIRP4
+CNSTI4 116
+ADDP4
+INDIRB
+ASGNB 12
+line 594
+;593:
+;594:	return spot;
+ADDRLP4 0
+INDIRP4
+RETP4
+LABELV $239
+endproc SelectInitialSpawnPoint 20 12
+export SelectSpectatorSpawnPoint
+proc SelectSpectatorSpawnPoint 0 0
+line 603
+;595:}
+;596:
+;597:/*
+;598:===========
+;599:SelectSpectatorSpawnPoint
+;600:
+;601:============
+;602:*/
+;603:gentity_t *SelectSpectatorSpawnPoint( vec3_t origin, vec3_t angles ) {
+line 604
+;604:	FindIntermissionPoint();
+ADDRGP4 FindIntermissionPoint
+CALLV
+pop
+line 606
+;605:
+;606:	VectorCopy( level.intermission_origin, origin );
+ADDRFP4 0
+INDIRP4
+ADDRGP4 level+9024
+INDIRB
+ASGNB 12
+line 607
+;607:	VectorCopy( level.intermission_angle, angles );
+ADDRFP4 4
+INDIRP4
+ADDRGP4 level+9036
+INDIRB
+ASGNB 12
+line 609
+;608:
+;609:	return NULL;
+CNSTP4 0
+RETP4
+LABELV $248
+endproc SelectSpectatorSpawnPoint 0 0
+export InitBodyQue
+proc InitBodyQue 12 0
+line 635
+;610:}
+;611:
+;612:/*
+;613:=======================================================================
+;614:
+;615:BODYQUE
+;616:
+;617:=======================================================================
+;618:*/
+;619:
+;620:/*
+;621:=======================================================================
+;622:
+;623:BODYQUE
+;624:
+;625:=======================================================================
+;626:*/
+;627:
+;628:#define BODY_SINK_TIME		45000
+;629:
+;630:/*
+;631:===============
+;632:InitBodyQue
+;633:===============
+;634:*/
+;635:void InitBodyQue (void) {
+line 639
+;636:	int		i;
+;637:	gentity_t	*ent;
+;638:
+;639:	level.bodyQueIndex = 0;
+ADDRGP4 level+9056
+CNSTI4 0
+ASGNI4
+line 640
+;640:	for (i=0; i<BODY_QUEUE_SIZE ; i++) {
+ADDRLP4 4
+CNSTI4 0
+ASGNI4
+LABELV $253
+line 641
+;641:		ent = G_Spawn();
+ADDRLP4 8
+ADDRGP4 G_Spawn
+CALLP4
+ASGNP4
+ADDRLP4 0
+ADDRLP4 8
+INDIRP4
+ASGNP4
+line 642
+;642:		ent->classname = "bodyque";
+ADDRLP4 0
+INDIRP4
+CNSTI4 416
+ADDP4
+ADDRGP4 $257
+ASGNP4
+line 643
+;643:		ent->neverFree = qtrue;
+ADDRLP4 0
+INDIRP4
+CNSTI4 468
+ADDP4
+CNSTI4 1
+ASGNI4
+line 644
+;644:		level.bodyQue[i] = ent;
+ADDRLP4 4
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRGP4 level+9060
+ADDP4
+ADDRLP4 0
+INDIRP4
+ASGNP4
+line 645
+;645:	}
+LABELV $254
+line 640
+ADDRLP4 4
+ADDRLP4 4
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+ADDRLP4 4
+INDIRI4
+CNSTI4 8
+LTI4 $253
+line 646
+;646:}
+LABELV $251
+endproc InitBodyQue 12 0
+export BodySink
+proc BodySink 4 4
+line 655
+;647:
+;648:/*
+;649:=============
+;650:BodySink
+;651:
+;652:After sitting around for five seconds, fall into the ground and dissapear
+;653:=============
+;654:*/
+;655:void BodySink( gentity_t *ent ) {
+line 656
+;656:	if ( level.time - ent->timestamp > BODY_SINK_TIME + 1500 ) {
+ADDRGP4 level+32
+INDIRI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 576
+ADDP4
+INDIRI4
+SUBI4
+CNSTI4 46500
+LEI4 $260
+line 658
+;657:		// the body ques are never actually freed, they are just unlinked
+;658:		trap_UnlinkEntity( ent );
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRGP4 trap_UnlinkEntity
+CALLV
+pop
+line 659
+;659:		ent->physicsObject = qfalse;
+ADDRFP4 0
+INDIRP4
+CNSTI4 500
+ADDP4
+CNSTI4 0
+ASGNI4
+line 660
+;660:		return;	
+ADDRGP4 $259
+JUMPV
+LABELV $260
+line 662
+;661:	}
+;662:	ent->nextthink = level.time + 100;
+ADDRFP4 0
+INDIRP4
+CNSTI4 632
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 100
+ADDI4
+ASGNI4
+line 663
+;663:	ent->s.pos.trBase[2] -= 1;
+ADDRLP4 0
+ADDRFP4 0
+INDIRP4
+CNSTI4 32
+ADDP4
+ASGNP4
+ADDRLP4 0
+INDIRP4
+ADDRLP4 0
+INDIRP4
+INDIRF4
+CNSTF4 1065353216
+SUBF4
+ASGNF4
+line 664
+;664:}
+LABELV $259
+endproc BodySink 4 4
+export CopyToBodyQue
+proc CopyToBodyQue 64 12
+line 674
+;665:
+;666:/*
+;667:=============
+;668:CopyToBodyQue
+;669:
+;670:A player is respawning, so make an entity that looks
+;671:just like the existing corpse to leave behind.
+;672:=============
+;673:*/
+;674:void CopyToBodyQue( gentity_t *ent ) {
+line 678
+;675:	gentity_t		*body;
+;676:	int			contents;
+;677:
+;678:	if (level.intermissiontime)
+ADDRGP4 level+9008
+INDIRI4
+CNSTI4 0
+EQI4 $265
+line 679
+;679:	{
+line 680
+;680:		return;
+ADDRGP4 $264
+JUMPV
+LABELV $265
+line 683
+;681:	}
+;682:
+;683:	trap_UnlinkEntity (ent);
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRGP4 trap_UnlinkEntity
+CALLV
+pop
+line 686
+;684:
+;685:	// if client is in a nodrop area, don't leave the body
+;686:	contents = trap_PointContents( ent->s.origin, -1 );
+ADDRFP4 0
+INDIRP4
+CNSTI4 92
+ADDP4
+ARGP4
+CNSTI4 -1
+ARGI4
+ADDRLP4 8
+ADDRGP4 trap_PointContents
+CALLI4
+ASGNI4
+ADDRLP4 4
+ADDRLP4 8
+INDIRI4
+ASGNI4
+line 687
+;687:	if ( contents & CONTENTS_NODROP ) {
+ADDRLP4 4
+INDIRI4
+CNSTI4 2048
+BANDI4
+CNSTI4 0
+EQI4 $268
+line 688
+;688:		return;
+ADDRGP4 $264
+JUMPV
+LABELV $268
+line 691
+;689:	}
+;690:
+;691:	if (ent->client && (ent->client->ps.eFlags & EF_DISINTEGRATION))
+ADDRLP4 12
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 12
+INDIRP4
+CVPU4 4
+CNSTU4 0
+EQU4 $270
+ADDRLP4 12
+INDIRP4
+CNSTI4 108
+ADDP4
+INDIRI4
+CNSTI4 33554432
+BANDI4
+CNSTI4 0
+EQI4 $270
+line 692
+;692:	{ //for now, just don't spawn a body if you got disint'd
+line 693
+;693:		return;
+ADDRGP4 $264
+JUMPV
+LABELV $270
+line 697
+;694:	}
+;695:
+;696:	// grab a body que and cycle to the next one
+;697:	body = level.bodyQue[ level.bodyQueIndex ];
+ADDRLP4 0
+ADDRGP4 level+9056
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRGP4 level+9060
+ADDP4
+INDIRP4
+ASGNP4
+line 698
+;698:	level.bodyQueIndex = (level.bodyQueIndex + 1) % BODY_QUEUE_SIZE;
+ADDRGP4 level+9056
+ADDRGP4 level+9056
+INDIRI4
+CNSTI4 1
+ADDI4
+CNSTI4 8
+MODI4
+ASGNI4
+line 700
+;699:
+;700:	trap_UnlinkEntity (body);
+ADDRLP4 0
+INDIRP4
+ARGP4
+ADDRGP4 trap_UnlinkEntity
+CALLV
+pop
+line 701
+;701:	body->s = ent->s;
+ADDRLP4 0
+INDIRP4
+ADDRFP4 0
+INDIRP4
+INDIRB
+ASGNB 296
+line 704
+;702:
+;703:	//avoid oddly angled corpses floating around
+;704:	body->s.angles[PITCH] = body->s.angles[ROLL] = body->s.apos.trBase[PITCH] = body->s.apos.trBase[ROLL] = 0;
+ADDRLP4 20
+CNSTF4 0
+ASGNF4
+ADDRLP4 0
+INDIRP4
+CNSTI4 68
+ADDP4
+ADDRLP4 20
+INDIRF4
+ASGNF4
+ADDRLP4 0
+INDIRP4
+CNSTI4 60
+ADDP4
+ADDRLP4 20
+INDIRF4
+ASGNF4
+ADDRLP4 0
+INDIRP4
+CNSTI4 124
+ADDP4
+ADDRLP4 20
+INDIRF4
+ASGNF4
+ADDRLP4 0
+INDIRP4
+CNSTI4 116
+ADDP4
+ADDRLP4 20
+INDIRF4
+ASGNF4
+line 706
+;705:
+;706:	body->s.g2radius = 100;
+ADDRLP4 0
+INDIRP4
+CNSTI4 208
+ADDP4
+CNSTI4 100
+ASGNI4
+line 708
+;707:
+;708:	body->s.eType = ET_BODY;
+ADDRLP4 0
+INDIRP4
+CNSTI4 4
+ADDP4
+CNSTI4 15
+ASGNI4
+line 709
+;709:	body->s.eFlags = EF_DEAD;		// clear EF_TALK, etc
+ADDRLP4 0
+INDIRP4
+CNSTI4 8
+ADDP4
+CNSTI4 1
+ASGNI4
+line 711
+;710:
+;711:	if (ent->client && (ent->client->ps.eFlags & EF_DISINTEGRATION))
+ADDRLP4 24
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 24
+INDIRP4
+CVPU4 4
+CNSTU4 0
+EQU4 $276
+ADDRLP4 24
+INDIRP4
+CNSTI4 108
+ADDP4
+INDIRI4
+CNSTI4 33554432
+BANDI4
+CNSTI4 0
+EQI4 $276
+line 712
+;712:	{
+line 713
+;713:		body->s.eFlags |= EF_DISINTEGRATION;
+ADDRLP4 28
+ADDRLP4 0
+INDIRP4
+CNSTI4 8
+ADDP4
+ASGNP4
+ADDRLP4 28
+INDIRP4
+ADDRLP4 28
+INDIRP4
+INDIRI4
+CNSTI4 33554432
+BORI4
+ASGNI4
+line 714
+;714:	}
+LABELV $276
+line 716
+;715:
+;716:	VectorCopy(ent->client->ps.lastHitLoc, body->s.origin2);
+ADDRLP4 0
+INDIRP4
+CNSTI4 104
+ADDP4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1368
+ADDP4
+INDIRB
+ASGNB 12
+line 718
+;717:
+;718:	body->s.powerups = 0;	// clear powerups
+ADDRLP4 0
+INDIRP4
+CNSTI4 272
+ADDP4
+CNSTI4 0
+ASGNI4
+line 719
+;719:	body->s.loopSound = 0;	// clear lava burning
+ADDRLP4 0
+INDIRP4
+CNSTI4 200
+ADDP4
+CNSTI4 0
+ASGNI4
+line 720
+;720:	body->s.number = body - g_entities;
+ADDRLP4 0
+INDIRP4
+ADDRLP4 0
+INDIRP4
+CVPU4 4
+ADDRGP4 g_entities
+CVPU4 4
+SUBU4
+CVUI4 4
+CNSTI4 852
+DIVI4
+ASGNI4
+line 721
+;721:	body->timestamp = level.time;
+ADDRLP4 0
+INDIRP4
+CNSTI4 576
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+ASGNI4
+line 722
+;722:	body->physicsObject = qtrue;
+ADDRLP4 0
+INDIRP4
+CNSTI4 500
+ADDP4
+CNSTI4 1
+ASGNI4
+line 723
+;723:	body->physicsBounce = 0;		// don't bounce
+ADDRLP4 0
+INDIRP4
+CNSTI4 504
+ADDP4
+CNSTF4 0
+ASGNF4
+line 724
+;724:	if ( body->s.groundEntityNum == ENTITYNUM_NONE ) {
+ADDRLP4 0
+INDIRP4
+CNSTI4 192
+ADDP4
+INDIRI4
+CNSTI4 1023
+NEI4 $279
+line 725
+;725:		body->s.pos.trType = TR_GRAVITY;
+ADDRLP4 0
+INDIRP4
+CNSTI4 12
+ADDP4
+CNSTI4 5
+ASGNI4
+line 726
+;726:		body->s.pos.trTime = level.time;
+ADDRLP4 0
+INDIRP4
+CNSTI4 16
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+ASGNI4
+line 727
+;727:		VectorCopy( ent->client->ps.velocity, body->s.pos.trDelta );
+ADDRLP4 0
+INDIRP4
+CNSTI4 36
+ADDP4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 32
+ADDP4
+INDIRB
+ASGNB 12
+line 728
+;728:	} else {
+ADDRGP4 $280
+JUMPV
+LABELV $279
+line 729
+;729:		body->s.pos.trType = TR_STATIONARY;
+ADDRLP4 0
+INDIRP4
+CNSTI4 12
+ADDP4
+CNSTI4 0
+ASGNI4
+line 730
+;730:	}
+LABELV $280
+line 731
+;731:	body->s.event = 0;
+ADDRLP4 0
+INDIRP4
+CNSTI4 252
+ADDP4
+CNSTI4 0
+ASGNI4
+line 733
+;732:
+;733:	body->s.weapon = ent->s.bolt2;
+ADDRLP4 0
+INDIRP4
+CNSTI4 276
+ADDP4
+ADDRFP4 0
+INDIRP4
+CNSTI4 144
+ADDP4
+INDIRI4
+ASGNI4
+line 735
+;734:
+;735:	if (body->s.weapon == WP_SABER && ent->client->ps.saberInFlight)
+ADDRLP4 0
+INDIRP4
+CNSTI4 276
+ADDP4
+INDIRI4
+CNSTI4 2
+NEI4 $282
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 504
+ADDP4
+INDIRI4
+CNSTI4 0
+EQI4 $282
+line 736
+;736:	{
+line 737
+;737:		body->s.weapon = WP_BLASTER; //lie to keep from putting a saber on the corpse, because it was thrown at death
+ADDRLP4 0
+INDIRP4
+CNSTI4 276
+ADDP4
+CNSTI4 4
+ASGNI4
+line 738
+;738:	}
+LABELV $282
+line 740
+;739:
+;740:	G_AddEvent(body, EV_BODY_QUEUE_COPY, ent->s.clientNum);
+ADDRLP4 0
+INDIRP4
+ARGP4
+CNSTI4 109
+ARGI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 220
+ADDP4
+INDIRI4
+ARGI4
+ADDRGP4 G_AddEvent
+CALLV
+pop
+line 742
+;741:
+;742:	body->r.svFlags = ent->r.svFlags | SVF_BROADCAST;
+ADDRLP4 32
+CNSTI4 304
+ASGNI4
+ADDRLP4 0
+INDIRP4
+ADDRLP4 32
+INDIRI4
+ADDP4
+ADDRFP4 0
+INDIRP4
+ADDRLP4 32
+INDIRI4
+ADDP4
+INDIRI4
+CNSTI4 32
+BORI4
+ASGNI4
+line 743
+;743:	VectorCopy (ent->r.mins, body->r.mins);
+ADDRLP4 36
+CNSTI4 316
+ASGNI4
+ADDRLP4 0
+INDIRP4
+ADDRLP4 36
+INDIRI4
+ADDP4
+ADDRFP4 0
+INDIRP4
+ADDRLP4 36
+INDIRI4
+ADDP4
+INDIRB
+ASGNB 12
+line 744
+;744:	VectorCopy (ent->r.maxs, body->r.maxs);
+ADDRLP4 40
+CNSTI4 328
+ASGNI4
+ADDRLP4 0
+INDIRP4
+ADDRLP4 40
+INDIRI4
+ADDP4
+ADDRFP4 0
+INDIRP4
+ADDRLP4 40
+INDIRI4
+ADDP4
+INDIRB
+ASGNB 12
+line 745
+;745:	VectorCopy (ent->r.absmin, body->r.absmin);
+ADDRLP4 44
+CNSTI4 344
+ASGNI4
+ADDRLP4 0
+INDIRP4
+ADDRLP4 44
+INDIRI4
+ADDP4
+ADDRFP4 0
+INDIRP4
+ADDRLP4 44
+INDIRI4
+ADDP4
+INDIRB
+ASGNB 12
+line 746
+;746:	VectorCopy (ent->r.absmax, body->r.absmax);
+ADDRLP4 48
+CNSTI4 356
+ASGNI4
+ADDRLP4 0
+INDIRP4
+ADDRLP4 48
+INDIRI4
+ADDP4
+ADDRFP4 0
+INDIRP4
+ADDRLP4 48
+INDIRI4
+ADDP4
+INDIRB
+ASGNB 12
+line 748
+;747:
+;748:	body->s.torsoAnim = body->s.legsAnim = ent->client->ps.legsAnim & ~ANIM_TOGGLEBIT;
+ADDRLP4 56
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 92
+ADDP4
+INDIRI4
+CNSTI4 -2049
+BANDI4
+ASGNI4
+ADDRLP4 0
+INDIRP4
+CNSTI4 280
+ADDP4
+ADDRLP4 56
+INDIRI4
+ASGNI4
+ADDRLP4 0
+INDIRP4
+CNSTI4 284
+ADDP4
+ADDRLP4 56
+INDIRI4
+ASGNI4
+line 750
+;749:
+;750:	body->clipmask = CONTENTS_SOLID | CONTENTS_PLAYERCLIP;
+ADDRLP4 0
+INDIRP4
+CNSTI4 508
+ADDP4
+CNSTI4 17
+ASGNI4
+line 751
+;751:	body->r.contents = CONTENTS_CORPSE;
+ADDRLP4 0
+INDIRP4
+CNSTI4 340
+ADDP4
+CNSTI4 512
+ASGNI4
+line 752
+;752:	body->r.ownerNum = ent->s.number;
+ADDRLP4 0
+INDIRP4
+CNSTI4 396
+ADDP4
+ADDRFP4 0
+INDIRP4
+INDIRI4
+ASGNI4
+line 754
+;753:
+;754:	body->nextthink = level.time + BODY_SINK_TIME;
+ADDRLP4 0
+INDIRP4
+CNSTI4 632
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 45000
+ADDI4
+ASGNI4
+line 755
+;755:	body->think = BodySink;
+ADDRLP4 0
+INDIRP4
+CNSTI4 636
+ADDP4
+ADDRGP4 BodySink
+ASGNP4
+line 757
+;756:
+;757:	body->die = body_die;
+ADDRLP4 0
+INDIRP4
+CNSTI4 660
+ADDP4
+ADDRGP4 body_die
+ASGNP4
+line 760
+;758:
+;759:	// don't take more damage if already gibbed
+;760:	if ( ent->health <= GIB_HEALTH ) {
+ADDRFP4 0
+INDIRP4
+CNSTI4 676
+ADDP4
+INDIRI4
+CNSTI4 -40
+GTI4 $285
+line 761
+;761:		body->takedamage = qfalse;
+ADDRLP4 0
+INDIRP4
+CNSTI4 680
+ADDP4
+CNSTI4 0
+ASGNI4
+line 762
+;762:	} else {
+ADDRGP4 $286
+JUMPV
+LABELV $285
+line 763
+;763:		body->takedamage = qtrue;
+ADDRLP4 0
+INDIRP4
+CNSTI4 680
+ADDP4
+CNSTI4 1
+ASGNI4
+line 764
+;764:	}
+LABELV $286
+line 766
+;765:
+;766:	VectorCopy ( body->s.pos.trBase, body->r.currentOrigin );
+ADDRLP4 0
+INDIRP4
+CNSTI4 368
+ADDP4
+ADDRLP4 0
+INDIRP4
+CNSTI4 24
+ADDP4
+INDIRB
+ASGNB 12
+line 767
+;767:	trap_LinkEntity (body);
+ADDRLP4 0
+INDIRP4
+ARGP4
+ADDRGP4 trap_LinkEntity
+CALLV
+pop
+line 768
+;768:}
+LABELV $264
+endproc CopyToBodyQue 64 12
+export SetClientViewAngle
+proc SetClientViewAngle 16 0
+line 779
+;769:
+;770://======================================================================
+;771:
+;772:
+;773:/*
+;774:==================
+;775:SetClientViewAngle
+;776:
+;777:==================
+;778:*/
+;779:void SetClientViewAngle( gentity_t *ent, vec3_t angle ) {
+line 783
+;780:	int			i;
+;781:
+;782:	// set the delta angle
+;783:	for (i=0 ; i<3 ; i++) {
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+LABELV $288
+line 786
+;784:		int		cmdAngle;
+;785:
+;786:		cmdAngle = ANGLE2SHORT(angle[i]);
+ADDRLP4 4
+CNSTF4 1199570944
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRFP4 4
+INDIRP4
+ADDP4
+INDIRF4
+MULF4
+CNSTF4 1135869952
+DIVF4
+CVFI4 4
+CNSTI4 65535
+BANDI4
+ASGNI4
+line 787
+;787:		ent->client->ps.delta_angles[i] = cmdAngle - ent->client->pers.cmd.angles[i];
+ADDRLP4 8
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+ASGNI4
+ADDRLP4 12
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 8
+INDIRI4
+ADDRLP4 12
+INDIRP4
+CNSTI4 68
+ADDP4
+ADDP4
+ADDRLP4 4
+INDIRI4
+ADDRLP4 8
+INDIRI4
+ADDRLP4 12
+INDIRP4
+CNSTI4 1388
+ADDP4
+ADDP4
+INDIRI4
+SUBI4
+ASGNI4
+line 788
+;788:	}
+LABELV $289
+line 783
+ADDRLP4 0
+ADDRLP4 0
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+ADDRLP4 0
+INDIRI4
+CNSTI4 3
+LTI4 $288
+line 789
+;789:	VectorCopy( angle, ent->s.angles );
+ADDRFP4 0
+INDIRP4
+CNSTI4 116
+ADDP4
+ADDRFP4 4
+INDIRP4
+INDIRB
+ASGNB 12
+line 790
+;790:	VectorCopy (ent->s.angles, ent->client->ps.viewangles);
+ADDRLP4 4
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 156
+ADDP4
+ADDRLP4 4
+INDIRP4
+CNSTI4 116
+ADDP4
+INDIRB
+ASGNB 12
+line 791
+;791:}
+LABELV $287
+endproc SetClientViewAngle 16 0
+export respawn
+proc respawn 36 8
+line 798
+;792:
+;793:/*
+;794:================
+;795:respawn
+;796:================
+;797:*/
+;798:void respawn( gentity_t *ent ) {
+line 801
+;799:	gentity_t	*tent;
+;800:	int i, t;
+;801:	int	num = 999;
+ADDRLP4 8
+CNSTI4 999
+ASGNI4
+line 803
+;802:
+;803:	CopyToBodyQue (ent);
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRGP4 CopyToBodyQue
+CALLV
+pop
+line 805
+;804:
+;805:	if (gEscaping)
+ADDRGP4 gEscaping
+INDIRI4
+CNSTI4 0
+EQI4 $293
+line 806
+;806:	{
+line 807
+;807:		ent->client->sess.sessionTeam = TEAM_SPECTATOR;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1632
+ADDP4
+CNSTI4 3
+ASGNI4
+line 808
+;808:		ent->client->sess.spectatorState = SPECTATOR_FREE;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1640
+ADDP4
+CNSTI4 1
+ASGNI4
+line 809
+;809:		ent->client->sess.spectatorClient = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1644
+ADDP4
+CNSTI4 0
+ASGNI4
+line 811
+;810:
+;811:		ent->client->pers.teamState.state = TEAM_BEGIN;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1472
+ADDP4
+CNSTI4 0
+ASGNI4
+line 812
+;812:	}
+LABELV $293
+line 814
+;813:
+;814:	trap_UnlinkEntity (ent);
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRGP4 trap_UnlinkEntity
+CALLV
+pop
+line 815
+;815:	ClientSpawn(ent);
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRGP4 ClientSpawn
+CALLV
+pop
+line 818
+;816:
+;817:	// add a teleportation effect
+;818:	tent = G_TempEntity( ent->client->ps.origin, EV_PLAYER_TELEPORT_IN );
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 20
+ADDP4
+ARGP4
+CNSTI4 59
+ARGI4
+ADDRLP4 16
+ADDRGP4 G_TempEntity
+CALLP4
+ASGNP4
+ADDRLP4 12
+ADDRLP4 16
+INDIRP4
+ASGNP4
+line 819
+;819:	tent->s.clientNum = ent->s.clientNum;
+ADDRLP4 20
+CNSTI4 220
+ASGNI4
+ADDRLP4 12
+INDIRP4
+ADDRLP4 20
+INDIRI4
+ADDP4
+ADDRFP4 0
+INDIRP4
+ADDRLP4 20
+INDIRI4
+ADDP4
+INDIRI4
+ASGNI4
+line 821
+;820:
+;821:	if (ent->client->pers.amempower == qtrue){
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1532
+ADDP4
+INDIRI4
+CNSTI4 1
+NEI4 $295
+line 822
+;822:		ent->client->ps.isJediMaster = qtrue;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 604
+ADDP4
+CNSTI4 1
+ASGNI4
+line 823
+;823:		if ( g_gametype.integer >= GT_TEAM) {
+ADDRGP4 g_gametype+12
+INDIRI4
+CNSTI4 5
+LTI4 $297
+line 824
+;824:			ent->client->ps.fd.forcePowersKnown = ( 1 << FP_HEAL | 1 << FP_SPEED | 1 << FP_PUSH | 1 << FP_PULL | 
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 844
+ADDP4
+CNSTI4 32765
+ASGNI4
+line 828
+;825:											1 << FP_TELEPATHY | 1 << FP_GRIP | 1 << FP_LIGHTNING | 1 << FP_RAGE | 
+;826:											1 << FP_PROTECT | 1 << FP_ABSORB | 1 << FP_TEAM_HEAL | 1 << FP_TEAM_FORCE | 
+;827:											1 << FP_DRAIN | 1 << FP_SEE);
+;828:		}
+ADDRGP4 $298
+JUMPV
+LABELV $297
+line 829
+;829:		else{
+line 830
+;830:			ent->client->ps.fd.forcePowersKnown = ( 1 << FP_HEAL | 1 << FP_SPEED | 1 << FP_PUSH | 1 << FP_PULL | 
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 844
+ADDP4
+CNSTI4 26621
+ASGNI4
+line 833
+;831:											1 << FP_TELEPATHY | 1 << FP_GRIP | 1 << FP_LIGHTNING | 1 << FP_RAGE | 
+;832:											1 << FP_PROTECT | 1 << FP_ABSORB | 1 << FP_DRAIN | 1 << FP_SEE);
+;833:		}
+LABELV $298
+line 834
+;834:		for( i = 0; i < NUM_FORCE_POWERS; i ++ ){
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+LABELV $300
+line 835
+;835:			ent->client->ps.fd.forcePowerLevel[i] = FORCE_LEVEL_3;
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 944
+ADDP4
+ADDP4
+CNSTI4 3
+ASGNI4
+line 836
+;836:		}
+LABELV $301
+line 834
+ADDRLP4 0
+ADDRLP4 0
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+ADDRLP4 0
+INDIRI4
+CNSTI4 18
+LTI4 $300
+line 837
+;837:	} else if (ent->client->pers.amterminator == qtrue) {
+ADDRGP4 $296
+JUMPV
+LABELV $295
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1536
+ADDP4
+INDIRI4
+CNSTI4 1
+NEI4 $304
+line 838
+;838:		for ( t = 0 ; t < MAX_WEAPONS ; t++ ) {
+ADDRLP4 4
+CNSTI4 0
+ASGNI4
+LABELV $306
+line 839
+;839:			ent->client->ps.ammo[t] = num;
+ADDRLP4 24
+CNSTI4 408
+ASGNI4
+ADDRLP4 4
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRFP4 0
+INDIRP4
+ADDRLP4 24
+INDIRI4
+ADDP4
+INDIRP4
+ADDRLP4 24
+INDIRI4
+ADDP4
+ADDP4
+ADDRLP4 8
+INDIRI4
+ASGNI4
+line 840
+;840:		}
+LABELV $307
+line 838
+ADDRLP4 4
+ADDRLP4 4
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+ADDRLP4 4
+INDIRI4
+CNSTI4 16
+LTI4 $306
+line 841
+;841:		ent->client->ps.weapon = WP_STUN_BATON;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 148
+ADDP4
+CNSTI4 1
+ASGNI4
+line 842
+;842:		ent->client->ps.forceRestricted = qtrue;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 608
+ADDP4
+CNSTI4 1
+ASGNI4
+line 843
+;843:		ent->client->ps.stats[STAT_WEAPONS] &= ~( 1 << WP_SABER );
+ADDRLP4 24
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 232
+ADDP4
+ASGNP4
+ADDRLP4 24
+INDIRP4
+ADDRLP4 24
+INDIRP4
+INDIRI4
+CNSTI4 -5
+BANDI4
+ASGNI4
+line 844
+;844:		ent->client->ps.stats[STAT_WEAPONS] |= (1 << WP_STUN_BATON) | (1 << WP_BRYAR_PISTOL) | (1 << WP_BLASTER) | (1 << WP_DISRUPTOR)
+ADDRLP4 28
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 232
+ADDP4
+ASGNP4
+ADDRLP4 28
+INDIRP4
+ADDRLP4 28
+INDIRP4
+INDIRI4
+CNSTI4 16378
+BORI4
+ASGNI4
+line 847
+;845:			 | (1 << WP_BOWCASTER) | (1 << WP_REPEATER) | (1 << WP_DEMP2) | (1 << WP_FLECHETTE) | (1 << WP_ROCKET_LAUNCHER) | (1 << WP_THERMAL)
+;846:			 | (1 << WP_TRIP_MINE) | (1 << WP_DET_PACK);
+;847:		ent->client->ps.stats[STAT_HOLDABLE_ITEMS] |= (1 << HI_BINOCULARS) | (1 << HI_SEEKER) | (1 << HI_MEDPAC) | (1 << HI_SHIELD) | (1 << HI_SENTRY_GUN);
+ADDRLP4 32
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 224
+ADDP4
+ASGNP4
+ADDRLP4 32
+INDIRP4
+ADDRLP4 32
+INDIRP4
+INDIRI4
+CNSTI4 110
+BORI4
+ASGNI4
+line 848
+;848:	}
+LABELV $304
+LABELV $296
+line 849
+;849:	if ( cm_autoprotecttime.integer != 0 ) {
+ADDRGP4 cm_autoprotecttime+12
+INDIRI4
+CNSTI4 0
+EQI4 $310
+line 850
+;850:		ent->client->cmIdleTimer = cm_autoprotecttime.integer;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1844
+ADDP4
+ADDRGP4 cm_autoprotecttime+12
+INDIRI4
+ASGNI4
+line 851
+;851:	}
+LABELV $310
+line 852
+;852:	if (ent->client->pers.ampunish == qtrue) {
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1544
+ADDP4
+INDIRI4
+CNSTI4 1
+NEI4 $314
+line 853
+;853:		ent->flags |= FL_GODMODE;
+ADDRLP4 24
+ADDRFP4 0
+INDIRP4
+CNSTI4 472
+ADDP4
+ASGNP4
+ADDRLP4 24
+INDIRP4
+ADDRLP4 24
+INDIRP4
+INDIRI4
+CNSTI4 16
+BORI4
+ASGNI4
+line 854
+;854:		ent->client->ps.forceRestricted = qtrue;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 608
+ADDP4
+CNSTI4 1
+ASGNI4
+line 855
+;855:		ent->client->ps.saberHolstered = qtrue;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1312
+ADDP4
+CNSTI4 1
+ASGNI4
+line 856
+;856:	}
+LABELV $314
+line 857
+;857:	if (ent->client->pers.amsleep == qtrue) {
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1548
+ADDP4
+INDIRI4
+CNSTI4 1
+NEI4 $316
+line 858
+;858:		ent->client->ps.forceHandExtend = HANDEXTEND_KNOCKDOWN;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1248
+ADDP4
+CNSTI4 8
+ASGNI4
+line 859
+;859:		ent->client->ps.forceDodgeAnim = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1260
+ADDP4
+CNSTI4 0
+ASGNI4
+line 860
+;860:		ent->client->ps.forceHandExtendTime = Q3_INFINITE;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1252
+ADDP4
+CNSTI4 16777216
+ASGNI4
+line 861
+;861:		ent->client->ps.quickerGetup = qfalse;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1264
+ADDP4
+CNSTI4 0
+ASGNI4
+line 862
+;862:		ent->client->ps.saberHolstered = qtrue;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1312
+ADDP4
+CNSTI4 1
+ASGNI4
+line 863
+;863:		ent->flags |= FL_GODMODE;
+ADDRLP4 24
+ADDRFP4 0
+INDIRP4
+CNSTI4 472
+ADDP4
+ASGNP4
+ADDRLP4 24
+INDIRP4
+ADDRLP4 24
+INDIRP4
+INDIRI4
+CNSTI4 16
+BORI4
+ASGNI4
+line 864
+;864:	}
+LABELV $316
+line 865
+;865:}
+LABELV $292
+endproc respawn 36 8
+export TeamCount
+proc TeamCount 8 0
+line 874
+;866:
+;867:/*
+;868:================
+;869:TeamCount
+;870:
+;871:Returns number of players on a team
+;872:================
+;873:*/
+;874:team_t TeamCount( int ignoreClientNum, int team ) {
+line 876
+;875:	int		i;
+;876:	int		count = 0;
+ADDRLP4 4
+CNSTI4 0
+ASGNI4
+line 878
+;877:
+;878:	for ( i = 0 ; i < level.maxclients ; i++ ) {
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+ADDRGP4 $322
+JUMPV
+LABELV $319
+line 879
+;879:		if ( i == ignoreClientNum ) {
+ADDRLP4 0
+INDIRI4
+ADDRFP4 0
+INDIRI4
+NEI4 $324
+line 880
+;880:			continue;
+ADDRGP4 $320
+JUMPV
+LABELV $324
+line 882
+;881:		}
+;882:		if ( level.clients[i].pers.connected == CON_DISCONNECTED ) {
+CNSTI4 2972
+ADDRLP4 0
+INDIRI4
+MULI4
+ADDRGP4 level
+INDIRP4
+ADDP4
+CNSTI4 1380
+ADDP4
+INDIRI4
+CNSTI4 0
+NEI4 $326
+line 883
+;883:			continue;
+ADDRGP4 $320
+JUMPV
+LABELV $326
+line 885
+;884:		}
+;885:		if ( level.clients[i].sess.sessionTeam == team ) {
+CNSTI4 2972
+ADDRLP4 0
+INDIRI4
+MULI4
+ADDRGP4 level
+INDIRP4
+ADDP4
+CNSTI4 1632
+ADDP4
+INDIRI4
+ADDRFP4 4
+INDIRI4
+NEI4 $328
+line 886
+;886:			count++;
+ADDRLP4 4
+ADDRLP4 4
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 887
+;887:		}
+LABELV $328
+line 888
+;888:	}
+LABELV $320
+line 878
+ADDRLP4 0
+ADDRLP4 0
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+LABELV $322
+ADDRLP4 0
+INDIRI4
+ADDRGP4 level+24
+INDIRI4
+LTI4 $319
+line 890
+;889:
+;890:	return count;
+ADDRLP4 4
+INDIRI4
+RETI4
+LABELV $318
+endproc TeamCount 8 0
+export TeamLeader
+proc TeamLeader 4 0
+line 900
+;891:}
+;892:
+;893:/*
+;894:================
+;895:TeamLeader
+;896:
+;897:Returns the client number of the team leader
+;898:================
+;899:*/
+;900:int TeamLeader( int team ) {
+line 903
+;901:	int		i;
+;902:
+;903:	for ( i = 0 ; i < level.maxclients ; i++ ) {
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+ADDRGP4 $334
+JUMPV
+LABELV $331
+line 904
+;904:		if ( level.clients[i].pers.connected == CON_DISCONNECTED ) {
+CNSTI4 2972
+ADDRLP4 0
+INDIRI4
+MULI4
+ADDRGP4 level
+INDIRP4
+ADDP4
+CNSTI4 1380
+ADDP4
+INDIRI4
+CNSTI4 0
+NEI4 $336
+line 905
+;905:			continue;
+ADDRGP4 $332
+JUMPV
+LABELV $336
+line 907
+;906:		}
+;907:		if ( level.clients[i].sess.sessionTeam == team ) {
+CNSTI4 2972
+ADDRLP4 0
+INDIRI4
+MULI4
+ADDRGP4 level
+INDIRP4
+ADDP4
+CNSTI4 1632
+ADDP4
+INDIRI4
+ADDRFP4 0
+INDIRI4
+NEI4 $338
+line 908
+;908:			if ( level.clients[i].sess.teamLeader )
+CNSTI4 2972
+ADDRLP4 0
+INDIRI4
+MULI4
+ADDRGP4 level
+INDIRP4
+ADDP4
+CNSTI4 1672
+ADDP4
+INDIRI4
+CNSTI4 0
+EQI4 $340
+line 909
+;909:				return i;
+ADDRLP4 0
+INDIRI4
+RETI4
+ADDRGP4 $330
+JUMPV
+LABELV $340
+line 910
+;910:		}
+LABELV $338
+line 911
+;911:	}
+LABELV $332
+line 903
+ADDRLP4 0
+ADDRLP4 0
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+LABELV $334
+ADDRLP4 0
+INDIRI4
+ADDRGP4 level+24
+INDIRI4
+LTI4 $331
+line 913
+;912:
+;913:	return -1;
+CNSTI4 -1
+RETI4
+LABELV $330
+endproc TeamLeader 4 0
+export PickTeam
+proc PickTeam 24 8
+line 923
+;914:}
+;915:
+;916:
+;917:/*
+;918:================
+;919:PickTeam
+;920:
+;921:================
+;922:*/
+;923:team_t PickTeam( int ignoreClientNum ) {
+line 926
+;924:	int		counts[TEAM_NUM_TEAMS];
+;925:
+;926:	counts[TEAM_BLUE] = TeamCount( ignoreClientNum, TEAM_BLUE );
+ADDRFP4 0
+INDIRI4
+ARGI4
+CNSTI4 2
+ARGI4
+ADDRLP4 16
+ADDRGP4 TeamCount
+CALLI4
+ASGNI4
+ADDRLP4 0+8
+ADDRLP4 16
+INDIRI4
+ASGNI4
+line 927
+;927:	counts[TEAM_RED] = TeamCount( ignoreClientNum, TEAM_RED );
+ADDRFP4 0
+INDIRI4
+ARGI4
+CNSTI4 1
+ARGI4
+ADDRLP4 20
+ADDRGP4 TeamCount
+CALLI4
+ASGNI4
+ADDRLP4 0+4
+ADDRLP4 20
+INDIRI4
+ASGNI4
+line 929
+;928:
+;929:	if (( counts[TEAM_BLUE] > counts[TEAM_RED] ) && (!level.isLockedred) ){
+ADDRLP4 0+8
+INDIRI4
+ADDRLP4 0+4
+INDIRI4
+LEI4 $345
+ADDRGP4 level+9096
+INDIRI4
+CNSTI4 0
+NEI4 $345
+line 930
+;930:		return TEAM_RED;
+CNSTI4 1
+RETI4
+ADDRGP4 $342
+JUMPV
+LABELV $345
+line 933
+;931:	}
+;932:	
+;933:	if (( counts[TEAM_RED] > counts[TEAM_BLUE] )&& (!level.isLockedblue) ) {
+ADDRLP4 0+4
+INDIRI4
+ADDRLP4 0+8
+INDIRI4
+LEI4 $350
+ADDRGP4 level+9100
+INDIRI4
+CNSTI4 0
+NEI4 $350
+line 934
+;934:		return TEAM_BLUE;
+CNSTI4 2
+RETI4
+ADDRGP4 $342
+JUMPV
+LABELV $350
+line 938
+;935:	}
+;936:	
+;937:	// equal team count, so join the team with the lowest score
+;938:	if (( level.teamScores[TEAM_BLUE] > level.teamScores[TEAM_RED] ) && (!level.isLockedred) ){
+ADDRGP4 level+44+8
+INDIRI4
+ADDRGP4 level+44+4
+INDIRI4
+LEI4 $355
+ADDRGP4 level+9096
+INDIRI4
+CNSTI4 0
+NEI4 $355
+line 939
+;939:		return TEAM_RED;
+CNSTI4 1
+RETI4
+ADDRGP4 $342
+JUMPV
+LABELV $355
+line 942
+;940:	}
+;941:	
+;942:	if (!level.isLockedblue){
+ADDRGP4 level+9100
+INDIRI4
+CNSTI4 0
+NEI4 $362
+line 943
+;943:		return TEAM_BLUE;
+CNSTI4 2
+RETI4
+ADDRGP4 $342
+JUMPV
+LABELV $362
+line 945
+;944:	}
+;945:	else {
+line 946
+;946:		return TEAM_SPECTATOR; // We gotta go SOMEWHERE! mine as well be spec.
+CNSTI4 3
+RETI4
+LABELV $342
+endproc PickTeam 24 8
+proc ClientCleanName 48 12
+line 975
+;947:	}
+;948:}
+;949:
+;950:/*
+;951:===========
+;952:ForceClientSkin
+;953:
+;954:Forces a client's skin (for teamplay)
+;955:===========
+;956:*/
+;957:/*
+;958:static void ForceClientSkin( gclient_t *client, char *model, const char *skin ) {
+;959:	char *p;
+;960:
+;961:	if ((p = Q_strrchr(model, '/')) != 0) {
+;962:		*p = 0;
+;963:	}
+;964:
+;965:	Q_strcat(model, MAX_QPATH, "/");
+;966:	Q_strcat(model, MAX_QPATH, skin);
+;967:}
+;968:*/
+;969:
+;970:/*
+;971:===========
+;972:ClientCheckName
+;973:============
+;974:*/
+;975:static void ClientCleanName( const char *in, char *out, int outSize ) {
+line 982
+;976:	int		len, colorlessLen;
+;977:	char	ch;
+;978:	char	*p;
+;979:	int		spaces;
+;980:
+;981:	//save room for trailing null byte
+;982:	outSize--;
+ADDRFP4 8
+ADDRFP4 8
+INDIRI4
+CNSTI4 1
+SUBI4
+ASGNI4
+line 984
+;983:
+;984:	len = 0;
+ADDRLP4 4
+CNSTI4 0
+ASGNI4
+line 985
+;985:	colorlessLen = 0;
+ADDRLP4 8
+CNSTI4 0
+ASGNI4
+line 986
+;986:	p = out;
+ADDRLP4 16
+ADDRFP4 4
+INDIRP4
+ASGNP4
+line 987
+;987:	*p = 0;
+ADDRLP4 16
+INDIRP4
+CNSTI1 0
+ASGNI1
+line 988
+;988:	spaces = 0;
+ADDRLP4 12
+CNSTI4 0
+ASGNI4
+ADDRGP4 $367
+JUMPV
+LABELV $366
+line 990
+;989:
+;990:	while( 1 ) {
+line 991
+;991:		ch = *in++;
+ADDRLP4 20
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRFP4 0
+ADDRLP4 20
+INDIRP4
+CNSTI4 1
+ADDP4
+ASGNP4
+ADDRLP4 0
+ADDRLP4 20
+INDIRP4
+INDIRI1
+ASGNI1
+line 992
+;992:		if( !ch ) {
+ADDRLP4 0
+INDIRI1
+CVII4 1
+CNSTI4 0
+NEI4 $369
+line 993
+;993:			break;
+ADDRGP4 $368
+JUMPV
+LABELV $369
+line 997
+;994:		}
+;995:
+;996:		// don't allow leading spaces
+;997:		if( (colorlessLen == 0 || !*p) && ch == ' ' ) { //JAKES NOTE: Color + Space is not a character
+ADDRLP4 24
+CNSTI4 0
+ASGNI4
+ADDRLP4 8
+INDIRI4
+ADDRLP4 24
+INDIRI4
+EQI4 $373
+ADDRLP4 16
+INDIRP4
+INDIRI1
+CVII4 1
+ADDRLP4 24
+INDIRI4
+NEI4 $371
+LABELV $373
+ADDRLP4 0
+INDIRI1
+CVII4 1
+CNSTI4 32
+NEI4 $371
+line 998
+;998:			continue;
+ADDRGP4 $367
+JUMPV
+LABELV $371
+line 1001
+;999:		}
+;1000:
+;1001:		if (ch == 255 || ch == -96){ //JAKES NOTE: Character 255 is a blank character (ALT+255)
+ADDRLP4 28
+ADDRLP4 0
+INDIRI1
+CVII4 1
+ASGNI4
+ADDRLP4 28
+INDIRI4
+CNSTI4 255
+EQI4 $376
+ADDRLP4 28
+INDIRI4
+CNSTI4 -96
+NEI4 $374
+LABELV $376
+line 1002
+;1002:			continue;
+ADDRGP4 $367
+JUMPV
+LABELV $374
+line 1006
+;1003:		}
+;1004:
+;1005:		// check colors
+;1006:		if( ch == Q_COLOR_ESCAPE ) {
+ADDRLP4 0
+INDIRI1
+CVII4 1
+CNSTI4 94
+NEI4 $377
+line 1008
+;1007:			// solo trailing carat is not a color prefix
+;1008:			if( !*in ) {
+ADDRFP4 0
+INDIRP4
+INDIRI1
+CVII4 1
+CNSTI4 0
+NEI4 $379
+line 1009
+;1009:				break;
+ADDRGP4 $368
+JUMPV
+LABELV $379
+line 1014
+;1010:			}
+;1011:
+;1012:			// don't allow black in a name, period
+;1013:			//cm NOTE: I want to allow black names sometimes
+;1014:			if (cm_blacknames.integer == 0) {
+ADDRGP4 cm_blacknames+12
+INDIRI4
+CNSTI4 0
+NEI4 $381
+line 1015
+;1015:				if( ColorIndex(*in) == 0 ) {
+ADDRFP4 0
+INDIRP4
+INDIRI1
+CVII4 1
+CNSTI4 48
+SUBI4
+CNSTI4 7
+BANDI4
+CNSTI4 0
+NEI4 $384
+line 1016
+;1016:					in++;
+ADDRFP4 0
+ADDRFP4 0
+INDIRP4
+CNSTI4 1
+ADDP4
+ASGNP4
+line 1017
+;1017:					continue;
+ADDRGP4 $367
+JUMPV
+LABELV $384
+line 1019
+;1018:				}
+;1019:			}
+LABELV $381
+line 1022
+;1020:
+;1021:			// make sure room in dest for both chars
+;1022:			if( len > outSize - 2 ) {
+ADDRLP4 4
+INDIRI4
+ADDRFP4 8
+INDIRI4
+CNSTI4 2
+SUBI4
+LEI4 $386
+line 1023
+;1023:				break;
+ADDRGP4 $368
+JUMPV
+LABELV $386
+line 1026
+;1024:			}
+;1025:
+;1026:			*out++ = ch;
+ADDRLP4 32
+ADDRFP4 4
+INDIRP4
+ASGNP4
+ADDRFP4 4
+ADDRLP4 32
+INDIRP4
+CNSTI4 1
+ADDP4
+ASGNP4
+ADDRLP4 32
+INDIRP4
+ADDRLP4 0
+INDIRI1
+ASGNI1
+line 1027
+;1027:			*out++ = *in++;
+ADDRLP4 36
+ADDRFP4 4
+INDIRP4
+ASGNP4
+ADDRLP4 44
+CNSTI4 1
+ASGNI4
+ADDRFP4 4
+ADDRLP4 36
+INDIRP4
+ADDRLP4 44
+INDIRI4
+ADDP4
+ASGNP4
+ADDRLP4 40
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRFP4 0
+ADDRLP4 40
+INDIRP4
+ADDRLP4 44
+INDIRI4
+ADDP4
+ASGNP4
+ADDRLP4 36
+INDIRP4
+ADDRLP4 40
+INDIRP4
+INDIRI1
+ASGNI1
+line 1028
+;1028:			len += 2;
+ADDRLP4 4
+ADDRLP4 4
+INDIRI4
+CNSTI4 2
+ADDI4
+ASGNI4
+line 1029
+;1029:			continue;
+ADDRGP4 $367
+JUMPV
+LABELV $377
+line 1033
+;1030:		}
+;1031:
+;1032:		// don't allow too many consecutive spaces
+;1033:		if( ch == ' ' ) {
+ADDRLP4 0
+INDIRI1
+CVII4 1
+CNSTI4 32
+NEI4 $388
+line 1034
+;1034:			spaces++;
+ADDRLP4 12
+ADDRLP4 12
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 1035
+;1035:			if( spaces > 3 ) {
+ADDRLP4 12
+INDIRI4
+CNSTI4 3
+LEI4 $389
+line 1036
+;1036:				continue;
+ADDRGP4 $367
+JUMPV
+line 1038
+;1037:			}
+;1038:		}
+LABELV $388
+line 1039
+;1039:		else {
+line 1040
+;1040:			spaces = 0;
+ADDRLP4 12
+CNSTI4 0
+ASGNI4
+line 1041
+;1041:		}
+LABELV $389
+line 1043
+;1042:
+;1043:		if( len > outSize - 1 ) {
+ADDRLP4 4
+INDIRI4
+ADDRFP4 8
+INDIRI4
+CNSTI4 1
+SUBI4
+LEI4 $392
+line 1044
+;1044:			break;
+ADDRGP4 $368
+JUMPV
+LABELV $392
+line 1047
+;1045:		}
+;1046:
+;1047:		*out++ = ch;
+ADDRLP4 32
+ADDRFP4 4
+INDIRP4
+ASGNP4
+ADDRFP4 4
+ADDRLP4 32
+INDIRP4
+CNSTI4 1
+ADDP4
+ASGNP4
+ADDRLP4 32
+INDIRP4
+ADDRLP4 0
+INDIRI1
+ASGNI1
+line 1048
+;1048:		colorlessLen++;
+ADDRLP4 8
+ADDRLP4 8
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 1049
+;1049:		len++;
+ADDRLP4 4
+ADDRLP4 4
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 1050
+;1050:	}
+LABELV $367
+line 990
+ADDRGP4 $366
+JUMPV
+LABELV $368
+line 1051
+;1051:	*out = 0;
+ADDRFP4 4
+INDIRP4
+CNSTI1 0
+ASGNI1
+line 1054
+;1052:
+;1053:	// don't allow empty names
+;1054:	if( *p == 0 || colorlessLen == 0 ) {
+ADDRLP4 20
+CNSTI4 0
+ASGNI4
+ADDRLP4 16
+INDIRP4
+INDIRI1
+CVII4 1
+ADDRLP4 20
+INDIRI4
+EQI4 $396
+ADDRLP4 8
+INDIRI4
+ADDRLP4 20
+INDIRI4
+NEI4 $394
+LABELV $396
+line 1055
+;1055:		Q_strncpyz( p, "Padawan", outSize );
+ADDRLP4 16
+INDIRP4
+ARGP4
+ADDRGP4 $397
+ARGP4
+ADDRFP4 8
+INDIRI4
+ARGI4
+ADDRGP4 Q_strncpyz
+CALLV
+pop
+line 1056
+;1056:	}
+LABELV $394
+line 1057
+;1057:}
+LABELV $365
+endproc ClientCleanName 48 12
+data
+export g2SaberInstance
+align 4
+LABELV g2SaberInstance
+byte 4 0
+lit
+align 4
+LABELV $399
+byte 4 0
+byte 4 0
+byte 4 0
+export SetupGameGhoul2Model
+code
+proc SetupGameGhoul2Model 188 44
+line 1082
+;1058:
+;1059:#ifdef _DEBUG
+;1060:void G_DebugWrite(const char *path, const char *text)
+;1061:{
+;1062:	fileHandle_t f;
+;1063:
+;1064:	trap_FS_FOpenFile( path, &f, FS_APPEND );
+;1065:	trap_FS_Write(text, strlen(text), f);
+;1066:	trap_FS_FCloseFile(f);
+;1067:}
+;1068:#endif
+;1069:
+;1070:/*
+;1071:===========
+;1072:SetupGameGhoul2Model
+;1073:
+;1074:There are two ghoul2 model instances per player (actually three).  One is on the clientinfo (the base for the client side 
+;1075:player, and copied for player spawns and for corpses).  One is attached to the centity itself, which is the model acutally 
+;1076:animated and rendered by the system.  The final is the game ghoul2 model.  This is animated by pmove on the server, and
+;1077:is used for determining where the lightsaber should be, and for per-poly collision tests.
+;1078:===========
+;1079:*/
+;1080:void *g2SaberInstance = NULL;
+;1081:void SetupGameGhoul2Model(gclient_t *client, char *modelname)
+;1082:{
+line 1087
+;1083:	int handle;
+;1084:	char		afilename[MAX_QPATH];
+;1085:	char		/**GLAName,*/ *slash;
+;1086:	char		GLAName[MAX_QPATH];
+;1087:	vec3_t	tempVec = {0,0,0};
+ADDRLP4 64
+ADDRGP4 $399
+INDIRB
+ASGNB 12
+line 1090
+;1088:
+;1089:	// First things first.  If this is a ghoul2 model, then let's make sure we demolish this first.
+;1090:	if (client->ghoul2 && trap_G2_HaveWeGhoul2Models(client->ghoul2))
+ADDRLP4 148
+ADDRFP4 0
+INDIRP4
+CNSTI4 2888
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 148
+INDIRP4
+CVPU4 4
+CNSTU4 0
+EQU4 $400
+ADDRLP4 148
+INDIRP4
+ARGP4
+ADDRLP4 152
+ADDRGP4 trap_G2_HaveWeGhoul2Models
+CALLI4
+ASGNI4
+ADDRLP4 152
+INDIRI4
+CNSTI4 0
+EQI4 $400
+line 1091
+;1091:	{
+line 1092
+;1092:		trap_G2API_CleanGhoul2Models(&(client->ghoul2));
+ADDRFP4 0
+INDIRP4
+CNSTI4 2888
+ADDP4
+ARGP4
+ADDRGP4 trap_G2API_CleanGhoul2Models
+CALLV
+pop
+line 1093
+;1093:	}
+LABELV $400
+line 1111
+;1094:
+;1095:	/*
+;1096:	Com_sprintf( afilename, sizeof( afilename ), "models/players/%s/model.glm", modelname );
+;1097:	handle = trap_G2API_InitGhoul2Model(&client->ghoul2, afilename, 0, 0, -20, 0, 0);
+;1098:	if (handle<0)
+;1099:	{
+;1100:		Com_sprintf( afilename, sizeof( afilename ), "models/players/kyle/model.glm" );
+;1101:		handle = trap_G2API_InitGhoul2Model(&client->ghoul2, afilename, 0, 0, -20, 0, 0);
+;1102:
+;1103:		if (handle<0)
+;1104:		{
+;1105:			return;
+;1106:		}
+;1107:	}
+;1108:	*/
+;1109:
+;1110:	//rww - just load the "standard" model for the server"
+;1111:	if (!precachedKyle)
+ADDRGP4 precachedKyle
+INDIRP4
+CVPU4 4
+CNSTU4 0
+NEU4 $402
+line 1112
+;1112:	{
+line 1113
+;1113:		Com_sprintf( afilename, sizeof( afilename ), "models/players/kyle/model.glm" );
+ADDRLP4 0
+ARGP4
+CNSTI4 64
+ARGI4
+ADDRGP4 $404
+ARGP4
+ADDRGP4 Com_sprintf
+CALLV
+pop
+line 1114
+;1114:		handle = trap_G2API_InitGhoul2Model(&precachedKyle, afilename, 0, 0, -20, 0, 0);
+ADDRGP4 precachedKyle
+ARGP4
+ADDRLP4 0
+ARGP4
+ADDRLP4 156
+CNSTI4 0
+ASGNI4
+ADDRLP4 156
+INDIRI4
+ARGI4
+ADDRLP4 156
+INDIRI4
+ARGI4
+CNSTI4 -20
+ARGI4
+ADDRLP4 156
+INDIRI4
+ARGI4
+ADDRLP4 156
+INDIRI4
+ARGI4
+ADDRLP4 160
+ADDRGP4 trap_G2API_InitGhoul2Model
+CALLI4
+ASGNI4
+ADDRLP4 144
+ADDRLP4 160
+INDIRI4
+ASGNI4
+line 1116
+;1115:
+;1116:		if (handle<0)
+ADDRLP4 144
+INDIRI4
+CNSTI4 0
+GEI4 $405
+line 1117
+;1117:		{
+line 1118
+;1118:			return;
+ADDRGP4 $398
+JUMPV
+LABELV $405
+line 1120
+;1119:		}
+;1120:	}
+LABELV $402
+line 1122
+;1121:
+;1122:	if (precachedKyle && trap_G2_HaveWeGhoul2Models(precachedKyle))
+ADDRLP4 156
+ADDRGP4 precachedKyle
+INDIRP4
+ASGNP4
+ADDRLP4 156
+INDIRP4
+CVPU4 4
+CNSTU4 0
+EQU4 $398
+ADDRLP4 156
+INDIRP4
+ARGP4
+ADDRLP4 160
+ADDRGP4 trap_G2_HaveWeGhoul2Models
+CALLI4
+ASGNI4
+ADDRLP4 160
+INDIRI4
+CNSTI4 0
+EQI4 $398
+line 1123
+;1123:	{
+line 1124
+;1124:		trap_G2API_DuplicateGhoul2Instance(precachedKyle, &client->ghoul2);
+ADDRGP4 precachedKyle
+INDIRP4
+ARGP4
+ADDRFP4 0
+INDIRP4
+CNSTI4 2888
+ADDP4
+ARGP4
+ADDRGP4 trap_G2API_DuplicateGhoul2Instance
+CALLV
+pop
+line 1125
+;1125:	}
+line 1127
+;1126:	else
+;1127:	{
+line 1128
+;1128:		return;
+LABELV $408
+line 1133
+;1129:	}
+;1130:
+;1131:	// The model is now loaded.
+;1132:
+;1133:	GLAName[0] = 0;
+ADDRLP4 76
+CNSTI1 0
+ASGNI1
+line 1135
+;1134:
+;1135:	if (!BGPAFtextLoaded)
+ADDRGP4 BGPAFtextLoaded
+INDIRI4
+CNSTI4 0
+NEI4 $409
+line 1136
+;1136:	{
+line 1139
+;1137:		//get the location of the animation.cfg
+;1138:		//GLAName = trap_G2API_GetGLAName( client->ghoul2, 0);
+;1139:		trap_G2API_GetGLAName( client->ghoul2, 0, GLAName);
+ADDRFP4 0
+INDIRP4
+CNSTI4 2888
+ADDP4
+INDIRP4
+ARGP4
+CNSTI4 0
+ARGI4
+ADDRLP4 76
+ARGP4
+ADDRGP4 trap_G2API_GetGLAName
+CALLV
+pop
+line 1141
+;1140:
+;1141:		if (!GLAName[0])
+ADDRLP4 76
+INDIRI1
+CVII4 1
+CNSTI4 0
+NEI4 $411
+line 1142
+;1142:		{
+line 1143
+;1143:			if (!BG_ParseAnimationFile("models/players/_humanoid/animation.cfg"))
+ADDRGP4 $415
+ARGP4
+ADDRLP4 164
+ADDRGP4 BG_ParseAnimationFile
+CALLI4
+ASGNI4
+ADDRLP4 164
+INDIRI4
+CNSTI4 0
+NEI4 $398
+line 1144
+;1144:			{
+line 1145
+;1145:				Com_Printf( "Failed to load animation file %s\n", afilename );
+ADDRGP4 $416
+ARGP4
+ADDRLP4 0
+ARGP4
+ADDRGP4 Com_Printf
+CALLV
+pop
+line 1146
+;1146:				return;
+ADDRGP4 $398
+JUMPV
+line 1148
+;1147:			}
+;1148:			return;
+LABELV $411
+line 1150
+;1149:		}
+;1150:		Q_strncpyz( afilename, GLAName, sizeof( afilename ));
+ADDRLP4 0
+ARGP4
+ADDRLP4 76
+ARGP4
+CNSTI4 64
+ARGI4
+ADDRGP4 Q_strncpyz
+CALLV
+pop
+line 1151
+;1151:		slash = Q_strrchr( afilename, '/' );
+ADDRLP4 0
+ARGP4
+CNSTI4 47
+ARGI4
+ADDRLP4 164
+ADDRGP4 Q_strrchr
+CALLP4
+ASGNP4
+ADDRLP4 140
+ADDRLP4 164
+INDIRP4
+ASGNP4
+line 1152
+;1152:		if ( slash )
+ADDRLP4 140
+INDIRP4
+CVPU4 4
+CNSTU4 0
+EQU4 $398
+line 1153
+;1153:		{
+line 1154
+;1154:			strcpy(slash, "/animation.cfg");
+ADDRLP4 140
+INDIRP4
+ARGP4
+ADDRGP4 $419
+ARGP4
+ADDRGP4 strcpy
+CALLP4
+pop
+line 1155
+;1155:		}	// Now afilename holds just the path to the animation.cfg
+line 1157
+;1156:		else 
+;1157:		{	// Didn't find any slashes, this is a raw filename right in base (whish isn't a good thing)
+line 1158
+;1158:			return;
+LABELV $418
+line 1162
+;1159:		}
+;1160:
+;1161:		// Try to load the animation.cfg for this model then.
+;1162:		if ( !BG_ParseAnimationFile( afilename ) )
+ADDRLP4 0
+ARGP4
+ADDRLP4 168
+ADDRGP4 BG_ParseAnimationFile
+CALLI4
+ASGNI4
+ADDRLP4 168
+INDIRI4
+CNSTI4 0
+NEI4 $420
+line 1163
+;1163:		{	// The GLA's animations failed
+line 1164
+;1164:			if (!BG_ParseAnimationFile("models/players/_humanoid/animation.cfg"))
+ADDRGP4 $415
+ARGP4
+ADDRLP4 172
+ADDRGP4 BG_ParseAnimationFile
+CALLI4
+ASGNI4
+ADDRLP4 172
+INDIRI4
+CNSTI4 0
+NEI4 $422
+line 1165
+;1165:			{
+line 1166
+;1166:				Com_Printf( "Failed to load animation file %s\n", afilename );
+ADDRGP4 $416
+ARGP4
+ADDRLP4 0
+ARGP4
+ADDRGP4 Com_Printf
+CALLV
+pop
+line 1167
+;1167:				return;
+ADDRGP4 $398
+JUMPV
+LABELV $422
+line 1169
+;1168:			}
+;1169:		}
+LABELV $420
+line 1170
+;1170:	}
+LABELV $409
+line 1172
+;1171:
+;1172:	trap_G2API_AddBolt(client->ghoul2, 0, "*r_hand");
+ADDRFP4 0
+INDIRP4
+CNSTI4 2888
+ADDP4
+INDIRP4
+ARGP4
+CNSTI4 0
+ARGI4
+ADDRGP4 $424
+ARGP4
+ADDRGP4 trap_G2API_AddBolt
+CALLI4
+pop
+line 1173
+;1173:	trap_G2API_AddBolt(client->ghoul2, 0, "*l_hand");
+ADDRFP4 0
+INDIRP4
+CNSTI4 2888
+ADDP4
+INDIRP4
+ARGP4
+CNSTI4 0
+ARGI4
+ADDRGP4 $425
+ARGP4
+ADDRGP4 trap_G2API_AddBolt
+CALLI4
+pop
+line 1176
+;1174:
+;1175:	// NOTE - ensure this sequence of bolt and bone accessing are always the same because the client expects them in a certain order
+;1176:	trap_G2API_SetBoneAnim(client->ghoul2, 0, "model_root", 0, 12, BONE_ANIM_OVERRIDE_LOOP, 1.0f, level.time, -1, -1);
+ADDRFP4 0
+INDIRP4
+CNSTI4 2888
+ADDP4
+INDIRP4
+ARGP4
+ADDRLP4 164
+CNSTI4 0
+ASGNI4
+ADDRLP4 164
+INDIRI4
+ARGI4
+ADDRGP4 $426
+ARGP4
+ADDRLP4 164
+INDIRI4
+ARGI4
+CNSTI4 12
+ARGI4
+CNSTI4 16
+ARGI4
+CNSTF4 1065353216
+ARGF4
+ADDRGP4 level+32
+INDIRI4
+ARGI4
+CNSTF4 3212836864
+ARGF4
+CNSTI4 -1
+ARGI4
+ADDRGP4 trap_G2API_SetBoneAnim
+CALLI4
+pop
+line 1177
+;1177:	trap_G2API_SetBoneAngles(client->ghoul2, 0, "upper_lumbar", tempVec, BONE_ANGLES_POSTMULT, POSITIVE_X, NEGATIVE_Y, NEGATIVE_Z, NULL, 0, level.time);
+ADDRFP4 0
+INDIRP4
+CNSTI4 2888
+ADDP4
+INDIRP4
+ARGP4
+ADDRLP4 168
+CNSTI4 0
+ASGNI4
+ADDRLP4 168
+INDIRI4
+ARGI4
+ADDRGP4 $428
+ARGP4
+ADDRLP4 64
+ARGP4
+CNSTI4 2
+ARGI4
+CNSTI4 1
+ARGI4
+CNSTI4 6
+ARGI4
+CNSTI4 5
+ARGI4
+CNSTP4 0
+ARGP4
+ADDRLP4 168
+INDIRI4
+ARGI4
+ADDRGP4 level+32
+INDIRI4
+ARGI4
+ADDRGP4 trap_G2API_SetBoneAngles
+CALLI4
+pop
+line 1178
+;1178:	trap_G2API_SetBoneAngles(client->ghoul2, 0, "cranium", tempVec, BONE_ANGLES_POSTMULT, POSITIVE_Z, NEGATIVE_Y, POSITIVE_X, NULL, 0, level.time);
+ADDRFP4 0
+INDIRP4
+CNSTI4 2888
+ADDP4
+INDIRP4
+ARGP4
+ADDRLP4 172
+CNSTI4 0
+ASGNI4
+ADDRLP4 172
+INDIRI4
+ARGI4
+ADDRGP4 $430
+ARGP4
+ADDRLP4 64
+ARGP4
+ADDRLP4 176
+CNSTI4 2
+ASGNI4
+ADDRLP4 176
+INDIRI4
+ARGI4
+ADDRLP4 176
+INDIRI4
+ARGI4
+CNSTI4 6
+ARGI4
+CNSTI4 1
+ARGI4
+CNSTP4 0
+ARGP4
+ADDRLP4 172
+INDIRI4
+ARGI4
+ADDRGP4 level+32
+INDIRI4
+ARGI4
+ADDRGP4 trap_G2API_SetBoneAngles
+CALLI4
+pop
+line 1180
+;1179:
+;1180:	if (!g2SaberInstance)
+ADDRGP4 g2SaberInstance
+INDIRP4
+CVPU4 4
+CNSTU4 0
+NEU4 $432
+line 1181
+;1181:	{
+line 1182
+;1182:		trap_G2API_InitGhoul2Model(&g2SaberInstance, "models/weapons2/saber/saber_w.glm", 0, 0, -20, 0, 0);
+ADDRGP4 g2SaberInstance
+ARGP4
+ADDRGP4 $108
+ARGP4
+ADDRLP4 180
+CNSTI4 0
+ASGNI4
+ADDRLP4 180
+INDIRI4
+ARGI4
+ADDRLP4 180
+INDIRI4
+ARGI4
+CNSTI4 -20
+ARGI4
+ADDRLP4 180
+INDIRI4
+ARGI4
+ADDRLP4 180
+INDIRI4
+ARGI4
+ADDRGP4 trap_G2API_InitGhoul2Model
+CALLI4
+pop
+line 1184
+;1183:
+;1184:		if (g2SaberInstance)
+ADDRGP4 g2SaberInstance
+INDIRP4
+CVPU4 4
+CNSTU4 0
+EQU4 $434
+line 1185
+;1185:		{
+line 1187
+;1186:			// indicate we will be bolted to model 0 (ie the player) on bolt 0 (always the right hand) when we get copied
+;1187:			trap_G2API_SetBoltInfo(g2SaberInstance, 0, 0);
+ADDRGP4 g2SaberInstance
+INDIRP4
+ARGP4
+ADDRLP4 184
+CNSTI4 0
+ASGNI4
+ADDRLP4 184
+INDIRI4
+ARGI4
+ADDRLP4 184
+INDIRI4
+ARGI4
+ADDRGP4 trap_G2API_SetBoltInfo
+CALLV
+pop
+line 1189
+;1188:			// now set up the gun bolt on it
+;1189:			trap_G2API_AddBolt(g2SaberInstance, 0, "*flash");
+ADDRGP4 g2SaberInstance
+INDIRP4
+ARGP4
+CNSTI4 0
+ARGI4
+ADDRGP4 $436
+ARGP4
+ADDRGP4 trap_G2API_AddBolt
+CALLI4
+pop
+line 1190
+;1190:		}
+LABELV $434
+line 1191
+;1191:	}
+LABELV $432
+line 1193
+;1192:
+;1193:	if (g2SaberInstance)
+ADDRGP4 g2SaberInstance
+INDIRP4
+CVPU4 4
+CNSTU4 0
+EQU4 $437
+line 1194
+;1194:	{
+line 1195
+;1195:		trap_G2API_CopySpecificGhoul2Model(g2SaberInstance, 0, client->ghoul2, 1); 
+ADDRGP4 g2SaberInstance
+INDIRP4
+ARGP4
+CNSTI4 0
+ARGI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 2888
+ADDP4
+INDIRP4
+ARGP4
+CNSTI4 1
+ARGI4
+ADDRGP4 trap_G2API_CopySpecificGhoul2Model
+CALLV
+pop
+line 1196
+;1196:	}
+LABELV $437
+line 1197
+;1197:}
+LABELV $398
+endproc SetupGameGhoul2Model 188 44
+lit
+align 1
+LABELV $440
+char 1 32
+char 1 126
+char 1 81
+char 1 113
+char 1 87
+char 1 119
+char 1 69
+char 1 101
+char 1 82
+char 1 114
+char 1 84
+char 1 116
+char 1 89
+char 1 121
+char 1 85
+char 1 117
+char 1 73
+char 1 105
+char 1 79
+char 1 111
+char 1 80
+char 1 112
+char 1 65
+char 1 97
+char 1 83
+char 1 115
+char 1 68
+char 1 100
+char 1 70
+char 1 102
+char 1 71
+char 1 103
+char 1 72
+char 1 104
+char 1 74
+char 1 106
+char 1 75
+char 1 107
+char 1 76
+char 1 108
+char 1 90
+char 1 122
+char 1 88
+char 1 120
+char 1 67
+char 1 99
+char 1 86
+char 1 118
+char 1 66
+char 1 98
+char 1 78
+char 1 110
+char 1 77
+char 1 109
+char 1 49
+char 1 50
+char 1 51
+char 1 52
+char 1 53
+char 1 54
+char 1 55
+char 1 56
+char 1 57
+char 1 48
+char 1 60
+char 1 62
+char 1 63
+char 1 44
+char 1 46
+char 1 47
+char 1 39
+char 1 59
+char 1 58
+char 1 93
+char 1 91
+char 1 123
+char 1 125
+char 1 96
+char 1 45
+char 1 61
+char 1 33
+char 1 64
+char 1 35
+char 1 36
+char 1 94
+char 1 38
+char 1 42
+char 1 40
+char 1 41
+char 1 95
+char 1 43
+char 1 124
+char 1 127
+char 1 0
+align 1
+LABELV $441
+char 1 46
+char 1 0
+export ClientUserinfoChanged
+code
+proc ClientUserinfoChanged 6436 52
+line 1214
+;1198:
+;1199:
+;1200:
+;1201:
+;1202:/*
+;1203:===========
+;1204:ClientUserInfoChanged
+;1205:
+;1206:Called from ClientConnect when the player first connects and
+;1207:directly by the server system when the player updates a userinfo variable.
+;1208:
+;1209:The game can override any of the settings and call trap_SetUserinfo
+;1210:if desired.
+;1211:============
+;1212:*/
+;1213:char *Q_stristr(const char *s, const char *find);
+;1214:void ClientUserinfoChanged( int clientNum ) {
+line 1223
+;1215:	gentity_t *ent;
+;1216:	int		teamTask, teamLeader, team, health;
+;1217:	char	*s;
+;1218:	char	model[MAX_QPATH];
+;1219:	//char	headModel[MAX_QPATH];
+;1220:	char	forcePowers[MAX_QPATH];
+;1221:	char	oldname[MAX_STRING_CHARS];
+;1222:	char	origname[MAX_NETNAME];
+;1223:	int		namecount = 1;
+ADDRLP4 1048
+CNSTI4 1
+ASGNI4
+line 1236
+;1224:	gclient_t	*client;
+;1225:	char	c1[MAX_INFO_STRING];
+;1226:	char	c2[MAX_INFO_STRING];
+;1227:	char	redTeam[MAX_INFO_STRING];
+;1228:	char	blueTeam[MAX_INFO_STRING];
+;1229:	char	userinfo[MAX_INFO_STRING];
+;1230:	//JediDog: Anti Name crash declarations
+;1231:	static const char validChars[] = " ~QqWwEeRrTtYyUuIiOoPpAaSsDdFfGgHhJjKkLlZzXxCcVvBbNnMm1234567890<>?,./';:][{}`-=!@#$^&*()_+|";
+;1232:	static const char Replacement[] = ".";
+;1233:	int i, c, j, jdIllegalName;
+;1234:	//end
+;1235:
+;1236:	ent = g_entities + clientNum;
+ADDRLP4 1052
+CNSTI4 852
+ADDRFP4 0
+INDIRI4
+MULI4
+ADDRGP4 g_entities
+ADDP4
+ASGNP4
+line 1237
+;1237:	client = ent->client;
+ADDRLP4 12
+ADDRLP4 1052
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+line 1239
+;1238:
+;1239:	trap_GetUserinfo( clientNum, userinfo, sizeof( userinfo ) );
+ADDRFP4 0
+INDIRI4
+ARGI4
+ADDRLP4 24
+ARGP4
+CNSTI4 1024
+ARGI4
+ADDRGP4 trap_GetUserinfo
+CALLV
+pop
+line 1242
+;1240:
+;1241:	//JediDog: This is the Anti Flood
+;1242:	if (jd_antiFlood.integer != 0) {
+ADDRGP4 jd_antiFlood+12
+INDIRI4
+CNSTI4 0
+EQI4 $442
+line 1243
+;1243:		if (ent->client->TimeReswitch < level.time && ent->client->TimeReswitch > 0 && ent->client->TimeReswitch > level.time-500) {
+ADDRLP4 6356
+ADDRLP4 1052
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 2968
+ADDP4
+INDIRI4
+ASGNI4
+ADDRLP4 6356
+INDIRI4
+ADDRGP4 level+32
+INDIRI4
+GEI4 $445
+ADDRLP4 6356
+INDIRI4
+CNSTI4 0
+LEI4 $445
+ADDRLP4 6356
+INDIRI4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 500
+SUBI4
+LEI4 $445
+line 1245
+;1244://		if ((ent->client->TimeReswitch = level.time || ent->client->TimeReswitch > level.time) && ent->client->TimeReswitch > 0 && ent->client->TimeReswitch > level.time-500) {
+;1245:			trap_SendServerCommand(clientNum, va("print\"^3Don't Flood. ^5Allow ^21 ^5second between changes.\n\""));
+ADDRGP4 $449
+ARGP4
+ADDRLP4 6360
+ADDRGP4 va
+CALLP4
+ASGNP4
+ADDRFP4 0
+INDIRI4
+ARGI4
+ADDRLP4 6360
+INDIRP4
+ARGP4
+ADDRGP4 trap_SendServerCommand
+CALLV
+pop
+line 1246
+;1246:			return;
+ADDRGP4 $439
+JUMPV
+LABELV $445
+line 1248
+;1247:		}
+;1248:		ent->client->TimeReswitch = level.time;
+ADDRLP4 1052
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 2968
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+ASGNI4
+line 1249
+;1249:	}
+LABELV $442
+line 1252
+;1250:
+;1251:	// check for malformed or illegal info strings
+;1252:	if ( !Info_Validate(userinfo) ) {
+ADDRLP4 24
+ARGP4
+ADDRLP4 6356
+ADDRGP4 Info_Validate
+CALLI4
+ASGNI4
+ADDRLP4 6356
+INDIRI4
+CNSTI4 0
+NEI4 $451
+line 1253
+;1253:		strcpy (userinfo, "\\name\\badinfo");
+ADDRLP4 24
+ARGP4
+ADDRGP4 $453
+ARGP4
+ADDRGP4 strcpy
+CALLP4
+pop
+line 1254
+;1254:	}
+LABELV $451
+line 1257
+;1255:
+;1256:	// check for local client
+;1257:	s = Info_ValueForKey( userinfo, "ip" );
+ADDRLP4 24
+ARGP4
+ADDRGP4 $454
+ARGP4
+ADDRLP4 6360
+ADDRGP4 Info_ValueForKey
+CALLP4
+ASGNP4
+ADDRLP4 16
+ADDRLP4 6360
+INDIRP4
+ASGNP4
+line 1258
+;1258:	if ( !strcmp( s, "localhost" ) ) {
+ADDRLP4 16
+INDIRP4
+ARGP4
+ADDRGP4 $457
+ARGP4
+ADDRLP4 6364
+ADDRGP4 strcmp
+CALLI4
+ASGNI4
+ADDRLP4 6364
+INDIRI4
+CNSTI4 0
+NEI4 $455
+line 1259
+;1259:		client->pers.localClient = qtrue;
+ADDRLP4 12
+INDIRP4
+CNSTI4 1412
+ADDP4
+CNSTI4 1
+ASGNI4
+line 1260
+;1260:	}
+LABELV $455
+line 1263
+;1261:
+;1262:	// check the item prediction
+;1263:	s = Info_ValueForKey( userinfo, "cg_predictItems" );
+ADDRLP4 24
+ARGP4
+ADDRGP4 $458
+ARGP4
+ADDRLP4 6368
+ADDRGP4 Info_ValueForKey
+CALLP4
+ASGNP4
+ADDRLP4 16
+ADDRLP4 6368
+INDIRP4
+ASGNP4
+line 1264
+;1264:	if ( !atoi( s ) ) {
+ADDRLP4 16
+INDIRP4
+ARGP4
+ADDRLP4 6372
+ADDRGP4 atoi
+CALLI4
+ASGNI4
+ADDRLP4 6372
+INDIRI4
+CNSTI4 0
+NEI4 $459
+line 1265
+;1265:		client->pers.predictItemPickup = qfalse;
+ADDRLP4 12
+INDIRP4
+CNSTI4 1420
+ADDP4
+CNSTI4 0
+ASGNI4
+line 1266
+;1266:	} else {
+ADDRGP4 $460
+JUMPV
+LABELV $459
+line 1267
+;1267:		client->pers.predictItemPickup = qtrue;
+ADDRLP4 12
+INDIRP4
+CNSTI4 1420
+ADDP4
+CNSTI4 1
+ASGNI4
+line 1268
+;1268:	}
+LABELV $460
+line 1271
+;1269:
+;1270:	// set name
+;1271:	Q_strncpyz ( oldname, client->pers.netname, sizeof( oldname ) );
+ADDRLP4 1156
+ARGP4
+ADDRLP4 12
+INDIRP4
+CNSTI4 1428
+ADDP4
+ARGP4
+CNSTI4 1024
+ARGI4
+ADDRGP4 Q_strncpyz
+CALLV
+pop
+line 1272
+;1272:	s = Info_ValueForKey (userinfo, "name");
+ADDRLP4 24
+ARGP4
+ADDRGP4 $461
+ARGP4
+ADDRLP4 6376
+ADDRGP4 Info_ValueForKey
+CALLP4
+ASGNP4
+ADDRLP4 16
+ADDRLP4 6376
+INDIRP4
+ASGNP4
+line 1274
+;1273:	//JediDog: Anti Name Crash
+;1274:	for(i = 0; (c = s[i]); i++) { 
+ADDRLP4 20
+CNSTI4 0
+ASGNI4
+ADDRGP4 $465
+JUMPV
+LABELV $462
+line 1275
+;1275:		jdIllegalName = 0;
+ADDRLP4 8
+CNSTI4 0
+ASGNI4
+line 1276
+;1276:		for(j = 0; validChars[j]; j++) { 
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+ADDRGP4 $469
+JUMPV
+LABELV $466
+line 1277
+;1277:			if(c == validChars[j]) {
+ADDRLP4 4
+INDIRI4
+ADDRLP4 0
+INDIRI4
+ADDRGP4 $440
+ADDP4
+INDIRI1
+CVII4 1
+NEI4 $470
+line 1278
+;1278:				jdIllegalName = 1;
+ADDRLP4 8
+CNSTI4 1
+ASGNI4
+line 1279
+;1279:			}
+LABELV $470
+line 1280
+;1280:        }  
+LABELV $467
+line 1276
+ADDRLP4 0
+ADDRLP4 0
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+LABELV $469
+ADDRLP4 0
+INDIRI4
+ADDRGP4 $440
+ADDP4
+INDIRI1
+CVII4 1
+CNSTI4 0
+NEI4 $466
+line 1281
+;1281:		if (jdIllegalName == 0) {
+ADDRLP4 8
+INDIRI4
+CNSTI4 0
+NEI4 $472
+line 1282
+;1282:				s[i] = Replacement[0];
+ADDRLP4 20
+INDIRI4
+ADDRLP4 16
+INDIRP4
+ADDP4
+ADDRGP4 $441
+INDIRI1
+ASGNI1
+line 1283
+;1283:		}
+LABELV $472
+line 1284
+;1284:    }//End of Anti Name Crash
+LABELV $463
+line 1274
+ADDRLP4 20
+ADDRLP4 20
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+LABELV $465
+ADDRLP4 6380
+ADDRLP4 20
+INDIRI4
+ADDRLP4 16
+INDIRP4
+ADDP4
+INDIRI1
+CVII4 1
+ASGNI4
+ADDRLP4 4
+ADDRLP4 6380
+INDIRI4
+ASGNI4
+ADDRLP4 6380
+INDIRI4
+CNSTI4 0
+NEI4 $462
+line 1285
+;1285:	ClientCleanName( s, client->pers.netname, sizeof(client->pers.netname) );
+ADDRLP4 16
+INDIRP4
+ARGP4
+ADDRLP4 12
+INDIRP4
+CNSTI4 1428
+ADDP4
+ARGP4
+CNSTI4 36
+ARGI4
+ADDRGP4 ClientCleanName
+CALLV
+pop
+line 1286
+;1286:	if (Q_stristr(client->pers.netname, cm_clanTag.string)){
+ADDRLP4 12
+INDIRP4
+CNSTI4 1428
+ADDP4
+ARGP4
+ADDRGP4 cm_clanTag+16
+ARGP4
+ADDRLP4 6384
+ADDRGP4 Q_stristr
+CALLP4
+ASGNP4
+ADDRLP4 6384
+INDIRP4
+CVPU4 4
+CNSTU4 0
+EQU4 $474
+line 1287
+;1287:			if (!(ent->r.svFlags & SVF_CLAN) && *cm_clanTag.string && cm_clanTag.string[0]){
+ADDRLP4 6388
+CNSTI4 0
+ASGNI4
+ADDRLP4 1052
+INDIRP4
+CNSTI4 304
+ADDP4
+INDIRI4
+CNSTI4 524288
+BANDI4
+ADDRLP4 6388
+INDIRI4
+NEI4 $475
+ADDRGP4 cm_clanTag+16
+INDIRI1
+CVII4 1
+ADDRLP4 6388
+INDIRI4
+EQI4 $475
+ADDRGP4 cm_clanTag+16
+INDIRI1
+CVII4 1
+ADDRLP4 6388
+INDIRI4
+EQI4 $475
+line 1288
+;1288:				client->cmClanTimer = 30;
+ADDRLP4 12
+INDIRP4
+CNSTI4 1848
+ADDP4
+CNSTI4 30
+ASGNI4
+line 1289
+;1289:				client->pers.amclanreserved = 1;
+ADDRLP4 12
+INDIRP4
+CNSTI4 1552
+ADDP4
+CNSTI4 1
+ASGNI4
+line 1290
+;1290:			}
+line 1291
+;1291:	} else {
+ADDRGP4 $475
+JUMPV
+LABELV $474
+line 1292
+;1292:		client->pers.amclanreserved = 0;
+ADDRLP4 12
+INDIRP4
+CNSTI4 1552
+ADDP4
+CNSTI4 0
+ASGNI4
+line 1293
+;1293:	}
+LABELV $475
+line 1295
+;1294:
+;1295:	if ( client->sess.sessionTeam == TEAM_SPECTATOR ) {
+ADDRLP4 12
+INDIRP4
+CNSTI4 1632
+ADDP4
+INDIRI4
+CNSTI4 3
+NEI4 $481
+line 1296
+;1296:		if ( client->sess.spectatorState == SPECTATOR_SCOREBOARD ) {
+ADDRLP4 12
+INDIRP4
+CNSTI4 1640
+ADDP4
+INDIRI4
+CNSTI4 3
+NEI4 $483
+line 1297
+;1297:			Q_strncpyz( client->pers.netname, "scoreboard", sizeof(client->pers.netname) );
+ADDRLP4 12
+INDIRP4
+CNSTI4 1428
+ADDP4
+ARGP4
+ADDRGP4 $485
+ARGP4
+CNSTI4 36
+ARGI4
+ADDRGP4 Q_strncpyz
+CALLV
+pop
+line 1298
+;1298:		}
+LABELV $483
+line 1299
+;1299:	}
+LABELV $481
+line 1301
+;1300:
+;1301:	if(cm_samenames.integer == 0){
+ADDRGP4 cm_samenames+12
+INDIRI4
+CNSTI4 0
+NEI4 $486
+line 1302
+;1302:		Q_strncpyz ( origname, client->pers.netname,  MAX_NETNAME - 5 );
+ADDRLP4 1056
+ARGP4
+ADDRLP4 12
+INDIRP4
+CNSTI4 1428
+ADDP4
+ARGP4
+CNSTI4 31
+ARGI4
+ADDRGP4 Q_strncpyz
+CALLV
+pop
+ADDRGP4 $490
+JUMPV
+LABELV $489
+line 1304
+;1303:		while ( G_FindClientByName ( client->pers.netname, clientNum ) )
+;1304:		{
+line 1305
+;1305:			Com_sprintf ( client->pers.netname, MAX_NETNAME, "%s(%d)", origname, namecount );
+ADDRLP4 12
+INDIRP4
+CNSTI4 1428
+ADDP4
+ARGP4
+CNSTI4 36
+ARGI4
+ADDRGP4 $492
+ARGP4
+ADDRLP4 1056
+ARGP4
+ADDRLP4 1048
+INDIRI4
+ARGI4
+ADDRGP4 Com_sprintf
+CALLV
+pop
+line 1306
+;1306:			namecount++;
+ADDRLP4 1048
+ADDRLP4 1048
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 1307
+;1307:		}
+LABELV $490
+line 1303
+ADDRLP4 12
+INDIRP4
+CNSTI4 1428
+ADDP4
+ARGP4
+ADDRFP4 0
+INDIRI4
+ARGI4
+ADDRLP4 6388
+ADDRGP4 G_FindClientByName
+CALLP4
+ASGNP4
+ADDRLP4 6388
+INDIRP4
+CVPU4 4
+CNSTU4 0
+NEU4 $489
+line 1308
+;1308:	}
+LABELV $486
+line 1310
+;1309:
+;1310:	if ( client->pers.connected == CON_CONNECTED ) {
+ADDRLP4 12
+INDIRP4
+CNSTI4 1380
+ADDP4
+INDIRI4
+CNSTI4 2
+NEI4 $493
+line 1311
+;1311:		if ( strcmp( oldname, client->pers.netname ) ) {
+ADDRLP4 1156
+ARGP4
+ADDRLP4 12
+INDIRP4
+CNSTI4 1428
+ADDP4
+ARGP4
+ADDRLP4 6388
+ADDRGP4 strcmp
+CALLI4
+ASGNI4
+ADDRLP4 6388
+INDIRI4
+CNSTI4 0
+EQI4 $495
+line 1312
+;1312:			trap_SendServerCommand( -1, va("print \"%s" S_COLOR_WHITE " %s %s\n\"", oldname, G_GetStripEdString("SVINGAME", "PLRENAME"),
+ADDRGP4 $148
+ARGP4
+ADDRGP4 $498
+ARGP4
+ADDRLP4 6392
+ADDRGP4 G_GetStripEdString
+CALLP4
+ASGNP4
+ADDRGP4 $497
+ARGP4
+ADDRLP4 1156
+ARGP4
+ADDRLP4 6392
+INDIRP4
+ARGP4
+ADDRLP4 12
+INDIRP4
+CNSTI4 1428
+ADDP4
+ARGP4
+ADDRLP4 6396
+ADDRGP4 va
+CALLP4
+ASGNP4
+CNSTI4 -1
+ARGI4
+ADDRLP4 6396
+INDIRP4
+ARGP4
+ADDRGP4 trap_SendServerCommand
+CALLV
+pop
+line 1314
+;1313:				client->pers.netname) );
+;1314:		}				
+LABELV $495
+line 1315
+;1315:	}
+LABELV $493
+line 1318
+;1316:
+;1317:	// set max health
+;1318:	health = 100; //atoi( Info_ValueForKey( userinfo, "handicap" ) );
+ADDRLP4 2188
+CNSTI4 100
+ASGNI4
+line 1319
+;1319:	client->pers.maxHealth = health;
+ADDRLP4 12
+INDIRP4
+CNSTI4 1464
+ADDP4
+ADDRLP4 2188
+INDIRI4
+ASGNI4
+line 1320
+;1320:	if ( client->pers.maxHealth < 1 || client->pers.maxHealth > 100 ) {
+ADDRLP4 6388
+ADDRLP4 12
+INDIRP4
+CNSTI4 1464
+ADDP4
+INDIRI4
+ASGNI4
+ADDRLP4 6388
+INDIRI4
+CNSTI4 1
+LTI4 $501
+ADDRLP4 6388
+INDIRI4
+CNSTI4 100
+LEI4 $499
+LABELV $501
+line 1321
+;1321:		client->pers.maxHealth = 100;
+ADDRLP4 12
+INDIRP4
+CNSTI4 1464
+ADDP4
+CNSTI4 100
+ASGNI4
+line 1322
+;1322:	}
+LABELV $499
+line 1323
+;1323:	client->ps.stats[STAT_MAX_HEALTH] = client->pers.maxHealth;
+ADDRLP4 12
+INDIRP4
+CNSTI4 248
+ADDP4
+ADDRLP4 12
+INDIRP4
+CNSTI4 1464
+ADDP4
+INDIRI4
+ASGNI4
+line 1326
+;1324:
+;1325:	// set model
+;1326:	if( g_gametype.integer >= GT_TEAM ) {
+ADDRGP4 g_gametype+12
+INDIRI4
+CNSTI4 5
+LTI4 $502
+line 1327
+;1327:		Q_strncpyz( model, Info_ValueForKey (userinfo, "team_model"), sizeof( model ) );
+ADDRLP4 24
+ARGP4
+ADDRGP4 $505
+ARGP4
+ADDRLP4 6396
+ADDRGP4 Info_ValueForKey
+CALLP4
+ASGNP4
+ADDRLP4 1092
+ARGP4
+ADDRLP4 6396
+INDIRP4
+ARGP4
+CNSTI4 64
+ARGI4
+ADDRGP4 Q_strncpyz
+CALLV
+pop
+line 1329
+;1328:		//Q_strncpyz( headModel, Info_ValueForKey (userinfo, "team_headmodel"), sizeof( headModel ) );
+;1329:	} else {
+ADDRGP4 $503
+JUMPV
+LABELV $502
+line 1330
+;1330:		Q_strncpyz( model, Info_ValueForKey (userinfo, "model"), sizeof( model ) );
+ADDRLP4 24
+ARGP4
+ADDRGP4 $506
+ARGP4
+ADDRLP4 6396
+ADDRGP4 Info_ValueForKey
+CALLP4
+ASGNP4
+ADDRLP4 1092
+ARGP4
+ADDRLP4 6396
+INDIRP4
+ARGP4
+CNSTI4 64
+ARGI4
+ADDRGP4 Q_strncpyz
+CALLV
+pop
+line 1332
+;1331:		//Q_strncpyz( headModel, Info_ValueForKey (userinfo, "headmodel"), sizeof( headModel ) );
+;1332:	}
+LABELV $503
+line 1334
+;1333:
+;1334:	Q_strncpyz( forcePowers, Info_ValueForKey (userinfo, "forcepowers"), sizeof( forcePowers ) );
+ADDRLP4 24
+ARGP4
+ADDRGP4 $507
+ARGP4
+ADDRLP4 6396
+ADDRGP4 Info_ValueForKey
+CALLP4
+ASGNP4
+ADDRLP4 2192
+ARGP4
+ADDRLP4 6396
+INDIRP4
+ARGP4
+CNSTI4 64
+ARGI4
+ADDRGP4 Q_strncpyz
+CALLV
+pop
+line 1337
+;1335:
+;1336:	// bots set their team a few frames later
+;1337:	if (g_gametype.integer >= GT_TEAM && g_entities[clientNum].r.svFlags & SVF_BOT) {
+ADDRGP4 g_gametype+12
+INDIRI4
+CNSTI4 5
+LTI4 $508
+CNSTI4 852
+ADDRFP4 0
+INDIRI4
+MULI4
+ADDRGP4 g_entities+296+8
+ADDP4
+INDIRI4
+CNSTI4 8
+BANDI4
+CNSTI4 0
+EQI4 $508
+line 1338
+;1338:		s = Info_ValueForKey( userinfo, "team" );
+ADDRLP4 24
+ARGP4
+ADDRGP4 $513
+ARGP4
+ADDRLP4 6400
+ADDRGP4 Info_ValueForKey
+CALLP4
+ASGNP4
+ADDRLP4 16
+ADDRLP4 6400
+INDIRP4
+ASGNP4
+line 1339
+;1339:		if ( !Q_stricmp( s, "red" ) || !Q_stricmp( s, "r" ) ) {
+ADDRLP4 16
+INDIRP4
+ARGP4
+ADDRGP4 $516
+ARGP4
+ADDRLP4 6404
+ADDRGP4 Q_stricmp
+CALLI4
+ASGNI4
+ADDRLP4 6404
+INDIRI4
+CNSTI4 0
+EQI4 $518
+ADDRLP4 16
+INDIRP4
+ARGP4
+ADDRGP4 $517
+ARGP4
+ADDRLP4 6408
+ADDRGP4 Q_stricmp
+CALLI4
+ASGNI4
+ADDRLP4 6408
+INDIRI4
+CNSTI4 0
+NEI4 $514
+LABELV $518
+line 1340
+;1340:			team = TEAM_RED;
+ADDRLP4 4304
+CNSTI4 1
+ASGNI4
+line 1341
+;1341:		} else if ( !Q_stricmp( s, "blue" ) || !Q_stricmp( s, "b" ) ) {
+ADDRGP4 $509
+JUMPV
+LABELV $514
+ADDRLP4 16
+INDIRP4
+ARGP4
+ADDRGP4 $521
+ARGP4
+ADDRLP4 6412
+ADDRGP4 Q_stricmp
+CALLI4
+ASGNI4
+ADDRLP4 6412
+INDIRI4
+CNSTI4 0
+EQI4 $523
+ADDRLP4 16
+INDIRP4
+ARGP4
+ADDRGP4 $522
+ARGP4
+ADDRLP4 6416
+ADDRGP4 Q_stricmp
+CALLI4
+ASGNI4
+ADDRLP4 6416
+INDIRI4
+CNSTI4 0
+NEI4 $519
+LABELV $523
+line 1342
+;1342:			team = TEAM_BLUE;
+ADDRLP4 4304
+CNSTI4 2
+ASGNI4
+line 1343
+;1343:		} else {
+ADDRGP4 $509
+JUMPV
+LABELV $519
+line 1345
+;1344:			// pick the team with the least number of players
+;1345:			team = PickTeam( clientNum );
+ADDRFP4 0
+INDIRI4
+ARGI4
+ADDRLP4 6420
+ADDRGP4 PickTeam
+CALLI4
+ASGNI4
+ADDRLP4 4304
+ADDRLP4 6420
+INDIRI4
+ASGNI4
+line 1346
+;1346:		}
+line 1347
+;1347:	}
+ADDRGP4 $509
+JUMPV
+LABELV $508
+line 1348
+;1348:	else {
+line 1349
+;1349:		team = client->sess.sessionTeam;
+ADDRLP4 4304
+ADDRLP4 12
+INDIRP4
+CNSTI4 1632
+ADDP4
+INDIRI4
+ASGNI4
+line 1350
+;1350:	}
+LABELV $509
+line 1373
+;1351:
+;1352:/*	NOTE: all client side now
+;1353:
+;1354:	// team
+;1355:	switch( team ) {
+;1356:	case TEAM_RED:
+;1357:		ForceClientSkin(client, model, "red");
+;1358://		ForceClientSkin(client, headModel, "red");
+;1359:		break;
+;1360:	case TEAM_BLUE:
+;1361:		ForceClientSkin(client, model, "blue");
+;1362://		ForceClientSkin(client, headModel, "blue");
+;1363:		break;
+;1364:	}
+;1365:	// don't ever use a default skin in teamplay, it would just waste memory
+;1366:	// however bots will always join a team but they spawn in as spectator
+;1367:	if ( g_gametype.integer >= GT_TEAM && team == TEAM_SPECTATOR) {
+;1368:		ForceClientSkin(client, model, "red");
+;1369://		ForceClientSkin(client, headModel, "red");
+;1370:	}
+;1371:*/
+;1372:
+;1373:	if (g_gametype.integer >= GT_TEAM) {
+ADDRGP4 g_gametype+12
+INDIRI4
+CNSTI4 5
+LTI4 $524
+line 1374
+;1374:		client->pers.teamInfo = qtrue;
+ADDRLP4 12
+INDIRP4
+CNSTI4 1528
+ADDP4
+CNSTI4 1
+ASGNI4
+line 1375
+;1375:	} else {
+ADDRGP4 $525
+JUMPV
+LABELV $524
+line 1376
+;1376:		s = Info_ValueForKey( userinfo, "teamoverlay" );
+ADDRLP4 24
+ARGP4
+ADDRGP4 $527
+ARGP4
+ADDRLP4 6400
+ADDRGP4 Info_ValueForKey
+CALLP4
+ASGNP4
+ADDRLP4 16
+ADDRLP4 6400
+INDIRP4
+ASGNP4
+line 1377
+;1377:		if ( ! *s || atoi( s ) != 0 ) {
+ADDRLP4 16
+INDIRP4
+INDIRI1
+CVII4 1
+CNSTI4 0
+EQI4 $530
+ADDRLP4 16
+INDIRP4
+ARGP4
+ADDRLP4 6408
+ADDRGP4 atoi
+CALLI4
+ASGNI4
+ADDRLP4 6408
+INDIRI4
+CNSTI4 0
+EQI4 $528
+LABELV $530
+line 1378
+;1378:			client->pers.teamInfo = qtrue;
+ADDRLP4 12
+INDIRP4
+CNSTI4 1528
+ADDP4
+CNSTI4 1
+ASGNI4
+line 1379
+;1379:		} else {
+ADDRGP4 $529
+JUMPV
+LABELV $528
+line 1380
+;1380:			client->pers.teamInfo = qfalse;
+ADDRLP4 12
+INDIRP4
+CNSTI4 1528
+ADDP4
+CNSTI4 0
+ASGNI4
+line 1381
+;1381:		}
+LABELV $529
+line 1382
+;1382:	}
+LABELV $525
+line 1394
+;1383:	/*
+;1384:	s = Info_ValueForKey( userinfo, "cg_pmove_fixed" );
+;1385:	if ( !*s || atoi( s ) == 0 ) {
+;1386:		client->pers.pmoveFixed = qfalse;
+;1387:	}
+;1388:	else {
+;1389:		client->pers.pmoveFixed = qtrue;
+;1390:	}
+;1391:	*/
+;1392:
+;1393:	// team task (0 = none, 1 = offence, 2 = defence)
+;1394:	teamTask = atoi(Info_ValueForKey(userinfo, "teamtask"));
+ADDRLP4 24
+ARGP4
+ADDRGP4 $531
+ARGP4
+ADDRLP4 6400
+ADDRGP4 Info_ValueForKey
+CALLP4
+ASGNP4
+ADDRLP4 6400
+INDIRP4
+ARGP4
+ADDRLP4 6404
+ADDRGP4 atoi
+CALLI4
+ASGNI4
+ADDRLP4 2180
+ADDRLP4 6404
+INDIRI4
+ASGNI4
+line 1396
+;1395:	// team Leader (1 = leader, 0 is normal player)
+;1396:	teamLeader = client->sess.teamLeader;
+ADDRLP4 2184
+ADDRLP4 12
+INDIRP4
+CNSTI4 1672
+ADDP4
+INDIRI4
+ASGNI4
+line 1399
+;1397:
+;1398:	// colors
+;1399:	strcpy(c1, Info_ValueForKey( userinfo, "color1" ));
+ADDRLP4 24
+ARGP4
+ADDRGP4 $532
+ARGP4
+ADDRLP4 6408
+ADDRGP4 Info_ValueForKey
+CALLP4
+ASGNP4
+ADDRLP4 2256
+ARGP4
+ADDRLP4 6408
+INDIRP4
+ARGP4
+ADDRGP4 strcpy
+CALLP4
+pop
+line 1400
+;1400:	strcpy(c2, Info_ValueForKey( userinfo, "color2" ));
+ADDRLP4 24
+ARGP4
+ADDRGP4 $533
+ARGP4
+ADDRLP4 6412
+ADDRGP4 Info_ValueForKey
+CALLP4
+ASGNP4
+ADDRLP4 3280
+ARGP4
+ADDRLP4 6412
+INDIRP4
+ARGP4
+ADDRGP4 strcpy
+CALLP4
+pop
+line 1402
+;1401:
+;1402:	strcpy(redTeam, Info_ValueForKey( userinfo, "g_redteam" ));
+ADDRLP4 24
+ARGP4
+ADDRGP4 $534
+ARGP4
+ADDRLP4 6416
+ADDRGP4 Info_ValueForKey
+CALLP4
+ASGNP4
+ADDRLP4 4308
+ARGP4
+ADDRLP4 6416
+INDIRP4
+ARGP4
+ADDRGP4 strcpy
+CALLP4
+pop
+line 1403
+;1403:	strcpy(blueTeam, Info_ValueForKey( userinfo, "g_blueteam" ));
+ADDRLP4 24
+ARGP4
+ADDRGP4 $535
+ARGP4
+ADDRLP4 6420
+ADDRGP4 Info_ValueForKey
+CALLP4
+ASGNP4
+ADDRLP4 5332
+ARGP4
+ADDRLP4 6420
+INDIRP4
+ARGP4
+ADDRGP4 strcpy
+CALLP4
+pop
+line 1407
+;1404:
+;1405:	// send over a subset of the userinfo keys so other clients can
+;1406:	// print scoreboards, display models, and play custom sounds
+;1407:	if ( ent->r.svFlags & SVF_BOT ) {
+ADDRLP4 1052
+INDIRP4
+CNSTI4 304
+ADDP4
+INDIRI4
+CNSTI4 8
+BANDI4
+CNSTI4 0
+EQI4 $536
+line 1408
+;1408:		s = va("n\\%s\\t\\%i\\model\\%s\\c1\\%s\\c2\\%s\\hc\\%i\\w\\%i\\l\\%i\\skill\\%s\\tt\\%d\\tl\\%d",
+ADDRLP4 24
+ARGP4
+ADDRGP4 $539
+ARGP4
+ADDRLP4 6424
+ADDRGP4 Info_ValueForKey
+CALLP4
+ASGNP4
+ADDRGP4 $538
+ARGP4
+ADDRLP4 12
+INDIRP4
+CNSTI4 1428
+ADDP4
+ARGP4
+ADDRLP4 4304
+INDIRI4
+ARGI4
+ADDRLP4 1092
+ARGP4
+ADDRLP4 2256
+ARGP4
+ADDRLP4 3280
+ARGP4
+ADDRLP4 12
+INDIRP4
+CNSTI4 1464
+ADDP4
+INDIRI4
+ARGI4
+ADDRLP4 12
+INDIRP4
+CNSTI4 1648
+ADDP4
+INDIRI4
+ARGI4
+ADDRLP4 12
+INDIRP4
+CNSTI4 1652
+ADDP4
+INDIRI4
+ARGI4
+ADDRLP4 6424
+INDIRP4
+ARGP4
+ADDRLP4 2180
+INDIRI4
+ARGI4
+ADDRLP4 2184
+INDIRI4
+ARGI4
+ADDRLP4 6432
+ADDRGP4 va
+CALLP4
+ASGNP4
+ADDRLP4 16
+ADDRLP4 6432
+INDIRP4
+ASGNP4
+line 1412
+;1409:			client->pers.netname, team, model,  c1, c2, 
+;1410:			client->pers.maxHealth, client->sess.wins, client->sess.losses,
+;1411:			Info_ValueForKey( userinfo, "skill" ), teamTask, teamLeader );
+;1412:	} else {
+ADDRGP4 $537
+JUMPV
+LABELV $536
+line 1413
+;1413:		s = va("n\\%s\\t\\%i\\model\\%s\\g_redteam\\%s\\g_blueteam\\%s\\c1\\%s\\c2\\%s\\hc\\%i\\w\\%i\\l\\%i\\tt\\%d\\tl\\%d",
+ADDRGP4 $540
+ARGP4
+ADDRLP4 12
+INDIRP4
+CNSTI4 1428
+ADDP4
+ARGP4
+ADDRLP4 12
+INDIRP4
+CNSTI4 1632
+ADDP4
+INDIRI4
+ARGI4
+ADDRLP4 1092
+ARGP4
+ADDRLP4 4308
+ARGP4
+ADDRLP4 5332
+ARGP4
+ADDRLP4 2256
+ARGP4
+ADDRLP4 3280
+ARGP4
+ADDRLP4 12
+INDIRP4
+CNSTI4 1464
+ADDP4
+INDIRI4
+ARGI4
+ADDRLP4 12
+INDIRP4
+CNSTI4 1648
+ADDP4
+INDIRI4
+ARGI4
+ADDRLP4 12
+INDIRP4
+CNSTI4 1652
+ADDP4
+INDIRI4
+ARGI4
+ADDRLP4 2180
+INDIRI4
+ARGI4
+ADDRLP4 2184
+INDIRI4
+ARGI4
+ADDRLP4 6428
+ADDRGP4 va
+CALLP4
+ASGNP4
+ADDRLP4 16
+ADDRLP4 6428
+INDIRP4
+ASGNP4
+line 1416
+;1414:			client->pers.netname, client->sess.sessionTeam, model, redTeam, blueTeam, c1, c2, 
+;1415:			client->pers.maxHealth, client->sess.wins, client->sess.losses, teamTask, teamLeader);
+;1416:	}
+LABELV $537
+line 1418
+;1417:
+;1418:	trap_SetConfigstring( CS_PLAYERS+clientNum, s );
+ADDRFP4 0
+INDIRI4
+CNSTI4 544
+ADDI4
+ARGI4
+ADDRLP4 16
+INDIRP4
+ARGP4
+ADDRGP4 trap_SetConfigstring
+CALLV
+pop
+line 1420
+;1419:
+;1420:	if (g_logClientInfo.integer)
+ADDRGP4 g_logClientInfo+12
+INDIRI4
+CNSTI4 0
+EQI4 $541
+line 1421
+;1421:	{
+line 1422
+;1422:		G_LogPrintf( "ClientUserinfoChanged: %i %s\n", clientNum, s );
+ADDRGP4 $544
+ARGP4
+ADDRFP4 0
+INDIRI4
+ARGI4
+ADDRLP4 16
+INDIRP4
+ARGP4
+ADDRGP4 G_LogPrintf
+CALLV
+pop
+line 1423
+;1423:	}
+LABELV $541
+line 1424
+;1424:}
+LABELV $439
+endproc ClientUserinfoChanged 6436 52
+bss
+align 1
+LABELV $565
+skip 1024
+export ClientConnect
+code
+proc ClientConnect 1192 16
+line 1446
+;1425:
+;1426:/*
+;1427:===========
+;1428:ClientConnect
+;1429:
+;1430:Called when a player begins connecting to the server.
+;1431:Called again for every map change or tournement restart.
+;1432:
+;1433:The session information will be valid after exit.
+;1434:
+;1435:Return NULL if the client should be allowed, otherwise return
+;1436:a string with the reason for denial.
+;1437:
+;1438:Otherwise, the client will be sent the current gamestate
+;1439:and will eventually get to ClientBegin.
+;1440:
+;1441:firstTime will be qtrue the very first time a client connects
+;1442:to the server machine, but qfalse on map changes and tournement
+;1443:restarts.
+;1444:============
+;1445:*/
+;1446:char *ClientConnect( int clientNum, qboolean firstTime, qboolean isBot ) {
+line 1468
+;1447:	char		*value;
+;1448:	char		*value2;	//cm BanClients
+;1449://	char		*areabits;
+;1450:	gclient_t	*client;
+;1451:	char		userinfo[MAX_INFO_STRING];
+;1452:	char tmpIP[22];			//cm BanClients
+;1453:	char savedIP[30];		//cm BanClients
+;1454:	gentity_t	*ent;
+;1455:	gentity_t	*te;
+;1456:	int			i;			//cm BanClients
+;1457:	//JediDog: Declarations for my parts... Note: i see u already have "int i;" so i dont need to do it too.
+;1458://	static const unsigned char validChars[] = " ~QqWwEeRrTtYyUuIiOoPpAaSsDdFfGgHhJjKkLlZzXxCcVvBbNnMm1234567890<>?,./';:][{}`-=!@#$^&*()_+|";
+;1459://	unsigned char jdIllegalName[24]; <--- old anti name crash declaration
+;1460://	int c; <--- old anti name crash declaration
+;1461://	int j; <--- old anti name crash declaration
+;1462:	char jdPortlessIP[24];
+;1463://	#define jdPB  "cl_punkbuster"
+;1464://	#define jdCLG "cl_guid"
+;1465://	#define jdFP  "forcepowers"
+;1466:	//end of the declarations
+;1467:
+;1468:	ent = &g_entities[ clientNum ];
+ADDRLP4 56
+CNSTI4 852
+ADDRFP4 0
+INDIRI4
+MULI4
+ADDRGP4 g_entities
+ADDP4
+ASGNP4
+line 1470
+;1469:
+;1470:	trap_GetUserinfo( clientNum, userinfo, sizeof( userinfo ) );
+ADDRFP4 0
+INDIRI4
+ARGI4
+ADDRLP4 60
+ARGP4
+CNSTI4 1024
+ARGI4
+ADDRGP4 trap_GetUserinfo
+CALLV
+pop
+line 1473
+;1471:
+;1472:	//JediDog: Added log for full userinfo including IP
+;1473:	G_LogPrintf( "Connect request from : %s\n", userinfo );
+ADDRGP4 $546
+ARGP4
+ADDRLP4 60
+ARGP4
+ADDRGP4 G_LogPrintf
+CALLV
+pop
+line 1477
+;1474:
+;1475:	// check to see if they are on the banned IP list
+;1476:	//cm BanClients
+;1477:	Q_strncpyz(tmpIP, Info_ValueForKey (userinfo, "ip"),sizeof(tmpIP) ); 
+ADDRLP4 60
+ARGP4
+ADDRGP4 $454
+ARGP4
+ADDRLP4 1128
+ADDRGP4 Info_ValueForKey
+CALLP4
+ASGNP4
+ADDRLP4 4
+ARGP4
+ADDRLP4 1128
+INDIRP4
+ARGP4
+CNSTI4 22
+ARGI4
+ADDRGP4 Q_strncpyz
+CALLV
+pop
+line 1478
+;1478:	if ( G_FilterPacket( tmpIP ) ) {
+ADDRLP4 4
+ARGP4
+ADDRLP4 1132
+ADDRGP4 G_FilterPacket
+CALLI4
+ASGNI4
+ADDRLP4 1132
+INDIRI4
+CNSTI4 0
+EQI4 $547
+line 1479
+;1479:		G_LogPrintf("IP banned: Access denied to <%s>\n", tmpIP);//JediDog: Added log
+ADDRGP4 $549
+ARGP4
+ADDRLP4 4
+ARGP4
+ADDRGP4 G_LogPrintf
+CALLV
+pop
+line 1480
+;1480:		return "Banned.";
+ADDRGP4 $550
+RETP4
+ADDRGP4 $545
+JUMPV
+LABELV $547
+line 1483
+;1481:	}
+;1482:	
+;1483:	if ( firstTime && G_CheckMaxConnections( tmpIP ) ) {
+ADDRFP4 4
+INDIRI4
+CNSTI4 0
+EQI4 $551
+ADDRLP4 4
+ARGP4
+ADDRLP4 1136
+ADDRGP4 G_CheckMaxConnections
+CALLI4
+ASGNI4
+ADDRLP4 1136
+INDIRI4
+CNSTI4 0
+EQI4 $551
+line 1484
+;1484:		return va("Maximum Connections Per IP: %d.", sv_maxConnections.integer );
+ADDRGP4 $553
+ARGP4
+ADDRGP4 sv_maxConnections+12
+INDIRI4
+ARGI4
+ADDRLP4 1140
+ADDRGP4 va
+CALLP4
+ASGNP4
+ADDRLP4 1140
+INDIRP4
+RETP4
+ADDRGP4 $545
+JUMPV
+LABELV $551
+line 1493
+;1485:	}
+;1486:
+;1487:	/*value = Info_ValueForKey (userinfo, "ip");
+;1488:	if ( G_FilterPacket( value ) ) {
+;1489:		return "Banned.";
+;1490:	}*/
+;1491:	//END
+;1492:
+;1493:	ent->r.svFlags &= ~SVF_ADMIN1; // prevent admin from being carried over to new players and bots
+ADDRLP4 1140
+ADDRLP4 56
+INDIRP4
+CNSTI4 304
+ADDP4
+ASGNP4
+ADDRLP4 1140
+INDIRP4
+ADDRLP4 1140
+INDIRP4
+INDIRI4
+CNSTI4 -65537
+BANDI4
+ASGNI4
+line 1494
+;1494:	ent->r.svFlags &= ~SVF_ADMIN2;
+ADDRLP4 1144
+ADDRLP4 56
+INDIRP4
+CNSTI4 304
+ADDP4
+ASGNP4
+ADDRLP4 1144
+INDIRP4
+ADDRLP4 1144
+INDIRP4
+INDIRI4
+CNSTI4 -536870913
+BANDI4
+ASGNI4
+line 1495
+;1495:	ent->r.svFlags &= ~SVF_ADMIN3;
+ADDRLP4 1148
+ADDRLP4 56
+INDIRP4
+CNSTI4 304
+ADDP4
+ASGNP4
+ADDRLP4 1148
+INDIRP4
+ADDRLP4 1148
+INDIRP4
+INDIRI4
+CNSTI4 -4194305
+BANDI4
+ASGNI4
+line 1496
+;1496:	ent->r.svFlags &= ~SVF_CLAN;
+ADDRLP4 1152
+ADDRLP4 56
+INDIRP4
+CNSTI4 304
+ADDP4
+ASGNP4
+ADDRLP4 1152
+INDIRP4
+ADDRLP4 1152
+INDIRP4
+INDIRI4
+CNSTI4 -524289
+BANDI4
+ASGNI4
+line 1498
+;1497:
+;1498:	if ( !( ent->r.svFlags & SVF_BOT ) && !isBot && g_needpass.integer ) {
+ADDRLP4 1156
+CNSTI4 0
+ASGNI4
+ADDRLP4 56
+INDIRP4
+CNSTI4 304
+ADDP4
+INDIRI4
+CNSTI4 8
+BANDI4
+ADDRLP4 1156
+INDIRI4
+NEI4 $555
+ADDRFP4 8
+INDIRI4
+ADDRLP4 1156
+INDIRI4
+NEI4 $555
+ADDRGP4 g_needpass+12
+INDIRI4
+ADDRLP4 1156
+INDIRI4
+EQI4 $555
+line 1500
+;1499:		// check for a password
+;1500:		value = Info_ValueForKey (userinfo, "password");
+ADDRLP4 60
+ARGP4
+ADDRGP4 $558
+ARGP4
+ADDRLP4 1160
+ADDRGP4 Info_ValueForKey
+CALLP4
+ASGNP4
+ADDRLP4 1088
+ADDRLP4 1160
+INDIRP4
+ASGNP4
+line 1501
+;1501:		if ( g_password.string[0] && Q_stricmp( g_password.string, "none" ) &&
+ADDRGP4 g_password+16
+INDIRI1
+CVII4 1
+CNSTI4 0
+EQI4 $559
+ADDRGP4 g_password+16
+ARGP4
+ADDRGP4 $563
+ARGP4
+ADDRLP4 1164
+ADDRGP4 Q_stricmp
+CALLI4
+ASGNI4
+ADDRLP4 1164
+INDIRI4
+CNSTI4 0
+EQI4 $559
+ADDRGP4 g_password+16
+ARGP4
+ADDRLP4 1088
+INDIRP4
+ARGP4
+ADDRLP4 1168
+ADDRGP4 strcmp
+CALLI4
+ASGNI4
+ADDRLP4 1168
+INDIRI4
+CNSTI4 0
+EQI4 $559
+line 1502
+;1502:			strcmp( g_password.string, value) != 0) {
+line 1504
+;1503:			static char sTemp[1024];
+;1504:			Q_strncpyz(sTemp, G_GetStripEdString("SVINGAME","INVALID_PASSWORD"), sizeof (sTemp) );
+ADDRGP4 $148
+ARGP4
+ADDRGP4 $566
+ARGP4
+ADDRLP4 1172
+ADDRGP4 G_GetStripEdString
+CALLP4
+ASGNP4
+ADDRGP4 $565
+ARGP4
+ADDRLP4 1172
+INDIRP4
+ARGP4
+CNSTI4 1024
+ARGI4
+ADDRGP4 Q_strncpyz
+CALLV
+pop
+line 1505
+;1505:			G_LogPrintf("Invalid password: Access denied to client %i: Entered password <%s> instead of <%s>\n",clientNum, value, g_password.string);//JediDog: Added log
+ADDRGP4 $567
+ARGP4
+ADDRFP4 0
+INDIRI4
+ARGI4
+ADDRLP4 1088
+INDIRP4
+ARGP4
+ADDRGP4 g_password+16
+ARGP4
+ADDRGP4 G_LogPrintf
+CALLV
+pop
+line 1506
+;1506:			return sTemp;// return "Invalid password";
+ADDRGP4 $565
+RETP4
+ADDRGP4 $545
+JUMPV
+LABELV $559
+line 1508
+;1507:		}
+;1508:	}
+LABELV $555
+line 1511
+;1509:	//JEDIDOG: BEGINNING OF JEDIDOG'S FIXES
+;1510:	//JediDog: Added this from my mod & Gamall mod, I like this idea too much to deny it :D
+;1511:	if (jd_CloseServer.integer !=0 && firstTime) {
+ADDRLP4 1160
+CNSTI4 0
+ASGNI4
+ADDRGP4 jd_CloseServer+12
+INDIRI4
+ADDRLP4 1160
+INDIRI4
+EQI4 $569
+ADDRFP4 4
+INDIRI4
+ADDRLP4 1160
+INDIRI4
+EQI4 $569
+line 1512
+;1512:		G_LogPrintf("Access denied because the server is closed\n");
+ADDRGP4 $572
+ARGP4
+ADDRGP4 G_LogPrintf
+CALLV
+pop
+line 1513
+;1513:		if (jd_CloseServer.integer !=0) {
+ADDRGP4 jd_CloseServer+12
+INDIRI4
+CNSTI4 0
+EQI4 $573
+line 1514
+;1514:			value = Info_ValueForKey (userinfo, "name");
+ADDRLP4 60
+ARGP4
+ADDRGP4 $461
+ARGP4
+ADDRLP4 1164
+ADDRGP4 Info_ValueForKey
+CALLP4
+ASGNP4
+ADDRLP4 1088
+ADDRLP4 1164
+INDIRP4
+ASGNP4
+line 1515
+;1515:			trap_SendServerCommand(-1, va("print\"^2Closed server: ^5Client ^7<^7%s^7>^5 was denied access^2.\n\"", value));
+ADDRGP4 $576
+ARGP4
+ADDRLP4 1088
+INDIRP4
+ARGP4
+ADDRLP4 1168
+ADDRGP4 va
+CALLP4
+ASGNP4
+CNSTI4 -1
+ARGI4
+ADDRLP4 1168
+INDIRP4
+ARGP4
+ADDRGP4 trap_SendServerCommand
+CALLV
+pop
+line 1516
+;1516:		}
+LABELV $573
+line 1517
+;1517:		return "The server is closed right now, come back later. :)";
+ADDRGP4 $577
+RETP4
+ADDRGP4 $545
+JUMPV
+LABELV $569
+line 1519
+;1518:	}//JediDog: End.
+;1519:	strcpy(jdPortlessIP, Info_ValueForKey (userinfo, "ip"));
+ADDRLP4 60
+ARGP4
+ADDRGP4 $454
+ARGP4
+ADDRLP4 1164
+ADDRGP4 Info_ValueForKey
+CALLP4
+ASGNP4
+ADDRLP4 26
+ARGP4
+ADDRLP4 1164
+INDIRP4
+ARGP4
+ADDRGP4 strcpy
+CALLP4
+pop
+line 1520
+;1520:	for (i = 0 ; i < 24 ; i++) {
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+LABELV $578
+line 1521
+;1521:		if ( jdPortlessIP[i] == ':' ) {
+ADDRLP4 0
+INDIRI4
+ADDRLP4 26
+ADDP4
+INDIRI1
+CVII4 1
+CNSTI4 58
+NEI4 $582
+line 1522
+;1522:			jdPortlessIP[i] = 0;
+ADDRLP4 0
+INDIRI4
+ADDRLP4 26
+ADDP4
+CNSTI1 0
+ASGNI1
+line 1523
+;1523:			break;
+ADDRGP4 $580
+JUMPV
+LABELV $582
+line 1525
+;1524:		}
+;1525:	}//end of fake player core
+LABELV $579
+line 1520
+ADDRLP4 0
+ADDRLP4 0
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+ADDRLP4 0
+INDIRI4
+CNSTI4 24
+LTI4 $578
+LABELV $580
+line 1527
+;1526:	// Begin Fake Players Detection
+;1527:	if (jd_FakePlayerDetection.integer != 0) {
+ADDRGP4 jd_FakePlayerDetection+12
+INDIRI4
+CNSTI4 0
+EQI4 $584
+line 1528
+;1528:		if (strcmp(Info_ValueForKey (userinfo, "cl_punkbuster"),"") != 0 || strcmp(Info_ValueForKey (userinfo, "cl_guid"),"") != 0 || !strcmp(Info_ValueForKey (userinfo, "model"), "none")) {
+ADDRLP4 60
+ARGP4
+ADDRGP4 $589
+ARGP4
+ADDRLP4 1168
+ADDRGP4 Info_ValueForKey
+CALLP4
+ASGNP4
+ADDRLP4 1168
+INDIRP4
+ARGP4
+ADDRGP4 $590
+ARGP4
+ADDRLP4 1172
+ADDRGP4 strcmp
+CALLI4
+ASGNI4
+ADDRLP4 1172
+INDIRI4
+CNSTI4 0
+NEI4 $593
+ADDRLP4 60
+ARGP4
+ADDRGP4 $591
+ARGP4
+ADDRLP4 1176
+ADDRGP4 Info_ValueForKey
+CALLP4
+ASGNP4
+ADDRLP4 1176
+INDIRP4
+ARGP4
+ADDRGP4 $590
+ARGP4
+ADDRLP4 1180
+ADDRGP4 strcmp
+CALLI4
+ASGNI4
+ADDRLP4 1180
+INDIRI4
+CNSTI4 0
+NEI4 $593
+ADDRLP4 60
+ARGP4
+ADDRGP4 $506
+ARGP4
+ADDRLP4 1184
+ADDRGP4 Info_ValueForKey
+CALLP4
+ASGNP4
+ADDRLP4 1184
+INDIRP4
+ARGP4
+ADDRGP4 $563
+ARGP4
+ADDRLP4 1188
+ADDRGP4 strcmp
+CALLI4
+ASGNI4
+ADDRLP4 1188
+INDIRI4
+CNSTI4 0
+NEI4 $587
+LABELV $593
+line 1529
+;1529:			G_LogPrintf("JEDIDOG: The IP Address %s has Fake Player Settings. The client has been denied access.\n", jdPortlessIP);
+ADDRGP4 $594
+ARGP4
+ADDRLP4 26
+ARGP4
+ADDRGP4 G_LogPrintf
+CALLV
+pop
+line 1530
+;1530:			return "Fake Player Settings Detected.";
+ADDRGP4 $595
+RETP4
+ADDRGP4 $545
+JUMPV
+LABELV $587
+line 1532
+;1531:		}
+;1532:	}// end of fake players detection
+LABELV $584
+line 1548
+;1533:	// JediDog: beginning of illegal name fix
+;1534://	strcpy((char*)jdIllegalName, Info_ValueForKey (userinfo, "name"));
+;1535://	for(i = 0; (c = jdIllegalName[i]); i++) {
+;1536://		for(j = 0; validChars[j]; j++) {
+;1537://			if(c == validChars[j]) break;
+;1538://		}// if anti name crash is activated, check them before they can connect
+;1539://		if (jd_antiNameCrash.integer != 0 && !validChars[j]) {
+;1540://			G_LogPrintf("JEDIDOG: IP %s has been denied connection because of illegal characters in name.\n", jdPortlessIP);
+;1541://			trap_SendServerCommand(-1,va("print \"^5[^2JediDog^5]: ^7Illegal characters in name detected. The client has been denied connection to prevenet crash or bug.\n\"", jdIllegalName));
+;1542://			return "Illegal characters detected in name, reconnect as a different name.";
+;1543://		}
+;1544://	}// END OF ILLEGAL NAME FIX
+;1545:	//END OF JEDIDOG FIXES
+;1546:
+;1547:	// they can connect
+;1548:	ent->client = level.clients + clientNum;
+ADDRLP4 56
+INDIRP4
+CNSTI4 408
+ADDP4
+CNSTI4 2972
+ADDRFP4 0
+INDIRI4
+MULI4
+ADDRGP4 level
+INDIRP4
+ADDP4
+ASGNP4
+line 1549
+;1549:	client = ent->client;
+ADDRLP4 52
+ADDRLP4 56
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+line 1553
+;1550:
+;1551://	areabits = client->areabits;
+;1552:
+;1553:	memset( client, 0, sizeof(*client) );
+ADDRLP4 52
+INDIRP4
+ARGP4
+CNSTI4 0
+ARGI4
+CNSTI4 2972
+ARGI4
+ADDRGP4 memset
+CALLP4
+pop
+line 1555
+;1554:
+;1555:	client->pers.connected = CON_CONNECTING;
+ADDRLP4 52
+INDIRP4
+CNSTI4 1380
+ADDP4
+CNSTI4 1
+ASGNI4
+line 1558
+;1556:
+;1557:	// read or initialize the session data
+;1558:	if ( firstTime ) {
+ADDRFP4 4
+INDIRI4
+CNSTI4 0
+EQI4 $596
+line 1559
+;1559:   		G_InitSessionData( client, userinfo, isBot );
+ADDRLP4 52
+INDIRP4
+ARGP4
+ADDRLP4 60
+ARGP4
+ADDRFP4 8
+INDIRI4
+ARGI4
+ADDRGP4 G_InitSessionData
+CALLV
+pop
+line 1560
+;1560:	} else if( level.newSession ) {
+ADDRGP4 $597
+JUMPV
+LABELV $596
+ADDRGP4 level+64
+INDIRI4
+CNSTI4 0
+EQI4 $598
+line 1561
+;1561:		G_InitSessionData( client, userinfo, isBot );
+ADDRLP4 52
+INDIRP4
+ARGP4
+ADDRLP4 60
+ARGP4
+ADDRFP4 8
+INDIRI4
+ARGI4
+ADDRGP4 G_InitSessionData
+CALLV
+pop
+line 1562
+;1562:		Q_strncpyz(client->sess.IPstring, savedIP, sizeof(client->sess.IPstring));
+ADDRLP4 52
+INDIRP4
+CNSTI4 1684
+ADDP4
+ARGP4
+ADDRLP4 1096
+ARGP4
+CNSTI4 16
+ARGI4
+ADDRGP4 Q_strncpyz
+CALLV
+pop
+line 1563
+;1563:	}
+LABELV $598
+LABELV $597
+line 1564
+;1564:	G_ReadSessionData( client );
+ADDRLP4 52
+INDIRP4
+ARGP4
+ADDRGP4 G_ReadSessionData
+CALLV
+pop
+line 1566
+;1565:
+;1566:	if ( Q_stricmp(tmpIP, "" ) || tmpIP[0] != 0 ) {
+ADDRLP4 4
+ARGP4
+ADDRGP4 $590
+ARGP4
+ADDRLP4 1168
+ADDRGP4 Q_stricmp
+CALLI4
+ASGNI4
+ADDRLP4 1172
+CNSTI4 0
+ASGNI4
+ADDRLP4 1168
+INDIRI4
+ADDRLP4 1172
+INDIRI4
+NEI4 $603
+ADDRLP4 4
+INDIRI1
+CVII4 1
+ADDRLP4 1172
+INDIRI4
+EQI4 $601
+LABELV $603
+line 1567
+;1567:		i=0;
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+ADDRGP4 $605
+JUMPV
+LABELV $604
+line 1568
+;1568:		while(++i<strlen(tmpIP))if(tmpIP[i]==':')tmpIP[i]=0;
+ADDRLP4 0
+INDIRI4
+ADDRLP4 4
+ADDP4
+INDIRI1
+CVII4 1
+CNSTI4 58
+NEI4 $607
+ADDRLP4 0
+INDIRI4
+ADDRLP4 4
+ADDP4
+CNSTI1 0
+ASGNI1
+LABELV $607
+LABELV $605
+ADDRLP4 1176
+ADDRLP4 0
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+ADDRLP4 0
+ADDRLP4 1176
+INDIRI4
+ASGNI4
+ADDRLP4 4
+ARGP4
+ADDRLP4 1180
+ADDRGP4 strlen
+CALLI4
+ASGNI4
+ADDRLP4 1176
+INDIRI4
+ADDRLP4 1180
+INDIRI4
+LTI4 $604
+line 1569
+;1569:		Q_strncpyz(client->sess.IPstring, tmpIP, sizeof(client->sess.IPstring));
+ADDRLP4 52
+INDIRP4
+CNSTI4 1684
+ADDP4
+ARGP4
+ADDRLP4 4
+ARGP4
+CNSTI4 16
+ARGI4
+ADDRGP4 Q_strncpyz
+CALLV
+pop
+line 1570
+;1570:	}
+LABELV $601
+line 1572
+;1571:
+;1572:	if( isBot ) {
+ADDRFP4 8
+INDIRI4
+CNSTI4 0
+EQI4 $609
+line 1573
+;1573:		ent->r.svFlags |= SVF_BOT;
+ADDRLP4 1176
+ADDRLP4 56
+INDIRP4
+CNSTI4 304
+ADDP4
+ASGNP4
+ADDRLP4 1176
+INDIRP4
+ADDRLP4 1176
+INDIRP4
+INDIRI4
+CNSTI4 8
+BORI4
+ASGNI4
+line 1574
+;1574:		ent->inuse = qtrue;
+ADDRLP4 56
+INDIRP4
+CNSTI4 412
+ADDP4
+CNSTI4 1
+ASGNI4
+line 1575
+;1575:		if( !G_BotConnect( clientNum, !firstTime ) ) {
+ADDRFP4 0
+INDIRI4
+ARGI4
+ADDRFP4 4
+INDIRI4
+CNSTI4 0
+NEI4 $614
+ADDRLP4 1180
+CNSTI4 1
+ASGNI4
+ADDRGP4 $615
+JUMPV
+LABELV $614
+ADDRLP4 1180
+CNSTI4 0
+ASGNI4
+LABELV $615
+ADDRLP4 1180
+INDIRI4
+ARGI4
+ADDRLP4 1184
+ADDRGP4 G_BotConnect
+CALLI4
+ASGNI4
+ADDRLP4 1184
+INDIRI4
+CNSTI4 0
+NEI4 $611
+line 1576
+;1576:			return "BotConnectfailed";
+ADDRGP4 $616
+RETP4
+ADDRGP4 $545
+JUMPV
+LABELV $611
+line 1578
+;1577:		}
+;1578:	}
+LABELV $609
+line 1581
+;1579:
+;1580:	// get and distribute relevent paramters
+;1581:	G_LogPrintf( "ClientConnect: %i\n", clientNum );
+ADDRGP4 $617
+ARGP4
+ADDRFP4 0
+INDIRI4
+ARGI4
+ADDRGP4 G_LogPrintf
+CALLV
+pop
+line 1582
+;1582:	ClientUserinfoChanged( clientNum );
+ADDRFP4 0
+INDIRI4
+ARGI4
+ADDRGP4 ClientUserinfoChanged
+CALLV
+pop
+line 1585
+;1583:
+;1584:	// don't do the "xxx connected" messages if they were caried over from previous level
+;1585:	if ( firstTime ) {
+ADDRFP4 4
+INDIRI4
+CNSTI4 0
+EQI4 $618
+line 1586
+;1586:		trap_SendServerCommand( -1, va("print \"%s" S_COLOR_WHITE " %s\n\"", client->pers.netname, G_GetStripEdString("SVINGAME", "PLCONNECT")) );
+ADDRGP4 $148
+ARGP4
+ADDRGP4 $621
+ARGP4
+ADDRLP4 1176
+ADDRGP4 G_GetStripEdString
+CALLP4
+ASGNP4
+ADDRGP4 $620
+ARGP4
+ADDRLP4 52
+INDIRP4
+CNSTI4 1428
+ADDP4
+ARGP4
+ADDRLP4 1176
+INDIRP4
+ARGP4
+ADDRLP4 1180
+ADDRGP4 va
+CALLP4
+ASGNP4
+CNSTI4 -1
+ARGI4
+ADDRLP4 1180
+INDIRP4
+ARGP4
+ADDRGP4 trap_SendServerCommand
+CALLV
+pop
+line 1587
+;1587:		value2 = Info_ValueForKey (userinfo, "name");
+ADDRLP4 60
+ARGP4
+ADDRGP4 $461
+ARGP4
+ADDRLP4 1184
+ADDRGP4 Info_ValueForKey
+CALLP4
+ASGNP4
+ADDRLP4 1092
+ADDRLP4 1184
+INDIRP4
+ASGNP4
+line 1588
+;1588:		if( !isBot ){
+ADDRFP4 8
+INDIRI4
+CNSTI4 0
+NEI4 $622
+line 1589
+;1589:			G_LogPrintf( "ClientConnect: %i '%s' -> '%s'\n", clientNum, value2, client->sess.IPstring );
+ADDRGP4 $624
+ARGP4
+ADDRFP4 0
+INDIRI4
+ARGI4
+ADDRLP4 1092
+INDIRP4
+ARGP4
+ADDRLP4 52
+INDIRP4
+CNSTI4 1684
+ADDP4
+ARGP4
+ADDRGP4 G_LogPrintf
+CALLV
+pop
+line 1590
+;1590:		}
+LABELV $622
+line 1591
+;1591:	}
+LABELV $618
+line 1593
+;1592:
+;1593:	if ( g_gametype.integer >= GT_TEAM &&
+ADDRGP4 g_gametype+12
+INDIRI4
+CNSTI4 5
+LTI4 $625
+ADDRLP4 52
+INDIRP4
+CNSTI4 1632
+ADDP4
+INDIRI4
+CNSTI4 3
+EQI4 $625
+line 1594
+;1594:		client->sess.sessionTeam != TEAM_SPECTATOR ) {
+line 1595
+;1595:		BroadcastTeamChange( client, -1 );
+ADDRLP4 52
+INDIRP4
+ARGP4
+CNSTI4 -1
+ARGI4
+ADDRGP4 BroadcastTeamChange
+CALLV
+pop
+line 1596
+;1596:	}
+LABELV $625
+line 1599
+;1597:
+;1598:	// count current clients and rank for scoreboard
+;1599:	CalculateRanks();
+ADDRGP4 CalculateRanks
+CALLV
+pop
+line 1601
+;1600:
+;1601:	te = G_TempEntity( vec3_origin, EV_CLIENTJOIN );
+ADDRGP4 vec3_origin
+ARGP4
+CNSTI4 1
+ARGI4
+ADDRLP4 1176
+ADDRGP4 G_TempEntity
+CALLP4
+ASGNP4
+ADDRLP4 1084
+ADDRLP4 1176
+INDIRP4
+ASGNP4
+line 1602
+;1602:	te->r.svFlags |= SVF_BROADCAST;
+ADDRLP4 1180
+ADDRLP4 1084
+INDIRP4
+CNSTI4 304
+ADDP4
+ASGNP4
+ADDRLP4 1180
+INDIRP4
+ADDRLP4 1180
+INDIRP4
+INDIRI4
+CNSTI4 32
+BORI4
+ASGNI4
+line 1603
+;1603:	te->s.eventParm = clientNum;
+ADDRLP4 1084
+INDIRP4
+CNSTI4 256
+ADDP4
+ADDRFP4 0
+INDIRI4
+ASGNI4
+line 1610
+;1604:
+;1605:	// for statistics
+;1606://	client->areabits = areabits;
+;1607://	if ( !client->areabits )
+;1608://		client->areabits = G_Alloc( (trap_AAS_PointReachabilityAreaIndex( NULL ) + 7) / 8 );
+;1609:
+;1610:	return NULL;
+CNSTP4 0
+RETP4
+LABELV $545
+endproc ClientConnect 1192 16
+export ClientBegin
+proc ClientBegin 1108 12
+line 1624
+;1611:}
+;1612:
+;1613:void G_WriteClientSessionData( gclient_t *client );
+;1614:
+;1615:/*
+;1616:===========
+;1617:ClientBegin
+;1618:
+;1619:called when a client has finished connecting, and is ready
+;1620:to be placed into the level.  This will happen every level load,
+;1621:and on transition between teams, but doesn't happen on respawns
+;1622:============
+;1623:*/
+;1624:void ClientBegin( int clientNum, qboolean allowTeamReset ) {
+line 1631
+;1625:	gentity_t	*ent;
+;1626:	gclient_t	*client;
+;1627:	gentity_t	*tent;
+;1628:	int			flags, i;
+;1629:	char		userinfo[MAX_INFO_VALUE], *modelname;
+;1630:
+;1631:	ent = g_entities + clientNum;
+ADDRLP4 4
+CNSTI4 852
+ADDRFP4 0
+INDIRI4
+MULI4
+ADDRGP4 g_entities
+ADDP4
+ASGNP4
+line 1633
+;1632:
+;1633:	if ((ent->r.svFlags & SVF_BOT) && g_gametype.integer >= GT_TEAM)
+ADDRLP4 4
+INDIRP4
+CNSTI4 304
+ADDP4
+INDIRI4
+CNSTI4 8
+BANDI4
+CNSTI4 0
+EQI4 $629
+ADDRGP4 g_gametype+12
+INDIRI4
+CNSTI4 5
+LTI4 $629
+line 1634
+;1634:	{
+line 1635
+;1635:		if (allowTeamReset)
+ADDRFP4 4
+INDIRI4
+CNSTI4 0
+EQI4 $632
+line 1636
+;1636:		{
+line 1637
+;1637:			const char *team = "Red";
+ADDRLP4 1048
+ADDRGP4 $634
+ASGNP4
+line 1641
+;1638:			int preSess;
+;1639:
+;1640:			//SetTeam(ent, "");
+;1641:			ent->client->sess.sessionTeam = PickTeam(-1);
+CNSTI4 -1
+ARGI4
+ADDRLP4 1056
+ADDRGP4 PickTeam
+CALLI4
+ASGNI4
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1632
+ADDP4
+ADDRLP4 1056
+INDIRI4
+ASGNI4
+line 1642
+;1642:			trap_GetUserinfo(clientNum, userinfo, MAX_INFO_STRING);
+ADDRFP4 0
+INDIRI4
+ARGI4
+ADDRLP4 12
+ARGP4
+CNSTI4 1024
+ARGI4
+ADDRGP4 trap_GetUserinfo
+CALLV
+pop
+line 1644
+;1643:
+;1644:			if (ent->client->sess.sessionTeam == TEAM_SPECTATOR)
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1632
+ADDP4
+INDIRI4
+CNSTI4 3
+NEI4 $635
+line 1645
+;1645:			{
+line 1646
+;1646:				ent->client->sess.sessionTeam = TEAM_RED;
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1632
+ADDP4
+CNSTI4 1
+ASGNI4
+line 1647
+;1647:			}
+LABELV $635
+line 1649
+;1648:
+;1649:			if (ent->client->sess.sessionTeam == TEAM_RED)
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1632
+ADDP4
+INDIRI4
+CNSTI4 1
+NEI4 $637
+line 1650
+;1650:			{
+line 1651
+;1651:				team = "Red";
+ADDRLP4 1048
+ADDRGP4 $634
+ASGNP4
+line 1652
+;1652:			}
+ADDRGP4 $638
+JUMPV
+LABELV $637
+line 1654
+;1653:			else
+;1654:			{
+line 1655
+;1655:				team = "Blue";
+ADDRLP4 1048
+ADDRGP4 $639
+ASGNP4
+line 1656
+;1656:			}
+LABELV $638
+line 1658
+;1657:
+;1658:			Info_SetValueForKey( userinfo, "team", team );
+ADDRLP4 12
+ARGP4
+ADDRGP4 $513
+ARGP4
+ADDRLP4 1048
+INDIRP4
+ARGP4
+ADDRGP4 Info_SetValueForKey
+CALLV
+pop
+line 1660
+;1659:
+;1660:			trap_SetUserinfo( clientNum, userinfo );
+ADDRFP4 0
+INDIRI4
+ARGI4
+ADDRLP4 12
+ARGP4
+ADDRGP4 trap_SetUserinfo
+CALLV
+pop
+line 1662
+;1661:
+;1662:			ent->client->ps.persistant[ PERS_TEAM ] = ent->client->sess.sessionTeam;
+ADDRLP4 1060
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 1060
+INDIRP4
+CNSTI4 292
+ADDP4
+ADDRLP4 1060
+INDIRP4
+CNSTI4 1632
+ADDP4
+INDIRI4
+ASGNI4
+line 1664
+;1663:
+;1664:			preSess = ent->client->sess.sessionTeam;
+ADDRLP4 1052
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1632
+ADDP4
+INDIRI4
+ASGNI4
+line 1665
+;1665:			G_ReadSessionData( ent->client );
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ARGP4
+ADDRGP4 G_ReadSessionData
+CALLV
+pop
+line 1666
+;1666:			ent->client->sess.sessionTeam = preSess;
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1632
+ADDP4
+ADDRLP4 1052
+INDIRI4
+ASGNI4
+line 1667
+;1667:			G_WriteClientSessionData(ent->client);
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ARGP4
+ADDRGP4 G_WriteClientSessionData
+CALLV
+pop
+line 1668
+;1668:			ClientUserinfoChanged( clientNum );
+ADDRFP4 0
+INDIRI4
+ARGI4
+ADDRGP4 ClientUserinfoChanged
+CALLV
+pop
+line 1669
+;1669:			ClientBegin(clientNum, qfalse);
+ADDRFP4 0
+INDIRI4
+ARGI4
+CNSTI4 0
+ARGI4
+ADDRGP4 ClientBegin
+CALLV
+pop
+line 1670
+;1670:			return;
+ADDRGP4 $628
+JUMPV
+LABELV $632
+line 1672
+;1671:		}
+;1672:	}
+LABELV $629
+line 1674
+;1673:
+;1674:	client = level.clients + clientNum;
+ADDRLP4 8
+CNSTI4 2972
+ADDRFP4 0
+INDIRI4
+MULI4
+ADDRGP4 level
+INDIRP4
+ADDP4
+ASGNP4
+line 1676
+;1675:
+;1676:	if ( ent->r.linked ) {
+ADDRLP4 4
+INDIRP4
+CNSTI4 296
+ADDP4
+INDIRI4
+CNSTI4 0
+EQI4 $640
+line 1677
+;1677:		trap_UnlinkEntity( ent );
+ADDRLP4 4
+INDIRP4
+ARGP4
+ADDRGP4 trap_UnlinkEntity
+CALLV
+pop
+line 1678
+;1678:	}
+LABELV $640
+line 1679
+;1679:	G_InitGentity( ent );
+ADDRLP4 4
+INDIRP4
+ARGP4
+ADDRGP4 G_InitGentity
+CALLV
+pop
+line 1680
+;1680:	ent->touch = 0;
+ADDRLP4 4
+INDIRP4
+CNSTI4 648
+ADDP4
+CNSTP4 0
+ASGNP4
+line 1681
+;1681:	ent->pain = 0;
+ADDRLP4 4
+INDIRP4
+CNSTI4 656
+ADDP4
+CNSTP4 0
+ASGNP4
+line 1682
+;1682:	ent->client = client;
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+ADDRLP4 8
+INDIRP4
+ASGNP4
+line 1684
+;1683:
+;1684:	client->pers.connected = CON_CONNECTED;
+ADDRLP4 8
+INDIRP4
+CNSTI4 1380
+ADDP4
+CNSTI4 2
+ASGNI4
+line 1685
+;1685:	client->pers.enterTime = level.time;
+ADDRLP4 8
+INDIRP4
+CNSTI4 1468
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+ASGNI4
+line 1686
+;1686:	client->pers.teamState.state = TEAM_BEGIN;
+ADDRLP4 8
+INDIRP4
+CNSTI4 1472
+ADDP4
+CNSTI4 0
+ASGNI4
+line 1693
+;1687:
+;1688:	// save eflags around this, because changing teams will
+;1689:	// cause this to happen with a valid entity, and we
+;1690:	// want to make sure the teleport bit is set right
+;1691:	// so the viewpoint doesn't interpolate through the
+;1692:	// world to the new position
+;1693:	flags = client->ps.eFlags;
+ADDRLP4 1036
+ADDRLP4 8
+INDIRP4
+CNSTI4 108
+ADDP4
+INDIRI4
+ASGNI4
+line 1695
+;1694:
+;1695:	i = 0;
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+ADDRGP4 $644
+JUMPV
+LABELV $643
+line 1698
+;1696:
+;1697:	while (i < NUM_FORCE_POWERS)
+;1698:	{
+line 1699
+;1699:		if (ent->client->ps.fd.forcePowersActive & (1 << i))
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 848
+ADDP4
+INDIRI4
+CNSTI4 1
+ADDRLP4 0
+INDIRI4
+LSHI4
+BANDI4
+CNSTI4 0
+EQI4 $646
+line 1700
+;1700:		{
+line 1701
+;1701:			WP_ForcePowerStop(ent, i);
+ADDRLP4 4
+INDIRP4
+ARGP4
+ADDRLP4 0
+INDIRI4
+ARGI4
+ADDRGP4 WP_ForcePowerStop
+CALLV
+pop
+line 1702
+;1702:		}
+LABELV $646
+line 1703
+;1703:		i++;
+ADDRLP4 0
+ADDRLP4 0
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 1704
+;1704:	}
+LABELV $644
+line 1697
+ADDRLP4 0
+INDIRI4
+CNSTI4 18
+LTI4 $643
+line 1706
+;1705:
+;1706:	i = TRACK_CHANNEL_1;
+ADDRLP4 0
+CNSTI4 51
+ASGNI4
+ADDRGP4 $649
+JUMPV
+LABELV $648
+line 1709
+;1707:
+;1708:	while (i < NUM_TRACK_CHANNELS)
+;1709:	{
+line 1710
+;1710:		if (ent->client->ps.fd.killSoundEntIndex[i-50] && ent->client->ps.fd.killSoundEntIndex[i-50] < MAX_GENTITIES && ent->client->ps.fd.killSoundEntIndex[i-50] > 0)
+ADDRLP4 1048
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+CNSTI4 200
+SUBI4
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1200
+ADDP4
+ADDP4
+INDIRI4
+ASGNI4
+ADDRLP4 1052
+CNSTI4 0
+ASGNI4
+ADDRLP4 1048
+INDIRI4
+ADDRLP4 1052
+INDIRI4
+EQI4 $651
+ADDRLP4 1048
+INDIRI4
+CNSTI4 1024
+GEI4 $651
+ADDRLP4 1048
+INDIRI4
+ADDRLP4 1052
+INDIRI4
+LEI4 $651
+line 1711
+;1711:		{
+line 1712
+;1712:			G_MuteSound(ent->client->ps.fd.killSoundEntIndex[i-50], CHAN_VOICE);
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+CNSTI4 200
+SUBI4
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1200
+ADDP4
+ADDP4
+INDIRI4
+ARGI4
+CNSTI4 3
+ARGI4
+ADDRGP4 G_MuteSound
+CALLV
+pop
+line 1713
+;1713:		}
+LABELV $651
+line 1714
+;1714:		i++;
+ADDRLP4 0
+ADDRLP4 0
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 1715
+;1715:	}
+LABELV $649
+line 1708
+ADDRLP4 0
+INDIRI4
+CNSTI4 56
+LTI4 $648
+line 1716
+;1716:	i = 0;
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+line 1718
+;1717:
+;1718:	memset( &client->ps, 0, sizeof( client->ps ) );
+ADDRLP4 8
+INDIRP4
+ARGP4
+CNSTI4 0
+ARGI4
+CNSTI4 1380
+ARGI4
+ADDRGP4 memset
+CALLP4
+pop
+line 1719
+;1719:	client->ps.eFlags = flags;
+ADDRLP4 8
+INDIRP4
+CNSTI4 108
+ADDP4
+ADDRLP4 1036
+INDIRI4
+ASGNI4
+line 1721
+;1720:
+;1721:	client->ps.hasDetPackPlanted = qfalse;
+ADDRLP4 8
+INDIRP4
+CNSTI4 640
+ADDP4
+CNSTI4 0
+ASGNI4
+line 1724
+;1722:
+;1723:	//first-time force power initialization
+;1724:	WP_InitForcePowers( ent );
+ADDRLP4 4
+INDIRP4
+ARGP4
+ADDRGP4 WP_InitForcePowers
+CALLV
+pop
+line 1727
+;1725:
+;1726:	//init saber ent
+;1727:	WP_SaberInitBladeData( ent );
+ADDRLP4 4
+INDIRP4
+ARGP4
+ADDRGP4 WP_SaberInitBladeData
+CALLV
+pop
+line 1730
+;1728:
+;1729:	// First time model setup for that player.
+;1730:	trap_GetUserinfo( clientNum, userinfo, sizeof(userinfo) );
+ADDRFP4 0
+INDIRI4
+ARGI4
+ADDRLP4 12
+ARGP4
+CNSTI4 1024
+ARGI4
+ADDRGP4 trap_GetUserinfo
+CALLV
+pop
+line 1731
+;1731:	modelname = Info_ValueForKey (userinfo, "model");
+ADDRLP4 12
+ARGP4
+ADDRGP4 $506
+ARGP4
+ADDRLP4 1048
+ADDRGP4 Info_ValueForKey
+CALLP4
+ASGNP4
+ADDRLP4 1040
+ADDRLP4 1048
+INDIRP4
+ASGNP4
+line 1732
+;1732:	SetupGameGhoul2Model(client, modelname);
+ADDRLP4 8
+INDIRP4
+ARGP4
+ADDRLP4 1040
+INDIRP4
+ARGP4
+ADDRGP4 SetupGameGhoul2Model
+CALLV
+pop
+line 1734
+;1733:
+;1734:	if (ent->client->ghoul2)
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 2888
+ADDP4
+INDIRP4
+CVPU4 4
+CNSTU4 0
+EQU4 $653
+line 1735
+;1735:	{
+line 1736
+;1736:		ent->bolt_Head = trap_G2API_AddBolt(ent->client->ghoul2, 0, "cranium");
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 2888
+ADDP4
+INDIRP4
+ARGP4
+CNSTI4 0
+ARGI4
+ADDRGP4 $430
+ARGP4
+ADDRLP4 1056
+ADDRGP4 trap_G2API_AddBolt
+CALLI4
+ASGNI4
+ADDRLP4 4
+INDIRP4
+CNSTI4 784
+ADDP4
+ADDRLP4 1056
+INDIRI4
+ASGNI4
+line 1737
+;1737:		ent->bolt_Waist = trap_G2API_AddBolt(ent->client->ghoul2, 0, "thoracic");
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 2888
+ADDP4
+INDIRP4
+ARGP4
+CNSTI4 0
+ARGI4
+ADDRGP4 $655
+ARGP4
+ADDRLP4 1064
+ADDRGP4 trap_G2API_AddBolt
+CALLI4
+ASGNI4
+ADDRLP4 4
+INDIRP4
+CNSTI4 804
+ADDP4
+ADDRLP4 1064
+INDIRI4
+ASGNI4
+line 1738
+;1738:		ent->bolt_LArm = trap_G2API_AddBolt(ent->client->ghoul2, 0, "lradius");
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 2888
+ADDP4
+INDIRP4
+ARGP4
+CNSTI4 0
+ARGI4
+ADDRGP4 $656
+ARGP4
+ADDRLP4 1072
+ADDRGP4 trap_G2API_AddBolt
+CALLI4
+ASGNI4
+ADDRLP4 4
+INDIRP4
+CNSTI4 788
+ADDP4
+ADDRLP4 1072
+INDIRI4
+ASGNI4
+line 1739
+;1739:		ent->bolt_RArm = trap_G2API_AddBolt(ent->client->ghoul2, 0, "rradius");
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 2888
+ADDP4
+INDIRP4
+ARGP4
+CNSTI4 0
+ARGI4
+ADDRGP4 $657
+ARGP4
+ADDRLP4 1080
+ADDRGP4 trap_G2API_AddBolt
+CALLI4
+ASGNI4
+ADDRLP4 4
+INDIRP4
+CNSTI4 792
+ADDP4
+ADDRLP4 1080
+INDIRI4
+ASGNI4
+line 1740
+;1740:		ent->bolt_LLeg = trap_G2API_AddBolt(ent->client->ghoul2, 0, "ltibia");
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 2888
+ADDP4
+INDIRP4
+ARGP4
+CNSTI4 0
+ARGI4
+ADDRGP4 $658
+ARGP4
+ADDRLP4 1088
+ADDRGP4 trap_G2API_AddBolt
+CALLI4
+ASGNI4
+ADDRLP4 4
+INDIRP4
+CNSTI4 796
+ADDP4
+ADDRLP4 1088
+INDIRI4
+ASGNI4
+line 1741
+;1741:		ent->bolt_RLeg = trap_G2API_AddBolt(ent->client->ghoul2, 0, "rtibia");
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 2888
+ADDP4
+INDIRP4
+ARGP4
+CNSTI4 0
+ARGI4
+ADDRGP4 $659
+ARGP4
+ADDRLP4 1096
+ADDRGP4 trap_G2API_AddBolt
+CALLI4
+ASGNI4
+ADDRLP4 4
+INDIRP4
+CNSTI4 800
+ADDP4
+ADDRLP4 1096
+INDIRI4
+ASGNI4
+line 1742
+;1742:		ent->bolt_Motion = trap_G2API_AddBolt(ent->client->ghoul2, 0, "Motion");
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 2888
+ADDP4
+INDIRP4
+ARGP4
+CNSTI4 0
+ARGI4
+ADDRGP4 $660
+ARGP4
+ADDRLP4 1104
+ADDRGP4 trap_G2API_AddBolt
+CALLI4
+ASGNI4
+ADDRLP4 4
+INDIRP4
+CNSTI4 808
+ADDP4
+ADDRLP4 1104
+INDIRI4
+ASGNI4
+line 1743
+;1743:	}
+LABELV $653
+line 1746
+;1744:
+;1745:	// locate ent at a spawn point
+;1746:	ClientSpawn( ent );
+ADDRLP4 4
+INDIRP4
+ARGP4
+ADDRGP4 ClientSpawn
+CALLV
+pop
+line 1748
+;1747:
+;1748:	if ( client->sess.sessionTeam != TEAM_SPECTATOR ) {
+ADDRLP4 8
+INDIRP4
+CNSTI4 1632
+ADDP4
+INDIRI4
+CNSTI4 3
+EQI4 $661
+line 1750
+;1749:		// send event
+;1750:		tent = G_TempEntity( ent->client->ps.origin, EV_PLAYER_TELEPORT_IN );
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 20
+ADDP4
+ARGP4
+CNSTI4 59
+ARGI4
+ADDRLP4 1052
+ADDRGP4 G_TempEntity
+CALLP4
+ASGNP4
+ADDRLP4 1044
+ADDRLP4 1052
+INDIRP4
+ASGNP4
+line 1751
+;1751:		tent->s.clientNum = ent->s.clientNum;
+ADDRLP4 1056
+CNSTI4 220
+ASGNI4
+ADDRLP4 1044
+INDIRP4
+ADDRLP4 1056
+INDIRI4
+ADDP4
+ADDRLP4 4
+INDIRP4
+ADDRLP4 1056
+INDIRI4
+ADDP4
+INDIRI4
+ASGNI4
+line 1753
+;1752:
+;1753:		if (Q_stristr(client->pers.netname, cm_clanTag.string)){
+ADDRLP4 8
+INDIRP4
+CNSTI4 1428
+ADDP4
+ARGP4
+ADDRGP4 cm_clanTag+16
+ARGP4
+ADDRLP4 1060
+ADDRGP4 Q_stristr
+CALLP4
+ASGNP4
+ADDRLP4 1060
+INDIRP4
+CVPU4 4
+CNSTU4 0
+EQU4 $663
+line 1754
+;1754:			if (!(ent->r.svFlags & SVF_CLAN) && *cm_clanTag.string && cm_clanTag.string[0]){
+ADDRLP4 1064
+CNSTI4 0
+ASGNI4
+ADDRLP4 4
+INDIRP4
+CNSTI4 304
+ADDP4
+INDIRI4
+CNSTI4 524288
+BANDI4
+ADDRLP4 1064
+INDIRI4
+NEI4 $666
+ADDRGP4 cm_clanTag+16
+INDIRI1
+CVII4 1
+ADDRLP4 1064
+INDIRI4
+EQI4 $666
+ADDRGP4 cm_clanTag+16
+INDIRI1
+CVII4 1
+ADDRLP4 1064
+INDIRI4
+EQI4 $666
+line 1755
+;1755:				client->cmClanTimer = 30;
+ADDRLP4 8
+INDIRP4
+CNSTI4 1848
+ADDP4
+CNSTI4 30
+ASGNI4
+line 1756
+;1756:				client->pers.amclanreserved = 1;
+ADDRLP4 8
+INDIRP4
+CNSTI4 1552
+ADDP4
+CNSTI4 1
+ASGNI4
+line 1757
+;1757:			}
+LABELV $666
+line 1758
+;1758:		}
+LABELV $663
+line 1760
+;1759:
+;1760:		if ( g_gametype.integer != GT_TOURNAMENT  ) {
+ADDRGP4 g_gametype+12
+INDIRI4
+CNSTI4 3
+EQI4 $670
+line 1761
+;1761:			trap_SendServerCommand( -1, va("print \"%s" S_COLOR_WHITE " %s\n\"", client->pers.netname, G_GetStripEdString("SVINGAME", "PLENTER")) );
+ADDRGP4 $148
+ARGP4
+ADDRGP4 $673
+ARGP4
+ADDRLP4 1064
+ADDRGP4 G_GetStripEdString
+CALLP4
+ASGNP4
+ADDRGP4 $620
+ARGP4
+ADDRLP4 8
+INDIRP4
+CNSTI4 1428
+ADDP4
+ARGP4
+ADDRLP4 1064
+INDIRP4
+ARGP4
+ADDRLP4 1068
+ADDRGP4 va
+CALLP4
+ASGNP4
+CNSTI4 -1
+ARGI4
+ADDRLP4 1068
+INDIRP4
+ARGP4
+ADDRGP4 trap_SendServerCommand
+CALLV
+pop
+line 1762
+;1762:		}
+LABELV $670
+line 1763
+;1763:	}
+LABELV $661
+line 1764
+;1764:	G_LogPrintf( "ClientBegin: %i\n", clientNum );
+ADDRGP4 $674
+ARGP4
+ADDRFP4 0
+INDIRI4
+ARGI4
+ADDRGP4 G_LogPrintf
+CALLV
+pop
+line 1767
+;1765:
+;1766:	// count current clients and rank for scoreboard
+;1767:	CalculateRanks();
+ADDRGP4 CalculateRanks
+CALLV
+pop
+line 1769
+;1768:
+;1769:	if (client->sess.sessionTeam != TEAM_SPECTATOR){
+ADDRLP4 8
+INDIRP4
+CNSTI4 1632
+ADDP4
+INDIRI4
+CNSTI4 3
+EQI4 $675
+line 1770
+;1770:		trap_SendServerCommand( ent-g_entities, va("print \"\n\n^1Clan Mod\n^3=================================================\n^3||^1Author: ^6NeWaGe ^2& JediDog ^5for the 1.03 Clan Mod^3||\n^3||^1Website: ^5http://www.ClanMod.org               ^3||\n^3=================================================\n^1* ^3Type in /HELP for a command list! ^1*\n\n\"" ) );
+ADDRGP4 $677
+ARGP4
+ADDRLP4 1052
+ADDRGP4 va
+CALLP4
+ASGNP4
+ADDRLP4 4
+INDIRP4
+CVPU4 4
+ADDRGP4 g_entities
+CVPU4 4
+SUBU4
+CVUI4 4
+CNSTI4 852
+DIVI4
+ARGI4
+ADDRLP4 1052
+INDIRP4
+ARGP4
+ADDRGP4 trap_SendServerCommand
+CALLV
+pop
+line 1771
+;1771:		trap_SendServerCommand( ent-g_entities, va("print \"%s\n\n\"", cm_console_motd.string ) );
+ADDRGP4 $678
+ARGP4
+ADDRGP4 cm_console_motd+16
+ARGP4
+ADDRLP4 1056
+ADDRGP4 va
+CALLP4
+ASGNP4
+ADDRLP4 4
+INDIRP4
+CVPU4 4
+ADDRGP4 g_entities
+CVPU4 4
+SUBU4
+CVUI4 4
+CNSTI4 852
+DIVI4
+ARGI4
+ADDRLP4 1056
+INDIRP4
+ARGP4
+ADDRGP4 trap_SendServerCommand
+CALLV
+pop
+line 1772
+;1772:		ent->client->csTimeLeft = cm_motd_time.integer;
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1840
+ADDP4
+ADDRGP4 cm_motd_time+12
+INDIRI4
+ASGNI4
+line 1773
+;1773:		if (level.matchMode == qtrue){
+ADDRGP4 level+9116
+INDIRI4
+CNSTI4 1
+NEI4 $681
+line 1774
+;1774:			trap_SendServerCommand( ent-g_entities, "print \"^5*** ^2CURRENT MODE: Clan Match ^5***\n\"");
+ADDRLP4 4
+INDIRP4
+CVPU4 4
+ADDRGP4 g_entities
+CVPU4 4
+SUBU4
+CVUI4 4
+CNSTI4 852
+DIVI4
+ARGI4
+ADDRGP4 $684
+ARGP4
+ADDRGP4 trap_SendServerCommand
+CALLV
+pop
+line 1775
+;1775:		} else if (level.meetingMode == qtrue){
+ADDRGP4 $682
+JUMPV
+LABELV $681
+ADDRGP4 level+9112
+INDIRI4
+CNSTI4 1
+NEI4 $685
+line 1776
+;1776:			trap_SendServerCommand( ent-g_entities, "print \"^5*** ^2CURRENT MODE: Clan Meeting ^5***\n\"");
+ADDRLP4 4
+INDIRP4
+CVPU4 4
+ADDRGP4 g_entities
+CVPU4 4
+SUBU4
+CVUI4 4
+CNSTI4 852
+DIVI4
+ARGI4
+ADDRGP4 $688
+ARGP4
+ADDRGP4 trap_SendServerCommand
+CALLV
+pop
+line 1777
+;1777:		}
+LABELV $685
+LABELV $682
+line 1778
+;1778:	}
+LABELV $675
+line 1780
+;1779:
+;1780:	G_ClearClientLog(clientNum);
+ADDRFP4 0
+INDIRI4
+ARGI4
+ADDRGP4 G_ClearClientLog
+CALLV
+pop
+line 1781
+;1781:}
+LABELV $628
+endproc ClientBegin 1108 12
+proc AllForceDisabled 4 0
+line 1784
+;1782:
+;1783:static qboolean AllForceDisabled(int force)
+;1784:{
+line 1787
+;1785:	int i;
+;1786:
+;1787:	if (force)
+ADDRFP4 0
+INDIRI4
+CNSTI4 0
+EQI4 $690
+line 1788
+;1788:	{
+line 1789
+;1789:		for (i=0;i<NUM_FORCE_POWERS;i++)
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+LABELV $692
+line 1790
+;1790:		{
+line 1791
+;1791:			if (!(force & (1<<i)))
+ADDRFP4 0
+INDIRI4
+CNSTI4 1
+ADDRLP4 0
+INDIRI4
+LSHI4
+BANDI4
+CNSTI4 0
+NEI4 $696
+line 1792
+;1792:			{
+line 1793
+;1793:				return qfalse;
+CNSTI4 0
+RETI4
+ADDRGP4 $689
+JUMPV
+LABELV $696
+line 1795
+;1794:			}
+;1795:		}
+LABELV $693
+line 1789
+ADDRLP4 0
+ADDRLP4 0
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+ADDRLP4 0
+INDIRI4
+CNSTI4 18
+LTI4 $692
+line 1797
+;1796:
+;1797:		return qtrue;
+CNSTI4 1
+RETI4
+ADDRGP4 $689
+JUMPV
+LABELV $690
+line 1800
+;1798:	}
+;1799:
+;1800:	return qfalse;
+CNSTI4 0
+RETI4
+LABELV $689
+endproc AllForceDisabled 4 0
+export ClientSpawn
+proc ClientSpawn 996 16
+line 1813
+;1801:}
+;1802:
+;1803:/*
+;1804:===========
+;1805:ClientSpawn
+;1806:
+;1807:Called every time a client is placed fresh in the world:
+;1808:after the first ClientBegin, and after each respawn
+;1809:Initializes all non-persistant parts of playerState
+;1810:============
+;1811:*/
+;1812:extern qboolean WP_HasForcePowers( const playerState_t *ps );
+;1813:void ClientSpawn(gentity_t *ent) {
+line 1830
+;1814:	int		index;
+;1815:	vec3_t	spawn_origin, spawn_angles;
+;1816:	gclient_t	*client;
+;1817:	int		i;
+;1818:	clientPersistant_t	saved;
+;1819:	clientSession_t		savedSess;
+;1820:	int		persistant[MAX_PERSISTANT];
+;1821:	gentity_t	*spawnPoint;
+;1822:	int		flags;
+;1823:	int		savedPing;
+;1824://	char	*savedAreaBits;
+;1825:	int		accuracy_hits, accuracy_shots;
+;1826:	int		eventSequence;
+;1827://	char	userinfo[MAX_INFO_STRING];
+;1828:	forcedata_t			savedForce;
+;1829:	void		*ghoul2save;
+;1830:	int		saveSaberNum = ENTITYNUM_NONE;
+ADDRLP4 112
+CNSTI4 1023
+ASGNI4
+line 1831
+;1831:	int		wDisable = 0;
+ADDRLP4 76
+CNSTI4 0
+ASGNI4
+line 1833
+;1832:
+;1833:	index = ent - g_entities;
+ADDRLP4 104
+ADDRFP4 0
+INDIRP4
+CVPU4 4
+ADDRGP4 g_entities
+CVPU4 4
+SUBU4
+CVUI4 4
+CNSTI4 852
+DIVI4
+ASGNI4
+line 1834
+;1834:	client = ent->client;
+ADDRLP4 0
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+line 1836
+;1835:
+;1836:	if (client->ps.fd.forceDoInit)
+ADDRLP4 0
+INDIRP4
+CNSTI4 1184
+ADDP4
+INDIRI4
+CNSTI4 0
+EQI4 $699
+line 1837
+;1837:	{ //force a reread of force powers
+line 1838
+;1838:		WP_InitForcePowers( ent );
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRGP4 WP_InitForcePowers
+CALLV
+pop
+line 1839
+;1839:		client->ps.fd.forceDoInit = 0;
+ADDRLP4 0
+INDIRP4
+CNSTI4 1184
+ADDP4
+CNSTI4 0
+ASGNI4
+line 1840
+;1840:	}
+LABELV $699
+line 1844
+;1841:	// find a spawn point
+;1842:	// do it before setting health back up, so farthest
+;1843:	// ranging doesn't count this client
+;1844:	if ( client->sess.sessionTeam == TEAM_SPECTATOR ) {
+ADDRLP4 0
+INDIRP4
+CNSTI4 1632
+ADDP4
+INDIRI4
+CNSTI4 3
+NEI4 $701
+line 1845
+;1845:		spawnPoint = SelectSpectatorSpawnPoint ( 
+ADDRLP4 80
+ARGP4
+ADDRLP4 92
+ARGP4
+ADDRLP4 928
+ADDRGP4 SelectSpectatorSpawnPoint
+CALLP4
+ASGNP4
+ADDRLP4 72
+ADDRLP4 928
+INDIRP4
+ASGNP4
+line 1847
+;1846:						spawn_origin, spawn_angles);
+;1847:	} else if (g_gametype.integer == GT_CTF || g_gametype.integer == GT_CTY) {
+ADDRGP4 $702
+JUMPV
+LABELV $701
+ADDRGP4 g_gametype+12
+INDIRI4
+CNSTI4 7
+EQI4 $707
+ADDRGP4 g_gametype+12
+INDIRI4
+CNSTI4 8
+NEI4 $703
+LABELV $707
+line 1849
+;1848:		// all base oriented team games use the CTF spawn points
+;1849:		spawnPoint = SelectCTFSpawnPoint ( 
+ADDRLP4 0
+INDIRP4
+CNSTI4 1632
+ADDP4
+INDIRI4
+ARGI4
+ADDRLP4 0
+INDIRP4
+CNSTI4 1472
+ADDP4
+INDIRI4
+ARGI4
+ADDRLP4 80
+ARGP4
+ADDRLP4 92
+ARGP4
+ADDRLP4 932
+ADDRGP4 SelectCTFSpawnPoint
+CALLP4
+ASGNP4
+ADDRLP4 72
+ADDRLP4 932
+INDIRP4
+ASGNP4
+line 1853
+;1850:						client->sess.sessionTeam, 
+;1851:						client->pers.teamState.state, 
+;1852:						spawn_origin, spawn_angles);
+;1853:	}
+ADDRGP4 $704
+JUMPV
+LABELV $703
+line 1854
+;1854:	else if (g_gametype.integer == GT_SAGA)
+ADDRGP4 g_gametype+12
+INDIRI4
+CNSTI4 6
+NEI4 $708
+line 1855
+;1855:	{
+line 1856
+;1856:		spawnPoint = SelectSagaSpawnPoint ( 
+ADDRLP4 0
+INDIRP4
+CNSTI4 1632
+ADDP4
+INDIRI4
+ARGI4
+ADDRLP4 0
+INDIRP4
+CNSTI4 1472
+ADDP4
+INDIRI4
+ARGI4
+ADDRLP4 80
+ARGP4
+ADDRLP4 92
+ARGP4
+ADDRLP4 932
+ADDRGP4 SelectSagaSpawnPoint
+CALLP4
+ASGNP4
+ADDRLP4 72
+ADDRLP4 932
+INDIRP4
+ASGNP4
+line 1860
+;1857:						client->sess.sessionTeam, 
+;1858:						client->pers.teamState.state, 
+;1859:						spawn_origin, spawn_angles);
+;1860:	}
+ADDRGP4 $709
+JUMPV
+LABELV $708
+line 1861
+;1861:	else {
+LABELV $711
+line 1862
+;1862:		do {
+line 1864
+;1863:			// the first spawn should be at a good looking spot
+;1864:			if ( !client->pers.initialSpawn && client->pers.localClient ) {
+ADDRLP4 932
+CNSTI4 0
+ASGNI4
+ADDRLP4 0
+INDIRP4
+CNSTI4 1416
+ADDP4
+INDIRI4
+ADDRLP4 932
+INDIRI4
+NEI4 $714
+ADDRLP4 0
+INDIRP4
+CNSTI4 1412
+ADDP4
+INDIRI4
+ADDRLP4 932
+INDIRI4
+EQI4 $714
+line 1865
+;1865:				client->pers.initialSpawn = qtrue;
+ADDRLP4 0
+INDIRP4
+CNSTI4 1416
+ADDP4
+CNSTI4 1
+ASGNI4
+line 1866
+;1866:				spawnPoint = SelectInitialSpawnPoint( spawn_origin, spawn_angles );
+ADDRLP4 80
+ARGP4
+ADDRLP4 92
+ARGP4
+ADDRLP4 936
+ADDRGP4 SelectInitialSpawnPoint
+CALLP4
+ASGNP4
+ADDRLP4 72
+ADDRLP4 936
+INDIRP4
+ASGNP4
+line 1867
+;1867:			} else {
+ADDRGP4 $715
+JUMPV
+LABELV $714
+line 1869
+;1868:				// don't spawn near existing origin if possible
+;1869:				spawnPoint = SelectSpawnPoint ( 
+ADDRLP4 0
+INDIRP4
+CNSTI4 20
+ADDP4
+ARGP4
+ADDRLP4 80
+ARGP4
+ADDRLP4 92
+ARGP4
+ADDRLP4 936
+ADDRGP4 SelectSpawnPoint
+CALLP4
+ASGNP4
+ADDRLP4 72
+ADDRLP4 936
+INDIRP4
+ASGNP4
+line 1872
+;1870:					client->ps.origin, 
+;1871:					spawn_origin, spawn_angles);
+;1872:			}
+LABELV $715
+line 1876
+;1873:
+;1874:			// Tim needs to prevent bots from spawning at the initial point
+;1875:			// on q3dm0...
+;1876:			if ( ( spawnPoint->flags & FL_NO_BOTS ) && ( ent->r.svFlags & SVF_BOT ) ) {
+ADDRLP4 936
+CNSTI4 0
+ASGNI4
+ADDRLP4 72
+INDIRP4
+CNSTI4 472
+ADDP4
+INDIRI4
+CNSTI4 8192
+BANDI4
+ADDRLP4 936
+INDIRI4
+EQI4 $716
+ADDRFP4 0
+INDIRP4
+CNSTI4 304
+ADDP4
+INDIRI4
+CNSTI4 8
+BANDI4
+ADDRLP4 936
+INDIRI4
+EQI4 $716
+line 1877
+;1877:				continue;	// try again
+ADDRGP4 $712
+JUMPV
+LABELV $716
+line 1880
+;1878:			}
+;1879:			// just to be symetric, we have a nohumans option...
+;1880:			if ( ( spawnPoint->flags & FL_NO_HUMANS ) && !( ent->r.svFlags & SVF_BOT ) ) {
+ADDRLP4 940
+CNSTI4 0
+ASGNI4
+ADDRLP4 72
+INDIRP4
+CNSTI4 472
+ADDP4
+INDIRI4
+CNSTI4 16384
+BANDI4
+ADDRLP4 940
+INDIRI4
+EQI4 $713
+ADDRFP4 0
+INDIRP4
+CNSTI4 304
+ADDP4
+INDIRI4
+CNSTI4 8
+BANDI4
+ADDRLP4 940
+INDIRI4
+NEI4 $713
+line 1881
+;1881:				continue;	// try again
+line 1884
+;1882:			}
+;1883:
+;1884:			break;
+LABELV $712
+line 1886
+;1885:
+;1886:		} while ( 1 );
+ADDRGP4 $711
+JUMPV
+LABELV $713
+line 1887
+;1887:	}
+LABELV $709
+LABELV $704
+LABELV $702
+line 1888
+;1888:	client->pers.teamState.state = TEAM_ACTIVE;
+ADDRLP4 0
+INDIRP4
+CNSTI4 1472
+ADDP4
+CNSTI4 1
+ASGNI4
+line 1892
+;1889:
+;1890:	// toggle the teleport bit so the client knows to not lerp
+;1891:	// and never clear the voted flag
+;1892:	flags = ent->client->ps.eFlags & (EF_TELEPORT_BIT | EF_VOTED | EF_TEAMVOTED);
+ADDRLP4 108
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 108
+ADDP4
+INDIRI4
+CNSTI4 540676
+BANDI4
+ASGNI4
+line 1893
+;1893:	flags ^= EF_TELEPORT_BIT;
+ADDRLP4 108
+ADDRLP4 108
+INDIRI4
+CNSTI4 4
+BXORI4
+ASGNI4
+line 1897
+;1894:
+;1895:	// clear everything but the persistant data
+;1896:
+;1897:	saved = client->pers;
+ADDRLP4 116
+ADDRLP4 0
+INDIRP4
+CNSTI4 1380
+ADDP4
+INDIRB
+ASGNB 252
+line 1898
+;1898:	savedSess = client->sess;
+ADDRLP4 368
+ADDRLP4 0
+INDIRP4
+CNSTI4 1632
+ADDP4
+INDIRB
+ASGNB 68
+line 1899
+;1899:	savedPing = client->ps.ping;
+ADDRLP4 436
+ADDRLP4 0
+INDIRP4
+CNSTI4 484
+ADDP4
+INDIRI4
+ASGNI4
+line 1901
+;1900://	savedAreaBits = client->areabits;
+;1901:	accuracy_hits = client->accuracy_hits;
+ADDRLP4 440
+ADDRLP4 0
+INDIRP4
+CNSTI4 1792
+ADDP4
+INDIRI4
+ASGNI4
+line 1902
+;1902:	accuracy_shots = client->accuracy_shots;
+ADDRLP4 444
+ADDRLP4 0
+INDIRP4
+CNSTI4 1788
+ADDP4
+INDIRI4
+ASGNI4
+line 1903
+;1903:	for ( i = 0 ; i < MAX_PERSISTANT ; i++ ) {
+ADDRLP4 4
+CNSTI4 0
+ASGNI4
+LABELV $720
+line 1904
+;1904:		persistant[i] = client->ps.persistant[i];
+ADDRLP4 928
+ADDRLP4 4
+INDIRI4
+CNSTI4 2
+LSHI4
+ASGNI4
+ADDRLP4 928
+INDIRI4
+ADDRLP4 8
+ADDP4
+ADDRLP4 928
+INDIRI4
+ADDRLP4 0
+INDIRP4
+CNSTI4 280
+ADDP4
+ADDP4
+INDIRI4
+ASGNI4
+line 1905
+;1905:	}
+LABELV $721
+line 1903
+ADDRLP4 4
+ADDRLP4 4
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+ADDRLP4 4
+INDIRI4
+CNSTI4 16
+LTI4 $720
+line 1906
+;1906:	eventSequence = client->ps.eventSequence;
+ADDRLP4 448
+ADDRLP4 0
+INDIRP4
+CNSTI4 112
+ADDP4
+INDIRI4
+ASGNI4
+line 1908
+;1907:
+;1908:	savedForce = client->ps.fd;
+ADDRLP4 452
+ADDRLP4 0
+INDIRP4
+CNSTI4 772
+ADDP4
+INDIRB
+ASGNB 472
+line 1910
+;1909:
+;1910:	ghoul2save = client->ghoul2;
+ADDRLP4 924
+ADDRLP4 0
+INDIRP4
+CNSTI4 2888
+ADDP4
+INDIRP4
+ASGNP4
+line 1912
+;1911:
+;1912:	saveSaberNum = client->ps.saberEntityNum;
+ADDRLP4 112
+ADDRLP4 0
+INDIRP4
+CNSTI4 544
+ADDP4
+INDIRI4
+ASGNI4
+line 1914
+;1913:
+;1914:	memset (client, 0, sizeof(*client)); // bk FIXME: Com_Memset?
+ADDRLP4 0
+INDIRP4
+ARGP4
+CNSTI4 0
+ARGI4
+CNSTI4 2972
+ARGI4
+ADDRGP4 memset
+CALLP4
+pop
+line 1917
+;1915:
+;1916:	//rww - Don't wipe the ghoul2 instance or the animation data
+;1917:	client->ghoul2 = ghoul2save;
+ADDRLP4 0
+INDIRP4
+CNSTI4 2888
+ADDP4
+ADDRLP4 924
+INDIRP4
+ASGNP4
+line 1920
+;1918:
+;1919:	//or the saber ent num
+;1920:	client->ps.saberEntityNum = saveSaberNum;
+ADDRLP4 0
+INDIRP4
+CNSTI4 544
+ADDP4
+ADDRLP4 112
+INDIRI4
+ASGNI4
+line 1922
+;1921:
+;1922:	client->ps.fd = savedForce;
+ADDRLP4 0
+INDIRP4
+CNSTI4 772
+ADDP4
+ADDRLP4 452
+INDIRB
+ASGNB 472
+line 1924
+;1923:
+;1924:	client->ps.duelIndex = ENTITYNUM_NONE;
+ADDRLP4 0
+INDIRP4
+CNSTI4 1296
+ADDP4
+CNSTI4 1023
+ASGNI4
+line 1926
+;1925:
+;1926:	client->pers = saved;
+ADDRLP4 0
+INDIRP4
+CNSTI4 1380
+ADDP4
+ADDRLP4 116
+INDIRB
+ASGNB 252
+line 1927
+;1927:	client->sess = savedSess;
+ADDRLP4 0
+INDIRP4
+CNSTI4 1632
+ADDP4
+ADDRLP4 368
+INDIRB
+ASGNB 68
+line 1928
+;1928:	client->ps.ping = savedPing;
+ADDRLP4 0
+INDIRP4
+CNSTI4 484
+ADDP4
+ADDRLP4 436
+INDIRI4
+ASGNI4
+line 1930
+;1929://	client->areabits = savedAreaBits;
+;1930:	client->accuracy_hits = accuracy_hits;
+ADDRLP4 0
+INDIRP4
+CNSTI4 1792
+ADDP4
+ADDRLP4 440
+INDIRI4
+ASGNI4
+line 1931
+;1931:	client->accuracy_shots = accuracy_shots;
+ADDRLP4 0
+INDIRP4
+CNSTI4 1788
+ADDP4
+ADDRLP4 444
+INDIRI4
+ASGNI4
+line 1932
+;1932:	client->lastkilled_client = -1;
+ADDRLP4 0
+INDIRP4
+CNSTI4 1796
+ADDP4
+CNSTI4 -1
+ASGNI4
+line 1934
+;1933:
+;1934:	for ( i = 0 ; i < MAX_PERSISTANT ; i++ ) {
+ADDRLP4 4
+CNSTI4 0
+ASGNI4
+LABELV $724
+line 1935
+;1935:		client->ps.persistant[i] = persistant[i];
+ADDRLP4 928
+ADDRLP4 4
+INDIRI4
+CNSTI4 2
+LSHI4
+ASGNI4
+ADDRLP4 928
+INDIRI4
+ADDRLP4 0
+INDIRP4
+CNSTI4 280
+ADDP4
+ADDP4
+ADDRLP4 928
+INDIRI4
+ADDRLP4 8
+ADDP4
+INDIRI4
+ASGNI4
+line 1936
+;1936:	}
+LABELV $725
+line 1934
+ADDRLP4 4
+ADDRLP4 4
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+ADDRLP4 4
+INDIRI4
+CNSTI4 16
+LTI4 $724
+line 1937
+;1937:	client->ps.eventSequence = eventSequence;
+ADDRLP4 0
+INDIRP4
+CNSTI4 112
+ADDP4
+ADDRLP4 448
+INDIRI4
+ASGNI4
+line 1939
+;1938:	// increment the spawncount so the client will detect the respawn
+;1939:	client->ps.persistant[PERS_SPAWN_COUNT]++;
+ADDRLP4 928
+ADDRLP4 0
+INDIRP4
+CNSTI4 296
+ADDP4
+ASGNP4
+ADDRLP4 928
+INDIRP4
+ADDRLP4 928
+INDIRP4
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 1940
+;1940:	client->ps.persistant[PERS_TEAM] = client->sess.sessionTeam;
+ADDRLP4 0
+INDIRP4
+CNSTI4 292
+ADDP4
+ADDRLP4 0
+INDIRP4
+CNSTI4 1632
+ADDP4
+INDIRI4
+ASGNI4
+line 1942
+;1941:
+;1942:	client->airOutTime = level.time + 12000;
+ADDRLP4 0
+INDIRP4
+CNSTI4 1824
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 12000
+ADDI4
+ASGNI4
+line 1946
+;1943:
+;1944://	trap_GetUserinfo( index, userinfo, sizeof(userinfo) );
+;1945:	// set max health
+;1946:	client->pers.maxHealth = 100;//atoi( Info_ValueForKey( userinfo, "handicap" ) );
+ADDRLP4 0
+INDIRP4
+CNSTI4 1464
+ADDP4
+CNSTI4 100
+ASGNI4
+line 1947
+;1947:	if ( client->pers.maxHealth < 1 || client->pers.maxHealth > 100 ) {
+ADDRLP4 936
+ADDRLP4 0
+INDIRP4
+CNSTI4 1464
+ADDP4
+INDIRI4
+ASGNI4
+ADDRLP4 936
+INDIRI4
+CNSTI4 1
+LTI4 $731
+ADDRLP4 936
+INDIRI4
+CNSTI4 100
+LEI4 $729
+LABELV $731
+line 1948
+;1948:		client->pers.maxHealth = 100;
+ADDRLP4 0
+INDIRP4
+CNSTI4 1464
+ADDP4
+CNSTI4 100
+ASGNI4
+line 1949
+;1949:	}
+LABELV $729
+line 1951
+;1950:	// clear entity values
+;1951:	client->ps.stats[STAT_MAX_HEALTH] = client->pers.maxHealth;
+ADDRLP4 0
+INDIRP4
+CNSTI4 248
+ADDP4
+ADDRLP4 0
+INDIRP4
+CNSTI4 1464
+ADDP4
+INDIRI4
+ASGNI4
+line 1952
+;1952:	client->ps.eFlags = flags;
+ADDRLP4 0
+INDIRP4
+CNSTI4 108
+ADDP4
+ADDRLP4 108
+INDIRI4
+ASGNI4
+line 1954
+;1953:
+;1954:	ent->s.groundEntityNum = ENTITYNUM_NONE;
+ADDRFP4 0
+INDIRP4
+CNSTI4 192
+ADDP4
+CNSTI4 1023
+ASGNI4
+line 1955
+;1955:	ent->client = &level.clients[index];
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+CNSTI4 2972
+ADDRLP4 104
+INDIRI4
+MULI4
+ADDRGP4 level
+INDIRP4
+ADDP4
+ASGNP4
+line 1956
+;1956:	ent->takedamage = qtrue;
+ADDRFP4 0
+INDIRP4
+CNSTI4 680
+ADDP4
+CNSTI4 1
+ASGNI4
+line 1957
+;1957:	ent->inuse = qtrue;
+ADDRFP4 0
+INDIRP4
+CNSTI4 412
+ADDP4
+CNSTI4 1
+ASGNI4
+line 1958
+;1958:	ent->classname = "player";
+ADDRFP4 0
+INDIRP4
+CNSTI4 416
+ADDP4
+ADDRGP4 $732
+ASGNP4
+line 1959
+;1959:	ent->r.contents = CONTENTS_BODY;
+ADDRFP4 0
+INDIRP4
+CNSTI4 340
+ADDP4
+CNSTI4 256
+ASGNI4
+line 1960
+;1960:	ent->clipmask = MASK_PLAYERSOLID;
+ADDRFP4 0
+INDIRP4
+CNSTI4 508
+ADDP4
+CNSTI4 273
+ASGNI4
+line 1961
+;1961:	ent->die = player_die;
+ADDRFP4 0
+INDIRP4
+CNSTI4 660
+ADDP4
+ADDRGP4 player_die
+ASGNP4
+line 1962
+;1962:	ent->waterlevel = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 748
+ADDP4
+CNSTI4 0
+ASGNI4
+line 1963
+;1963:	ent->watertype = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 744
+ADDP4
+CNSTI4 0
+ASGNI4
+line 1964
+;1964:	ent->flags = 0;
+ADDRFP4 0
+INDIRP4
+CNSTI4 472
+ADDP4
+CNSTI4 0
+ASGNI4
+line 1966
+;1965:	
+;1966:	VectorCopy (playerMins, ent->r.mins);
+ADDRFP4 0
+INDIRP4
+CNSTI4 316
+ADDP4
+ADDRGP4 playerMins
+INDIRB
+ASGNB 12
+line 1967
+;1967:	VectorCopy (playerMaxs, ent->r.maxs);
+ADDRFP4 0
+INDIRP4
+CNSTI4 328
+ADDP4
+ADDRGP4 playerMaxs
+INDIRB
+ASGNB 12
+line 1969
+;1968:
+;1969:	client->ps.clientNum = index;
+ADDRLP4 0
+INDIRP4
+CNSTI4 144
+ADDP4
+ADDRLP4 104
+INDIRI4
+ASGNI4
+line 1971
+;1970:	//give default weapons
+;1971:	client->ps.stats[STAT_WEAPONS] = ( 1 << WP_NONE );
+ADDRLP4 0
+INDIRP4
+CNSTI4 232
+ADDP4
+CNSTI4 1
+ASGNI4
+line 1973
+;1972:
+;1973:	if (g_gametype.integer == GT_TOURNAMENT)
+ADDRGP4 g_gametype+12
+INDIRI4
+CNSTI4 3
+NEI4 $733
+line 1974
+;1974:	{
+line 1975
+;1975:		wDisable = g_duelWeaponDisable.integer;
+ADDRLP4 76
+ADDRGP4 g_duelWeaponDisable+12
+INDIRI4
+ASGNI4
+line 1976
+;1976:	}
+ADDRGP4 $734
+JUMPV
+LABELV $733
+line 1978
+;1977:	else
+;1978:	{
+line 1979
+;1979:		wDisable = g_weaponDisable.integer;
+ADDRLP4 76
+ADDRGP4 g_weaponDisable+12
+INDIRI4
+ASGNI4
+line 1980
+;1980:	}
+LABELV $734
+line 1984
+;1981:
+;1982:
+;1983:
+;1984:	if ( g_gametype.integer != GT_HOLOCRON 
+ADDRGP4 g_gametype+12
+INDIRI4
+CNSTI4 1
+EQI4 $738
+ADDRGP4 g_gametype+12
+INDIRI4
+CNSTI4 2
+EQI4 $738
+ADDRLP4 944
+ADDRGP4 HasSetSaberOnly
+CALLI4
+ASGNI4
+ADDRLP4 944
+INDIRI4
+CNSTI4 0
+NEI4 $738
+ADDRGP4 g_forcePowerDisable+12
+INDIRI4
+ARGI4
+ADDRLP4 948
+ADDRGP4 AllForceDisabled
+CALLI4
+ASGNI4
+ADDRLP4 952
+CNSTI4 0
+ASGNI4
+ADDRLP4 948
+INDIRI4
+ADDRLP4 952
+INDIRI4
+NEI4 $738
+ADDRGP4 g_trueJedi+12
+INDIRI4
+ADDRLP4 952
+INDIRI4
+EQI4 $738
+line 1989
+;1985:		&& g_gametype.integer != GT_JEDIMASTER 
+;1986:		&& !HasSetSaberOnly()
+;1987:		&& !AllForceDisabled( g_forcePowerDisable.integer )
+;1988:		&& g_trueJedi.integer )
+;1989:	{
+line 1990
+;1990:		if ( g_gametype.integer >= GT_TEAM && (client->sess.sessionTeam == TEAM_BLUE || client->sess.sessionTeam == TEAM_RED) )
+ADDRGP4 g_gametype+12
+INDIRI4
+CNSTI4 5
+LTI4 $744
+ADDRLP4 956
+ADDRLP4 0
+INDIRP4
+CNSTI4 1632
+ADDP4
+INDIRI4
+ASGNI4
+ADDRLP4 956
+INDIRI4
+CNSTI4 2
+EQI4 $747
+ADDRLP4 956
+INDIRI4
+CNSTI4 1
+NEI4 $744
+LABELV $747
+line 1991
+;1991:		{//In Team games, force one side to be merc and other to be jedi
+line 1992
+;1992:			if ( level.numPlayingClients > 0 )
+ADDRGP4 level+80
+INDIRI4
+CNSTI4 0
+LEI4 $748
+line 1993
+;1993:			{//already someone in the game
+line 1994
+;1994:				int		i, forceTeam = TEAM_SPECTATOR;
+ADDRLP4 964
+CNSTI4 3
+ASGNI4
+line 1995
+;1995:				for ( i = 0 ; i < level.maxclients ; i++ ) 
+ADDRLP4 960
+CNSTI4 0
+ASGNI4
+ADDRGP4 $754
+JUMPV
+LABELV $751
+line 1996
+;1996:				{
+line 1997
+;1997:					if ( level.clients[i].pers.connected == CON_DISCONNECTED ) {
+CNSTI4 2972
+ADDRLP4 960
+INDIRI4
+MULI4
+ADDRGP4 level
+INDIRP4
+ADDP4
+CNSTI4 1380
+ADDP4
+INDIRI4
+CNSTI4 0
+NEI4 $756
+line 1998
+;1998:						continue;
+ADDRGP4 $752
+JUMPV
+LABELV $756
+line 2000
+;1999:					}
+;2000:					if ( level.clients[i].sess.sessionTeam == TEAM_BLUE || level.clients[i].sess.sessionTeam == TEAM_RED ) 
+ADDRLP4 968
+CNSTI4 2972
+ADDRLP4 960
+INDIRI4
+MULI4
+ADDRGP4 level
+INDIRP4
+ADDP4
+CNSTI4 1632
+ADDP4
+INDIRI4
+ASGNI4
+ADDRLP4 968
+INDIRI4
+CNSTI4 2
+EQI4 $760
+ADDRLP4 968
+INDIRI4
+CNSTI4 1
+NEI4 $758
+LABELV $760
+line 2001
+;2001:					{//in-game
+line 2002
+;2002:						if ( WP_HasForcePowers( &level.clients[i].ps ) )
+CNSTI4 2972
+ADDRLP4 960
+INDIRI4
+MULI4
+ADDRGP4 level
+INDIRP4
+ADDP4
+ARGP4
+ADDRLP4 972
+ADDRGP4 WP_HasForcePowers
+CALLI4
+ASGNI4
+ADDRLP4 972
+INDIRI4
+CNSTI4 0
+EQI4 $761
+line 2003
+;2003:						{//this side is using force
+line 2004
+;2004:							forceTeam = level.clients[i].sess.sessionTeam;
+ADDRLP4 964
+CNSTI4 2972
+ADDRLP4 960
+INDIRI4
+MULI4
+ADDRGP4 level
+INDIRP4
+ADDP4
+CNSTI4 1632
+ADDP4
+INDIRI4
+ASGNI4
+line 2005
+;2005:						}
+ADDRGP4 $753
+JUMPV
+LABELV $761
+line 2007
+;2006:						else
+;2007:						{//other team is using force
+line 2008
+;2008:							if ( level.clients[i].sess.sessionTeam == TEAM_BLUE )
+CNSTI4 2972
+ADDRLP4 960
+INDIRI4
+MULI4
+ADDRGP4 level
+INDIRP4
+ADDP4
+CNSTI4 1632
+ADDP4
+INDIRI4
+CNSTI4 2
+NEI4 $763
+line 2009
+;2009:							{
+line 2010
+;2010:								forceTeam = TEAM_RED;
+ADDRLP4 964
+CNSTI4 1
+ASGNI4
+line 2011
+;2011:							}
+ADDRGP4 $753
+JUMPV
+LABELV $763
+line 2013
+;2012:							else
+;2013:							{
+line 2014
+;2014:								forceTeam = TEAM_BLUE;
+ADDRLP4 964
+CNSTI4 2
+ASGNI4
+line 2015
+;2015:							}
+line 2016
+;2016:						}
+line 2017
+;2017:						break;
+ADDRGP4 $753
+JUMPV
+LABELV $758
+line 2019
+;2018:					}
+;2019:				}
+LABELV $752
+line 1995
+ADDRLP4 960
+ADDRLP4 960
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+LABELV $754
+ADDRLP4 960
+INDIRI4
+ADDRGP4 level+24
+INDIRI4
+LTI4 $751
+LABELV $753
+line 2020
+;2020:				if ( WP_HasForcePowers( &client->ps ) && client->sess.sessionTeam != forceTeam )
+ADDRLP4 0
+INDIRP4
+ARGP4
+ADDRLP4 968
+ADDRGP4 WP_HasForcePowers
+CALLI4
+ASGNI4
+ADDRLP4 968
+INDIRI4
+CNSTI4 0
+EQI4 $765
+ADDRLP4 0
+INDIRP4
+CNSTI4 1632
+ADDP4
+INDIRI4
+ADDRLP4 964
+INDIRI4
+EQI4 $765
+line 2021
+;2021:				{//using force but not on right team, switch him over
+line 2022
+;2022:					const char *teamName = TeamName( forceTeam );
+ADDRLP4 964
+INDIRI4
+ARGI4
+ADDRLP4 976
+ADDRGP4 TeamName
+CALLP4
+ASGNP4
+ADDRLP4 972
+ADDRLP4 976
+INDIRP4
+ASGNP4
+line 2024
+;2023:					//client->sess.sessionTeam = forceTeam;
+;2024:					SetTeam( ent, (char *)teamName );
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRLP4 972
+INDIRP4
+ARGP4
+ADDRGP4 SetTeam
+CALLV
+pop
+line 2025
+;2025:					return;
+ADDRGP4 $698
+JUMPV
+LABELV $765
+line 2027
+;2026:				}
+;2027:			}
+LABELV $748
+line 2028
+;2028:		}
+LABELV $744
+line 2030
+;2029:
+;2030:		if ( WP_HasForcePowers( &client->ps ) )
+ADDRLP4 0
+INDIRP4
+ARGP4
+ADDRLP4 960
+ADDRGP4 WP_HasForcePowers
+CALLI4
+ASGNI4
+ADDRLP4 960
+INDIRI4
+CNSTI4 0
+EQI4 $767
+line 2031
+;2031:		{
+line 2032
+;2032:			client->ps.trueNonJedi = qfalse;
+ADDRLP4 0
+INDIRP4
+CNSTI4 616
+ADDP4
+CNSTI4 0
+ASGNI4
+line 2033
+;2033:			client->ps.trueJedi = qtrue;
+ADDRLP4 0
+INDIRP4
+CNSTI4 612
+ADDP4
+CNSTI4 1
+ASGNI4
+line 2035
+;2034:			//make sure they only use the saber
+;2035:			client->ps.weapon = WP_SABER;
+ADDRLP4 0
+INDIRP4
+CNSTI4 148
+ADDP4
+CNSTI4 2
+ASGNI4
+line 2036
+;2036:			client->ps.stats[STAT_WEAPONS] = (1 << WP_SABER);
+ADDRLP4 0
+INDIRP4
+CNSTI4 232
+ADDP4
+CNSTI4 4
+ASGNI4
+line 2037
+;2037:		}
+ADDRGP4 $739
+JUMPV
+LABELV $767
+line 2039
+;2038:		else
+;2039:		{//no force powers set
+line 2040
+;2040:			client->ps.trueNonJedi = qtrue;
+ADDRLP4 0
+INDIRP4
+CNSTI4 616
+ADDP4
+CNSTI4 1
+ASGNI4
+line 2041
+;2041:			client->ps.trueJedi = qfalse;
+ADDRLP4 0
+INDIRP4
+CNSTI4 612
+ADDP4
+CNSTI4 0
+ASGNI4
+line 2042
+;2042:			if (!wDisable || !(wDisable & (1 << WP_BRYAR_PISTOL)))
+ADDRLP4 968
+CNSTI4 0
+ASGNI4
+ADDRLP4 76
+INDIRI4
+ADDRLP4 968
+INDIRI4
+EQI4 $771
+ADDRLP4 76
+INDIRI4
+CNSTI4 8
+BANDI4
+ADDRLP4 968
+INDIRI4
+NEI4 $769
+LABELV $771
+line 2043
+;2043:			{
+line 2044
+;2044:				client->ps.stats[STAT_WEAPONS] |= ( 1 << WP_BRYAR_PISTOL );
+ADDRLP4 972
+ADDRLP4 0
+INDIRP4
+CNSTI4 232
+ADDP4
+ASGNP4
+ADDRLP4 972
+INDIRP4
+ADDRLP4 972
+INDIRP4
+INDIRI4
+CNSTI4 8
+BORI4
+ASGNI4
+line 2045
+;2045:			}
+LABELV $769
+line 2046
+;2046:			if (!wDisable || !(wDisable & (1 << WP_BLASTER)))
+ADDRLP4 976
+CNSTI4 0
+ASGNI4
+ADDRLP4 76
+INDIRI4
+ADDRLP4 976
+INDIRI4
+EQI4 $774
+ADDRLP4 76
+INDIRI4
+CNSTI4 16
+BANDI4
+ADDRLP4 976
+INDIRI4
+NEI4 $772
+LABELV $774
+line 2047
+;2047:			{
+line 2048
+;2048:				client->ps.stats[STAT_WEAPONS] |= ( 1 << WP_BLASTER );
+ADDRLP4 980
+ADDRLP4 0
+INDIRP4
+CNSTI4 232
+ADDP4
+ASGNP4
+ADDRLP4 980
+INDIRP4
+ADDRLP4 980
+INDIRP4
+INDIRI4
+CNSTI4 16
+BORI4
+ASGNI4
+line 2049
+;2049:			}
+LABELV $772
+line 2050
+;2050:			if (!wDisable || !(wDisable & (1 << WP_BOWCASTER)))
+ADDRLP4 984
+CNSTI4 0
+ASGNI4
+ADDRLP4 76
+INDIRI4
+ADDRLP4 984
+INDIRI4
+EQI4 $777
+ADDRLP4 76
+INDIRI4
+CNSTI4 64
+BANDI4
+ADDRLP4 984
+INDIRI4
+NEI4 $775
+LABELV $777
+line 2051
+;2051:			{
+line 2052
+;2052:				client->ps.stats[STAT_WEAPONS] |= ( 1 << WP_BOWCASTER );
+ADDRLP4 988
+ADDRLP4 0
+INDIRP4
+CNSTI4 232
+ADDP4
+ASGNP4
+ADDRLP4 988
+INDIRP4
+ADDRLP4 988
+INDIRP4
+INDIRI4
+CNSTI4 64
+BORI4
+ASGNI4
+line 2053
+;2053:			}
+LABELV $775
+line 2054
+;2054:			client->ps.stats[STAT_WEAPONS] &= ~(1 << WP_SABER);
+ADDRLP4 988
+ADDRLP4 0
+INDIRP4
+CNSTI4 232
+ADDP4
+ASGNP4
+ADDRLP4 988
+INDIRP4
+ADDRLP4 988
+INDIRP4
+INDIRI4
+CNSTI4 -5
+BANDI4
+ASGNI4
+line 2055
+;2055:			client->ps.stats[STAT_WEAPONS] |= (1 << WP_STUN_BATON);
+ADDRLP4 992
+ADDRLP4 0
+INDIRP4
+CNSTI4 232
+ADDP4
+ASGNP4
+ADDRLP4 992
+INDIRP4
+ADDRLP4 992
+INDIRP4
+INDIRI4
+CNSTI4 2
+BORI4
+ASGNI4
+line 2056
+;2056:			client->ps.ammo[AMMO_POWERCELL] = ammoData[AMMO_POWERCELL].max;
+ADDRLP4 0
+INDIRP4
+CNSTI4 420
+ADDP4
+ADDRGP4 ammoData+12
+INDIRI4
+ASGNI4
+line 2057
+;2057:			client->ps.weapon = WP_BRYAR_PISTOL;
+ADDRLP4 0
+INDIRP4
+CNSTI4 148
+ADDP4
+CNSTI4 3
+ASGNI4
+line 2058
+;2058:		}
+line 2059
+;2059:	}
+ADDRGP4 $739
+JUMPV
+LABELV $738
+line 2061
+;2060:	else
+;2061:	{//jediVmerc is incompatible with this gametype, turn it off!
+line 2062
+;2062:		trap_Cvar_Set( "g_jediVmerc", "0" );
+ADDRGP4 $779
+ARGP4
+ADDRGP4 $80
+ARGP4
+ADDRGP4 trap_Cvar_Set
+CALLV
+pop
+line 2063
+;2063:		if (g_gametype.integer == GT_HOLOCRON)
+ADDRGP4 g_gametype+12
+INDIRI4
+CNSTI4 1
+NEI4 $780
+line 2064
+;2064:		{
+line 2066
+;2065:			//always get free saber level 1 in holocron
+;2066:			client->ps.stats[STAT_WEAPONS] |= ( 1 << WP_SABER );	//these are precached in g_items, ClearRegisteredItems()
+ADDRLP4 956
+ADDRLP4 0
+INDIRP4
+CNSTI4 232
+ADDP4
+ASGNP4
+ADDRLP4 956
+INDIRP4
+ADDRLP4 956
+INDIRP4
+INDIRI4
+CNSTI4 4
+BORI4
+ASGNI4
+line 2067
+;2067:		}
+ADDRGP4 $781
+JUMPV
+LABELV $780
+line 2069
+;2068:		else
+;2069:		{
+line 2070
+;2070:			if (client->ps.fd.forcePowerLevel[FP_SABERATTACK])
+ADDRLP4 0
+INDIRP4
+CNSTI4 1004
+ADDP4
+INDIRI4
+CNSTI4 0
+EQI4 $783
+line 2071
+;2071:			{
+line 2072
+;2072:				client->ps.stats[STAT_WEAPONS] |= ( 1 << WP_SABER );	//these are precached in g_items, ClearRegisteredItems()
+ADDRLP4 956
+ADDRLP4 0
+INDIRP4
+CNSTI4 232
+ADDP4
+ASGNP4
+ADDRLP4 956
+INDIRP4
+ADDRLP4 956
+INDIRP4
+INDIRI4
+CNSTI4 4
+BORI4
+ASGNI4
+line 2073
+;2073:			}
+ADDRGP4 $784
+JUMPV
+LABELV $783
+line 2075
+;2074:			else
+;2075:			{ //if you don't have saber attack rank then you don't get a saber
+line 2076
+;2076:				client->ps.stats[STAT_WEAPONS] |= (1 << WP_STUN_BATON);
+ADDRLP4 956
+ADDRLP4 0
+INDIRP4
+CNSTI4 232
+ADDP4
+ASGNP4
+ADDRLP4 956
+INDIRP4
+ADDRLP4 956
+INDIRP4
+INDIRI4
+CNSTI4 2
+BORI4
+ASGNI4
+line 2077
+;2077:			}
+LABELV $784
+line 2078
+;2078:		}
+LABELV $781
+line 2080
+;2079:
+;2080:		if (!wDisable || !(wDisable & (1 << WP_BRYAR_PISTOL)))
+ADDRLP4 960
+CNSTI4 0
+ASGNI4
+ADDRLP4 76
+INDIRI4
+ADDRLP4 960
+INDIRI4
+EQI4 $787
+ADDRLP4 76
+INDIRI4
+CNSTI4 8
+BANDI4
+ADDRLP4 960
+INDIRI4
+NEI4 $785
+LABELV $787
+line 2081
+;2081:		{
+line 2082
+;2082:			client->ps.stats[STAT_WEAPONS] |= ( 1 << WP_BRYAR_PISTOL );
+ADDRLP4 964
+ADDRLP4 0
+INDIRP4
+CNSTI4 232
+ADDP4
+ASGNP4
+ADDRLP4 964
+INDIRP4
+ADDRLP4 964
+INDIRP4
+INDIRI4
+CNSTI4 8
+BORI4
+ASGNI4
+line 2083
+;2083:		}
+ADDRGP4 $786
+JUMPV
+LABELV $785
+line 2084
+;2084:		else if (g_gametype.integer == GT_JEDIMASTER)
+ADDRGP4 g_gametype+12
+INDIRI4
+CNSTI4 2
+NEI4 $788
+line 2085
+;2085:		{
+line 2086
+;2086:			client->ps.stats[STAT_WEAPONS] |= ( 1 << WP_BRYAR_PISTOL );
+ADDRLP4 964
+ADDRLP4 0
+INDIRP4
+CNSTI4 232
+ADDP4
+ASGNP4
+ADDRLP4 964
+INDIRP4
+ADDRLP4 964
+INDIRP4
+INDIRI4
+CNSTI4 8
+BORI4
+ASGNI4
+line 2087
+;2087:		}
+LABELV $788
+LABELV $786
+line 2089
+;2088:
+;2089:		if (g_gametype.integer == GT_JEDIMASTER)
+ADDRGP4 g_gametype+12
+INDIRI4
+CNSTI4 2
+NEI4 $791
+line 2090
+;2090:		{
+line 2091
+;2091:			client->ps.stats[STAT_WEAPONS] &= ~(1 << WP_SABER);
+ADDRLP4 964
+ADDRLP4 0
+INDIRP4
+CNSTI4 232
+ADDP4
+ASGNP4
+ADDRLP4 964
+INDIRP4
+ADDRLP4 964
+INDIRP4
+INDIRI4
+CNSTI4 -5
+BANDI4
+ASGNI4
+line 2092
+;2092:			client->ps.stats[STAT_WEAPONS] |= (1 << WP_STUN_BATON);
+ADDRLP4 968
+ADDRLP4 0
+INDIRP4
+CNSTI4 232
+ADDP4
+ASGNP4
+ADDRLP4 968
+INDIRP4
+ADDRLP4 968
+INDIRP4
+INDIRI4
+CNSTI4 2
+BORI4
+ASGNI4
+line 2093
+;2093:		}
+LABELV $791
+line 2095
+;2094:
+;2095:		if (client->ps.stats[STAT_WEAPONS] & (1 << WP_BRYAR_PISTOL))
+ADDRLP4 0
+INDIRP4
+CNSTI4 232
+ADDP4
+INDIRI4
+CNSTI4 8
+BANDI4
+CNSTI4 0
+EQI4 $794
+line 2096
+;2096:		{
+line 2097
+;2097:			client->ps.weapon = WP_BRYAR_PISTOL;
+ADDRLP4 0
+INDIRP4
+CNSTI4 148
+ADDP4
+CNSTI4 3
+ASGNI4
+line 2098
+;2098:		}
+ADDRGP4 $795
+JUMPV
+LABELV $794
+line 2099
+;2099:		else if (client->ps.stats[STAT_WEAPONS] & (1 << WP_SABER))
+ADDRLP4 0
+INDIRP4
+CNSTI4 232
+ADDP4
+INDIRI4
+CNSTI4 4
+BANDI4
+CNSTI4 0
+EQI4 $796
+line 2100
+;2100:		{
+line 2101
+;2101:			client->ps.weapon = WP_SABER;
+ADDRLP4 0
+INDIRP4
+CNSTI4 148
+ADDP4
+CNSTI4 2
+ASGNI4
+line 2102
+;2102:		}
+ADDRGP4 $797
+JUMPV
+LABELV $796
+line 2104
+;2103:		else
+;2104:		{
+line 2105
+;2105:			client->ps.weapon = WP_STUN_BATON;
+ADDRLP4 0
+INDIRP4
+CNSTI4 148
+ADDP4
+CNSTI4 1
+ASGNI4
+line 2106
+;2106:		}
+LABELV $797
+LABELV $795
+line 2107
+;2107:	}
+LABELV $739
+line 2114
+;2108:
+;2109:	/*
+;2110:	client->ps.stats[STAT_HOLDABLE_ITEMS] |= ( 1 << HI_BINOCULARS );
+;2111:	client->ps.stats[STAT_HOLDABLE_ITEM] = BG_GetItemIndexByTag(HI_BINOCULARS, IT_HOLDABLE);
+;2112:	*/
+;2113:
+;2114:	client->ps.stats[STAT_HOLDABLE_ITEMS] = 0;
+ADDRLP4 0
+INDIRP4
+CNSTI4 224
+ADDP4
+CNSTI4 0
+ASGNI4
+line 2115
+;2115:	client->ps.stats[STAT_HOLDABLE_ITEM] = 0;
+ADDRLP4 0
+INDIRP4
+CNSTI4 220
+ADDP4
+CNSTI4 0
+ASGNI4
+line 2117
+;2116:
+;2117:	if ( client->sess.sessionTeam == TEAM_SPECTATOR )
+ADDRLP4 0
+INDIRP4
+CNSTI4 1632
+ADDP4
+INDIRI4
+CNSTI4 3
+NEI4 $798
+line 2118
+;2118:	{
+line 2119
+;2119:		client->ps.stats[STAT_WEAPONS] = 0;
+ADDRLP4 0
+INDIRP4
+CNSTI4 232
+ADDP4
+CNSTI4 0
+ASGNI4
+line 2120
+;2120:		client->ps.stats[STAT_HOLDABLE_ITEMS] = 0;
+ADDRLP4 0
+INDIRP4
+CNSTI4 224
+ADDP4
+CNSTI4 0
+ASGNI4
+line 2121
+;2121:		client->ps.stats[STAT_HOLDABLE_ITEM] = 0;
+ADDRLP4 0
+INDIRP4
+CNSTI4 220
+ADDP4
+CNSTI4 0
+ASGNI4
+line 2122
+;2122:	}
+LABELV $798
+line 2124
+;2123:
+;2124:	client->ps.ammo[AMMO_BLASTER] = 100; //ammoData[AMMO_BLASTER].max; //100 seems fair.
+ADDRLP4 0
+INDIRP4
+CNSTI4 416
+ADDP4
+CNSTI4 100
+ASGNI4
+line 2137
+;2125://	client->ps.ammo[AMMO_POWERCELL] = ammoData[AMMO_POWERCELL].max;
+;2126://	client->ps.ammo[AMMO_FORCE] = ammoData[AMMO_FORCE].max;
+;2127://	client->ps.ammo[AMMO_METAL_BOLTS] = ammoData[AMMO_METAL_BOLTS].max;
+;2128://	client->ps.ammo[AMMO_ROCKETS] = ammoData[AMMO_ROCKETS].max;
+;2129:/*
+;2130:	client->ps.stats[STAT_WEAPONS] = ( 1 << WP_BRYAR_PISTOL);
+;2131:	if ( g_gametype.integer == GT_TEAM ) {
+;2132:		client->ps.ammo[WP_BRYAR_PISTOL] = 50;
+;2133:	} else {
+;2134:		client->ps.ammo[WP_BRYAR_PISTOL] = 100;
+;2135:	}
+;2136:*/
+;2137:	client->ps.rocketLockIndex = MAX_CLIENTS;
+ADDRLP4 0
+INDIRP4
+CNSTI4 580
+ADDP4
+CNSTI4 32
+ASGNI4
+line 2138
+;2138:	client->ps.rocketLockTime = 0;
+ADDRLP4 0
+INDIRP4
+CNSTI4 588
+ADDP4
+CNSTF4 0
+ASGNF4
+line 2149
+;2139:
+;2140:	//rww - Set here to initialize the circling seeker drone to off.
+;2141:	//A quick note about this so I don't forget how it works again:
+;2142:	//ps.genericEnemyIndex is kept in sync between the server and client.
+;2143:	//When it gets set then an entitystate value of the same name gets
+;2144:	//set along with an entitystate flag in the shared bg code. Which
+;2145:	//is why a value needs to be both on the player state and entity state.
+;2146:	//(it doesn't seem to just carry over the entitystate value automatically
+;2147:	//because entity state value is derived from player state data or some
+;2148:	//such)
+;2149:	client->ps.genericEnemyIndex = -1;
+ADDRLP4 0
+INDIRP4
+CNSTI4 624
+ADDP4
+CNSTI4 -1
+ASGNI4
+line 2151
+;2150:
+;2151:	client->ps.isJediMaster = qfalse;
+ADDRLP4 0
+INDIRP4
+CNSTI4 604
+ADDP4
+CNSTI4 0
+ASGNI4
+line 2153
+;2152:
+;2153:	client->ps.fallingToDeath = 0;
+ADDRLP4 0
+INDIRP4
+CNSTI4 1352
+ADDP4
+CNSTI4 0
+ASGNI4
+line 2156
+;2154:
+;2155:	//Do per-spawn force power initialization
+;2156:	WP_SpawnInitForcePowers( ent );
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRGP4 WP_SpawnInitForcePowers
+CALLV
+pop
+line 2159
+;2157:
+;2158:	// health will count down towards max_health
+;2159:	ent->health = client->ps.stats[STAT_HEALTH] = client->ps.stats[STAT_MAX_HEALTH] * 1.25;
+ADDRLP4 960
+CNSTF4 1067450368
+ADDRLP4 0
+INDIRP4
+CNSTI4 248
+ADDP4
+INDIRI4
+CVIF4 4
+MULF4
+CVFI4 4
+ASGNI4
+ADDRLP4 0
+INDIRP4
+CNSTI4 216
+ADDP4
+ADDRLP4 960
+INDIRI4
+ASGNI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 676
+ADDP4
+ADDRLP4 960
+INDIRI4
+ASGNI4
+line 2162
+;2160:
+;2161:	// Start with a small amount of armor as well.
+;2162:	client->ps.stats[STAT_ARMOR] = client->ps.stats[STAT_MAX_HEALTH] * 0.25;
+ADDRLP4 0
+INDIRP4
+CNSTI4 236
+ADDP4
+CNSTF4 1048576000
+ADDRLP4 0
+INDIRP4
+CNSTI4 248
+ADDP4
+INDIRI4
+CVIF4 4
+MULF4
+CVFI4 4
+ASGNI4
+line 2164
+;2163:
+;2164:	G_SetOrigin( ent, spawn_origin );
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRLP4 80
+ARGP4
+ADDRGP4 G_SetOrigin
+CALLV
+pop
+line 2165
+;2165:	VectorCopy( spawn_origin, client->ps.origin );
+ADDRLP4 0
+INDIRP4
+CNSTI4 20
+ADDP4
+ADDRLP4 80
+INDIRB
+ASGNB 12
+line 2168
+;2166:
+;2167:	// the respawned flag will be cleared after the attack and jump keys come up
+;2168:	client->ps.pm_flags |= PMF_RESPAWNED;
+ADDRLP4 968
+ADDRLP4 0
+INDIRP4
+CNSTI4 12
+ADDP4
+ASGNP4
+ADDRLP4 968
+INDIRP4
+ADDRLP4 968
+INDIRP4
+INDIRI4
+CNSTI4 512
+BORI4
+ASGNI4
+line 2170
+;2169:
+;2170:	trap_GetUsercmd( client - level.clients, &ent->client->pers.cmd );
+ADDRLP4 0
+INDIRP4
+CVPU4 4
+ADDRGP4 level
+INDIRP4
+CVPU4 4
+SUBU4
+CVUI4 4
+CNSTI4 2972
+DIVI4
+ARGI4
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1384
+ADDP4
+ARGP4
+ADDRGP4 trap_GetUsercmd
+CALLV
+pop
+line 2171
+;2171:	SetClientViewAngle( ent, spawn_angles );
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRLP4 92
+ARGP4
+ADDRGP4 SetClientViewAngle
+CALLV
+pop
+line 2173
+;2172:
+;2173:	if ( ent->client->sess.sessionTeam == TEAM_SPECTATOR ) {
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1632
+ADDP4
+INDIRI4
+CNSTI4 3
+NEI4 $800
+line 2175
+;2174:
+;2175:	} else {
+ADDRGP4 $801
+JUMPV
+LABELV $800
+line 2176
+;2176:		G_KillBox( ent );
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRGP4 G_KillBox
+CALLV
+pop
+line 2177
+;2177:		trap_LinkEntity (ent);
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRGP4 trap_LinkEntity
+CALLV
+pop
+line 2180
+;2178:
+;2179:		// force the base weapon up
+;2180:		client->ps.weapon = WP_BRYAR_PISTOL;
+ADDRLP4 0
+INDIRP4
+CNSTI4 148
+ADDP4
+CNSTI4 3
+ASGNI4
+line 2181
+;2181:		client->ps.weaponstate = FIRST_WEAPON;
+ADDRLP4 0
+INDIRP4
+CNSTI4 152
+ADDP4
+CNSTI4 3
+ASGNI4
+line 2183
+;2182:
+;2183:	}
+LABELV $801
+line 2186
+;2184:
+;2185:	// don't allow full run speed for a bit
+;2186:	client->ps.pm_flags |= PMF_TIME_KNOCKBACK;
+ADDRLP4 972
+ADDRLP4 0
+INDIRP4
+CNSTI4 12
+ADDP4
+ASGNP4
+ADDRLP4 972
+INDIRP4
+ADDRLP4 972
+INDIRP4
+INDIRI4
+CNSTI4 64
+BORI4
+ASGNI4
+line 2187
+;2187:	client->ps.pm_time = 100;
+ADDRLP4 0
+INDIRP4
+CNSTI4 16
+ADDP4
+CNSTI4 100
+ASGNI4
+line 2189
+;2188:
+;2189:	client->respawnTime = level.time;
+ADDRLP4 0
+INDIRP4
+CNSTI4 1808
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+ASGNI4
+line 2190
+;2190:	client->inactivityTime = level.time + g_inactivity.integer * 1000;
+ADDRLP4 0
+INDIRP4
+CNSTI4 1812
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 1000
+ADDRGP4 g_inactivity+12
+INDIRI4
+MULI4
+ADDI4
+ASGNI4
+line 2191
+;2191:	client->latched_buttons = 0;
+ADDRLP4 0
+INDIRP4
+CNSTI4 1728
+ADDP4
+CNSTI4 0
+ASGNI4
+line 2194
+;2192:
+;2193:	// set default animations
+;2194:	client->ps.torsoAnim = WeaponReadyAnim[client->ps.weapon];
+ADDRLP4 0
+INDIRP4
+CNSTI4 100
+ADDP4
+ADDRLP4 0
+INDIRP4
+CNSTI4 148
+ADDP4
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRGP4 WeaponReadyAnim
+ADDP4
+INDIRI4
+ASGNI4
+line 2195
+;2195:	client->ps.legsAnim = WeaponReadyAnim[client->ps.weapon];
+ADDRLP4 0
+INDIRP4
+CNSTI4 92
+ADDP4
+ADDRLP4 0
+INDIRP4
+CNSTI4 148
+ADDP4
+INDIRI4
+CNSTI4 2
+LSHI4
+ADDRGP4 WeaponReadyAnim
+ADDP4
+INDIRI4
+ASGNI4
+line 2197
+;2196:
+;2197:	if ( level.intermissiontime ) {
+ADDRGP4 level+9008
+INDIRI4
+CNSTI4 0
+EQI4 $805
+line 2198
+;2198:		MoveClientToIntermission( ent );
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRGP4 MoveClientToIntermission
+CALLV
+pop
+line 2199
+;2199:	} else {
+ADDRGP4 $806
+JUMPV
+LABELV $805
+line 2201
+;2200:		// fire the targets of the spawn point
+;2201:		G_UseTargets( spawnPoint, ent );
+ADDRLP4 72
+INDIRP4
+ARGP4
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRGP4 G_UseTargets
+CALLV
+pop
+line 2205
+;2202:
+;2203:		// select the highest weapon number available, after any
+;2204:		// spawn given items have fired
+;2205:		client->ps.weapon = 1;
+ADDRLP4 0
+INDIRP4
+CNSTI4 148
+ADDP4
+CNSTI4 1
+ASGNI4
+line 2206
+;2206:		for ( i = WP_NUM_WEAPONS - 1 ; i > 0 ; i-- ) {
+ADDRLP4 4
+CNSTI4 15
+ASGNI4
+LABELV $808
+line 2207
+;2207:			if ( client->ps.stats[STAT_WEAPONS] & ( 1 << i ) ) {
+ADDRLP4 0
+INDIRP4
+CNSTI4 232
+ADDP4
+INDIRI4
+CNSTI4 1
+ADDRLP4 4
+INDIRI4
+LSHI4
+BANDI4
+CNSTI4 0
+EQI4 $812
+line 2208
+;2208:				client->ps.weapon = i;
+ADDRLP4 0
+INDIRP4
+CNSTI4 148
+ADDP4
+ADDRLP4 4
+INDIRI4
+ASGNI4
+line 2209
+;2209:				break;
+ADDRGP4 $810
+JUMPV
+LABELV $812
+line 2211
+;2210:			}
+;2211:		}
+LABELV $809
+line 2206
+ADDRLP4 4
+ADDRLP4 4
+INDIRI4
+CNSTI4 1
+SUBI4
+ASGNI4
+ADDRLP4 4
+INDIRI4
+CNSTI4 0
+GTI4 $808
+LABELV $810
+line 2212
+;2212:	}
+LABELV $806
+line 2216
+;2213:
+;2214:	// run a client frame to drop exactly to the floor,
+;2215:	// initialize animations and other things
+;2216:	client->ps.commandTime = level.time - 100;
+ADDRLP4 0
+INDIRP4
+ADDRGP4 level+32
+INDIRI4
+CNSTI4 100
+SUBI4
+ASGNI4
+line 2217
+;2217:	ent->client->pers.cmd.serverTime = level.time;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1384
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+ASGNI4
+line 2218
+;2218:	ClientThink( ent-g_entities );
+ADDRFP4 0
+INDIRP4
+CVPU4 4
+ADDRGP4 g_entities
+CVPU4 4
+SUBU4
+CVUI4 4
+CNSTI4 852
+DIVI4
+ARGI4
+ADDRGP4 ClientThink
+CALLV
+pop
+line 2221
+;2219:
+;2220:	// positively link the client, even if the command times are weird
+;2221:	if ( ent->client->sess.sessionTeam != TEAM_SPECTATOR ) {
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1632
+ADDP4
+INDIRI4
+CNSTI4 3
+EQI4 $816
+line 2222
+;2222:		BG_PlayerStateToEntityState( &client->ps, &ent->s, qtrue );
+ADDRLP4 0
+INDIRP4
+ARGP4
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 1
+ARGI4
+ADDRGP4 BG_PlayerStateToEntityState
+CALLV
+pop
+line 2223
+;2223:		VectorCopy( ent->client->ps.origin, ent->r.currentOrigin );
+ADDRLP4 984
+ADDRFP4 0
+INDIRP4
+ASGNP4
+ADDRLP4 984
+INDIRP4
+CNSTI4 368
+ADDP4
+ADDRLP4 984
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 20
+ADDP4
+INDIRB
+ASGNB 12
+line 2224
+;2224:		trap_LinkEntity( ent );
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRGP4 trap_LinkEntity
+CALLV
+pop
+line 2225
+;2225:	}
+LABELV $816
+line 2227
+;2226:
+;2227:	if (g_spawnInvulnerability.integer)
+ADDRGP4 g_spawnInvulnerability+12
+INDIRI4
+CNSTI4 0
+EQI4 $818
+line 2228
+;2228:	{
+line 2229
+;2229:		ent->client->ps.eFlags |= EF_INVULNERABLE;
+ADDRLP4 984
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 108
+ADDP4
+ASGNP4
+ADDRLP4 984
+INDIRP4
+ADDRLP4 984
+INDIRP4
+INDIRI4
+CNSTI4 67108864
+BORI4
+ASGNI4
+line 2230
+;2230:		ent->client->invulnerableTimer = level.time + g_spawnInvulnerability.integer;
+ADDRFP4 0
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1700
+ADDP4
+ADDRGP4 level+32
+INDIRI4
+ADDRGP4 g_spawnInvulnerability+12
+INDIRI4
+ADDI4
+ASGNI4
+line 2231
+;2231:	}
+LABELV $818
+line 2234
+;2232:
+;2233:	// run the presend to set anything else
+;2234:	ClientEndFrame( ent );
+ADDRFP4 0
+INDIRP4
+ARGP4
+ADDRGP4 ClientEndFrame
+CALLV
+pop
+line 2237
+;2235:
+;2236:	// clear entity state values
+;2237:	BG_PlayerStateToEntityState( &client->ps, &ent->s, qtrue );
+ADDRLP4 0
+INDIRP4
+ARGP4
+ADDRFP4 0
+INDIRP4
+ARGP4
+CNSTI4 1
+ARGI4
+ADDRGP4 BG_PlayerStateToEntityState
+CALLV
+pop
+line 2238
+;2238:}
+LABELV $698
+endproc ClientSpawn 996 16
+export ClientDisconnect
+proc ClientDisconnect 24 8
+line 2253
+;2239:
+;2240:
+;2241:/*
+;2242:===========
+;2243:ClientDisconnect
+;2244:
+;2245:Called when a player drops from the server.
+;2246:Will not be called between levels.
+;2247:
+;2248:This should NOT be called directly by any game logic,
+;2249:call trap_DropClient(), which will call this and do
+;2250:server system housekeeping.
+;2251:============
+;2252:*/
+;2253:void ClientDisconnect( int clientNum ) {
+line 2260
+;2254:	gentity_t	*ent;
+;2255:	gentity_t	*tent;
+;2256:	int			i;
+;2257:
+;2258:	// cleanup if we are kicking a bot that
+;2259:	// hasn't spawned yet
+;2260:	G_RemoveQueuedBotBegin( clientNum );
+ADDRFP4 0
+INDIRI4
+ARGI4
+ADDRGP4 G_RemoveQueuedBotBegin
+CALLV
+pop
+line 2262
+;2261:
+;2262:	ent = g_entities + clientNum;
+ADDRLP4 4
+CNSTI4 852
+ADDRFP4 0
+INDIRI4
+MULI4
+ADDRGP4 g_entities
+ADDP4
+ASGNP4
+line 2263
+;2263:	if ( !ent->client ) {
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CVPU4 4
+CNSTU4 0
+NEU4 $824
+line 2264
+;2264:		return;
+ADDRGP4 $823
+JUMPV
+LABELV $824
+line 2267
+;2265:	}
+;2266:
+;2267:	i = 0;
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+ADDRGP4 $827
+JUMPV
+LABELV $826
+line 2270
+;2268:
+;2269:	while (i < NUM_FORCE_POWERS)
+;2270:	{
+line 2271
+;2271:		if (ent->client->ps.fd.forcePowersActive & (1 << i))
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 848
+ADDP4
+INDIRI4
+CNSTI4 1
+ADDRLP4 0
+INDIRI4
+LSHI4
+BANDI4
+CNSTI4 0
+EQI4 $829
+line 2272
+;2272:		{
+line 2273
+;2273:			WP_ForcePowerStop(ent, i);
+ADDRLP4 4
+INDIRP4
+ARGP4
+ADDRLP4 0
+INDIRI4
+ARGI4
+ADDRGP4 WP_ForcePowerStop
+CALLV
+pop
+line 2274
+;2274:		}
+LABELV $829
+line 2275
+;2275:		i++;
+ADDRLP4 0
+ADDRLP4 0
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 2276
+;2276:	}
+LABELV $827
+line 2269
+ADDRLP4 0
+INDIRI4
+CNSTI4 18
+LTI4 $826
+line 2278
+;2277:
+;2278:	i = TRACK_CHANNEL_1;
+ADDRLP4 0
+CNSTI4 51
+ASGNI4
+ADDRGP4 $832
+JUMPV
+LABELV $831
+line 2281
+;2279:
+;2280:	while (i < NUM_TRACK_CHANNELS)
+;2281:	{
+line 2282
+;2282:		if (ent->client->ps.fd.killSoundEntIndex[i-50] && ent->client->ps.fd.killSoundEntIndex[i-50] < MAX_GENTITIES && ent->client->ps.fd.killSoundEntIndex[i-50] > 0)
+ADDRLP4 12
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+CNSTI4 200
+SUBI4
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1200
+ADDP4
+ADDP4
+INDIRI4
+ASGNI4
+ADDRLP4 16
+CNSTI4 0
+ASGNI4
+ADDRLP4 12
+INDIRI4
+ADDRLP4 16
+INDIRI4
+EQI4 $834
+ADDRLP4 12
+INDIRI4
+CNSTI4 1024
+GEI4 $834
+ADDRLP4 12
+INDIRI4
+ADDRLP4 16
+INDIRI4
+LEI4 $834
+line 2283
+;2283:		{
+line 2284
+;2284:			G_MuteSound(ent->client->ps.fd.killSoundEntIndex[i-50], CHAN_VOICE);
+ADDRLP4 0
+INDIRI4
+CNSTI4 2
+LSHI4
+CNSTI4 200
+SUBI4
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1200
+ADDP4
+ADDP4
+INDIRI4
+ARGI4
+CNSTI4 3
+ARGI4
+ADDRGP4 G_MuteSound
+CALLV
+pop
+line 2285
+;2285:		}
+LABELV $834
+line 2286
+;2286:		i++;
+ADDRLP4 0
+ADDRLP4 0
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 2287
+;2287:	}
+LABELV $832
+line 2280
+ADDRLP4 0
+INDIRI4
+CNSTI4 56
+LTI4 $831
+line 2288
+;2288:	i = 0;
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+line 2291
+;2289:
+;2290:	// stop any following clients
+;2291:	for ( i = 0 ; i < level.maxclients ; i++ ) {
+ADDRLP4 0
+CNSTI4 0
+ASGNI4
+ADDRGP4 $839
+JUMPV
+LABELV $836
+line 2292
+;2292:		if ( level.clients[i].sess.sessionTeam == TEAM_SPECTATOR
+ADDRLP4 12
+CNSTI4 2972
+ADDRLP4 0
+INDIRI4
+MULI4
+ADDRGP4 level
+INDIRP4
+ADDP4
+ASGNP4
+ADDRLP4 12
+INDIRP4
+CNSTI4 1632
+ADDP4
+INDIRI4
+CNSTI4 3
+NEI4 $841
+ADDRLP4 12
+INDIRP4
+CNSTI4 1640
+ADDP4
+INDIRI4
+CNSTI4 2
+NEI4 $841
+ADDRLP4 12
+INDIRP4
+CNSTI4 1644
+ADDP4
+INDIRI4
+ADDRFP4 0
+INDIRI4
+NEI4 $841
+line 2294
+;2293:			&& level.clients[i].sess.spectatorState == SPECTATOR_FOLLOW
+;2294:			&& level.clients[i].sess.spectatorClient == clientNum ) {
+line 2295
+;2295:			StopFollowing( &g_entities[i] );
+CNSTI4 852
+ADDRLP4 0
+INDIRI4
+MULI4
+ADDRGP4 g_entities
+ADDP4
+ARGP4
+ADDRGP4 StopFollowing
+CALLV
+pop
+line 2296
+;2296:		}
+LABELV $841
+line 2297
+;2297:	}
+LABELV $837
+line 2291
+ADDRLP4 0
+ADDRLP4 0
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+LABELV $839
+ADDRLP4 0
+INDIRI4
+ADDRGP4 level+24
+INDIRI4
+LTI4 $836
+line 2300
+;2298:
+;2299:	// send effect if they were completely connected
+;2300:	if ( ent->client->pers.connected == CON_CONNECTED 
+ADDRLP4 12
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+ASGNP4
+ADDRLP4 12
+INDIRP4
+CNSTI4 1380
+ADDP4
+INDIRI4
+CNSTI4 2
+NEI4 $843
+ADDRLP4 12
+INDIRP4
+CNSTI4 1632
+ADDP4
+INDIRI4
+CNSTI4 3
+EQI4 $843
+line 2301
+;2301:		&& ent->client->sess.sessionTeam != TEAM_SPECTATOR ) {
+line 2302
+;2302:		tent = G_TempEntity( ent->client->ps.origin, EV_PLAYER_TELEPORT_OUT );
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 20
+ADDP4
+ARGP4
+CNSTI4 60
+ARGI4
+ADDRLP4 16
+ADDRGP4 G_TempEntity
+CALLP4
+ASGNP4
+ADDRLP4 8
+ADDRLP4 16
+INDIRP4
+ASGNP4
+line 2303
+;2303:		tent->s.clientNum = ent->s.clientNum;
+ADDRLP4 20
+CNSTI4 220
+ASGNI4
+ADDRLP4 8
+INDIRP4
+ADDRLP4 20
+INDIRI4
+ADDP4
+ADDRLP4 4
+INDIRP4
+ADDRLP4 20
+INDIRI4
+ADDP4
+INDIRI4
+ASGNI4
+line 2307
+;2304:
+;2305:		// They don't get to take powerups with them!
+;2306:		// Especially important for stuff like CTF flags
+;2307:		TossClientItems( ent );
+ADDRLP4 4
+INDIRP4
+ARGP4
+ADDRGP4 TossClientItems
+CALLV
+pop
+line 2308
+;2308:	}
+LABELV $843
+line 2310
+;2309:
+;2310:	G_LogPrintf( "ClientDisconnect: %i\n", clientNum );
+ADDRGP4 $845
+ARGP4
+ADDRFP4 0
+INDIRI4
+ARGI4
+ADDRGP4 G_LogPrintf
+CALLV
+pop
+line 2313
+;2311:
+;2312:	// if we are playing in tourney mode, give a win to the other player and clear his frags for this round
+;2313:	if ( (g_gametype.integer == GT_TOURNAMENT )
+ADDRGP4 g_gametype+12
+INDIRI4
+CNSTI4 3
+NEI4 $846
+ADDRLP4 16
+CNSTI4 0
+ASGNI4
+ADDRGP4 level+9008
+INDIRI4
+ADDRLP4 16
+INDIRI4
+NEI4 $846
+ADDRGP4 level+16
+INDIRI4
+ADDRLP4 16
+INDIRI4
+NEI4 $846
+line 2315
+;2314:		&& !level.intermissiontime
+;2315:		&& !level.warmupTime ) {
+line 2316
+;2316:		if ( level.sortedClients[1] == clientNum ) {
+ADDRGP4 level+84+4
+INDIRI4
+ADDRFP4 0
+INDIRI4
+NEI4 $851
+line 2317
+;2317:			level.clients[ level.sortedClients[0] ].ps.persistant[PERS_SCORE] = 0;
+CNSTI4 2972
+ADDRGP4 level+84
+INDIRI4
+MULI4
+ADDRGP4 level
+INDIRP4
+ADDP4
+CNSTI4 280
+ADDP4
+CNSTI4 0
+ASGNI4
+line 2318
+;2318:			level.clients[ level.sortedClients[0] ].sess.wins++;
+ADDRLP4 20
+CNSTI4 2972
+ADDRGP4 level+84
+INDIRI4
+MULI4
+ADDRGP4 level
+INDIRP4
+ADDP4
+CNSTI4 1648
+ADDP4
+ASGNP4
+ADDRLP4 20
+INDIRP4
+ADDRLP4 20
+INDIRP4
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 2319
+;2319:			ClientUserinfoChanged( level.sortedClients[0] );
+ADDRGP4 level+84
+INDIRI4
+ARGI4
+ADDRGP4 ClientUserinfoChanged
+CALLV
+pop
+line 2320
+;2320:		}
+ADDRGP4 $852
+JUMPV
+LABELV $851
+line 2321
+;2321:		else if ( level.sortedClients[0] == clientNum ) {
+ADDRGP4 level+84
+INDIRI4
+ADDRFP4 0
+INDIRI4
+NEI4 $858
+line 2322
+;2322:			level.clients[ level.sortedClients[1] ].ps.persistant[PERS_SCORE] = 0;
+CNSTI4 2972
+ADDRGP4 level+84+4
+INDIRI4
+MULI4
+ADDRGP4 level
+INDIRP4
+ADDP4
+CNSTI4 280
+ADDP4
+CNSTI4 0
+ASGNI4
+line 2323
+;2323:			level.clients[ level.sortedClients[1] ].sess.wins++;
+ADDRLP4 20
+CNSTI4 2972
+ADDRGP4 level+84+4
+INDIRI4
+MULI4
+ADDRGP4 level
+INDIRP4
+ADDP4
+CNSTI4 1648
+ADDP4
+ASGNP4
+ADDRLP4 20
+INDIRP4
+ADDRLP4 20
+INDIRP4
+INDIRI4
+CNSTI4 1
+ADDI4
+ASGNI4
+line 2324
+;2324:			ClientUserinfoChanged( level.sortedClients[1] );
+ADDRGP4 level+84+4
+INDIRI4
+ARGI4
+ADDRGP4 ClientUserinfoChanged
+CALLV
+pop
+line 2325
+;2325:		}
+LABELV $858
+LABELV $852
+line 2326
+;2326:	}
+LABELV $846
+line 2328
+;2327:
+;2328:	trap_UnlinkEntity (ent);
+ADDRLP4 4
+INDIRP4
+ARGP4
+ADDRGP4 trap_UnlinkEntity
+CALLV
+pop
+line 2329
+;2329:	ent->s.modelindex = 0;
+ADDRLP4 4
+INDIRP4
+CNSTI4 212
+ADDP4
+CNSTI4 0
+ASGNI4
+line 2330
+;2330:	ent->inuse = qfalse;
+ADDRLP4 4
+INDIRP4
+CNSTI4 412
+ADDP4
+CNSTI4 0
+ASGNI4
+line 2331
+;2331:	ent->classname = "disconnected";
+ADDRLP4 4
+INDIRP4
+CNSTI4 416
+ADDP4
+ADDRGP4 $867
+ASGNP4
+line 2332
+;2332:	ent->client->pers.connected = CON_DISCONNECTED;
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1380
+ADDP4
+CNSTI4 0
+ASGNI4
+line 2333
+;2333:	ent->client->ps.persistant[PERS_TEAM] = TEAM_FREE;
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 292
+ADDP4
+CNSTI4 0
+ASGNI4
+line 2334
+;2334:	ent->client->sess.sessionTeam = TEAM_FREE;
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1632
+ADDP4
+CNSTI4 0
+ASGNI4
+line 2337
+;2335:
+;2336:	//cm NOTE: Don't forget to add persistant flags here
+;2337:	ent->client->pers.amempower = qfalse;
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1532
+ADDP4
+CNSTI4 0
+ASGNI4
+line 2338
+;2338:	ent->client->pers.amterminator = qfalse;
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1536
+ADDP4
+CNSTI4 0
+ASGNI4
+line 2339
+;2339:	ent->client->pers.amsilence = qfalse;
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1540
+ADDP4
+CNSTI4 0
+ASGNI4
+line 2340
+;2340:	ent->client->pers.ampunish = qfalse;
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1544
+ADDP4
+CNSTI4 0
+ASGNI4
+line 2341
+;2341:	ent->client->pers.amsleep = qfalse;
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1548
+ADDP4
+CNSTI4 0
+ASGNI4
+line 2342
+;2342:	ent->client->pers.amclanreserved = 0;
+ADDRLP4 4
+INDIRP4
+CNSTI4 408
+ADDP4
+INDIRP4
+CNSTI4 1552
+ADDP4
+CNSTI4 0
+ASGNI4
+line 2344
+;2343:
+;2344:	trap_SetConfigstring( CS_PLAYERS + clientNum, "");
+ADDRFP4 0
+INDIRI4
+CNSTI4 544
+ADDI4
+ARGI4
+ADDRGP4 $590
+ARGP4
+ADDRGP4 trap_SetConfigstring
+CALLV
+pop
+line 2346
+;2345:
+;2346:	CalculateRanks();
+ADDRGP4 CalculateRanks
+CALLV
+pop
+line 2348
+;2347:
+;2348:	if ( ent->r.svFlags & SVF_BOT ) {
+ADDRLP4 4
+INDIRP4
+CNSTI4 304
+ADDP4
+INDIRI4
+CNSTI4 8
+BANDI4
+CNSTI4 0
+EQI4 $868
+line 2349
+;2349:		BotAIShutdownClient( clientNum, qfalse );
+ADDRFP4 0
+INDIRI4
+ARGI4
+CNSTI4 0
+ARGI4
+ADDRGP4 BotAIShutdownClient
+CALLI4
+pop
+line 2350
+;2350:	}
+LABELV $868
+line 2352
+;2351:
+;2352:	G_ClearClientLog(clientNum);
+ADDRFP4 0
+INDIRI4
+ARGI4
+ADDRGP4 G_ClearClientLog
+CALLV
+pop
+line 2353
+;2353:}
+LABELV $823
+endproc ClientDisconnect 24 8
+import WP_HasForcePowers
+import G_WriteClientSessionData
+import Q_stristr
+bss
+export Client_Force
+align 4
+LABELV Client_Force
+skip 15104
+import G_CheckMaxConnections
+import trap_ROFF_Purge_Ent
+import trap_ROFF_Play
+import trap_ROFF_Cache
+import trap_ROFF_UpdateEntities
+import trap_ROFF_Clean
+import trap_SP_GetStringTextString
+import trap_SP_Register
+import trap_SP_RegisterServer
+import trap_SnapVector
+import trap_GeneticParentsAndChildSelection
+import trap_BotResetWeaponState
+import trap_BotFreeWeaponState
+import trap_BotAllocWeaponState
+import trap_BotLoadWeaponWeights
+import trap_BotGetWeaponInfo
+import trap_BotChooseBestFightWeapon
+import trap_BotAddAvoidSpot
+import trap_BotInitMoveState
+import trap_BotFreeMoveState
+import trap_BotAllocMoveState
+import trap_BotPredictVisiblePosition
+import trap_BotMovementViewTarget
+import trap_BotReachabilityArea
+import trap_BotResetLastAvoidReach
+import trap_BotResetAvoidReach
+import trap_BotMoveInDirection
+import trap_BotMoveToGoal
+import trap_BotResetMoveState
+import trap_BotFreeGoalState
+import trap_BotAllocGoalState
+import trap_BotMutateGoalFuzzyLogic
+import trap_BotSaveGoalFuzzyLogic
+import trap_BotInterbreedGoalFuzzyLogic
+import trap_BotFreeItemWeights
+import trap_BotLoadItemWeights
+import trap_BotUpdateEntityItems
+import trap_BotInitLevelItems
+import trap_BotSetAvoidGoalTime
+import trap_BotAvoidGoalTime
+import trap_BotGetLevelItemGoal
+import trap_BotGetMapLocationGoal
+import trap_BotGetNextCampSpotGoal
+import trap_BotItemGoalInVisButNotVisible
+import trap_BotTouchingGoal
+import trap_BotChooseNBGItem
+import trap_BotChooseLTGItem
+import trap_BotGetSecondGoal
+import trap_BotGetTopGoal
+import trap_BotGoalName
+import trap_BotDumpGoalStack
+import trap_BotDumpAvoidGoals
+import trap_BotEmptyGoalStack
+import trap_BotPopGoal
+import trap_BotPushGoal
+import trap_BotResetAvoidGoals
+import trap_BotRemoveFromAvoidGoals
+import trap_BotResetGoalState
+import trap_BotSetChatName
+import trap_BotSetChatGender
+import trap_BotLoadChatFile
+import trap_BotReplaceSynonyms
+import trap_UnifyWhiteSpaces
+import trap_BotMatchVariable
+import trap_BotFindMatch
+import trap_StringContains
+import trap_BotGetChatMessage
+import trap_BotEnterChat
+import trap_BotChatLength
+import trap_BotReplyChat
+import trap_BotNumInitialChats
+import trap_BotInitialChat
+import trap_BotNumConsoleMessages
+import trap_BotNextConsoleMessage
+import trap_BotRemoveConsoleMessage
+import trap_BotQueueConsoleMessage
+import trap_BotFreeChatState
+import trap_BotAllocChatState
+import trap_Characteristic_String
+import trap_Characteristic_BInteger
+import trap_Characteristic_Integer
+import trap_Characteristic_BFloat
+import trap_Characteristic_Float
+import trap_BotFreeCharacter
+import trap_BotLoadCharacter
+import trap_EA_ResetInput
+import trap_EA_GetInput
+import trap_EA_EndRegular
+import trap_EA_ForcePower
+import trap_EA_Alt_Attack
+import trap_EA_View
+import trap_EA_Move
+import trap_EA_DelayedJump
+import trap_EA_Jump
+import trap_EA_SelectWeapon
+import trap_EA_MoveRight
+import trap_EA_MoveLeft
+import trap_EA_MoveBack
+import trap_EA_MoveForward
+import trap_EA_MoveDown
+import trap_EA_MoveUp
+import trap_EA_Crouch
+import trap_EA_Respawn
+import trap_EA_Use
+import trap_EA_Attack
+import trap_EA_Talk
+import trap_EA_Gesture
+import trap_EA_Action
+import trap_EA_Command
+import trap_EA_SayTeam
+import trap_EA_Say
+import trap_AAS_PredictClientMovement
+import trap_AAS_Swimming
+import trap_AAS_AlternativeRouteGoals
+import trap_AAS_PredictRoute
+import trap_AAS_EnableRoutingArea
+import trap_AAS_AreaTravelTimeToGoalArea
+import trap_AAS_AreaReachability
+import trap_AAS_IntForBSPEpairKey
+import trap_AAS_FloatForBSPEpairKey
+import trap_AAS_VectorForBSPEpairKey
+import trap_AAS_ValueForBSPEpairKey
+import trap_AAS_NextBSPEntity
+import trap_AAS_PointContents
+import trap_AAS_TraceAreas
+import trap_AAS_PointReachabilityAreaIndex
+import trap_AAS_PointAreaNum
+import trap_AAS_Time
+import trap_AAS_PresenceTypeBoundingBox
+import trap_AAS_Initialized
+import trap_AAS_EntityInfo
+import trap_AAS_AreaInfo
+import trap_AAS_BBoxAreas
+import trap_BotUserCommand
+import trap_BotGetServerCommand
+import trap_BotGetSnapshotEntity
+import trap_BotLibTest
+import trap_BotLibUpdateEntity
+import trap_BotLibLoadMap
+import trap_BotLibStartFrame
+import trap_BotLibDefine
+import trap_BotLibVarGet
+import trap_BotLibVarSet
+import trap_BotLibShutdown
+import trap_BotLibSetup
+import trap_DebugPolygonDelete
+import trap_DebugPolygonCreate
+import trap_GetEntityToken
+import trap_GetUsercmd
+import trap_BotFreeClient
+import trap_BotAllocateClient
+import trap_EntityContact
+import trap_EntitiesInBox
+import trap_UnlinkEntity
+import trap_LinkEntity
+import trap_AreasConnected
+import trap_AdjustAreaPortalState
+import trap_InPVSIgnorePortals
+import trap_InPVS
+import trap_PointContents
+import trap_Trace
+import trap_SetBrushModel
+import trap_GetServerinfo
+import trap_SetUserinfo
+import trap_GetUserinfo
+import trap_GetConfigstring
+import trap_SetConfigstring
+import trap_SendServerCommand
+import trap_DropClient
+import trap_LocateGameData
+import trap_Cvar_VariableStringBuffer
+import trap_Cvar_VariableValue
+import trap_Cvar_VariableIntegerValue
+import trap_Cvar_Set
+import trap_Cvar_Update
+import trap_Cvar_Register
+import trap_SendConsoleCommand
+import trap_FS_GetFileList
+import trap_FS_FCloseFile
+import trap_FS_Write
+import trap_FS_Read
+import trap_FS_FOpenFile
+import trap_Args
+import trap_Argv
+import trap_Argc
+import trap_Milliseconds
+import trap_Error
+import trap_Printf
+import jd_CloseServer
+import jd_FakePlayerDetection
+import jd_antiForceCrash
+import jd_antiNameCrash
+import jd_antiFlood
+import cm_clanLogout_saying
+import cm_clanLogin_saying
+import cm_teleport_saying
+import cm_slay_saying
+import cm_sleep_off_saying
+import cm_sleep_on_saying
+import cm_punish_off_saying
+import cm_punish_on_saying
+import cm_slap_saying
+import cm_silence_off_saying
+import cm_silence_on_saying
+import cm_protect_off_saying
+import cm_protect_on_saying
+import cm_terminator_off_saying
+import cm_terminator_on_saying
+import cm_empower_off_saying
+import cm_empower_on_saying
+import cm_AdminLogout3_saying
+import cm_AdminLogout2_saying
+import cm_AdminLogout1_saying
+import cm_AdminLogin3_saying
+import cm_AdminLogin2_saying
+import cm_AdminLogin1_saying
+import cm_adminPassword3
+import cm_adminPassword2
+import cm_adminPassword1
+import cm_clanPassword
+import cm_voteControl
+import cm_emoteControl
+import cm_adminControl3
+import cm_adminControl2
+import cm_adminControl1
+import cm_adminLevel3
+import cm_adminLevel2
+import cm_adminLevel1
+import cm_report
+import cm_clanTag
+import cm_badwords
+import sv_maxConnections
+import cm_autoprotecttime
+import cm_knockmedown
+import cm_blacknames
+import cm_duelshield
+import cm_duelhealth
+import cm_duelradius
+import cm_duelstatus
+import mod_pushall
+import cm_samenames
+import cm_duelbeginsaberoff
+import cm_multiduels
+import cm_dualblade
+import cm_motd_time
+import cm_motd
+import cm_console_motd
+import g_austrian
+import g_saberDebugPrint
+import g_saberDmgDelay_Wound
+import g_saberDmgDelay_Idle
+import g_saberDmgVelocityScale
+import g_timeouttospec
+import g_forceDodge
+import g_dismember
+import g_singlePlayer
+import g_enableBreath
+import g_enableDust
+import g_rankings
+import pmove_msec
+import pmove_fixed
+import g_smoothClients
+import g_blueteam
+import g_redteam
+import g_debugUp
+import g_debugRight
+import g_debugForward
+import g_filterBan
+import g_banIPs
+import g_teamForceBalance
+import g_teamAutoJoin
+import g_allowVote
+import g_blood
+import g_doWarmup
+import g_warmup
+import g_motd
+import g_synchronousClients
+import g_adaptRespawn
+import g_weaponTeamRespawn
+import g_weaponRespawn
+import g_debugDamage
+import g_debugAlloc
+import g_debugMove
+import g_inactivity
+import g_forcerespawn
+import g_quadfactor
+import g_knockback
+import g_speed
+import g_gravity
+import g_needpass
+import g_password
+import g_friendlySaber
+import g_friendlyFire
+import g_saberInterpolate
+import g_capturelimit
+import g_timelimit
+import g_duel_fraglimit
+import g_fraglimit
+import g_duelWeaponDisable
+import g_fraglimitVoteCorrection
+import g_allowDuelSuicide
+import g_weaponDisable
+import g_forcePowerDisable
+import g_spawnInvulnerability
+import g_forceRegenTime
+import g_saberDamageScale
+import g_slowmoDuelEnd
+import g_logClientInfo
+import g_saberBoxTraceSize
+import g_saberAlwaysBoxTrace
+import g_saberGhoul2Collision
+import g_saberTraceSaberFirst
+import g_saberLockFactor
+import g_saberLocking
+import g_privateDuel
+import g_forceBasedTeams
+import g_maxForceRank
+import g_dmflags
+import g_autoMapCycle
+import g_trueJedi
+import g_restarted
+import g_maxGameClients
+import g_maxclients
+import g_cheats
+import g_dedicated
+import g_gametype
+import g_entities
+import level
+import Pickup_Team
+import CheckTeamStatus
+import TeamplayInfoMessage
+import Team_GetLocationMsg
+import Team_GetLocation
+import SelectSagaSpawnPoint
+import SelectCTFSpawnPoint
+import Team_FreeEntity
+import Team_ReturnFlag
+import Team_InitGame
+import Team_CheckHurtCarrier
+import Team_FragBonuses
+import Team_DroppedFlagThink
+import AddTeamScore
+import TeamColorString
+import OtherTeamName
+import TeamName
+import OtherTeam
+import BotAIStartFrame
+import BotAIShutdownClient
+import BotAISetupClient
+import BotAILoadMap
+import BotAIShutdown
+import BotAISetup
+import B_CleanupAlloc
+import B_InitAlloc
+import InFieldOfVision
+import BotOrder
+import OrgVisible
+import InitSagaMode
+import G_ClearClientLog
+import G_LogExit
+import G_LogWeaponOutput
+import G_LogWeaponInit
+import G_LogWeaponItem
+import G_LogWeaponPowerup
+import G_LogWeaponFrag
+import G_LogWeaponDeath
+import G_LogWeaponKill
+import G_LogWeaponDamage
+import G_LogWeaponFire
+import G_LogWeaponPickup
+import Jedi_DodgeEvasion
+import ForceTelepathy
+import ForceThrow
+import ForceSeeing
+import ForceTeamForceReplenish
+import ForceTeamHeal
+import ForceAbsorb
+import ForceProtect
+import ForceGrip
+import ForceRage
+import ForceSpeed
+import ForceHeal
+import ForcePowerUsableOn
+import WP_ForcePowersUpdate
+import WP_SpawnInitForcePowers
+import WP_InitForcePowers
+import WP_SaberInitBladeData
+import WP_SaberCanBlock
+import WP_SaberPositionUpdate
+import WP_ForcePowerStop
+import HasSetSaberOnly
+import G_PreDefSound
+import G_RefreshNextMap
+import G_DoesMapSupportGametype
+import BotInterbreedEndMatch
+import Svcmd_BotList_f
+import Svcmd_AddBot_f
+import G_BotConnect
+import G_RemoveQueuedBotBegin
+import G_CheckBotSpawn
+import G_GetBotInfoByName
+import G_GetBotInfoByNumber
+import G_InitBots
+import UpdateTournamentInfo
+import G_WriteSessionData
+import G_InitWorldSession
+import G_InitSessionData
+import G_ReadSessionData
+import Svcmd_GameMem_f
+import G_InitMemory
+import G_Alloc
+import Team_CheckDroppedItem
+import OnSameTeam
+import G_RunClient
+import ClientEndFrame
+import ClientThink
+import G_CheckClientTimeouts
+import ClientCommand
+import G_GetStripEdString
+import G_Error
+import G_Printf
+import SendScoreboardMessageToAllClients
+import G_LogPrintf
+import G_RunThink
+import CheckTeamLeader
+import SetLeader
+import FindIntermissionPoint
+import gSlowMoDuelTime
+import gDoSlowMoDuel
+import g_ff_objectives
+import DeathmatchScoreboardMessage
+import G_SetStats
+import MoveClientToIntermission
+import BlowDetpacks
+import FireWeapon
+import G_FilterPacket
+import G_ProcessIPBans
+import ConsoleCommand
+import CalculateRanks
+import AddScore
+import player_die
+import BeginIntermission
+import CheckGauntletAttack
+import SnapVectorTowards
+import CalcMuzzlePoint
+import LogAccuracyHit
+import WP_FireGenericBlasterMissile
+import WP_FireTurretMissile
+import G_CreateExampleAnimEnt
+import G_PlayerBecomeATST
+import ATST_ManageDamageBoxes
+import TeleportPlayer
+import trigger_teleporter_touch
+import Touch_DoorTrigger
+import G_RunMover
+import WP_FireBlasterMissile
+import G_ExplodeMissile
+import G_BounceProjectile
+import CreateMissile
+import G_RunMissile
+import G_ReflectMissile
+import gGAvoidDismember
+import G_CheckForDismemberment
+import ExplodeDeath
+import TossClientCubes
+import TossClientItems
+import TossClientWeapon
+import body_die
+import G_RadiusDamage
+import G_Damage
+import CanDamage
+import trap_G2API_SetBoneAnim
+import trap_G2API_GetGLAName
+import trap_G2API_SetBoneAngles
+import trap_G2API_CollisionDetect
+import trap_G2API_CleanGhoul2Models
+import trap_G2API_RemoveGhoul2Model
+import trap_G2API_HasGhoul2ModelOnIndex
+import trap_G2API_DuplicateGhoul2Instance
+import trap_G2API_CopySpecificGhoul2Model
+import trap_G2API_CopyGhoul2Instance
+import trap_G2API_SetBoltInfo
+import trap_G2API_AddBolt
+import trap_G2API_InitGhoul2Model
+import trap_G2API_GetBoltMatrix_NoRecNoRot
+import trap_G2API_GetBoltMatrix_NoReconstruct
+import trap_G2API_GetBoltMatrix
+import trap_G2_HaveWeGhoul2Models
+import trap_G2_SetGhoul2ModelIndexes
+import trap_G2_ListModelBones
+import trap_G2_ListModelSurfaces
+import G_SkinIndex
+import BuildShaderStateConfig
+import AddRemap
+import G_SetOrigin
+import G_AddEvent
+import G_AddPredictableEvent
+import vtos
+import tv
+import G_RunObject
+import G_TouchSolids
+import G_TouchTriggers
+import G_EntitiesFree
+import G_FreeEntity
+import G_KillG2Queue
+import G_SendG2KillQueue
+import TryUse
+import G_EntitySound
+import G_SoundAtLoc
+import G_Sound
+import G_MuteSound
+import G_ScreenShake
+import G_PlayEffect
+import G_TempEntity
+import G_Spawn
+import G_InitGentity
+import G_SetAngles
+import G_SetMovedir
+import G_UseTargets
+import G_PickTarget
+import G_RadiusList
+import G_Find
+import G_KillBox
+import G_TeamCommand
+import G_EffectIndex
+import G_SoundIndex
+import G_ModelIndex
+import SaveRegisteredItems
+import RegisterItem
+import ClearRegisteredItems
+import Touch_Item
+import Add_Ammo
+import ArmorIndex
+import Think_Weapon
+import FinishSpawningItem
+import G_SpawnItem
+import SetRespawn
+import LaunchItem
+import Drop_Item
+import PrecacheItem
+import UseHoldableItem
+import ResetItem
+import RespawnItem
+import G_RunItem
+import G_CheckTeamItems
+import ItemUse_MedPack
+import ItemUse_Seeker
+import ItemUse_Sentry
+import ItemUse_Shield
+import ItemUse_Binoculars
+import G_GetDuelWinner
+import Cmd_EngageDuel_f
+import Cmd_ToggleSaber_f
+import G_ItemUsable
+import Cmd_SaberAttackCycle_f
+import Cmd_FollowCycle_f
+import SetTeam
+import BroadcastTeamChange
+import StopFollowing
+import Cmd_Score_f
+import G_NewString
+import G_SpawnEntitiesFromString
+import G_SpawnVector
+import G_SpawnInt
+import G_SpawnFloat
+import G_SpawnString
+import gEscapeTime
+import gEscaping
+import precachedKyle
+import forcePowerDarkLight
+import WeaponAttackAnim
+import WeaponReadyAnim
+import BG_OutOfMemory
+import BG_StringAlloc
+import BG_TempFree
+import BG_TempAlloc
+import BG_AllocUnaligned
+import BG_Alloc
+import BG_CanUseFPNow
+import BG_HasYsalamiri
+import BG_GetItemIndexByTag
+import BG_ParseAnimationFile
+import BG_PlayerTouchesItem
+import BG_PlayerStateToEntityStateExtraPolate
+import BG_PlayerStateToEntityState
+import BG_TouchJumpPad
+import BG_AddPredictableEventToPlayerstate
+import BG_EvaluateTrajectoryDelta
+import BG_EvaluateTrajectory
+import BG_ForcePowerDrain
+import BG_SaberStartTransAnim
+import BG_InDeathAnim
+import BG_InRoll
+import BG_KnockawayForParry
+import BG_BrokenParryForParry
+import BG_BrokenParryForAttack
+import BG_SaberInSpecialAttack
+import BG_SpinningSaberAnim
+import BG_FlippingAnim
+import BG_SaberInIdle
+import BG_SaberInSpecial
+import BG_SaberInAttack
+import BG_DirectFlippingAnim
+import BG_InSaberStandAnim
+import BG_InSpecialJump
+import BG_LegalizedForcePowers
+import saberMoveData
+import BG_CanItemBeGrabbed
+import BG_FindItemForHoldable
+import BG_FindItemForPowerup
+import BG_FindItemForWeapon
+import BG_FindItem
+import vectoyaw
+import bg_numItems
+import bg_itemlist
+import Pmove
+import PM_UpdateViewAngles
+import pm
+import bgForcePowerCost
+import forceMasteryPoints
+import forceMasteryLevels
+import bgGlobalAnimations
+import BGPAFtextLoaded
+import forcePowerSorted
+import WP_MuzzlePoint
+import ammoData
+import weaponData
+import GetStringForID
+import GetIDForString
+import Q_irand
+import irand
+import flrand
+import Rand_Init
+import Com_Printf
+import Com_Error
+import Info_NextPair
+import Info_Validate
+import Info_SetValueForKey_Big
+import Info_SetValueForKey
+import Info_RemoveKey_big
+import Info_RemoveKey
+import Info_ValueForKey
+import va
+import Q_CleanStr
+import Q_PrintStrlen
+import Q_strcat
+import Q_strncpyz
+import Q_strrchr
+import Q_strupr
+import Q_strlwr
+import Q_stricmpn
+import Q_strncmp
+import Q_stricmp
+import Q_isalpha
+import Q_isupper
+import Q_islower
+import Q_isprint
+import Com_sprintf
+import Parse3DMatrix
+import Parse2DMatrix
+import Parse1DMatrix
+import SkipRestOfLine
+import SkipBracedSection
+import COM_MatchToken
+import COM_ParseVec4
+import COM_ParseFloat
+import COM_ParseInt
+import COM_ParseString
+import COM_ParseWarning
+import COM_ParseError
+import COM_Compress
+import COM_ParseExt
+import COM_Parse
+import SkipWhitespace
+import COM_GetCurrentParseLine
+import COM_BeginParseSession
+import COM_DefaultExtension
+import COM_StripExtension
+import COM_SkipPath
+import Com_Clamp
+import PerpendicularVector
+import AngleVectors
+import MatrixMultiply
+import MakeNormalVectors
+import RotateAroundDirection
+import RotatePointAroundVector
+import ProjectPointOnPlane
+import PlaneFromPoints
+import AngleDelta
+import AngleNormalize180
+import AngleNormalize360
+import AnglesSubtract
+import AngleSubtract
+import LerpAngle
+import AngleMod
+import BoxOnPlaneSide
+import SetPlaneSignbits
+import AxisCopy
+import AxisClear
+import AnglesToAxis
+import vectoangles
+import Q_crandom
+import Q_random
+import Q_rand
+import Q_acos
+import Q_log2
+import VectorRotate
+import Vector4Scale
+import VectorNormalize2
+import VectorNormalize
+import CrossProduct
+import VectorInverse
+import VectorNormalizeFast
+import DistanceSquared
+import Distance
+import VectorLengthSquared
+import VectorLength
+import VectorCompare
+import AddPointToBounds
+import ClearBounds
+import RadiusFromBounds
+import NormalizeColor
+import ColorBytes4
+import ColorBytes3
+import _VectorMA
+import _VectorScale
+import _VectorCopy
+import _VectorAdd
+import _VectorSubtract
+import _DotProduct
+import ByteToDir
+import DirToByte
+import powf
+import ClampShort
+import ClampChar
+import Q_rsqrt
+import Q_fabs
+import axisDefault
+import vec3_origin
+import g_color_table
+import colorDkBlue
+import colorLtBlue
+import colorDkGrey
+import colorMdGrey
+import colorLtGrey
+import colorWhite
+import colorCyan
+import colorMagenta
+import colorYellow
+import colorBlue
+import colorGreen
+import colorRed
+import colorBlack
+import colorTable
+import bytedirs
+import Com_Memcpy
+import Com_Memset
+import Hunk_Alloc
+import forceSpeedLevels
+import FloatSwap
+import LongSwap
+import ShortSwap
+import acos
+import fabs
+import abs
+import tan
+import atan2
+import cos
+import sin
+import sqrt
+import floor
+import ceil
+import memcpy
+import memset
+import memmove
+import sscanf
+import vsprintf
+import _atoi
+import atoi
+import _atof
+import atof
+import toupper
+import tolower
+import strncpy
+import strstr
+import strchr
+import strcmp
+import strcpy
+import strcat
+import strlen
+import rand
+import srand
+import qsort
+lit
+align 1
+LABELV $867
+char 1 100
+char 1 105
+char 1 115
+char 1 99
+char 1 111
+char 1 110
+char 1 110
+char 1 101
+char 1 99
+char 1 116
+char 1 101
+char 1 100
+char 1 0
+align 1
+LABELV $845
+char 1 67
+char 1 108
+char 1 105
+char 1 101
+char 1 110
+char 1 116
+char 1 68
+char 1 105
+char 1 115
+char 1 99
+char 1 111
+char 1 110
+char 1 110
+char 1 101
+char 1 99
+char 1 116
+char 1 58
+char 1 32
+char 1 37
+char 1 105
+char 1 10
+char 1 0
+align 1
+LABELV $779
+char 1 103
+char 1 95
+char 1 106
+char 1 101
+char 1 100
+char 1 105
+char 1 86
+char 1 109
+char 1 101
+char 1 114
+char 1 99
+char 1 0
+align 1
+LABELV $732
+char 1 112
+char 1 108
+char 1 97
+char 1 121
+char 1 101
+char 1 114
+char 1 0
+align 1
+LABELV $688
+char 1 112
+char 1 114
+char 1 105
+char 1 110
+char 1 116
+char 1 32
+char 1 34
+char 1 94
+char 1 53
+char 1 42
+char 1 42
+char 1 42
+char 1 32
+char 1 94
+char 1 50
+char 1 67
+char 1 85
+char 1 82
+char 1 82
+char 1 69
+char 1 78
+char 1 84
+char 1 32
+char 1 77
+char 1 79
+char 1 68
+char 1 69
+char 1 58
+char 1 32
+char 1 67
+char 1 108
+char 1 97
+char 1 110
+char 1 32
+char 1 77
+char 1 101
+char 1 101
+char 1 116
+char 1 105
+char 1 110
+char 1 103
+char 1 32
+char 1 94
+char 1 53
+char 1 42
+char 1 42
+char 1 42
+char 1 10
+char 1 34
+char 1 0
+align 1
+LABELV $684
+char 1 112
+char 1 114
+char 1 105
+char 1 110
+char 1 116
+char 1 32
+char 1 34
+char 1 94
+char 1 53
+char 1 42
+char 1 42
+char 1 42
+char 1 32
+char 1 94
+char 1 50
+char 1 67
+char 1 85
+char 1 82
+char 1 82
+char 1 69
+char 1 78
+char 1 84
+char 1 32
+char 1 77
+char 1 79
+char 1 68
+char 1 69
+char 1 58
+char 1 32
+char 1 67
+char 1 108
+char 1 97
+char 1 110
+char 1 32
+char 1 77
+char 1 97
+char 1 116
+char 1 99
+char 1 104
+char 1 32
+char 1 94
+char 1 53
+char 1 42
+char 1 42
+char 1 42
+char 1 10
+char 1 34
+char 1 0
+align 1
+LABELV $678
+char 1 112
+char 1 114
+char 1 105
+char 1 110
+char 1 116
+char 1 32
+char 1 34
+char 1 37
+char 1 115
+char 1 10
+char 1 10
+char 1 34
+char 1 0
+align 1
+LABELV $677
+char 1 112
+char 1 114
+char 1 105
+char 1 110
+char 1 116
+char 1 32
+char 1 34
+char 1 10
+char 1 10
+char 1 94
+char 1 49
+char 1 67
+char 1 108
+char 1 97
+char 1 110
+char 1 32
+char 1 77
+char 1 111
+char 1 100
+char 1 10
+char 1 94
+char 1 51
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 10
+char 1 94
+char 1 51
+char 1 124
+char 1 124
+char 1 94
+char 1 49
+char 1 65
+char 1 117
+char 1 116
+char 1 104
+char 1 111
+char 1 114
+char 1 58
+char 1 32
+char 1 94
+char 1 54
+char 1 78
+char 1 101
+char 1 87
+char 1 97
+char 1 71
+char 1 101
+char 1 32
+char 1 94
+char 1 50
+char 1 38
+char 1 32
+char 1 74
+char 1 101
+char 1 100
+char 1 105
+char 1 68
+char 1 111
+char 1 103
+char 1 32
+char 1 94
+char 1 53
+char 1 102
+char 1 111
+char 1 114
+char 1 32
+char 1 116
+char 1 104
+char 1 101
+char 1 32
+char 1 49
+char 1 46
+char 1 48
+char 1 51
+char 1 32
+char 1 67
+char 1 108
+char 1 97
+char 1 110
+char 1 32
+char 1 77
+char 1 111
+char 1 100
+char 1 94
+char 1 51
+char 1 124
+char 1 124
+char 1 10
+char 1 94
+char 1 51
+char 1 124
+char 1 124
+char 1 94
+char 1 49
+char 1 87
+char 1 101
+char 1 98
+char 1 115
+char 1 105
+char 1 116
+char 1 101
+char 1 58
+char 1 32
+char 1 94
+char 1 53
+char 1 104
+char 1 116
+char 1 116
+char 1 112
+char 1 58
+char 1 47
+char 1 47
+char 1 119
+char 1 119
+char 1 119
+char 1 46
+char 1 67
+char 1 108
+char 1 97
+char 1 110
+char 1 77
+char 1 111
+char 1 100
+char 1 46
+char 1 111
+char 1 114
+char 1 103
+char 1 32
+char 1 32
+char 1 32
+char 1 32
+char 1 32
+char 1 32
+char 1 32
+char 1 32
+char 1 32
+char 1 32
+char 1 32
+char 1 32
+char 1 32
+char 1 32
+char 1 32
+char 1 94
+char 1 51
+char 1 124
+char 1 124
+char 1 10
+char 1 94
+char 1 51
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 61
+char 1 10
+char 1 94
+char 1 49
+char 1 42
+char 1 32
+char 1 94
+char 1 51
+char 1 84
+char 1 121
+char 1 112
+char 1 101
+char 1 32
+char 1 105
+char 1 110
+char 1 32
+char 1 47
+char 1 72
+char 1 69
+char 1 76
+char 1 80
+char 1 32
+char 1 102
+char 1 111
+char 1 114
+char 1 32
+char 1 97
+char 1 32
+char 1 99
+char 1 111
+char 1 109
+char 1 109
+char 1 97
+char 1 110
+char 1 100
+char 1 32
+char 1 108
+char 1 105
+char 1 115
+char 1 116
+char 1 33
+char 1 32
+char 1 94
+char 1 49
+char 1 42
+char 1 10
+char 1 10
+char 1 34
+char 1 0
+align 1
+LABELV $674
+char 1 67
+char 1 108
+char 1 105
+char 1 101
+char 1 110
+char 1 116
+char 1 66
+char 1 101
+char 1 103
+char 1 105
+char 1 110
+char 1 58
+char 1 32
+char 1 37
+char 1 105
+char 1 10
+char 1 0
+align 1
+LABELV $673
+char 1 80
+char 1 76
+char 1 69
+char 1 78
+char 1 84
+char 1 69
+char 1 82
+char 1 0
+align 1
+LABELV $660
+char 1 77
+char 1 111
+char 1 116
+char 1 105
+char 1 111
+char 1 110
+char 1 0
+align 1
+LABELV $659
+char 1 114
+char 1 116
+char 1 105
+char 1 98
+char 1 105
+char 1 97
+char 1 0
+align 1
+LABELV $658
+char 1 108
+char 1 116
+char 1 105
+char 1 98
+char 1 105
+char 1 97
+char 1 0
+align 1
+LABELV $657
+char 1 114
+char 1 114
+char 1 97
+char 1 100
+char 1 105
+char 1 117
+char 1 115
+char 1 0
+align 1
+LABELV $656
+char 1 108
+char 1 114
+char 1 97
+char 1 100
+char 1 105
+char 1 117
+char 1 115
+char 1 0
+align 1
+LABELV $655
+char 1 116
+char 1 104
+char 1 111
+char 1 114
+char 1 97
+char 1 99
+char 1 105
+char 1 99
+char 1 0
+align 1
+LABELV $639
+char 1 66
+char 1 108
+char 1 117
+char 1 101
+char 1 0
+align 1
+LABELV $634
+char 1 82
+char 1 101
+char 1 100
+char 1 0
+align 1
+LABELV $624
+char 1 67
+char 1 108
+char 1 105
+char 1 101
+char 1 110
+char 1 116
+char 1 67
+char 1 111
+char 1 110
+char 1 110
+char 1 101
+char 1 99
+char 1 116
+char 1 58
+char 1 32
+char 1 37
+char 1 105
+char 1 32
+char 1 39
+char 1 37
+char 1 115
+char 1 39
+char 1 32
+char 1 45
+char 1 62
+char 1 32
+char 1 39
+char 1 37
+char 1 115
+char 1 39
+char 1 10
+char 1 0
+align 1
+LABELV $621
+char 1 80
+char 1 76
+char 1 67
+char 1 79
+char 1 78
+char 1 78
+char 1 69
+char 1 67
+char 1 84
+char 1 0
+align 1
+LABELV $620
+char 1 112
+char 1 114
+char 1 105
+char 1 110
+char 1 116
+char 1 32
+char 1 34
+char 1 37
+char 1 115
+char 1 94
+char 1 55
+char 1 32
+char 1 37
+char 1 115
+char 1 10
+char 1 34
+char 1 0
+align 1
+LABELV $617
+char 1 67
+char 1 108
+char 1 105
+char 1 101
+char 1 110
+char 1 116
+char 1 67
+char 1 111
+char 1 110
+char 1 110
+char 1 101
+char 1 99
+char 1 116
+char 1 58
+char 1 32
+char 1 37
+char 1 105
+char 1 10
+char 1 0
+align 1
+LABELV $616
+char 1 66
+char 1 111
+char 1 116
+char 1 67
+char 1 111
+char 1 110
+char 1 110
+char 1 101
+char 1 99
+char 1 116
+char 1 102
+char 1 97
+char 1 105
+char 1 108
+char 1 101
+char 1 100
+char 1 0
+align 1
+LABELV $595
+char 1 70
+char 1 97
+char 1 107
+char 1 101
+char 1 32
+char 1 80
+char 1 108
+char 1 97
+char 1 121
+char 1 101
+char 1 114
+char 1 32
+char 1 83
+char 1 101
+char 1 116
+char 1 116
+char 1 105
+char 1 110
+char 1 103
+char 1 115
+char 1 32
+char 1 68
+char 1 101
+char 1 116
+char 1 101
+char 1 99
+char 1 116
+char 1 101
+char 1 100
+char 1 46
+char 1 0
+align 1
+LABELV $594
+char 1 74
+char 1 69
+char 1 68
+char 1 73
+char 1 68
+char 1 79
+char 1 71
+char 1 58
+char 1 32
+char 1 84
+char 1 104
+char 1 101
+char 1 32
+char 1 73
+char 1 80
+char 1 32
+char 1 65
+char 1 100
+char 1 100
+char 1 114
+char 1 101
+char 1 115
+char 1 115
+char 1 32
+char 1 37
+char 1 115
+char 1 32
+char 1 104
+char 1 97
+char 1 115
+char 1 32
+char 1 70
+char 1 97
+char 1 107
+char 1 101
+char 1 32
+char 1 80
+char 1 108
+char 1 97
+char 1 121
+char 1 101
+char 1 114
+char 1 32
+char 1 83
+char 1 101
+char 1 116
+char 1 116
+char 1 105
+char 1 110
+char 1 103
+char 1 115
+char 1 46
+char 1 32
+char 1 84
+char 1 104
+char 1 101
+char 1 32
+char 1 99
+char 1 108
+char 1 105
+char 1 101
+char 1 110
+char 1 116
+char 1 32
+char 1 104
+char 1 97
+char 1 115
+char 1 32
+char 1 98
+char 1 101
+char 1 101
+char 1 110
+char 1 32
+char 1 100
+char 1 101
+char 1 110
+char 1 105
+char 1 101
+char 1 100
+char 1 32
+char 1 97
+char 1 99
+char 1 99
+char 1 101
+char 1 115
+char 1 115
+char 1 46
+char 1 10
+char 1 0
+align 1
+LABELV $591
+char 1 99
+char 1 108
+char 1 95
+char 1 103
+char 1 117
+char 1 105
+char 1 100
+char 1 0
+align 1
+LABELV $590
+char 1 0
+align 1
+LABELV $589
+char 1 99
+char 1 108
+char 1 95
+char 1 112
+char 1 117
+char 1 110
+char 1 107
+char 1 98
+char 1 117
+char 1 115
+char 1 116
+char 1 101
+char 1 114
+char 1 0
+align 1
+LABELV $577
+char 1 84
+char 1 104
+char 1 101
+char 1 32
+char 1 115
+char 1 101
+char 1 114
+char 1 118
+char 1 101
+char 1 114
+char 1 32
+char 1 105
+char 1 115
+char 1 32
+char 1 99
+char 1 108
+char 1 111
+char 1 115
+char 1 101
+char 1 100
+char 1 32
+char 1 114
+char 1 105
+char 1 103
+char 1 104
+char 1 116
+char 1 32
+char 1 110
+char 1 111
+char 1 119
+char 1 44
+char 1 32
+char 1 99
+char 1 111
+char 1 109
+char 1 101
+char 1 32
+char 1 98
+char 1 97
+char 1 99
+char 1 107
+char 1 32
+char 1 108
+char 1 97
+char 1 116
+char 1 101
+char 1 114
+char 1 46
+char 1 32
+char 1 58
+char 1 41
+char 1 0
+align 1
+LABELV $576
+char 1 112
+char 1 114
+char 1 105
+char 1 110
+char 1 116
+char 1 34
+char 1 94
+char 1 50
+char 1 67
+char 1 108
+char 1 111
+char 1 115
+char 1 101
+char 1 100
+char 1 32
+char 1 115
+char 1 101
+char 1 114
+char 1 118
+char 1 101
+char 1 114
+char 1 58
+char 1 32
+char 1 94
+char 1 53
+char 1 67
+char 1 108
+char 1 105
+char 1 101
+char 1 110
+char 1 116
+char 1 32
+char 1 94
+char 1 55
+char 1 60
+char 1 94
+char 1 55
+char 1 37
+char 1 115
+char 1 94
+char 1 55
+char 1 62
+char 1 94
+char 1 53
+char 1 32
+char 1 119
+char 1 97
+char 1 115
+char 1 32
+char 1 100
+char 1 101
+char 1 110
+char 1 105
+char 1 101
+char 1 100
+char 1 32
+char 1 97
+char 1 99
+char 1 99
+char 1 101
+char 1 115
+char 1 115
+char 1 94
+char 1 50
+char 1 46
+char 1 10
+char 1 34
+char 1 0
+align 1
+LABELV $572
+char 1 65
+char 1 99
+char 1 99
+char 1 101
+char 1 115
+char 1 115
+char 1 32
+char 1 100
+char 1 101
+char 1 110
+char 1 105
+char 1 101
+char 1 100
+char 1 32
+char 1 98
+char 1 101
+char 1 99
+char 1 97
+char 1 117
+char 1 115
+char 1 101
+char 1 32
+char 1 116
+char 1 104
+char 1 101
+char 1 32
+char 1 115
+char 1 101
+char 1 114
+char 1 118
+char 1 101
+char 1 114
+char 1 32
+char 1 105
+char 1 115
+char 1 32
+char 1 99
+char 1 108
+char 1 111
+char 1 115
+char 1 101
+char 1 100
+char 1 10
+char 1 0
+align 1
+LABELV $567
+char 1 73
+char 1 110
+char 1 118
+char 1 97
+char 1 108
+char 1 105
+char 1 100
+char 1 32
+char 1 112
+char 1 97
+char 1 115
+char 1 115
+char 1 119
+char 1 111
+char 1 114
+char 1 100
+char 1 58
+char 1 32
+char 1 65
+char 1 99
+char 1 99
+char 1 101
+char 1 115
+char 1 115
+char 1 32
+char 1 100
+char 1 101
+char 1 110
+char 1 105
+char 1 101
+char 1 100
+char 1 32
+char 1 116
+char 1 111
+char 1 32
+char 1 99
+char 1 108
+char 1 105
+char 1 101
+char 1 110
+char 1 116
+char 1 32
+char 1 37
+char 1 105
+char 1 58
+char 1 32
+char 1 69
+char 1 110
+char 1 116
+char 1 101
+char 1 114
+char 1 101
+char 1 100
+char 1 32
+char 1 112
+char 1 97
+char 1 115
+char 1 115
+char 1 119
+char 1 111
+char 1 114
+char 1 100
+char 1 32
+char 1 60
+char 1 37
+char 1 115
+char 1 62
+char 1 32
+char 1 105
+char 1 110
+char 1 115
+char 1 116
+char 1 101
+char 1 97
+char 1 100
+char 1 32
+char 1 111
+char 1 102
+char 1 32
+char 1 60
+char 1 37
+char 1 115
+char 1 62
+char 1 10
+char 1 0
+align 1
+LABELV $566
+char 1 73
+char 1 78
+char 1 86
+char 1 65
+char 1 76
+char 1 73
+char 1 68
+char 1 95
+char 1 80
+char 1 65
+char 1 83
+char 1 83
+char 1 87
+char 1 79
+char 1 82
+char 1 68
+char 1 0
+align 1
+LABELV $563
+char 1 110
+char 1 111
+char 1 110
+char 1 101
+char 1 0
+align 1
+LABELV $558
+char 1 112
+char 1 97
+char 1 115
+char 1 115
+char 1 119
+char 1 111
+char 1 114
+char 1 100
+char 1 0
+align 1
+LABELV $553
+char 1 77
+char 1 97
+char 1 120
+char 1 105
+char 1 109
+char 1 117
+char 1 109
+char 1 32
+char 1 67
+char 1 111
+char 1 110
+char 1 110
+char 1 101
+char 1 99
+char 1 116
+char 1 105
+char 1 111
+char 1 110
+char 1 115
+char 1 32
+char 1 80
+char 1 101
+char 1 114
+char 1 32
+char 1 73
+char 1 80
+char 1 58
+char 1 32
+char 1 37
+char 1 100
+char 1 46
+char 1 0
+align 1
+LABELV $550
+char 1 66
+char 1 97
+char 1 110
+char 1 110
+char 1 101
+char 1 100
+char 1 46
+char 1 0
+align 1
+LABELV $549
+char 1 73
+char 1 80
+char 1 32
+char 1 98
+char 1 97
+char 1 110
+char 1 110
+char 1 101
+char 1 100
+char 1 58
+char 1 32
+char 1 65
+char 1 99
+char 1 99
+char 1 101
+char 1 115
+char 1 115
+char 1 32
+char 1 100
+char 1 101
+char 1 110
+char 1 105
+char 1 101
+char 1 100
+char 1 32
+char 1 116
+char 1 111
+char 1 32
+char 1 60
+char 1 37
+char 1 115
+char 1 62
+char 1 10
+char 1 0
+align 1
+LABELV $546
+char 1 67
+char 1 111
+char 1 110
+char 1 110
+char 1 101
+char 1 99
+char 1 116
+char 1 32
+char 1 114
+char 1 101
+char 1 113
+char 1 117
+char 1 101
+char 1 115
+char 1 116
+char 1 32
+char 1 102
+char 1 114
+char 1 111
+char 1 109
+char 1 32
+char 1 58
+char 1 32
+char 1 37
+char 1 115
+char 1 10
+char 1 0
+align 1
+LABELV $544
+char 1 67
+char 1 108
+char 1 105
+char 1 101
+char 1 110
+char 1 116
+char 1 85
+char 1 115
+char 1 101
+char 1 114
+char 1 105
+char 1 110
+char 1 102
+char 1 111
+char 1 67
+char 1 104
+char 1 97
+char 1 110
+char 1 103
+char 1 101
+char 1 100
+char 1 58
+char 1 32
+char 1 37
+char 1 105
+char 1 32
+char 1 37
+char 1 115
+char 1 10
+char 1 0
+align 1
+LABELV $540
+char 1 110
+char 1 92
+char 1 37
+char 1 115
+char 1 92
+char 1 116
+char 1 92
+char 1 37
+char 1 105
+char 1 92
+char 1 109
+char 1 111
+char 1 100
+char 1 101
+char 1 108
+char 1 92
+char 1 37
+char 1 115
+char 1 92
+char 1 103
+char 1 95
+char 1 114
+char 1 101
+char 1 100
+char 1 116
+char 1 101
+char 1 97
+char 1 109
+char 1 92
+char 1 37
+char 1 115
+char 1 92
+char 1 103
+char 1 95
+char 1 98
+char 1 108
+char 1 117
+char 1 101
+char 1 116
+char 1 101
+char 1 97
+char 1 109
+char 1 92
+char 1 37
+char 1 115
+char 1 92
+char 1 99
+char 1 49
+char 1 92
+char 1 37
+char 1 115
+char 1 92
+char 1 99
+char 1 50
+char 1 92
+char 1 37
+char 1 115
+char 1 92
+char 1 104
+char 1 99
+char 1 92
+char 1 37
+char 1 105
+char 1 92
+char 1 119
+char 1 92
+char 1 37
+char 1 105
+char 1 92
+char 1 108
+char 1 92
+char 1 37
+char 1 105
+char 1 92
+char 1 116
+char 1 116
+char 1 92
+char 1 37
+char 1 100
+char 1 92
+char 1 116
+char 1 108
+char 1 92
+char 1 37
+char 1 100
+char 1 0
+align 1
+LABELV $539
+char 1 115
+char 1 107
+char 1 105
+char 1 108
+char 1 108
+char 1 0
+align 1
+LABELV $538
+char 1 110
+char 1 92
+char 1 37
+char 1 115
+char 1 92
+char 1 116
+char 1 92
+char 1 37
+char 1 105
+char 1 92
+char 1 109
+char 1 111
+char 1 100
+char 1 101
+char 1 108
+char 1 92
+char 1 37
+char 1 115
+char 1 92
+char 1 99
+char 1 49
+char 1 92
+char 1 37
+char 1 115
+char 1 92
+char 1 99
+char 1 50
+char 1 92
+char 1 37
+char 1 115
+char 1 92
+char 1 104
+char 1 99
+char 1 92
+char 1 37
+char 1 105
+char 1 92
+char 1 119
+char 1 92
+char 1 37
+char 1 105
+char 1 92
+char 1 108
+char 1 92
+char 1 37
+char 1 105
+char 1 92
+char 1 115
+char 1 107
+char 1 105
+char 1 108
+char 1 108
+char 1 92
+char 1 37
+char 1 115
+char 1 92
+char 1 116
+char 1 116
+char 1 92
+char 1 37
+char 1 100
+char 1 92
+char 1 116
+char 1 108
+char 1 92
+char 1 37
+char 1 100
+char 1 0
+align 1
+LABELV $535
+char 1 103
+char 1 95
+char 1 98
+char 1 108
+char 1 117
+char 1 101
+char 1 116
+char 1 101
+char 1 97
+char 1 109
+char 1 0
+align 1
+LABELV $534
+char 1 103
+char 1 95
+char 1 114
+char 1 101
+char 1 100
+char 1 116
+char 1 101
+char 1 97
+char 1 109
+char 1 0
+align 1
+LABELV $533
+char 1 99
+char 1 111
+char 1 108
+char 1 111
+char 1 114
+char 1 50
+char 1 0
+align 1
+LABELV $532
+char 1 99
+char 1 111
+char 1 108
+char 1 111
+char 1 114
+char 1 49
+char 1 0
+align 1
+LABELV $531
+char 1 116
+char 1 101
+char 1 97
+char 1 109
+char 1 116
+char 1 97
+char 1 115
+char 1 107
+char 1 0
+align 1
+LABELV $527
+char 1 116
+char 1 101
+char 1 97
+char 1 109
+char 1 111
+char 1 118
+char 1 101
+char 1 114
+char 1 108
+char 1 97
+char 1 121
+char 1 0
+align 1
+LABELV $522
+char 1 98
+char 1 0
+align 1
+LABELV $521
+char 1 98
+char 1 108
+char 1 117
+char 1 101
+char 1 0
+align 1
+LABELV $517
+char 1 114
+char 1 0
+align 1
+LABELV $516
+char 1 114
+char 1 101
+char 1 100
+char 1 0
+align 1
+LABELV $513
+char 1 116
+char 1 101
+char 1 97
+char 1 109
+char 1 0
+align 1
+LABELV $507
+char 1 102
+char 1 111
+char 1 114
+char 1 99
+char 1 101
+char 1 112
+char 1 111
+char 1 119
+char 1 101
+char 1 114
+char 1 115
+char 1 0
+align 1
+LABELV $506
+char 1 109
+char 1 111
+char 1 100
+char 1 101
+char 1 108
+char 1 0
+align 1
+LABELV $505
+char 1 116
+char 1 101
+char 1 97
+char 1 109
+char 1 95
+char 1 109
+char 1 111
+char 1 100
+char 1 101
+char 1 108
+char 1 0
+align 1
+LABELV $498
+char 1 80
+char 1 76
+char 1 82
+char 1 69
+char 1 78
+char 1 65
+char 1 77
+char 1 69
+char 1 0
+align 1
+LABELV $497
+char 1 112
+char 1 114
+char 1 105
+char 1 110
+char 1 116
+char 1 32
+char 1 34
+char 1 37
+char 1 115
+char 1 94
+char 1 55
+char 1 32
+char 1 37
+char 1 115
+char 1 32
+char 1 37
+char 1 115
+char 1 10
+char 1 34
+char 1 0
+align 1
+LABELV $492
+char 1 37
+char 1 115
+char 1 40
+char 1 37
+char 1 100
+char 1 41
+char 1 0
+align 1
+LABELV $485
+char 1 115
+char 1 99
+char 1 111
+char 1 114
+char 1 101
+char 1 98
+char 1 111
+char 1 97
+char 1 114
+char 1 100
+char 1 0
+align 1
+LABELV $461
+char 1 110
+char 1 97
+char 1 109
+char 1 101
+char 1 0
+align 1
+LABELV $458
+char 1 99
+char 1 103
+char 1 95
+char 1 112
+char 1 114
+char 1 101
+char 1 100
+char 1 105
+char 1 99
+char 1 116
+char 1 73
+char 1 116
+char 1 101
+char 1 109
+char 1 115
+char 1 0
+align 1
+LABELV $457
+char 1 108
+char 1 111
+char 1 99
+char 1 97
+char 1 108
+char 1 104
+char 1 111
+char 1 115
+char 1 116
+char 1 0
+align 1
+LABELV $454
+char 1 105
+char 1 112
+char 1 0
+align 1
+LABELV $453
+char 1 92
+char 1 110
+char 1 97
+char 1 109
+char 1 101
+char 1 92
+char 1 98
+char 1 97
+char 1 100
+char 1 105
+char 1 110
+char 1 102
+char 1 111
+char 1 0
+align 1
+LABELV $449
+char 1 112
+char 1 114
+char 1 105
+char 1 110
+char 1 116
+char 1 34
+char 1 94
+char 1 51
+char 1 68
+char 1 111
+char 1 110
+char 1 39
+char 1 116
+char 1 32
+char 1 70
+char 1 108
+char 1 111
+char 1 111
+char 1 100
+char 1 46
+char 1 32
+char 1 94
+char 1 53
+char 1 65
+char 1 108
+char 1 108
+char 1 111
+char 1 119
+char 1 32
+char 1 94
+char 1 50
+char 1 49
+char 1 32
+char 1 94
+char 1 53
+char 1 115
+char 1 101
+char 1 99
+char 1 111
+char 1 110
+char 1 100
+char 1 32
+char 1 98
+char 1 101
+char 1 116
+char 1 119
+char 1 101
+char 1 101
+char 1 110
+char 1 32
+char 1 99
+char 1 104
+char 1 97
+char 1 110
+char 1 103
+char 1 101
+char 1 115
+char 1 46
+char 1 10
+char 1 34
+char 1 0
+align 1
+LABELV $436
+char 1 42
+char 1 102
+char 1 108
+char 1 97
+char 1 115
+char 1 104
+char 1 0
+align 1
+LABELV $430
+char 1 99
+char 1 114
+char 1 97
+char 1 110
+char 1 105
+char 1 117
+char 1 109
+char 1 0
+align 1
+LABELV $428
+char 1 117
+char 1 112
+char 1 112
+char 1 101
+char 1 114
+char 1 95
+char 1 108
+char 1 117
+char 1 109
+char 1 98
+char 1 97
+char 1 114
+char 1 0
+align 1
+LABELV $426
+char 1 109
+char 1 111
+char 1 100
+char 1 101
+char 1 108
+char 1 95
+char 1 114
+char 1 111
+char 1 111
+char 1 116
+char 1 0
+align 1
+LABELV $425
+char 1 42
+char 1 108
+char 1 95
+char 1 104
+char 1 97
+char 1 110
+char 1 100
+char 1 0
+align 1
+LABELV $424
+char 1 42
+char 1 114
+char 1 95
+char 1 104
+char 1 97
+char 1 110
+char 1 100
+char 1 0
+align 1
+LABELV $419
+char 1 47
+char 1 97
+char 1 110
+char 1 105
+char 1 109
+char 1 97
+char 1 116
+char 1 105
+char 1 111
+char 1 110
+char 1 46
+char 1 99
+char 1 102
+char 1 103
+char 1 0
+align 1
+LABELV $416
+char 1 70
+char 1 97
+char 1 105
+char 1 108
+char 1 101
+char 1 100
+char 1 32
+char 1 116
+char 1 111
+char 1 32
+char 1 108
+char 1 111
+char 1 97
+char 1 100
+char 1 32
+char 1 97
+char 1 110
+char 1 105
+char 1 109
+char 1 97
+char 1 116
+char 1 105
+char 1 111
+char 1 110
+char 1 32
+char 1 102
+char 1 105
+char 1 108
+char 1 101
+char 1 32
+char 1 37
+char 1 115
+char 1 10
+char 1 0
+align 1
+LABELV $415
+char 1 109
+char 1 111
+char 1 100
+char 1 101
+char 1 108
+char 1 115
+char 1 47
+char 1 112
+char 1 108
+char 1 97
+char 1 121
+char 1 101
+char 1 114
+char 1 115
+char 1 47
+char 1 95
+char 1 104
+char 1 117
+char 1 109
+char 1 97
+char 1 110
+char 1 111
+char 1 105
+char 1 100
+char 1 47
+char 1 97
+char 1 110
+char 1 105
+char 1 109
+char 1 97
+char 1 116
+char 1 105
+char 1 111
+char 1 110
+char 1 46
+char 1 99
+char 1 102
+char 1 103
+char 1 0
+align 1
+LABELV $404
+char 1 109
+char 1 111
+char 1 100
+char 1 101
+char 1 108
+char 1 115
+char 1 47
+char 1 112
+char 1 108
+char 1 97
+char 1 121
+char 1 101
+char 1 114
+char 1 115
+char 1 47
+char 1 107
+char 1 121
+char 1 108
+char 1 101
+char 1 47
+char 1 109
+char 1 111
+char 1 100
+char 1 101
+char 1 108
+char 1 46
+char 1 103
+char 1 108
+char 1 109
+char 1 0
+align 1
+LABELV $397
+char 1 80
+char 1 97
+char 1 100
+char 1 97
+char 1 119
+char 1 97
+char 1 110
+char 1 0
+align 1
+LABELV $257
+char 1 98
+char 1 111
+char 1 100
+char 1 121
+char 1 113
+char 1 117
+char 1 101
+char 1 0
+align 1
+LABELV $225
+char 1 67
+char 1 111
+char 1 117
+char 1 108
+char 1 100
+char 1 110
+char 1 39
+char 1 116
+char 1 32
+char 1 102
+char 1 105
+char 1 110
+char 1 100
+char 1 32
+char 1 97
+char 1 32
+char 1 115
+char 1 112
+char 1 97
+char 1 119
+char 1 110
+char 1 32
+char 1 112
+char 1 111
+char 1 105
+char 1 110
+char 1 116
+char 1 0
+align 1
+LABELV $149
+char 1 66
+char 1 69
+char 1 67
+char 1 79
+char 1 77
+char 1 69
+char 1 74
+char 1 77
+char 1 0
+align 1
+LABELV $148
+char 1 83
+char 1 86
+char 1 73
+char 1 78
+char 1 71
+char 1 65
+char 1 77
+char 1 69
+char 1 0
+align 1
+LABELV $147
+char 1 99
+char 1 112
+char 1 32
+char 1 34
+char 1 37
+char 1 115
+char 1 32
+char 1 37
+char 1 115
+char 1 10
+char 1 34
+char 1 0
+align 1
+LABELV $141
+char 1 37
+char 1 105
+char 1 0
+align 1
+LABELV $108
+char 1 109
+char 1 111
+char 1 100
+char 1 101
+char 1 108
+char 1 115
+char 1 47
+char 1 119
+char 1 101
+char 1 97
+char 1 112
+char 1 111
+char 1 110
+char 1 115
+char 1 50
+char 1 47
+char 1 115
+char 1 97
+char 1 98
+char 1 101
+char 1 114
+char 1 47
+char 1 115
+char 1 97
+char 1 98
+char 1 101
+char 1 114
+char 1 95
+char 1 119
+char 1 46
+char 1 103
+char 1 108
+char 1 109
+char 1 0
+align 1
+LABELV $103
+char 1 45
+char 1 49
+char 1 0
+align 1
+LABELV $87
+char 1 105
+char 1 110
+char 1 102
+char 1 111
+char 1 95
+char 1 112
+char 1 108
+char 1 97
+char 1 121
+char 1 101
+char 1 114
+char 1 95
+char 1 100
+char 1 101
+char 1 97
+char 1 116
+char 1 104
+char 1 109
+char 1 97
+char 1 116
+char 1 99
+char 1 104
+char 1 0
+align 1
+LABELV $83
+char 1 110
+char 1 111
+char 1 104
+char 1 117
+char 1 109
+char 1 97
+char 1 110
+char 1 115
+char 1 0
+align 1
+LABELV $80
+char 1 48
+char 1 0
+align 1
+LABELV $79
+char 1 110
+char 1 111
+char 1 98
+char 1 111
+char 1 116
+char 1 115
+char 1 0
