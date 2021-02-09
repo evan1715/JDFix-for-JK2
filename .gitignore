@@ -1,13 +1,24 @@
 #General
 *.zip
 *.rar
-Original\ Source\ Codes
+
+*.asm
+*.bat
+*.def
+*.doc
+*.dsp
+*.dsw
+*.map
+*.q3asm
+*.qvm
+
 
 #Clan Mod with JDFIX
 Clan\ Mod/cm_v2.04/bin
 Clan\ Mod/cm_v2.04/Code/base
 Clan\ Mod/cm_v2.04/Code/cgame
 Clan\ Mod/cm_v2.04/Code/Final
+Clan\ Mod/cm_v2.04/Code/game/vm
 Clan\ Mod/cm_v2.04/Code/ghoul2
 Clan\ Mod/cm_v2.04/Code/qcommon
 Clan\ Mod/cm_v2.04/Code/renderer
@@ -29,6 +40,7 @@ Clan\ Mod/JDClanMod/clanmod
 Clan\ Mod/JDClanMod/Code/base
 Clan\ Mod/JDClanMod/Code/cgame
 Clan\ Mod/JDClanMod/Code/Final
+Clan\ Mod/JDClanMod/Code/game/vm
 Clan\ Mod/JDClanMod/Code/ghoul2
 Clan\ Mod/JDClanMod/Code/qcommon
 Clan\ Mod/JDClanMod/Code/renderer
