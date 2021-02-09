@@ -4,39 +4,39 @@
 Original\ Source\ Codes
 
 #Clan Mod folder
-Clan\ Mod/bin
-Clan\ Mod/Code/base
-Clan\ Mod/Code/cgame
-Clan\ Mod/Code/Final
-Clan\ Mod/Code/ghoul2
-Clan\ Mod/Code/qcommon
-Clan\ Mod/Code/renderer
-Clan\ Mod/Code/ui
-Clan\ Mod/Code/buildvms.bat
-Clan\ Mod/Code/JK2\ Game\ Source\ License.doc
-Clan\ Mod/Code/jk2mp-SDK.dsw
-Clan\ Mod/Code/jk2mp-SDK.ncb
-Clan\ Mod/Code/jk2mp-SDK.sln
-Clan\ Mod/Code/jk2mp-SDK.suo
-Clan\ Mod/Code/MakeAMod_readme.txt
-Clan\ Mod/ui/menudef.h
-Clan\ Mod/ui/menudef.h
+Clan\ Mod/cm_v2.04/bin
+Clan\ Mod/cm_v2.04/Code/base
+Clan\ Mod/cm_v2.04/Code/cgame
+Clan\ Mod/cm_v2.04/Code/Final
+Clan\ Mod/cm_v2.04/Code/ghoul2
+Clan\ Mod/cm_v2.04/Code/qcommon
+Clan\ Mod/cm_v2.04/Code/renderer
+Clan\ Mod/cm_v2.04/Code/ui
+Clan\ Mod/cm_v2.04/Code/buildvms.bat
+Clan\ Mod/cm_v2.04/Code/JK2\ Game\ Source\ License.doc
+Clan\ Mod/cm_v2.04/Code/jk2mp-SDK.dsw
+Clan\ Mod/cm_v2.04/Code/jk2mp-SDK.ncb
+Clan\ Mod/cm_v2.04/Code/jk2mp-SDK.sln
+Clan\ Mod/cm_v2.04/Code/jk2mp-SDK.suo
+Clan\ Mod/cm_v2.04/Code/MakeAMod_readme.txt
+Clan\ Mod/cm_v2.04/ui/menudef.h
+Clan\ Mod/cm_v2.04/ui/menudef.h
 
-JDClanMod/bin
-JDClanMod/Calculators
-JDClanMod/clanmod
-JDClanMod/Code/base
-JDClanMod/Code/cgame
-JDClanMod/Code/Final
-JDClanMod/Code/ghoul2
-JDClanMod/Code/qcommon
-JDClanMod/Code/renderer
-JDClanMod/Code/ui
-JDClanMod/Code/buildvms.bat
-JDClanMod/Code/JK2\ Game\ Source\ License.doc
-JDClanMod/Code/jk2mp-SDK.dsw
-JDClanMod/Code/jk2mp-SDK.ncb
-JDClanMod/Code/jk2mp-SDK.sln
-JDClanMod/Code/jk2mp-SDK.suo
-JDClanMod/Code/MakeAMod_readme.txt
-JDClanMod/ui/menudef.h
+Clan\ Mod/JDClanMod/bin
+Clan\ Mod/JDClanMod/Calculators
+Clan\ Mod/JDClanMod/clanmod
+Clan\ Mod/JDClanMod/Code/base
+Clan\ Mod/JDClanMod/Code/cgame
+Clan\ Mod/JDClanMod/Code/Final
+Clan\ Mod/JDClanMod/Code/ghoul2
+Clan\ Mod/JDClanMod/Code/qcommon
+Clan\ Mod/JDClanMod/Code/renderer
+Clan\ Mod/JDClanMod/Code/ui
+Clan\ Mod/JDClanMod/Code/buildvms.bat
+Clan\ Mod/JDClanMod/Code/JK2\ Game\ Source\ License.doc
+Clan\ Mod/JDClanMod/Code/jk2mp-SDK.dsw
+Clan\ Mod/JDClanMod/Code/jk2mp-SDK.ncb
+Clan\ Mod/JDClanMod/Code/jk2mp-SDK.sln
+Clan\ Mod/JDClanMod/Code/jk2mp-SDK.suo
+Clan\ Mod/JDClanMod/Code/MakeAMod_readme.txt
+Clan\ Mod/JDClanMod/ui/menudef.h
