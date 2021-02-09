@@ -43,12 +43,12 @@ Clan\ Mod/JDClanMod/Code/MakeAMod_readme.txt
 Clan\ Mod/JDClanMod/ui/menudef.h
 
 #JDFix Mod standalone
-JDFix\ 1.03\ Mod/base
-JDFix\ 1.03\ Mod/bin
-JDFix\ 1.03\ Mod/Tools
-JDFix\ 1.03\ Mod/ui/menudef.h
+JDFix\ Mod/JDFix\ 1.03\ Mod/base
+JDFix\ Mod/JDFix\ 1.03\ Mod/bin
+JDFix\ Mod/JDFix\ 1.03\ Mod/Tools
+JDFix\ Mod/JDFix\ 1.03\ Mod/ui/menudef.h
 
-JDFix\ 1.04\ Mod/1.04\ fix/base
-JDFix\ 1.04\ Mod/1.04\ fix/bin
-JDFix\ 1.04\ Mod/1.04\ fix/Tools
-JDFix\ 1.04\ Mod/1.04\ fix/ui/menudef.h
+JDFix\ Mod/JDFix\ 1.04\ Mod/1.04\ fix/base
+JDFix\ Mod/JDFix\ 1.04\ Mod/1.04\ fix/bin
+JDFix\ Mod/JDFix\ 1.04\ Mod/1.04\ fix/Tools
+JDFix\ Mod/JDFix\ 1.04\ Mod/1.04\ fix/ui/menudef.h
