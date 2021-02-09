@@ -3,7 +3,7 @@
 *.rar
 Original\ Source\ Codes
 
-#Clan Mod folder
+#Clan Mod with JDFIX
 Clan\ Mod/cm_v2.04/bin
 Clan\ Mod/cm_v2.04/Code/base
 Clan\ Mod/cm_v2.04/Code/cgame
@@ -22,6 +22,7 @@ Clan\ Mod/cm_v2.04/Code/MakeAMod_readme.txt
 Clan\ Mod/cm_v2.04/ui/menudef.h
 Clan\ Mod/cm_v2.04/ui/menudef.h
 
+#Clan Mod with JDFix for JK2 v1.03
 Clan\ Mod/JDClanMod/bin
 Clan\ Mod/JDClanMod/Calculators
 Clan\ Mod/JDClanMod/clanmod
@@ -40,3 +41,14 @@ Clan\ Mod/JDClanMod/Code/jk2mp-SDK.sln
 Clan\ Mod/JDClanMod/Code/jk2mp-SDK.suo
 Clan\ Mod/JDClanMod/Code/MakeAMod_readme.txt
 Clan\ Mod/JDClanMod/ui/menudef.h
+
+#JDFix Mod standalone
+JDFix\ 1.03\ Mod/base
+JDFix\ 1.03\ Mod/bin
+JDFix\ 1.03\ Mod/Tools
+JDFix\ 1.03\ Mod/ui/menudef.h
+
+JDFix\ 1.04\ Mod/1.04\ fix/base
+JDFix\ 1.04\ Mod/1.04\ fix/bin
+JDFix\ 1.04\ Mod/1.04\ fix/Tools
+JDFix\ 1.04\ Mod/1.04\ fix/ui/menudef.h
