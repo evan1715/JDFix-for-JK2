@@ -1,2 +1,42 @@
+#General
 *.zip
 *.rar
+Original\ Source\ Codes
+
+#Clan Mod folder
+Clan\ Mod/bin
+Clan\ Mod/Code/base
+Clan\ Mod/Code/cgame
+Clan\ Mod/Code/Final
+Clan\ Mod/Code/ghoul2
+Clan\ Mod/Code/qcommon
+Clan\ Mod/Code/renderer
+Clan\ Mod/Code/ui
+Clan\ Mod/Code/buildvms.bat
+Clan\ Mod/Code/JK2\ Game\ Source\ License.doc
+Clan\ Mod/Code/jk2mp-SDK.dsw
+Clan\ Mod/Code/jk2mp-SDK.ncb
+Clan\ Mod/Code/jk2mp-SDK.sln
+Clan\ Mod/Code/jk2mp-SDK.suo
+Clan\ Mod/Code/MakeAMod_readme.txt
+Clan\ Mod/ui/menudef.h
+Clan\ Mod/ui/menudef.h
+
+JDClanMod/bin
+JDClanMod/Calculators
+JDClanMod/clanmod
+JDClanMod/Code/base
+JDClanMod/Code/cgame
+JDClanMod/Code/Final
+JDClanMod/Code/ghoul2
+JDClanMod/Code/qcommon
+JDClanMod/Code/renderer
+JDClanMod/Code/ui
+JDClanMod/Code/buildvms.bat
+JDClanMod/Code/JK2\ Game\ Source\ License.doc
+JDClanMod/Code/jk2mp-SDK.dsw
+JDClanMod/Code/jk2mp-SDK.ncb
+JDClanMod/Code/jk2mp-SDK.sln
+JDClanMod/Code/jk2mp-SDK.suo
+JDClanMod/Code/MakeAMod_readme.txt
+JDClanMod/ui/menudef.h
