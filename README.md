@@ -20,3 +20,6 @@ This was a mod called Clan Mod by someone else for JK2 v1.04. I integrated my an
 ### JDClanMod
 This was me taking the Clan Mod plus JDFix integrated in it from JK2 1.04 and backporting it to JK2 1.03. The changelog.txt shows more details.
 
+
+## Other folder
+This folder is just something where misc. files were put, trying out modifications or side projects, or someone else's code on something else.
